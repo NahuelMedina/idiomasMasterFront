@@ -7,8 +7,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Landing/>} />
-        
+        <Route path="/" element={<Landing />} />
       </Routes>
     </>
   );
@@ -16,12 +15,13 @@ function App() {
 
 export default App;
 
-
-{/*     
+{
+  /*     
         <Route path="/home" element={} />
         <Route path="/login" element={} />
         <Route path="/form" element={} />
         <Route path="/about" element={} />
         <Route path="/buyPremium" element={} />
         <Route path="/detail:id" element={} /> 
-*/}
+*/
+}
