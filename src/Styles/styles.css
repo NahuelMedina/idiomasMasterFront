@@ -1,0 +1,47 @@
+.landing{
+    background-color: black;
+   
+}
+
+
+                        /* NAVBAR  */
+
+
+.navButton{
+    background-color: transparent; 
+    border: 1px solid transparent; 
+    color: #fff8f8; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+    box-sizing: border-box;
+    margin: 20px;
+
+}
+
+.navButton:hover{
+    background-color: #1F1F1F;
+    border-color: #1F1F1F;
+}
+
+.navBar{
+    top: 0;  
+    left: 0;
+    width: 100%; 
+    color: #fff; 
+    display: flex;
+    position:fixed;
+   
+}
+
+
+.loginDiv{
+    margin-left: 500px;
+}
+
+.logoNavBar{
+    width: 120px;
+    height: 80px;
+    margin-left: 20px;
+}
