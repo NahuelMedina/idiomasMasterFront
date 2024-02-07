@@ -1,14 +1,15 @@
-export const Card = ({ image, lenguage, level, schedule, duration }) => {
+import styles from "../Card/Card.module.css"
+export const Card = ({ course }) => {
   return (
-    <div className="divCardContainer">
+    <div className={styles.contain}>
       <div>
-        <img src={image} alt={lenguage} />
+        <img className={styles.image} src={course.image} alt={course.lenguage} />
       </div>
       <div>
-        <h2>{lenguage}</h2>
-        <p>{level}</p>
-        <p>{schedule}</p>
-        <p>{duration}</p>
+        <h2>{course.lenguage}</h2>
+        <p>{course.level}</p>
+        <p>{course.schedule}</p>
+        <p>{course.duration}</p>
       </div>
       <button>Obtener Ahora</button>
     </div>

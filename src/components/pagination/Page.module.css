@@ -1,0 +1,34 @@
+.buttom {
+    position: absolute;
+    bottom: 5%;
+    right: 38%;
+}
+
+.top {
+    position: absolute;
+    top: 10%;
+    right: 38%;
+}
+
+.buttom button {
+    margin: 2px;
+    background-color: #505050;
+    color: rgb(253, 253, 253);
+    border: 1px solid #444444;
+    padding: 8px 16px;
+    margin: 0 4px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.top button {
+    margin: 2px;
+    margin: 2px;
+    background-color: #505050;
+    color: rgb(253, 253, 253);
+    border: 1px solid #444444;
+    padding: 8px 16px;
+    margin: 0 4px;
+    cursor: pointer;
+    border-radius: 4px;
+}

@@ -1,13 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Navbar, Landing } from "./components/indexAux";
+import { Navbar, Landing } from "./components";
+import FalsoHome from "./components/pagination/FalsoHome";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Landing />} />
+       // <Route path="/" element={<Landing />} />
+        <Route path="/home" element={<FalsoHome />} />
       </Routes>
     </>
   );
