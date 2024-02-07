@@ -10,26 +10,29 @@ export const Detail = () =>{
     const dispatch = useDispatch()
     const detail = useSelector(state => state.courseDetail)
 
-  useEffect(()=>{
+  useEffect(()=> {
     dispatch(getCoursesDetail(params.id))
-    return ()=>{
-      
-    }
+    
   },[])
 
+  
+
+  console.log(detail);
+
   const d =detail[0];
+
     return(
         <div>
             <div>
-        <img src={d.image} alt={d.lenguage} />
-      </div>
-      <div>
-        <h2>{d.lenguage}</h2>
-        <p>{d.level}</p>
-        <p>{d.schedule}</p>
-        <p>{d.duration}</p>
-        <p>{d.location}</p>
-      </div>
+               <img src={d?.image} alt={d?.lenguage} />
+            </div>
+            <div>
+                <h2>{d?.lenguage}</h2>
+                <p>{d?.level}</p>
+                <p>{d?.schedule}</p>
+                <p>{d?.duration}</p>
+                <p>{d?.location}</p>
+            </div>
         </div>
     )
 }
