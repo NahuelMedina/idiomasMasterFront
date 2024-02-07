@@ -1,7 +1,9 @@
-import { COURSE_DETAIL } from "../action/actiontypes";
+import { COURSE_DETAIL, SEARCH } from "../action/actiontypes";
 
 let initialState= {
+    coursesName: [],
     courseDetail : [],
+
 }
 
 export const reducer = (state=initialState, {type, payload})=>{
@@ -12,7 +14,11 @@ export const reducer = (state=initialState, {type, payload})=>{
                 ...state,
                 courseDetail: payload
             }
-
+        case SEARCH:
+            return{
+                ...state,
+                coursesName: payload
+            }
     
         default: return state;
             break;
