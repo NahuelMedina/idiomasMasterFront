@@ -18,7 +18,6 @@ export const Landing = () => {
           ></img>
         </div>
       </div>
-      <Cards></Cards>
     </div>
   );
 };

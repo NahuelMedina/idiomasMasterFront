@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "../Card/Card.module.css"
 export const Card = ({ course }) => {
   return (
@@ -11,7 +12,7 @@ export const Card = ({ course }) => {
         <p>{course.schedule}</p>
         <p>{course.duration}</p>
       </div>
-      <Link to={`/detail/${id}`}>
+      <Link to={`/detail/${course.id}`}>
       <button>Obtener Ahora</button>
       </Link>
     </div>

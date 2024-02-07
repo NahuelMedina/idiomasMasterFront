@@ -1,16 +1,20 @@
 import { COURSE_DETAIL } from "../action/actiontypes";
 
 let initialState= {
-
+    courseDetail : [],
 }
 
 export const reducer = (state=initialState, {type, payload})=>{
-    switch (key) {
+    switch (type) {
         case COURSE_DETAIL:
-            
-            break;
+            console.log(payload);
+            return{
+                ...state,
+                courseDetail: payload
+            }
+
     
-        default:
+        default: return state;
             break;
     }
 }
