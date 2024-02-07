@@ -1,8 +1,6 @@
 import React from "react";
 import "../../Styles/styles.css";
 import { SearchBar } from "../SearchBar/SearchBar";
-import { Cards } from '../Cards/Cards'
-
 export const Landing = () => {
   return (
     <div className="landing">
