@@ -1,25 +1,33 @@
-import "../../Styles/styles.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 export const Navbar = () => {
+  const location = useLocation();
   return (
-    <div className="navBar">
-      <img
-        className="logoNavBar"
-        src="src\assets\logo\logo_idiomaster-removebg-preview.png"
-      ></img>
-      <div>
-        <button className="navButton">Sobre Nosotros</button>
+    <div className="flex h-20 justify-between items-center text-white bg-black">
+      <div className="flex justify-center w-1/2 items-center gap-20">
+        <img
+          className="w-32"
+          src="src\assets\logo\logo_idiomaster-removebg-preview.png"
+        ></img>
+        <div>
+          <NavLink className="navButton">Sobre Nosotros</NavLink>
+        </div>
+        <div>
+          <NavLink className="navButton">Curso</NavLink>
+        </div>
+        <div>
+          <NavLink className="navButton" to="/home">
+            Explorar
+          </NavLink>
+        </div>
       </div>
-      <div>
-        <button className="navButton">Curso</button>
-      </div>
-      <div>
-        <Link to='/home'>
-          <button className="navButton">Explorar</button>
-        </Link>
-      </div>
-      <div className="loginDiv">
-        <button className="navButton">Registrarse</button>
+      <div className="mr-20">
+        {location.pathname !== "/register" && location.pathname !== "/login" ? (
+          <Link to="/register" className="navButton">
+            Registrarse
+          </Link>
+        ) : (
+          <Link></Link>
+        )}
       </div>
     </div>
   );
