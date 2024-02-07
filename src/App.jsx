@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Navbar, Landing } from "./components";
+import { Navbar, Landing, FalsoHome } from "./components";
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/home" element={<FalsoHome />} />
       </Routes>
     </>
   );
