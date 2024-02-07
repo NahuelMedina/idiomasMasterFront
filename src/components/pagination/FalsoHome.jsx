@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card } from "../Card/Card";
 import Page from "./Page";
 import styles from "./Page.module.css"
-function FalsoHome() {
+export function FalsoHome() {
 
     //const courses = useSelector((state) => state.allCourses);  
     const courses = [
@@ -226,7 +226,7 @@ function FalsoHome() {
     );
 }
 
-export default FalsoHome;
+
 
 
 
