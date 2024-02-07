@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Navbar, Landing } from "./components/indexAux";
+import { Navbar, Landing } from "./components";
 
 function App() {
   return (
