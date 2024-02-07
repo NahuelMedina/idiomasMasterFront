@@ -1,5 +1,6 @@
-import { COURSE_DETAIL, FILTER_LANGUAGE, FILTER_LEVEL, ORDER_PRICE } from "./actiontypes";
+import { COURSE_DETAIL, FILTER_LANGUAGE, FILTER_LEVEL, ORDER_PRICE, SEARCH } from "./actiontypes";
 import { courses } from "../../Cursos/courses";
+import axios from "axios";
 
 export function getCoursesDetail(id) {
   return function (dispatch) {
@@ -42,4 +43,18 @@ export const OrderPrice = (orden) => {
     type: ORDER_PRICE,
     payload: orden,
   };
+}
+export function search(value) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`http://localhost:3000/getCourse/name?name=${value}`)
+      console.log(data);
+      dispatch({
+        type: SEARCH,
+        payload: data
+      });
+    } catch (error) {
+      alert(error)
+    }
+  }
 }

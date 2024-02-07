@@ -34,15 +34,14 @@ export const reducer = (state = initialState, { type, payload }) => {
                 ...state,
                 courses: sortedArray,
             };
-
-
-
-
-
-
-
+        case SEARCH:
+            return {
+                ...state,
+                coursesName: payload
+            }
 
         default: return state;
+
             break;
     }
 }

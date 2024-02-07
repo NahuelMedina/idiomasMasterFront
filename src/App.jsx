@@ -1,7 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import { Navbar, Landing, FalsoHome, Detail } from "./components";
-
+import { Navbar, Landing, FalsoHome, Register, Login, Detail } from "./components";
 function App() {
   return (
     <>
@@ -9,7 +7,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<FalsoHome />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path='/detail/:id' element={<Detail/>}  />
       </Routes>
     </>
   );
@@ -21,7 +21,6 @@ export default App;
   /*     
         <Route path="/home" element={} />
         <Route path="/login" element={} />
-        <Route path="/form" element={} />
         <Route path="/about" element={} />
         <Route path="/buyPremium" element={} />
         <Route path="/detail:id" element={} /> 
