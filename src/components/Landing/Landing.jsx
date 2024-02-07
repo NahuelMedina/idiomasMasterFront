@@ -1,7 +1,6 @@
 import React from "react";
 import "../../Styles/styles.css";
 import { SearchBar } from "../SearchBar/SearchBar";
-
 export const Landing = () => {
   return (
     <div className="landing">

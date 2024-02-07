@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Navbar, Landing } from "./components";
-import FalsoHome from "./components/pagination/FalsoHome";
 
 function App() {
   return (
