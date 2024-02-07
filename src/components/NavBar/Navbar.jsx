@@ -1,5 +1,5 @@
 import "../../Styles/styles.css";
-
+import { Link } from "react-router-dom";
 export const Navbar = () => {
   return (
     <div className="navBar">
@@ -14,7 +14,9 @@ export const Navbar = () => {
         <button className="navButton">Cursos</button>
       </div>
       <div>
-        <button className="navButton">Explorar</button>
+        <Link to='/home'>
+          <button className="navButton">Explorar</button>
+        </Link>
       </div>
       <div className="loginDiv">
         <button className="navButton">Registrarse</button>
