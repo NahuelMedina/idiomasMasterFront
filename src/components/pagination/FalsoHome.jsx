@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Card } from "../Card/Card";
 import Page from "./Page";
-import styles from "./Page.module.css"
+
+
 export function FalsoHome() {
 
     //const courses = useSelector((state) => state.allCourses);  
@@ -186,8 +187,8 @@ export function FalsoHome() {
     };
 
     return (
-        <>
-            <div className={styles.top}>
+        <div class="bg-black text-white flex justify-center">
+            <div class='absolute top-20 right-38 '>
                 <Page
                     setCurrentPage={setCurrentPage}
                     coursePerPage={coursePerPage}
@@ -197,7 +198,7 @@ export function FalsoHome() {
             </div>
 
 
-            <div>
+            <div class='p-16'>
 
                 {courses.length > 0 ? (
                     currentCourses.map((course) => <Card key={course.id} course={course} />)
@@ -213,7 +214,7 @@ export function FalsoHome() {
 
 
 
-            <div className={styles.buttom}>
+            <div class="absolute bottom-6 right-38">
                 <Page
                     setCurrentPage={setCurrentPage}
                     coursePerPage={coursePerPage}
@@ -221,8 +222,7 @@ export function FalsoHome() {
                     page={page}
                     current={currentPage} />
             </div>
-
-        </>
+        </div>
     );
 }
 

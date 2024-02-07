@@ -1,11 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-<<<<<<< HEAD
-import { Navbar, Landing, FalsoHome, Register, Login } from "./components";
-=======
-import "./App.css";
-import { Navbar, Landing, FalsoHome, Detail } from "./components";
-
->>>>>>> 3f73ac229de72e66f06dae29e63c58a9d2a969dd
+import { Navbar, Landing, FalsoHome, Register, Login, Detail } from "./components";
 function App() {
   return (
     <>
@@ -13,12 +7,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<FalsoHome />} />
-<<<<<<< HEAD
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-=======
-        <Route path="/detail/:id" element={<Detail />} />
->>>>>>> 3f73ac229de72e66f06dae29e63c58a9d2a969dd
+        <Route path='/detail/:id' element={<Detail/>}  />
       </Routes>
     </>
   );
