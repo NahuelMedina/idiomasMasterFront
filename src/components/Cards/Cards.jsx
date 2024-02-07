@@ -5,7 +5,6 @@ export const Cards = () => {
     {
       id: 1,
       lenguage: "Inglés",
-      company_course: "juan",
       level: "Principiante",
       instructor: "John Smith",
       schedule: "Lunes y Miércoles, 18:00 - 20:00",
@@ -16,7 +15,6 @@ export const Cards = () => {
     {
       id: 2,
       lenguage: "Portuguese",
-      company_course: "tr",
       level: "Principiante",
       instructor: "John Smith",
       schedule: "Lunes y Miércoles, 18:00 - 20:00",
@@ -29,8 +27,8 @@ export const Cards = () => {
     <div className="divCardsContainer">
       {cardExample?.map((c) => (
         <Card
-          key={c.company_course}
-          id={c.company_course}
+          key={c.id}
+          id={c.id}
           lenguage={c.lenguage}
           level={c.level}
           schedule={c.schedule}

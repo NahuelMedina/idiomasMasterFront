@@ -1,4 +1,6 @@
-export const Card = ({ image, lenguage, level, schedule, duration }) => {
+import { Link } from "react-router-dom";
+
+export const Card = ({id,image, lenguage, level, schedule, duration }) => {
   return (
     <div className="divCardContainer">
       <div>
@@ -10,7 +12,9 @@ export const Card = ({ image, lenguage, level, schedule, duration }) => {
         <p>{schedule}</p>
         <p>{duration}</p>
       </div>
+      <Link to={`/detail/${id}`}>
       <button>Obtener Ahora</button>
+      </Link>
     </div>
   );
 };
