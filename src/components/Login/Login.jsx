@@ -33,7 +33,7 @@ export const Login = () => {
       <h2 className="relative top-14 text-3xl font-bold">Iniciar Sesion</h2>
       <form className="w-3/6 h-4/5 flex justify-center items-center flex-col bg-stone-900 rounded-lg text-lg pt-10 shadow-lg shadow-indigo-950 font-medium">
         <div className="flex flex-col gap-2 w-2/4 h-2/5 text-center items-center">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email</label>
           <input
             onChange={handleChange}
             className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-indigo-600 w-60"
@@ -41,7 +41,7 @@ export const Login = () => {
             id="email"
             type="email"
           />
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password</label>
           <input
             onChange={handleChange}
             className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-indigo-600 w-60"

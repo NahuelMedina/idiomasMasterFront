@@ -1,6 +1,8 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 export const Navbar = () => {
   const location = useLocation();
+  const styleNavLink = ({ isActive }) =>
+    isActive ? "text-indigo-900 font-semibold" : "text-white font-semibold";
   return (
     <div className="flex h-20 justify-between items-center text-white bg-black">
       <div className="flex justify-center w-1/2 items-center gap-20">
@@ -11,13 +13,15 @@ export const Navbar = () => {
           ></img>
         </Link>
         <div>
-          <NavLink className="navButton">Sobre Nosotros</NavLink>
+          <NavLink className={styleNavLink} to="/about">
+            Sobre Nosotros
+          </NavLink>
         </div>
         <div>
-          <NavLink className="navButton">Curso</NavLink>
+          <NavLink className={styleNavLink}>Curso</NavLink>
         </div>
         <div>
-          <NavLink className="navButton" to="/home">
+          <NavLink className={styleNavLink} to="/home">
             Explorar
           </NavLink>
         </div>

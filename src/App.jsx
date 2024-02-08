@@ -1,5 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import { Navbar, Landing, FalsoHome, Register, Login, Detail } from "./components";
+import {
+  Navbar,
+  Landing,
+  FalsoHome,
+  Register,
+  Login,
+  Detail,
+} from "./components";
+import { About } from "./components/About/About";
 function App() {
   return (
     <>
@@ -9,7 +17,8 @@ function App() {
         <Route path="/home" element={<FalsoHome />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path='/detail/:id' element={<Detail/>}  />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="about" element={<About />} />
       </Routes>
     </>
   );
