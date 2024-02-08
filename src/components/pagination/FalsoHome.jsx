@@ -186,7 +186,7 @@ export function FalsoHome() {
     };
 
     return (
-        <div class="bg-black text-white flex justify-center">
+        <div className="bg-black text-white flex justify-center">
             <div class='absolute top-20 right-38 '>
                 <Page
                     setCurrentPage={setCurrentPage}
@@ -197,10 +197,10 @@ export function FalsoHome() {
             </div>
 
 
-            <div class='p-16'>
+            <div className='p-16'>
 
                 {courses.length > 0 ? (
-                    currentCourses.map((course) => <Card key={course.id} course={course} />)
+                    currentCourses.map((course, index) => <Card key={index} course={course} />)
                 ) : (
                     <div>
                         <h2>Loading...</h2>
@@ -213,7 +213,7 @@ export function FalsoHome() {
 
 
 
-            <div class="absolute bottom-6 right-38">
+            <div className="absolute bottom-6 right-38">
                 <Page
                     setCurrentPage={setCurrentPage}
                     coursePerPage={coursePerPage}

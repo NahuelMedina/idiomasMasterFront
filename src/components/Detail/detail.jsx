@@ -32,3 +32,18 @@ export const Detail = () => {
     </div>
   );
 };
+    return(
+        <div className='text-white'>
+            <div>
+               <img className='h-[350px] w-[400px]' src={d?.image} alt={d?.lenguage} />
+            </div>
+            <div>
+                <h2>{d?.lenguage}</h2>
+                <p>{d?.level}</p>
+                <p>{d?.schedule}</p>
+                <p>{d?.duration}</p>
+                <p>{d?.location}</p>
+            </div>
+        </div>
+    )
+}

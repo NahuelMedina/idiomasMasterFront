@@ -26,20 +26,58 @@ const Page = ({ coursePerPage, courses, page, current, setCurrentPage }) => {
             ↩
           </button>
         ) : null}
+        return (
+        <div>
+          <div>
+            {pageNumbers.length !== 0 ? (
+              <button
+                onClick={prevPage}
+                className="mx-2 bg-gray-800 text-white border border-gray-700 px-4 py-2 rounded cursor-pointer"
+              >
+                ↩
+              </button>
+            ) : null}
 
-        {pageNumbers &&
-          pageNumbers.map((num) => (
-            <button
-              className="mx-2 bg-gray-800 text-white border border-gray-700 px-4 py-2 rounded cursor-pointer"
-              key={num}
-              onClick={() => page(num)}
-            >
-              <a style={{ fontWeight: current === num ? "bold" : "normal" }}>
-                {num}
-              </a>
-            </button>
-          ))}
+            {pageNumbers &&
+              pageNumbers.map((num) => (
+                <button
+                  className="mx-2 bg-gray-800 text-white border border-gray-700 px-4 py-2 rounded cursor-pointer"
+                  key={num}
+                  onClick={() => page(num)}
+                >
+                  <a
+                    style={{ fontWeight: current === num ? "bold" : "normal" }}
+                  >
+                    {num}
+                  </a>
+                </button>
+              ))}
+            {pageNumbers &&
+              pageNumbers.map((num) => (
+                <button
+                  className="mx-2 bg-gray-800 text-white border border-gray-700 px-4 py-2 rounded cursor-pointer"
+                  key={num}
+                  onClick={() => page(num)}
+                >
+                  <a
+                    style={{ fontWeight: current === num ? "bold" : "normal" }}
+                  >
+                    {num}
+                  </a>
+                </button>
+              ))}
 
+            {pageNumbers.length !== 0 ? (
+              <button
+                onClick={nextPage}
+                className="mx-2 bg-gray-800 text-white border border-gray-700 px-4 py-2 rounded cursor-pointer"
+              >
+                ↪
+              </button>
+            ) : null}
+          </div>
+        </div>
+        ); }; export default Page;
         {pageNumbers.length !== 0 ? (
           <button
             onClick={nextPage}
