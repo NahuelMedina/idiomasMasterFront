@@ -27,7 +27,7 @@ const Page = ({ coursePerPage, courses, page, current, setCurrentPage }) => {
                 {pageNumbers &&
                     pageNumbers.map(num => (
                         <button className="mx-2 bg-gray-800 text-white border border-gray-700 px-4 py-2 rounded cursor-pointer"
-                        key={num} onClick={() => page(num)}>
+                            key={num} onClick={() => page(num)}>
                             <a style={{ fontWeight: current === num ? 'bold' : 'normal' }}>{num}</a>
                         </button>
                     ))}
