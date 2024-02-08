@@ -1,13 +1,9 @@
 import { Link } from "react-router-dom";
 export const Card = ({ course }) => {
   return (
-    <div className={styles.contain}>
+    <div>
       <div>
-        <img
-          className={styles.image}
-          src={course.image}
-          alt={course.lenguage}
-        />
+        <img src={course.image} alt={course.lenguage} />
       </div>
       <div>
         <h2>{course.lenguage}</h2>
