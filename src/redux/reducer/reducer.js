@@ -11,6 +11,7 @@ import {
 let initialState = {
     courses: [],
     courseDetail: [],
+    coursesName: [],
 };
 
 export const reducer = (state = initialState, { type, payload }) => {

@@ -24,6 +24,7 @@ export function FalsoHome() {
         }
     }, []);
     return (
+
         <div className="bg-black text-white flex justify-center">
             <div className='absolute top-20 right-38 '>
                 <Page
@@ -60,5 +61,7 @@ export function FalsoHome() {
                     current={currentPage} />
             </div>
         </div>
+
     );
+
 }

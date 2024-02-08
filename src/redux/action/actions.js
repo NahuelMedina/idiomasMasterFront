@@ -12,6 +12,7 @@ export const getAllCourses = () => async (dispatch) => {
     alert(error)
   }
 };
+const url = import.meta.env.VITE_URL_HOST
 
 export function getCoursesDetail(id) {
   return function (dispatch) {
@@ -58,8 +59,8 @@ export const OrderPrice = (orden) => {
 export function search(value) {
   return async function (dispatch) {
     try {
+      console.log(value);
       const { data } = await axios.get(`http://localhost:3000/getCourse/name?name=${value}`)
-      console.log(data);
       dispatch({
         type: SEARCH,
         payload: data
