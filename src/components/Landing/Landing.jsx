@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
 import { SearchBar } from "../SearchBar/SearchBar";
+import { Card } from "../Card/Card";
 
 
 export const Landing = () => {
 
   const search = useSelector(state => state.coursesName)
 
+console.log(search);
   return (
     <div className="flex w-screnn h-screen bg-black text-white">
 
@@ -21,11 +23,16 @@ export const Landing = () => {
           </div>
         </div>
       </div>
-
-     
-      <div class='flex items-center '>
-
+      <div className="flex items-center">
+        {search.length > 0 ? (
+          search.map((course, index) => <Card key={index} course={course} />)
+          ) : (
+          <div>
+           <h2>No hay cursos de tal idioma</h2>
+          </div>
+          )}
       </div>
+     
     </div>
   );
 };
