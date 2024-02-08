@@ -1,6 +1,17 @@
-import { COURSE_DETAIL, FILTER_LANGUAGE, FILTER_LEVEL, ORDER_PRICE, SEARCH } from "./actiontypes";
+import { COURSE_DETAIL, FILTER_LANGUAGE, FILTER_LEVEL, ORDER_PRICE, SEARCH, ALL_COURSES } from "./actiontypes";
 import { courses } from "../../Cursos/courses";
 import axios from "axios";
+export const getAllCourses = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get("http://localhost:3000/getAllCourses");
+    dispatch({
+      type: ALL_COURSES,
+      payload: data,
+    });
+  } catch (error) {
+    alert(error)
+  }
+};
 
 export function getCoursesDetail(id) {
   return function (dispatch) {

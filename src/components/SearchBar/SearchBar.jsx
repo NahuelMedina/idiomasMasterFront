@@ -5,9 +5,9 @@ import { search } from "../../redux/action/actions";
 
 export const SearchBar = () => {
 
-  const  dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  const handleSubmit = (event)=>{
+  const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(search(document.getElementById('search').value))
 
@@ -15,8 +15,8 @@ export const SearchBar = () => {
 
   return (
     <div className="text-center" >
-      <input id="search" type="text" class=" text-black" placeholder="Buscar..." ></input>
-      <button type="submit" onClick={handleSubmit} class='h-3 w-3'>
+      <input id="search" type="text" className=" text-black" placeholder="Buscar..." ></input>
+      <button type="submit" onClick={handleSubmit} className='h-3 w-3'>
         <IoSearchCircle /></button>
     </div>
   );

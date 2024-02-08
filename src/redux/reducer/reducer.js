@@ -15,8 +15,11 @@ let initialState = {
 
 export const reducer = (state = initialState, { type, payload }) => {
     switch (type) {
-        // case ALL_COURSES:
-
+        case ALL_COURSES:
+            return {
+                ...state,
+                courses: payload
+            }
         case COURSE_DETAIL:
             return {
                 ...state,
