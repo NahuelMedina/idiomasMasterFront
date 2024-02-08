@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Card } from "../Card/Card";
 import Page from "./Page";
 
-
 export function FalsoHome() {
 
     //const courses = useSelector((state) => state.allCourses);  
@@ -225,11 +224,3 @@ export function FalsoHome() {
         </div>
     );
 }
-
-
-
-
-
-
-
-
