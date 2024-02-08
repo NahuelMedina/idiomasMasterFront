@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
-import styles from "../Card/Card.module.css"
 export const Card = ({ course }) => {
   return (
     <div className={styles.contain}>
       <div>
-        <img className={styles.image} src={course.image} alt={course.lenguage} />
+        <img
+          className={styles.image}
+          src={course.image}
+          alt={course.lenguage}
+        />
       </div>
       <div>
         <h2>{course.lenguage}</h2>
@@ -13,7 +16,7 @@ export const Card = ({ course }) => {
         <p>{course.duration}</p>
       </div>
       <Link to={`/detail/${course.id}`}>
-      <button>Obtener Ahora</button>
+        <button>Obtener Ahora</button>
       </Link>
     </div>
   );
