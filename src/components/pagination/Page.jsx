@@ -26,18 +26,6 @@ const Page = ({ coursePerPage, courses, page, current, setCurrentPage }) => {
             ↩
           </button>
         ) : null}
-        return (
-        <div>
-          <div>
-            {pageNumbers.length !== 0 ? (
-              <button
-                onClick={prevPage}
-                className="mx-2 bg-gray-800 text-white border border-gray-700 px-4 py-2 rounded cursor-pointer"
-              >
-                ↩
-              </button>
-            ) : null}
-
             {pageNumbers &&
               pageNumbers.map((num) => (
                 <button
