@@ -7,7 +7,6 @@ export const Landing = () => {
 
   const search = useSelector(state => state.coursesName)
 
-console.log(search);
   return (
     <div className="flex w-screnn h-screen bg-black text-white">
 
