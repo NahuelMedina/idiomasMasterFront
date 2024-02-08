@@ -1,6 +1,9 @@
 import { COURSE_DETAIL, FILTER_LANGUAGE, FILTER_LEVEL, ORDER_PRICE, SEARCH, ALL_COURSES } from "./actiontypes";
 import { courses } from "../../Cursos/courses";
 import axios from "axios";
+
+const url = import.meta.env.VITE_URL_HOST
+
 export const getAllCourses = () => async (dispatch) => {
   try {
     const { data } = await axios.get("http://localhost:3000/getAllCourses");
@@ -12,7 +15,6 @@ export const getAllCourses = () => async (dispatch) => {
     alert(error)
   }
 };
-const url = import.meta.env.VITE_URL_HOST
 
 export function getCoursesDetail(id) {
   return function (dispatch) {
@@ -50,7 +52,7 @@ export const filterLevel = (level) => {
     payload: level,
   };
 };
-export const OrderPrice = (orden) => {
+export const orderPrice = (orden) => {
   return {
     type: ORDER_PRICE,
     payload: orden,

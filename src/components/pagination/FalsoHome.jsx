@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { Card } from "../Card/Card";
 import Page from "./Page";
-import { getAllCourses } from "../../redux/action/actions";
+import { filterLenguage, filterLevel, getAllCourses, orderPrice } from "../../redux/action/actions";
 
 export function FalsoHome() {
 
@@ -23,6 +23,24 @@ export function FalsoHome() {
             dispatch(getAllCourses());
         }
     }, []);
+
+    const handleOrderPrice = (e) => {
+        e.preventDefault();
+        dispatch(orderPrice(e.target.value));
+        setCurrentPage(1);
+    }
+    const handleFilterLevel = (e) => {
+        e.preventDefault();
+        dispatch(filterLevel(e.target.value));
+        setCurrentPage(1);
+    }
+    const handleFilterLanguage = (e) => {
+        e.preventDefault();
+        dispatch(filterLenguage(e.target.value));
+        setCurrentPage(1);
+    }
+
+
     return (
 
         <div className="bg-black text-white flex justify-center">
@@ -33,6 +51,44 @@ export function FalsoHome() {
                     courses={courses.length}
                     page={page}
                     current={currentPage} />
+            </div>
+            <div>
+
+                <select
+                    name="orderPrice"
+                    id="orderPrice"
+                    defaultValue="default"
+                    onChange={(e) => handleOrderPrice(e)}
+                >
+                    <option value="default">Precio</option>
+                    <option value="A">Min a Max</option>
+                    <option value="B">Max a Min</option>
+                </select>
+                <select
+                    name="filterLevel"
+                    id="filterLevel"
+                    onChange={(e) => handleFilterLevel(e)}
+                    defaultValue="all"
+                >
+                    <option value="all">dificultad</option>
+                    <option value="Beginner">Principiante</option>
+                    <option value="Intermediate">Intermedio</option>
+                    <option value="Advanced">Avanzado</option>
+                </select>
+                <select
+                    name="filterLanguage"
+                    id="filterLanguage"
+                    onChange={(e) => handleFilterLanguage(e)}
+                    defaultValue="all"
+                >
+                    <option value="all">Idiomas</option>
+                    <option value="English">Ingles</option>
+                    <option value="French">Frances</option>
+                    <option value="German">Aleman</option>
+                    <option value="Italian">Italiano</option>
+                    <option value="Dutch">Holandés</option>
+                    <option value="Portuguese">Portugues</option>
+                </select>
             </div>
 
 
