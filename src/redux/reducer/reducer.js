@@ -1,4 +1,4 @@
-import { ALL_COURSES, COURSE_DETAIL, FILTER_LANGUAGE, FILTER_LEVEL, ORDER_PRICE } from "../action/actiontypes";
+import { ALL_COURSES, COURSE_DETAIL, FILTER_LANGUAGE, FILTER_LEVEL, ORDER_PRICE, SEARCH } from "../action/actiontypes";
 
 let initialState = {
     courses: [],

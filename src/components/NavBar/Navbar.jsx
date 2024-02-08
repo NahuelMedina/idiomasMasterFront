@@ -1,4 +1,5 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { SearchBar } from "../SearchBar/SearchBar";
 export const Navbar = () => {
   const location = useLocation();
   return (
@@ -19,6 +20,14 @@ export const Navbar = () => {
             Explorar
           </NavLink>
         </div>
+      </div>
+      <div>
+        {location.pathname === '/'? (
+          <SearchBar></SearchBar>
+        )
+      :<Link></Link>
+      }
+        
       </div>
       <div className="mr-20">
         {location.pathname !== "/register" && location.pathname !== "/login" ? (

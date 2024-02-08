@@ -12,10 +12,9 @@ export const SearchBar = () => {
     dispatch(search(document.getElementById('search').value))
 
   }
-
   return (
     <div className="text-center" >
-      <input id="search" type="text" class=" text-black" placeholder="Buscar..." ></input>
+      <input id="search" type="text" class=" text-black border-1 rounded-lg" placeholder="Buscar..." ></input>
       <button type="submit" onClick={handleSubmit} class='h-3 w-3'>
         <IoSearchCircle /></button>
     </div>
