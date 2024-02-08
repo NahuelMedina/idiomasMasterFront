@@ -1,29 +1,33 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import registerValidate from "../Utils/registerValidate";
-
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/action/actions";
 export const Register = () => {
+  const dispatch = useDispatch();
   const [state, setState] = useState({
     name: "",
-    lastName: "",
+    lastname: "",
     email: "",
+    img: "",
     password: "",
-    image: "",
     age: "",
   });
 
   const [errors, setErrors] = useState({
     name: "Nombre obligatorio.",
-    lastName: "",
+    lastname: "",
     email: "",
     password: "",
-    image: "",
+    img: "",
     age: "",
   });
 
   const handleChange = (e) => {
     e.preventDefault();
+    console.log(e.target);
     const { name, value } = e.target;
+
     setState({
       ...state,
       [name]: value,
@@ -45,13 +49,15 @@ export const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(register(state));
   };
 
   return (
     <div className="w-screen h-screen bg-black text-white flex justify-center items-center flex-col">
+      {console.log(state)}
       <h2 className="relative top-14 text-3xl font-bold">Registrarse</h2>
       <form
-        onChange={handleSubmit}
+        onSubmit={handleSubmit}
         className="w-3/6 h-4/5 flex justify-center items-center flex-col bg-stone-900 rounded-lg text-lg pt-10 shadow-lg shadow-indigo-950 font-medium "
       >
         <div className="flex w-full h-2/4 gap-20 text-center justify-center items-center ">
@@ -65,15 +71,15 @@ export const Register = () => {
               type="text"
             />
             <span style={{ color: "red" }}>{errors.name}</span>
-            <label htmlFor="lastName">Apellido</label>
+            <label htmlFor="lastname">Apellido</label>
             <input
               className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-indigo-600"
               onChange={handleChange}
-              name="lastName"
-              id="lastName"
+              name="lastname"
+              id="lastname"
               type="text"
             />
-            <span style={{ color: "red" }}>{errors.lastName}</span>
+            <span style={{ color: "red" }}>{errors.lastname}</span>
             <label htmlFor="password">Constraseña</label>
             <input
               className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-indigo-600"
@@ -103,15 +109,14 @@ export const Register = () => {
               type="number"
             />
             <span style={{ color: "red" }}>{errors.age}</span>
-            <label htmlFor="image">Imagen</label>
+            <label htmlFor="img">Imagen</label>
             <input
               className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-indigo-600"
               onChange={handleChange}
-              name="image"
-              id="image"
+              name="img"
+              id="img"
               type="text"
             />
-            <span style={{ color: "red" }}>{errors.image}</span>
           </div>
         </div>
         <input

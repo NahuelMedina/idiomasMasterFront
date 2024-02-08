@@ -1,4 +1,4 @@
-const registerValidate = ({ name, lastName, email, age, image, password }) => {
+const registerValidate = ({ name, lastname, email, age, img, password }) => {
   const errors = {};
   const regexImg = new RegExp(
     "[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$"
@@ -13,15 +13,15 @@ const registerValidate = ({ name, lastName, email, age, image, password }) => {
   }
 
   //LASTNAME
-  if (!lastName.length) errors.lastName = "El apellido es obligatorio.";
+  if (!lastname.length) errors.lastname = "El apellido es obligatorio.";
   else {
-    if (!regexNameAndLast.test(lastName))
-      errors.lastName = "Ingrese primer letras en mayuscula y sin espacios.";
-    if (lastName.length > 20) errors.lastName = "Apellido demasiado largo.";
+    if (!regexNameAndLast.test(lastname))
+      errors.lastname = "Ingrese primer letras en mayuscula y sin espacios.";
+    if (lastname.length > 20) errors.lastname = "Apellido demasiado largo.";
   }
 
   //IMAGE
-  if (!regexImg.test(image))
+  if (!regexImg.test(img))
     errors.image = "permite solo archivos con extensión jpg o jpeg.";
 
   //EMAIL
