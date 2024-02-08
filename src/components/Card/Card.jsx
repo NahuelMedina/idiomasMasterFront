@@ -7,7 +7,6 @@ export const Card = ({ course }) => {
       </div>
       <div>
         <h2>{course.language}</h2>
-        <h2>{course.language}</h2>
         <p>{course.level}</p>
         <p>{course.schedule}</p>
         <p>{course.duration}</p>

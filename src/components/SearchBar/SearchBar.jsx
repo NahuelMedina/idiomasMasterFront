@@ -16,7 +16,7 @@ export const SearchBar = () => {
     event.preventDefault();
     console.log(searchTerm);
     dispatch(search(searchTerm))
-    navigate('/')
+    navigate('/home')
   }
 
 
