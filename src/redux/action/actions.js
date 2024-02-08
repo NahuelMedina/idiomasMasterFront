@@ -48,8 +48,8 @@ export const OrderPrice = (orden) => {
 export function search(value) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`${url}getCourse/name?name=${value}`)
-      console.log(data);
+      console.log(value);
+      const { data } = await axios.get(`http://localhost:3000/getCourse/name?name=${value}`)
       dispatch({
         type: SEARCH,
         payload: data

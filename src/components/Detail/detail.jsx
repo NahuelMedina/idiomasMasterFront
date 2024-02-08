@@ -22,9 +22,9 @@ export const Detail = () =>{
   const d =detail[0];
 
     return(
-        <div class='text-white'>
+        <div className='text-white'>
             <div>
-               <img class='h-[350px] w-[400px]' src={d?.image} alt={d?.lenguage} />
+               <img className='h-[350px] w-[400px]' src={d?.image} alt={d?.lenguage} />
             </div>
             <div>
                 <h2>{d?.lenguage}</h2>

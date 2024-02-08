@@ -24,7 +24,7 @@ export const Navbar = () => {
         </div>
       </div>
       <div>
-        {location.pathname === '/'? (
+        {location.pathname !== '/'? (
           <SearchBar></SearchBar>
         )
       :<Link></Link>
