@@ -1,14 +1,16 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { SearchBar } from "../SearchBar/SearchBar";
 export const Navbar = () => {
+
   const location = useLocation();
+  
   return (
     <div className="flex h-20 justify-between items-center text-white bg-black">
       <div className="flex justify-center w-1/2 items-center gap-20">
         <Link to="/">
           <img
-            className="w-32"
-            src="src\assets\logo\logo_idiomaster-removebg-preview.png"
+            className="w-12 h-10"
+            src="src\assets\logo\logo2.png"
           ></img>
         </Link>
         <div>
