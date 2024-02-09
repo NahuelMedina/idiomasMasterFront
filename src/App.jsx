@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Navbar, Landing, FalsoHome, Register, Login, Detail } from "./components";
+import CourseForm from "./components/CourseForm/CourseForm";
 function App() {
   return (
     <>
@@ -10,6 +11,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path='/detail/:id' element={<Detail/>}  />
+        <Route path='/createCourse' element={<CourseForm/>}  />
       </Routes>
     </>
   );
