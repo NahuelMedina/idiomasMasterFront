@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { FaUserGraduate } from "react-icons/fa";
 export const Navbar = () => {
@@ -14,6 +14,7 @@ export const Navbar = () => {
             ></img>
           </div>
         </Link>
+
         <Link to="/about" className="h-full">
           <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
             <h1>Sobre Nosotros</h1>

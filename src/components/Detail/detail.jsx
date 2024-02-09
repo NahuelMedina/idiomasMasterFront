@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -8,12 +7,20 @@ export const Detail = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.courseDetail);
+
   useEffect(() => {
     dispatch(getCoursesDetail(params.id));
   }, []);
 
   return (
     <div className="bg-[#FFFFFF] w-screen h-screen text-white container flex justify-center items-center">
+      <div>
+        <img
+          className="mt-10 h-[450px] w-[500px] bg-white rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out transform hover:shadow-xl hover:scale-105"
+          src={detail?.image}
+          alt={detail?.lenguage}
+        />
+      </div>
       <div className="flex justify-center h-[95%] w-4/5 bg-[#1E68AD] p-10">
         <div className=" flex flex-col justify-center items-start text-center h-full w-3/5">
           <div className=" flex flex-col justify-center items-start rounded-xl">

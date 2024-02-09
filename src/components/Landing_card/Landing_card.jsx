@@ -2,7 +2,7 @@ export default function Landing_card({ img, title, description }) {
   return (
     <div
       id="main_landing_card"
-      className="w-1/4 min-w-[400px] h-[350px] relative shadow-2xl shadow-black/50 rounded-[10px]  "
+      className="w-1/4 min-w-[400px] h-[350px] relative  shadow-lg shadow-black/50 rounded-[10px]  "
     >
       <img
         src={`${img}`}
