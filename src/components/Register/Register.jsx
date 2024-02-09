@@ -58,7 +58,7 @@ export const Register = () => {
       <div className="flex m-5 h-[95%]">
         <div className=" w-3/5 h-full">
           <img
-            className="h-full object-cover"
+            className="h-full object-cover rounded-l-md"
             src="src\assets\fotos\image-register.jpg"
             alt=""
           />
@@ -69,7 +69,7 @@ export const Register = () => {
           </h2>
           <form
             onSubmit={handleSubmit}
-            className="h-full w-full pt-20  flex justify-center items-center flex-col text-[#FFFFFF] bg-[#1E68AD] text-lg font-medium "
+            className="h-full w-full pt-20  flex justify-center items-center flex-col text-[#FFFFFF] bg-[#1E68AD] text-lg font-medium  rounded-r-md"
           >
             <div className="flex w-full h-2/4 gap-1 text-center justify-center items-center ">
               <div className="flex flex-col w-2/4 gap-2 p-8">

@@ -42,7 +42,7 @@ export const Login = () => {
       <div className="flex m-5 h-[95%]">
         <div className="w-3/5 h-full">
           <img
-            className="h-full object-cover"
+            className="h-full object-cover rounded-l-md"
             src="src\assets\fotos\image-login.jpg"
             alt=""
           />
@@ -53,7 +53,7 @@ export const Login = () => {
           </h2>
           <form
             onSubmit={handleSubmit}
-            className="h-full w-full flex justify-center items-center flex-col bg-[#1E68AD] text-[#FFFFFF] text-lg pt-10 font-medium"
+            className="h-full w-full flex justify-center items-center flex-col bg-[#1E68AD] text-[#FFFFFF] text-lg pt-10 font-medium rounded-r-md"
           >
             <div className="flex flex-col gap-2 w-2/4 h-2/5 text-center items-center">
               <label htmlFor="email">Email</label>
