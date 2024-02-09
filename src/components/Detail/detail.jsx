@@ -8,18 +8,16 @@ export const Detail = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.courseDetail);
+
   useEffect(() => {
     dispatch(getCoursesDetail(params.id));
   }, []);
 
   return (
-    <div className="mt-12 text-white flex justify-around container bg-opacity-50 backdrop-filter backdrop-blur-lg">
+    <div className='mt-12 text-white flex justify-around container bg-opacity-50 backdrop-filter backdrop-blur-lg'>
       <div>
-        <img
-          className="mt-10 h-[450px] w-[500px] bg-white rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out transform hover:shadow-xl hover:scale-105"
-          src={detail?.image}
-          alt={detail?.lenguage}
-        />
+        <img className='mt-10 h-[450px] w-[500px] bg-white rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out transform hover:shadow-xl hover:scale-105' src={detail?.image} alt={detail?.lenguage} />
+
       </div>
       <div>
         <p className="font-black text-sky-600  m-8 text-8xl ">
