@@ -52,7 +52,7 @@ export const Landing = () => {
         <div className="flex w-full h-full  absolute z-0 ">
           <img
             src={`img/Rail_0${num}.png`}
-            class="object-cover h-full w-full"
+            className="object-cover h-full w-full"
             alt="Imagen"
           />
         </div>

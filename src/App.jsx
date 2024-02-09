@@ -2,13 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import {
   Navbar,
   Landing,
+  HomeC,
   Register,
   Login,
   Detail,
 } from "./components";
 import CourseForm from "./components/CourseForm/CourseForm";
 import { About } from "./components/About/About";
-import HomeC from "./components/pagination/HomeC";
 function App() {
   return (
     <>
