@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Card } from "../Card/Card";
 import Page from "./Page";
 import {
-  filterLenguage,
+  filterLanguage,
   filterLevel,
   getAllCourses,
   orderPrice,
@@ -42,7 +42,7 @@ export function FalsoHome() {
   };
   const handleFilterLanguage = (e) => {
     e.preventDefault();
-    dispatch(filterLenguage(e.target.value));
+    dispatch(filterLanguage(e.target.value));
     setCurrentPage(1);
   };
 

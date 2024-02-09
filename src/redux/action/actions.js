@@ -5,6 +5,9 @@ import {
   ORDER_PRICE,
   SEARCH,
   ALL_COURSES,
+  POST_COURSE_FAILURE,
+  POST_COURSE_REQUEST,
+  POST_COURSE_SUCCESS,
 } from "./actiontypes";
 import { courses } from "../../Cursos/courses";
 import axios from "axios";
@@ -46,10 +49,10 @@ export function getCoursesDetail(id) {
     }
   };
 }
-export const filterLenguage = (lenguage) => {
+export const filterLanguage = (language) => {
   return {
     type: FILTER_LANGUAGE,
-    payload: lenguage,
+    payload: language,
   };
 };
 
@@ -82,15 +85,39 @@ export function search(value) {
   };
 }
 
-export const register = (state) => {
-  return async (dispatch) => {
-    try {
-      const user = await axios.post("http://localhost:3000/createUser", state);
-      if (user) {
-        alert("driver creado");
-      }
-    } catch (error) {
-      alert("Error: " + error.message);
-    }
-  };
+export const postCourseRequest = () => ({
+  type: POST_COURSE_REQUEST,
+});
+
+export const postCourseSuccess = () => ({
+  type: POST_COURSE_SUCCESS,
+});
+
+export const postCourseFailure = (error) => ({
+  type: POST_COURSE_FAILURE,
+  payload: error,
+});
+
+export const postCourseData = (courseData) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/createcourse",
+      courseData
+    );
+    console.log("Solicitud POST exitosa:", response.data);
+  } catch (error) {
+    console.error("Error al enviar los datos del curso:", error.message);
+  }
+};
+
+export const postUser = (state) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/createUser",
+      state
+    );
+    alert("Creado con Exito", response.data);
+  } catch (error) {
+    console.error("Error al enviar los datos del usuario:", error.message);
+  }
 };

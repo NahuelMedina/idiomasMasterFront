@@ -23,6 +23,11 @@ export const Navbar = () => {
             Explorar
           </NavLink>
         </div>
+        <div>
+          <NavLink className="navButton" to="/createCourse">
+            Crear curso
+          </NavLink>
+        </div>
       </div>
       <div>
         {location.pathname !== "/" ? <SearchBar></SearchBar> : <Link></Link>}

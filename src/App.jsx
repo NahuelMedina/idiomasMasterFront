@@ -7,6 +7,7 @@ import {
   Login,
   Detail,
 } from "./components";
+import CourseForm from "./components/CourseForm/CourseForm";
 import { About } from "./components/About/About";
 function App() {
   return (
@@ -16,9 +17,10 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<FalsoHome />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/detail/:id" element={<Detail />} />
-        <Route path="about" element={<About />} />
+        <Route path="/createCourse" element={<CourseForm />} />
       </Routes>
     </>
   );

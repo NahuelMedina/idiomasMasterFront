@@ -3,7 +3,6 @@ const registerValidate = ({ name, lastname, email, age, img, password }) => {
   const regexImg = new RegExp(
     "[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$"
   );
-  const regexPassword = new RegExp("");
   const regexNameAndLast = new RegExp("^(?!.* (?: |$))[A-Z][a-z ]+$");
   //NAME
   if (!name.length) errors.name = "El nombre es obligatorio.";

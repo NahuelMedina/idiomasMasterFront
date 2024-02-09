@@ -43,7 +43,7 @@ export const Landing = () => {
       <div className="flex flex-row justify-end items-center w-screen h-[600px] relative bg-white">
         <div className=" flex w-full h-full absolute left-0 z-20 bg-gradient-to-r from-black via-white/10 to-white/0">
           <div className="h-full w-[950px] items-center justify-center flex flex-col">
-            <p className="text-[40px] text-white border-b-4 border-white">{`${landing_string[num].title}`}</p>
+            <p className="text-[40px] text-white border-b-4 border-white ">{`${landing_string[num].title}`}</p>
             <p className={`${landing_string[num].color} `}>
               {" "}
               {`${landing_string[num].word}`}
@@ -51,7 +51,7 @@ export const Landing = () => {
           </div>
         </div>
 
-        <div className="flex w-full h-full  absolute z-0">
+        <div className="flex w-full h-full  absolute z-0 ">
           <img
             src={`img/Rail_0${num}.png`}
             className="object-cover h-full w-full"
