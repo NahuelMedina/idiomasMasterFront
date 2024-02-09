@@ -5,32 +5,19 @@ import { useParams } from "react-router-dom";
 import { getCoursesDetail } from "../../redux/action/actions";
 
 export const Detail = () => {
-<<<<<<< HEAD
-  const params = useParams();
-  const dispatch = useDispatch();
-  const detail = useSelector((state) => state.courseDetail);
-
-=======
 
   const params = useParams()
   const dispatch = useDispatch()
   const detail = useSelector(state => state.courseDetail)
->>>>>>> 017d7c0eb7ffd6bcc30752f2e139d1c8f74d9c28
   useEffect(() => {
     dispatch(getCoursesDetail(params.id));
   }, []);
 
 
   return (
-<<<<<<< HEAD
-    <div className="text-white">
-      <div>
-        <img className="h-[350px] w-[400px]" src={d?.image} alt={d?.lenguage} />
-=======
     <div className='mt-12 text-white flex justify-around container bg-opacity-50 backdrop-filter backdrop-blur-lg'>
       <div>
         <img className='mt-10 h-[450px] w-[500px] bg-white rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out transform hover:shadow-xl hover:scale-105' src={detail?.image} alt={detail?.lenguage} />
->>>>>>> 017d7c0eb7ffd6bcc30752f2e139d1c8f74d9c28
       </div>
       <div>
         <p className="font-black text-sky-600  m-8 text-8xl ">{detail?.language}</p>

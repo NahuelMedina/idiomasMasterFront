@@ -8,6 +8,7 @@ import {
   POST_COURSE_FAILURE,
   POST_COURSE_REQUEST,
   POST_COURSE_SUCCESS,
+  FILTERED_COURSES,
 } from "./actiontypes";
 import axios from "axios";
 
@@ -109,4 +110,11 @@ export const postUser = (state) => async (dispatch) => {
   } catch (error) {
     console.error("Error al enviar los datos del usuario:", error.message);
   }
+};
+
+export const filteredCourses = (data) => {
+  return {
+    type: FILTERED_COURSES,
+    payload: data
+  };
 };

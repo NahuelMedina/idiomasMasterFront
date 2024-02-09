@@ -9,13 +9,14 @@ import {
 } from "./components";
 import CourseForm from "./components/CourseForm/CourseForm";
 import { About } from "./components/About/About";
+import HomeC from "./components/pagination/HomeC";
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<FalsoHome />} />
+        <Route path="/home" element={<HomeC />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
