@@ -14,7 +14,8 @@ export const Navbar = () => {
             ></img>
           </div>
         </Link>
-        <Link className="h-full">
+
+        <Link to="/about" className="h-full">
           <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
             <h1>Sobre Nosotros</h1>
           </div>
