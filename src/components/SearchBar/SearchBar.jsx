@@ -12,14 +12,13 @@ export const SearchBar = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(search(searchTerm));
-    setSearchTerm(""); 
-    navigate('/home')
+    setSearchTerm("");
+    navigate("/home");
   };
-
 
   const handleSearch = (event) => {
     const value = event.target.value;
-    setSearchTerm(value); 
+    setSearchTerm(value);
   };
 
   return (

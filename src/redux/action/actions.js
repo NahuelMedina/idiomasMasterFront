@@ -1,7 +1,17 @@
-import { COURSE_DETAIL, FILTER_LANGUAGE, FILTER_LEVEL, ORDER_PRICE, SEARCH, ALL_COURSES, POST_COURSE_FAILURE, POST_COURSE_REQUEST, POST_COURSE_SUCCESS} from "./actiontypes";
+import {
+  COURSE_DETAIL,
+  FILTER_LANGUAGE,
+  FILTER_LEVEL,
+  ORDER_PRICE,
+  SEARCH,
+  ALL_COURSES,
+  POST_COURSE_FAILURE,
+  POST_COURSE_REQUEST,
+  POST_COURSE_SUCCESS,
+} from "./actiontypes";
 import axios from "axios";
 
-const url = import.meta.env.VITE_URL_HOST
+const url = import.meta.env.VITE_URL_HOST;
 
 export const getAllCourses = () => async (dispatch) => {
   try {
@@ -11,22 +21,22 @@ export const getAllCourses = () => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    alert(error)
+    alert(error);
   }
 };
 
 export function getCoursesDetail(id) {
   return async function (dispatch) {
     try {
-      const {data} = await axios.get(`http://localhost:3000/getCourse/${id}`)
-        dispatch({
-          type: COURSE_DETAIL,
-          payload: data
-        });
+      const { data } = await axios.get(`http://localhost:3000/getCourse/${id}`);
+      dispatch({
+        type: COURSE_DETAIL,
+        payload: data,
+      });
     } catch (error) {
-      alert(error)
+      alert(error);
     }
-  }
+  };
 }
 export const filterLanguage = (language) => {
   return {
@@ -46,34 +56,35 @@ export const orderPrice = (orden) => {
     type: ORDER_PRICE,
     payload: orden,
   };
-}
+};
 export function search(value) {
   return async function (dispatch) {
     try {
       console.log(value);
-      const { data } = await axios.get(`http://localhost:3000/getCourse/name?name=${value}`)
+      const { data } = await axios.get(
+        `http://localhost:3000/getCourse/name?name=${value}`
+      );
       dispatch({
         type: SEARCH,
-        payload: data
+        payload: data,
       });
     } catch (error) {
-      alert(error)
+      alert(error);
     }
-  }
-}                                                                                                                                                              
-
+  };
+}
 
 export const postCourseRequest = () => ({
-  type: POST_COURSE_REQUEST
+  type: POST_COURSE_REQUEST,
 });
 
 export const postCourseSuccess = () => ({
-  type: POST_COURSE_SUCCESS
+  type: POST_COURSE_SUCCESS,
 });
 
 export const postCourseFailure = (error) => ({
   type: POST_COURSE_FAILURE,
-  payload: error
+  payload: error,
 });
 
 export const postCourseData = (courseData) => async (dispatch) => {
@@ -85,5 +96,17 @@ export const postCourseData = (courseData) => async (dispatch) => {
     console.log("Solicitud POST exitosa:", response.data);
   } catch (error) {
     console.error("Error al enviar los datos del curso:", error.message);
+  }
+};
+
+export const postUser = (state) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/createUser",
+      state
+    );
+    alert("Creado con Exito", response.data);
+  } catch (error) {
+    console.error("Error al enviar los datos del usuario:", error.message);
   }
 };
