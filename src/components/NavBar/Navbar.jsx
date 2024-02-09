@@ -4,7 +4,7 @@ import { FaUserGraduate } from "react-icons/fa";
 export const Navbar = () => {
   const location = useLocation();
   return (
-    <div className="flex h-20 justify-between items-center text-white bg-black">
+    <div className="flex h-20 w-screen justify-between items-center text-white bg-black">
       <div className="flex items-center justify-evenly w-[700px] h-full ">
         <Link to="/" className="h-full">
           <div className="flex items-center justify-center h-full w-[200px]">
