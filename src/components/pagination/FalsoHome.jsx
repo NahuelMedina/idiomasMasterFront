@@ -28,7 +28,7 @@ export function FalsoHome() {
     if (courses.length === 0) {
       dispatch(getAllCourses());
     }
-  }, []);
+  }, [dispatch]);
 
   const handleOrderPrice = (e) => {
     e.preventDefault();

@@ -11,8 +11,11 @@ const validation = (course) => {
   
     if (!course.price) {
       errors.price = "El campo Precio es obligatorio";
-    } else if (isNaN(course.price)) {
+      
+    } if (isNaN(course.price)) {
       errors.price = "El campo Precio debe ser un número";
+    } else if(course.price < 25 || course.price > 500) {
+      errors.price = "El precio debe ser entre 50 y 300 USD";
     }
   
     if (!course.duration) {

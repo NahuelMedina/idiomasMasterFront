@@ -4,7 +4,7 @@ export const About = () => {
       <div className="w-3/5	">
         <img
           className="w-full h-full "
-          src="https://pixabay.com/get/ge1cf95a681273ac1beefe71e7cfe1f2bd764bbb833d493264f3f444f974096c0015f02754170398bc0f3c77f1d2344f8.jpg"
+          src="https://previews.123rf.com/images/snake3d/snake3d1505/snake3d150500085/39793202-procesos-de-negocios-trabajo-en-equipo-de-trabajo-duro-de-asociaci%C3%B3n-hombres-personajes-que-dan.jpg"
           alt=""
         />
       </div>
