@@ -107,6 +107,18 @@ export const postUser = (state) => async (dispatch) => {
     );
     alert("Creado con Exito", response.data);
   } catch (error) {
-    console.error("Error al enviar los datos del usuario:", error.message);
+    const message = error.response.data;
+    alert(`${message}`);
+  }
+};
+
+export const getUser = (state) => async (dispatch) => {
+  try {
+    console.log(state);
+    const response = await axios.post("http://localhost:3000/getUser", state);
+    alert("Se a conectado", response.data);
+  } catch (error) {
+    const message = error.response.data.message;
+    alert(`${message}`);
   }
 };

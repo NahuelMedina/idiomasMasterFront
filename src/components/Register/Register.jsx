@@ -23,18 +23,6 @@ export const Register = () => {
     age: "",
   });
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setState({ ...state, img: reader.result });
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
-
   const handleChange = (e) => {
     e.preventDefault();
     console.log(e.target);
@@ -69,8 +57,8 @@ export const Register = () => {
       {console.log(state)}
       <div className=" w-3/5 h-full">
         <img
-          className="h-screen"
-          src="https://pixabay.com/get/gfebdf8a076329856399e0b1d299c4b4ac0fa91de763e3241b0b3d61a9e29ed66c89dcdc93f6817e6798599a0874d277e.jpg"
+          className="h-screen object-cover"
+          src="src\assets\fotos\image-register.jpg"
           alt=""
         />
       </div>
@@ -86,7 +74,7 @@ export const Register = () => {
             <div className="flex flex-col w-2/4 gap-2 p-8">
               <label htmlFor="name">Nombre</label>
               <input
-                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
+                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#1E68AD]"
                 onChange={handleChange}
                 name="name"
                 placeholder="Nombre..."
@@ -96,7 +84,7 @@ export const Register = () => {
               <span style={{ color: "red" }}>{errors.name}</span>
               <label htmlFor="lastname">Apellido</label>
               <input
-                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
+                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#1E68AD]"
                 onChange={handleChange}
                 name="lastname"
                 placeholder="Apellido..."
@@ -106,7 +94,7 @@ export const Register = () => {
               <span style={{ color: "red" }}>{errors.lastname}</span>
               <label htmlFor="password">Constraseña</label>
               <input
-                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
+                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#1E68AD]"
                 onChange={handleChange}
                 placeholder="Contraseña..."
                 name="password"
@@ -118,7 +106,7 @@ export const Register = () => {
             <div className="flex flex-col w-2/4 gap-2 p-8">
               <label htmlFor="email">Email</label>
               <input
-                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
+                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#1E68AD]"
                 onChange={handleChange}
                 name="email"
                 placeholder="Email..."
@@ -128,7 +116,7 @@ export const Register = () => {
               <span style={{ color: "red" }}>{errors.email}</span>
               <label htmlFor="age">Edad</label>
               <input
-                className="text-black rounded-md h-8 outline-none pl-1 remove-arrow  focus:border-2 border-[#FF6B6C]"
+                className="text-black rounded-md h-8 outline-none pl-1 remove-arrow  focus:border-2 border-[#1E68AD]"
                 onChange={handleChange}
                 placeholder="Edad..."
                 name="age"
@@ -138,8 +126,8 @@ export const Register = () => {
               <span style={{ color: "red" }}>{errors.age}</span>
               <label htmlFor="img">Imagen URL</label>
               <input
-                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
-                onChange={handleFileChange}
+                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#1E68AD]"
+                onChange={handleChange}
                 name="img"
                 id="img"
                 type="text"
