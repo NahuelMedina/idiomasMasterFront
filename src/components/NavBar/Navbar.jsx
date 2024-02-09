@@ -1,45 +1,55 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { SearchBar } from "../SearchBar/SearchBar";
+import { FaUserGraduate } from "react-icons/fa";
 export const Navbar = () => {
   const location = useLocation();
   return (
     <div className="flex h-20 justify-between items-center text-white bg-black">
-      <div className="flex justify-center w-1/2 items-center gap-20">
-        <Link to="/">
-          <img
-            className="w-32"
-            src="src\assets\logo\logo_idiomaster-removebg-preview.png"
-          ></img>
+      <div className="flex items-center justify-evenly w-[700px] h-full ">
+        <Link to="/" className="h-full">
+          <div className="flex items-center justify-center h-full w-[200px]">
+            <img
+              className="w-32"
+              src="src\assets\logo\logo_idiomaster-removebg-preview.png"
+            ></img>
+          </div>
         </Link>
-        <div>
-          <NavLink className="navButton">Sobre Nosotros</NavLink>
-        </div>
-        <div>
-          <NavLink className="navButton">Curso</NavLink>
-        </div>
-        <div>
-          <NavLink className="navButton" to="/home">
-            Explorar
-          </NavLink>
-        </div>
+        <Link  className="h-full">
+        <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+            <h1>Sobre Nosotros</h1>
+          </div>
+        </Link>
+        <Link  className="h-full">
+        <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out  border-b-4 border-black hover:border-white border-t-[4px]">
+            <h1>Curso</h1>
+          </div>
+        </Link>
+        <Link to="/home"  className="h-full">
+        <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+            <h1>Explorar</h1>
+          </div>
+        </Link>
+
       </div>
       <div>
-        {location.pathname !== '/'? (
-          <SearchBar></SearchBar>
-        )
-      :<Link></Link>
-      }
-        
+        {location.pathname !== "/" ? <SearchBar></SearchBar> : <Link></Link>}
       </div>
-      <div className="mr-20">
         {location.pathname !== "/register" && location.pathname !== "/login" ? (
-          <Link to="/register" className="navButton">
-            Registrarse
-          </Link>
+      <div className=" relative flex flex-row items-center justify-evenly w-[200px] h-full mr-[80px]">
+           <Link to="/register"  className=" w-full h-full flex flex-row items-center">
+           <div className="flex items-center justify-evenly h-full w-full transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+               <h1>Registrate</h1>
+               <FaUserGraduate className="text-[40px]" />
+             </div>
+             
+           </Link>
+           
+           
+           
+      </div>
         ) : (
           <Link></Link>
         )}
-      </div>
     </div>
   );
 };
