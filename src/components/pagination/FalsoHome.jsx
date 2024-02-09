@@ -2,7 +2,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { Card } from "../Card/Card";
 import Page from "./Page";
-import { filterLenguage, filterLevel, getAllCourses, orderPrice } from "../../redux/action/actions";
+import { filterLanguage, filterLevel, getAllCourses, orderPrice } from "../../redux/action/actions";
+
 
 export function FalsoHome() {
 
@@ -36,7 +37,7 @@ export function FalsoHome() {
     }
     const handleFilterLanguage = (e) => {
         e.preventDefault();
-        dispatch(filterLenguage(e.target.value));
+        dispatch(filterLanguage(e.target.value));
         setCurrentPage(1);
     }
 
