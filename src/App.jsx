@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import {
   Navbar,
   Landing,
-  FalsoHome,
   Register,
   Login,
   Detail,
