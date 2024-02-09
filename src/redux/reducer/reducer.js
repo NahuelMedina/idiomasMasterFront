@@ -1,4 +1,3 @@
-
 import {
     ALL_COURSES,
     COURSE_DETAIL,
@@ -15,7 +14,7 @@ let initialState = {
     coursesName: [],
 };
 
-export const reducer = (state = initialState, { type, payload }) => {
+const reducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case ALL_COURSES:
             return {
@@ -64,3 +63,5 @@ export const reducer = (state = initialState, { type, payload }) => {
             return state;
     }
 };
+
+export default reducer; 
