@@ -7,10 +7,10 @@ export const Navbar = () => {
     <div className="flex h-20 justify-between items-center text-white bg-black">
       <div className="flex items-center justify-evenly w-[700px] h-full ">
         <Link to="/" className="h-full">
-          <div className="flex items-center justify-center h-full w-[200px]">
+          <div className="flex items-center justify-center h-full w-[60px]">
             <img
               className="w-32"
-              src="src\assets\logo\logo_idiomaster-removebg-preview.png"
+              src="src\assets\logo\logo4.png"
             ></img>
           </div>
         </Link>
