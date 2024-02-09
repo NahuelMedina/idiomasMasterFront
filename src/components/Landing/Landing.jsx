@@ -31,15 +31,7 @@ export const Landing = () => {
       <div className="flex justify-end items-center w-screen h-[80px] bg-[#1E68AD]">
         <SearchBar></SearchBar>
       </div>
-      {/* <div className="flex items-center border-2 border-blue-300 border-gree-300">
-        {search.length > 0 ? (
-          search.map((course, index) => <Card key={index} course={course} />)
-        ) : (
-          <div>
-            <h2>No hay cursos de tal idioma</h2>
-          </div>
-          )}
-      </div>  */}
+
       <div className="flex flex-row justify-end items-center w-screen h-[600px] relative bg-white">
         <div className=" flex w-full h-full absolute left-0 z-20 bg-gradient-to-r from-black via-white/10 to-white/0">
           <div className="h-full w-[950px] items-center justify-center flex flex-col">
