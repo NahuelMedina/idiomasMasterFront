@@ -57,9 +57,11 @@ export function FalsoHome() {
           current={currentPage}
         />
       </div>
-      <div className="rounded-lg h-6 flex text-black justify-start m-4 bg-gray-900   ">
+      <div className="rounded-lg  h-6 flex text-white justify-between m-4  ">
+       <div className="">
+
         <select
-          className="bg-gray-900 text-white"
+          className="bg-gray-900 rounded-lg m-1 hover:bg-gray-700 transition-colors duration-300 shadow-md px-1 py-1 border border-gray-700"
           name="orderPrice"
           id="orderPrice"
           defaultValue="default"
@@ -69,20 +71,24 @@ export function FalsoHome() {
           <option value="A">Min a Max</option>
           <option value="B">Max a Min</option>
         </select>
+      </div>
+      <div>
         <select
-          className="bg-gray-900 text-white"
+          className="bg-gray-900  rounded-lg m-1  hover:bg-gray-700 transition-colors duration-300 shadow-md px-1 py-1 border border-gray-700"
           name="filterLevel"
           id="filterLevel"
           onChange={(e) => handleFilterLevel(e)}
           defaultValue="all"
         >
-          <option value="all">dificultad</option>
+          <option value="all">Dificultad</option>
           <option value="Beginner">Principiante</option>
           <option value="Intermediate">Intermedio</option>
           <option value="Advanced">Avanzado</option>
         </select>
+        </div>
+        <div>
         <select
-          className="bg-gray-900 text-white"
+          className="bg-gray-900 rounded-lg m-1  hover:bg-gray-700 transition-colors duration-300 shadow-md px-1 py-1 border border-gray-700"
           name="filterLanguage"
           id="filterLanguage"
           onChange={(e) => handleFilterLanguage(e)}
@@ -96,6 +102,7 @@ export function FalsoHome() {
           <option value="Dutch">Holandés</option>
           <option value="Portuguese">Portugues</option>
         </select>
+        </div>
       </div>
 
       <div className="flex justify-center bg-black items-center m-12">
