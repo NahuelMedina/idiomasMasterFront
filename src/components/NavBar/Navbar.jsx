@@ -5,12 +5,12 @@ export const Navbar = () => {
   const location = useLocation();
   
   return (
-    <div className="flex h-20 justify-between items-center text-white bg-black">
-      <div className="flex justify-center w-1/2 items-center gap-20">
+    <div className="flex h-20 justify-between items-center text-white bg-black ">
+      <div className="flex justify-center w-1/2 items-center gap-20 ">
         <Link to="/">
           <img
-            className="w-12 h-10"
-            src="src\assets\logo\logo2.png"
+            className="w-14 h-14 "
+            src="src\assets\logo\logo4.png"
           ></img>
         </Link>
         <div>
