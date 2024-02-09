@@ -14,25 +14,24 @@ export const Navbar = () => {
             ></img>
           </div>
         </Link>
-        <Link  className="h-full">
-        <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+        <Link className="h-full">
+          <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
             <h1>Sobre Nosotros</h1>
           </div>
         </Link>
-        <Link  className="h-full">
-        <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out  border-b-4 border-black hover:border-white border-t-[4px]">
+        <Link className="h-full">
+          <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out  border-b-4 border-black hover:border-white border-t-[4px]">
             <h1>Curso</h1>
           </div>
         </Link>
-        <Link to="/home"  className="h-full">
-        <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+        <Link to="/home" className="h-full">
+          <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
             <h1>Explorar</h1>
           </div>
         </Link>
 
-
-        <Link to="/createCourse"  className="h-full">
-        <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+        <Link to="/createCourse" className="h-full">
+          <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
             <h1>Crear Curso</h1>
           </div>
         </Link>
@@ -40,22 +39,21 @@ export const Navbar = () => {
       <div>
         {location.pathname !== "/" ? <SearchBar></SearchBar> : <Link></Link>}
       </div>
-        {location.pathname !== "/register" && location.pathname !== "/login" ? (
-      <div className=" relative flex flex-row items-center justify-evenly w-[200px] h-full mr-[80px]">
-           <Link to="/register"  className=" w-full h-full flex flex-row items-center">
-           <div className="flex items-center justify-evenly h-full w-full transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-               <h1>Registrate</h1>
-               <FaUserGraduate className="text-[40px]" />
-             </div>
-             
-           </Link>
-           
-           
-           
-      </div>
-        ) : (
-          <Link></Link>
-        )}
+      {location.pathname !== "/register" && location.pathname !== "/login" ? (
+        <div className=" relative flex flex-row items-center justify-evenly w-[200px] h-full mr-[80px]">
+          <Link
+            to="/register"
+            className=" w-full h-full flex flex-row items-center"
+          >
+            <div className="flex items-center justify-evenly h-full w-full transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+              <h1>Registrate</h1>
+              <FaUserGraduate className="text-[40px]" />
+            </div>
+          </Link>
+        </div>
+      ) : (
+        <Link></Link>
+      )}
     </div>
   );
 };

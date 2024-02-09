@@ -1,5 +1,4 @@
 import { COURSE_DETAIL, FILTER_LANGUAGE, FILTER_LEVEL, ORDER_PRICE, SEARCH, ALL_COURSES, POST_COURSE_FAILURE, POST_COURSE_REQUEST, POST_COURSE_SUCCESS} from "./actiontypes";
-import { courses } from "../../Cursos/courses";
 import axios from "axios";
 
 const url = import.meta.env.VITE_URL_HOST
@@ -17,23 +16,13 @@ export const getAllCourses = () => async (dispatch) => {
 };
 
 export function getCoursesDetail(id) {
-  return function (dispatch) {
+  return async function (dispatch) {
     try {
-      const course = []
-      courses.forEach(c => {
-        if (c.id === Number(id)) {
-          course.push(c)
-        }
-      })
-      if (course.length > 0) {
-        console.log(course);
+      const {data} = await axios.get(`http://localhost:3000/getCourse/${id}`)
         dispatch({
           type: COURSE_DETAIL,
-          payload: course
+          payload: data
         });
-      } else {
-        alert(`No se encontró ningún curso con el ID: ${id}`);
-      }
     } catch (error) {
       alert(error)
     }
