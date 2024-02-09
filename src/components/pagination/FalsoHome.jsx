@@ -10,12 +10,15 @@ export function FalsoHome() {
 
     const dispatch = useDispatch()
     const courses = useSelector((state) => state.courses);
+    const search = useSelector(state => state.coursesName)
+    
     /*Paginado*/
     const [currentPage, setCurrentPage] = useState(1);
     const [coursePerPage, setCoursePerPage] = useState(3);
     const indexLastCourse = currentPage * coursePerPage;
     const indexFirstCourse = indexLastCourse - coursePerPage; // 12 - 12 = 0 -> me da el indice del primer curso.
     const currentCourses = courses.slice(indexFirstCourse, indexLastCourse);
+    const currentSearch= search.slice(indexFirstCourse, indexLastCourse);
     const page = (pageNum) => {
         setCurrentPage(pageNum); //seteo el estado, y esto hace que cambie el valor del resto de mis constantes del paginado.
     };
@@ -44,8 +47,8 @@ export function FalsoHome() {
 
     return (
 
-        <div className="bg-black text-white flex justify-center">
-            <div className='absolute top-20 right-38 '>
+        <div className="bg-black text-white flex ">
+            <div className='absolute top-15 flex left-96 m-4'>
                 <Page
                     setCurrentPage={setCurrentPage}
                     coursePerPage={coursePerPage}
@@ -53,9 +56,10 @@ export function FalsoHome() {
                     page={page}
                     current={currentPage} />
             </div>
-            <div>
+            <div className="rounded-lg h-6 flex text-black justify-start m-4 bg-gray-900   ">
 
                 <select
+                    className="bg-gray-900 text-white"
                     name="orderPrice"
                     id="orderPrice"
                     defaultValue="default"
@@ -66,6 +70,7 @@ export function FalsoHome() {
                     <option value="B">Max a Min</option>
                 </select>
                 <select
+                    className="bg-gray-900 text-white"
                     name="filterLevel"
                     id="filterLevel"
                     onChange={(e) => handleFilterLevel(e)}
@@ -77,6 +82,7 @@ export function FalsoHome() {
                     <option value="Advanced">Avanzado</option>
                 </select>
                 <select
+                    className="bg-gray-900 text-white"
                     name="filterLanguage"
                     id="filterLanguage"
                     onChange={(e) => handleFilterLanguage(e)}
@@ -93,23 +99,36 @@ export function FalsoHome() {
             </div>
 
 
-            <div className='p-16'>
-
-                {courses.length > 0 ? (
-                    currentCourses.map((course, index) => <Card key={index} course={course} />)
+            <div className='flex justify-center bg-black items-center m-12'>
+                {
+                search.length > 0 ? (
+                    currentSearch.map((course, index) => (
+                        <div key={index} className="p-6 "> 
+                            <Card course={course} />
+                        </div>
+                        ))
+                    ) : (
+                    
+                    
+    
+                courses.length > 0 ? (
+                    currentCourses.map((course, index) => (
+                    <div key={index} className="p-6 "> 
+                        <Card course={course} />
+                    </div>
+                    ))
                 ) : (
                     <div>
-                        <h2>Loading...</h2>
+                    <h2>Loading...</h2>
                     </div>
-                )}
-
-            </div>
-
+                ))}
+                </div>
 
 
 
 
-            <div className="absolute bottom-6 right-38">
+
+            <div className="absolute bottom-6 flex left-96 m-4 ">
                 <Page
                     setCurrentPage={setCurrentPage}
                     coursePerPage={coursePerPage}

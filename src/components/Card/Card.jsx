@@ -3,7 +3,7 @@ export const Card = ({ course }) => {
   return (
     <div>
       <div>
-        <img src={course.image} alt={course.lenguage} className='h-[350px] w-[400px]' />
+        <img src={course.image} alt={course.lenguage} className='h-[150px] w-[200px]'/>
       </div>
       <div>
         <h2>{course.language}</h2>

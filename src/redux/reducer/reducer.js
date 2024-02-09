@@ -1,4 +1,3 @@
-
 import {
     ALL_COURSES,
     COURSE_DETAIL,
@@ -15,7 +14,7 @@ let initialState = {
     coursesName: [],
 };
 
-export const reducer = (state = initialState, { type, payload }) => {
+const reducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case ALL_COURSES:
             return {
@@ -33,12 +32,14 @@ export const reducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 courses: filteredByLanguage,
+                coursesName: filteredByLanguage,
             };
         case FILTER_LEVEL:
             const filteredByLevel = state.coursesCopy.filter(course => course.level === payload);
             return {
                 ...state,
                 courses: filteredByLevel,
+                coursesName: filteredByLevel,
             };
         case ORDER_PRICE:
             if (payload === "default") {
@@ -52,6 +53,7 @@ export const reducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 courses: sortedArray,
+                coursesName: sortedArray,
             };
         case SEARCH:
             // Revierte al estado inicial antes de realizar la búsqueda
@@ -64,3 +66,5 @@ export const reducer = (state = initialState, { type, payload }) => {
             return state;
     }
 };
+
+export default reducer; 
