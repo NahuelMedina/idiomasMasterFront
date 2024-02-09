@@ -8,7 +8,7 @@ import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
 import { Card } from "../Card/Card";
 
-export default function HomeC() {
+function HomeC() {
   const sortByDescending = (data) => {
     return data.sort((a, b) => b.price - a.price);
   };
@@ -209,3 +209,5 @@ export default function HomeC() {
     </div>
   );
 }
+
+export default HomeC

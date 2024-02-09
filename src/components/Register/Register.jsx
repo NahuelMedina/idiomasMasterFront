@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import registerValidate from "../Utils/registerValidate";
 import { useDispatch } from "react-redux";
 import { postUser } from "../../redux/action/actions";
-export const Register = () => {
+
+const Register = () => {
   const dispatch = useDispatch();
   const [state, setState] = useState({
     name: "",
@@ -162,3 +163,5 @@ export const Register = () => {
     </div>
   );
 };
+
+export default Register
