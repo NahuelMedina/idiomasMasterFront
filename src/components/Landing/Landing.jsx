@@ -5,7 +5,6 @@ import { Card } from "../Card/Card";
 export const Landing = () => {
   const search = useSelector((state) => state.coursesName);
 
-  console.log(search);
   return (
     <div className="flex w-screnn h-screen bg-black text-white">
       <div className="flex justify-center items-center w-1/2">

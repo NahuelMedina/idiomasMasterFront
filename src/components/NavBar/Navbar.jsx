@@ -8,10 +8,7 @@ export const Navbar = () => {
     <div className="flex h-20 justify-between items-center text-white bg-black">
       <div className="flex justify-center w-1/2 items-center gap-20">
         <Link to="/">
-          <img
-            className="w-32"
-            src="src\assets\logo\logo_idiomaster-removebg-preview.png"
-          ></img>
+          <img className="w-12 h-10" src="src\assets\logo\logo2.png"></img>
         </Link>
         <div>
           <NavLink className={styleNavLink} to="/about">
@@ -28,12 +25,7 @@ export const Navbar = () => {
         </div>
       </div>
       <div>
-        {location.pathname !== '/'? (
-          <SearchBar></SearchBar>
-        )
-      :<Link></Link>
-      }
-        
+        {location.pathname !== "/" ? <SearchBar></SearchBar> : <Link></Link>}
       </div>
       <div className="mr-20">
         {location.pathname !== "/register" && location.pathname !== "/login" ? (
