@@ -10,10 +10,11 @@ export const SearchBar = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(searchTerm);
     dispatch(search(searchTerm));
     setSearchTerm(""); 
+    navigate('/home')
   };
+
 
   const handleSearch = (event) => {
     const value = event.target.value;
