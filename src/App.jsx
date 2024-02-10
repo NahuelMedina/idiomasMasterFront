@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import {
   Navbar,
   Landing,
-  FalsoHome,
+  HomeC,
   Register,
   Login,
   Detail,
@@ -16,7 +16,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<FalsoHome />} />
+        <Route path="/home" element={<HomeC />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />

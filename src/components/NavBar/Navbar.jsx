@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { FaUserGraduate } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
@@ -8,7 +8,7 @@ import { TiShoppingCart } from "react-icons/ti";
 export const Navbar = () => {
   const location = useLocation();
   return (
-    <div className="flex h-20 justify-between items-center text-white bg-black">
+    <div className="flex h-20 w-screen justify-between items-center text-white bg-black">
       <div className="flex items-center justify-evenly w-[700px] h-full ">
         <Link to="/" className="h-full">
           <div className="flex items-center justify-center h-full w-[60px]">

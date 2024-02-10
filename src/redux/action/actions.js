@@ -8,6 +8,7 @@ import {
   POST_COURSE_FAILURE,
   POST_COURSE_REQUEST,
   POST_COURSE_SUCCESS,
+  FILTERED_COURSES,
   CART,
   ALLCART,
   ALL_CART_STATUS
@@ -124,6 +125,13 @@ export const getUser = (state) => async (dispatch) => {
     const message = error.response.data.message;
     alert(`${message}`);
   }
+};
+
+export const filteredCourses = (data) => {
+  return {
+    type: FILTERED_COURSES,
+    payload: data
+  };
 };
 export const addCart = (data)=>{
   return async function (dispatch) {

@@ -1,6 +1,7 @@
 import {
     ALL_COURSES,
     COURSE_DETAIL,
+    FILTERED_COURSES,
     FILTER_LANGUAGE,
     FILTER_LEVEL,
     ORDER_PRICE,
@@ -72,6 +73,15 @@ const reducer = (state = initialState, { type, payload }) => {
                 courses: state.coursesCopy,
                 coursesName: payload,
             };
+
+        case FILTERED_COURSES: 
+
+        console.log(payload)
+
+        return {
+            ...state,
+            courses: payload
+        }
         case CART:
                 return{
                 ...state,

@@ -1,11 +1,12 @@
 import { Navbar } from "./NavBar/Navbar";
 import { Card } from "./Card/Card";
-import { Register } from "./Register/Register";
+import  Register  from "./Register/Register";
 import { Landing } from "../components/Landing/Landing";
 import { Login } from "./Login/Login";
-import { FalsoHome } from "./pagination/FalsoHome";
+import  HomeC  from "./pagination/HomeC";
 import { Detail } from "./Detail/detail";
 import { ShoppingCart } from "./ShoppingCart/ShoppingCart";
 import { CourseForm } from "./CourseForm/CourseForm";
 import { About } from "./About/About";
-export { Navbar, Card, Register, Landing, Login, FalsoHome, Detail,CourseForm,About, ShoppingCart };
+export { Navbar, Card, Register, Landing, Login, HomeC, Detail,CourseForm,About, ShoppingCart };
+
