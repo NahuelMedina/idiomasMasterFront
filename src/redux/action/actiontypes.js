@@ -7,3 +7,6 @@ export const SEARCH = 'SEARCH'
 export const POST_COURSE_REQUEST = 'POST_COURSE_REQUEST';
 export const POST_COURSE_SUCCESS = 'POST_COURSE_SUCCESS';
 export const POST_COURSE_FAILURE = 'POST_COURSE_FAILURE';
+export const CART = 'CART'
+export const ALLCART = 'ALLCART'
+export const ALL_CART_STATUS = 'ALL_CART_STATUS'

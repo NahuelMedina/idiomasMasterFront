@@ -5,4 +5,7 @@ import { Landing } from "../components/Landing/Landing";
 import { Login } from "./Login/Login";
 import { FalsoHome } from "./pagination/FalsoHome";
 import { Detail } from "./Detail/detail";
-export { Navbar, Card, Register, Landing, Login, FalsoHome, Detail };
+import { ShoppingCart } from "./ShoppingCart/ShoppingCart";
+import { CourseForm } from "./CourseForm/CourseForm";
+import { About } from "./About/About";
+export { Navbar, Card, Register, Landing, Login, FalsoHome, Detail,CourseForm,About, ShoppingCart };

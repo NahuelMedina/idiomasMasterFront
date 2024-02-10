@@ -6,9 +6,10 @@ import {
   Register,
   Login,
   Detail,
+  CourseForm,
+  About,
+  ShoppingCart
 } from "./components";
-import CourseForm from "./components/CourseForm/CourseForm";
-import { About } from "./components/About/About";
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/createCourse" element={<CourseForm />} />
+        <Route path="/cart" element={<ShoppingCart />} />
       </Routes>
     </>
   );

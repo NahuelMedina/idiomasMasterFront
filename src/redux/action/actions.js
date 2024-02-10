@@ -8,6 +8,9 @@ import {
   POST_COURSE_FAILURE,
   POST_COURSE_REQUEST,
   POST_COURSE_SUCCESS,
+  CART,
+  ALLCART,
+  ALL_CART_STATUS
 } from "./actiontypes";
 import axios from "axios";
 
@@ -122,3 +125,40 @@ export const getUser = (state) => async (dispatch) => {
     alert(`${message}`);
   }
 };
+export const addCart = (data)=>{
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: CART,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+
+export const allCartFunction = (value)=>{
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: ALLCART,
+        payload: value,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+export const allCartStatus = (value)=>{
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: ALL_CART_STATUS,
+        payload: value,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}

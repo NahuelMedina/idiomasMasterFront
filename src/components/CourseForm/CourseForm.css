@@ -11,21 +11,4 @@
     /* Otros estilos opcionales */
   }
 
-  .ContainerForm{
-    padding-top: 20px;
-  }
-
-  .ContainerFromInt{
-    background-color: #1f69d7f3;
-    border-radius: 16px;
-  }
-
-  .Titulo{
-    color: rgb(19, 23, 125);
-    font-size: xx-large;
-  }
-
-  .Subtitulo{
-    color: rgb(19, 23, 125);
-    font-size: larger;
-  }
+ 
