@@ -6,8 +6,6 @@ import { FaRankingStar } from "react-icons/fa6";
 import { TbMessageLanguage } from "react-icons/tb";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
-
-
 import { Card } from "../Card/Card";
 
 function HomeC() {
@@ -27,7 +25,7 @@ function HomeC() {
   const itemsOnPage = 3;
 
   const nextPage = () => {
-    setPagePosition(prevPagePosition => {
+    setPagePosition((prevPagePosition) => {
       if (prevPagePosition < pageNum) {
         return prevPagePosition + 1;
       } else {
@@ -35,9 +33,9 @@ function HomeC() {
       }
     });
   };
-  
+
   const prevPage = () => {
-    setPagePosition(prevPagePosition => {
+    setPagePosition((prevPagePosition) => {
       if (prevPagePosition > 1) {
         return prevPagePosition - 1;
       } else {
@@ -176,7 +174,7 @@ function HomeC() {
 
       <div className="flex flex-col items-start justify-start bg-white h-full w-[85%] relative">
         <div className=" w-[600px] border-b-[2px] border-[#848484] my-[10px] mx-[90px]">
-        <h1 className="text-[35px] text-[#1F1F1F] m-[2px]">{`Cursos Encontrados: ${courses.length}`}</h1>
+          <h1 className="text-[35px] text-[#1F1F1F] m-[2px]">{`Cursos Encontrados: ${courses.length}`}</h1>
         </div>
         <div className="flex justify-evenly items-center h-[75%] w-full">
           {courses &&
@@ -189,15 +187,23 @@ function HomeC() {
         </div>
 
         <div className="h-[70px] items-center justify-center flex flex-row w-full">
-        <IoIosArrowDropleft
-  className={`text-[50px] m-[30px] ${pagePosition === 1 ? 'cursor-not-allowed' : 'cursor-pointer'} text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
-  onClick={prevPage}
-  disabled={pagePosition === 1}
-/>
-        <div className="w-[50px] flex items-center justify-center">
-        <h1 className="text-[30px] m-[30px] text-black">{`${pagePosition}`}</h1>
-        </div>
-        <IoIosArrowDropright className={`text-[50px] m-[30px] ${pagePosition === pageNum ? 'cursor-not-allowed' : 'cursor-pointer'} text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`} onClick={nextPage} disabled={pagePosition === pageNum}/>
+          <IoIosArrowDropleft
+            className={`text-[50px] m-[30px] ${
+              pagePosition === 1 ? "cursor-not-allowed" : "cursor-pointer"
+            } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
+            onClick={prevPage}
+            disabled={pagePosition === 1}
+          />
+          <div className="w-[50px] flex items-center justify-center">
+            <h1 className="text-[30px] m-[30px] text-black">{`${pagePosition}`}</h1>
+          </div>
+          <IoIosArrowDropright
+            className={`text-[50px] m-[30px] ${
+              pagePosition === pageNum ? "cursor-not-allowed" : "cursor-pointer"
+            } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
+            onClick={nextPage}
+            disabled={pagePosition === pageNum}
+          />
         </div>
       </div>
     </div>

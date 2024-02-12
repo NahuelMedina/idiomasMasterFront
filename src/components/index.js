@@ -6,3 +6,4 @@ import { Login } from "./Login/Login";
 import  HomeC  from "./pagination/HomeC";
 import { Detail } from "./Detail/detail";
 export { Navbar, Card, Register, Landing, Login, HomeC, Detail };
+
