@@ -60,6 +60,8 @@ function CourseForm({ onSubmit }) {
     }
   };
 
+
+
   return (
     <div className="">
       <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center containerCourse" >
@@ -160,7 +162,7 @@ function CourseForm({ onSubmit }) {
                       <option value="Monday-Wednesday-Friday">Lunes, Miércoles, Viernes</option>
                       <option value="Tuesday-Thursday">Martes, Jueves</option>
                     </select><br /><br />
-                    
+
                     <label htmlFor="start_time">Fecha de inicio: </label>
                     <div className="relative">
                       <DatePicker
