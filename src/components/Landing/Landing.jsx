@@ -67,13 +67,13 @@ export const Landing = () => {
           />
         ))}
       </div>
-      <marquee direction="left" behavior="alternate" scrollamount="5" className="text-black">
+      {/* <marquee direction="left" behavior="alternate" scrollamount="5" className="text-black">
         <div className="w-full h-[50px] bg-white text-black">
         Texto en movimiento...
         </div>
         
         
-        </marquee>
+        </marquee> */}
       <div className="flex flex-row items-center justify-evenly w-screen h-[600px] relative bg-[#ff5555]">
       {card_landing_reviews.map((element, index) => (
         <Landing_reviews

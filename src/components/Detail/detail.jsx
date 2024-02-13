@@ -19,7 +19,20 @@ export const Detail = () => {
     
   }, []);
 
- 
+  const fechaIni = new Date(detail?.start_time);
+  const añoI = fechaIni.getFullYear();
+  const mesI = ('0' + (fechaIni.getMonth() + 1)).slice(-2); // Sumar 1 al mes ya que en JavaScript los meses van de 0 a 11
+  const diaI = ('0' + fechaIni.getDate()).slice(-2);
+
+  const fechaInicial = `${añoI}-${mesI}-${diaI}`;
+
+  const fechafin = new Date(detail?.finish_time);
+  const añoF = fechafin.getFullYear();
+  const mesF = ('0' + (fechafin.getMonth() + 1)).slice(-2); // Sumar 1 al mes ya que en JavaScript los meses van de 0 a 11
+  const diaF = ('0' + fechafin.getDate()).slice(-2);
+
+  const fechaFinal = `${añoF}-${mesF}-${diaF}`;
+
   return (
     <div className="bg-[#FFFFFF] w-screen h-screen text-white container flex justify-center items-center">
       <div className="flex justify-center h-[95%] w-4/5 bg-[#1E68AD] p-10 rounded-md">
@@ -49,13 +62,13 @@ export const Detail = () => {
             <div className="text-[#FFFFFF] flex items-center gap-2 mt-5  pb-1 font-normal  text-2xl  ">
               <FaHourglassStart />
               <p className="border-b border-white/40">
-                Empieza el dia {detail?.start_time}
+                Empieza el dia {fechaInicial}
               </p>
             </div>
             <div className="text-[#FFFFFF] flex items-center gap-2 mt-5 pb-1 mb-5 font-normal  text-2xl ">
               <FaHourglassEnd />
               <p className="border-b border-white/40">
-                Finaliza el dia {detail?.finish_time}
+                Finaliza el dia {fechaFinal}
               </p>
             </div>
             <div className="flex">

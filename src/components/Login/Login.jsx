@@ -65,12 +65,12 @@ export const Login = () => {
                 id="email"
                 type="email"
               />
-              <label htmlFor="password">Constraseña</label>
+              <label htmlFor="password">Contraseña</label>
               <input
                 onChange={handleChange}
                 className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C] w-60"
                 name="password"
-                placeholder="Constraseña..."
+                placeholder="Contraseña..."
                 id="password"
                 type="password"
               />
