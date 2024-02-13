@@ -62,13 +62,13 @@ export const Detail = () => {
             <div className="text-[#FFFFFF] flex items-center gap-2 mt-5  pb-1 font-normal  text-2xl  ">
               <FaHourglassStart />
               <p className="border-b border-white/40">
-                Empieza el dia {detail?.start_time}
+                Empieza el dia {fechaInicial}
               </p>
             </div>
             <div className="text-[#FFFFFF] flex items-center gap-2 mt-5 pb-1 mb-5 font-normal  text-2xl ">
               <FaHourglassEnd />
               <p className="border-b border-white/40">
-                Finaliza el dia {detail?.finish_time}
+                Finaliza el dia {fechaFinal}
               </p>
             </div>
             <div className="flex">
