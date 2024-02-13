@@ -5,11 +5,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { postCourseData } from "../../redux/action/actions";
 import './CourseForm.css'
-import { useNavigate } from "react-router-dom";
 
-
-
-export function CourseForm({ onSubmit }) {
+function CourseForm({ onSubmit }) {
   const [course, setCourse] = useState({
     language: "",
     level: "",
@@ -23,7 +20,6 @@ export function CourseForm({ onSubmit }) {
     status: true
   });
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -50,6 +46,20 @@ export function CourseForm({ onSubmit }) {
     }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setCourse((prevCourse) => ({
+          ...prevCourse,
+          image: reader.result
+        }));
+      };
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const errors = validation(course);
@@ -58,21 +68,18 @@ export function CourseForm({ onSubmit }) {
       console.log("Datos enviados al hacer clic:", course);
       dispatch(postCourseData(course));
       window.alert("El curso se ha creado exitosamente."); // Actualizar el mensaje de éxito
-      navigate('/home')
     }
   };
 
-
-
   return (
     <div className="">
-      <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center containerCourse">
-        <div className="pt-5">
+      <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center containerCourse" >
+        <div className="ContainerForm">
           <div >
 
-            <div className="bg-white  shadow-lg p-4 px-4 md:p-18 mb-0 bg-[#1f69d7f3] rounded-lg">
-              <h1 className=" font-bold text-3xl text-[#13177d] ">Crear nuevo curso</h1>
-              <p className=" text-[#13177d] mb-6 font-semibold text-lg" >Completa el formulario, por favor.</p>
+            <div className="bg-white rounded shadow-lg p-4 px-4 md:p-18 mb-0 ContainerFromInt">
+              <h1 className=" Titulo font-semibold text-xl text-gray-600">Crear nuevo curso</h1>
+              <p className="Subtitulo text-gray-500 mb-6" >Completa el formulario, por favor.</p>
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                 <div className="text-gray-600">
                 </div>
@@ -164,7 +171,7 @@ export function CourseForm({ onSubmit }) {
                       <option value="Monday-Wednesday-Friday">Lunes, Miércoles, Viernes</option>
                       <option value="Tuesday-Thursday">Martes, Jueves</option>
                     </select><br /><br />
-
+                    
                     <label htmlFor="start_time">Fecha de inicio: </label>
                     <div className="relative">
                       <DatePicker
@@ -225,15 +232,14 @@ export function CourseForm({ onSubmit }) {
                       <option value="Suecia">Suecia</option>
                       <option value="Suiza">Suiza</option>
                     </select><br /><br />
-                    <label htmlFor="image">URL de la imagen:</label>
+                    <label htmlFor="image">Imagen:</label>
                     <input
-                      type="text"
+                      type="file"
                       id="image"
                       name="image"
-                      value={course.image}
-                      onChange={handleChange}
-                      required
-                      className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="w-full"
                     /><br /><br />
                     <button type="submit" className="bg-blue-950 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">Crear Curso</button>
                     <div className="text-green-500 mt-8 text-lg">
@@ -249,4 +255,4 @@ export function CourseForm({ onSubmit }) {
     </div>
   );
 }
-
+export default CourseForm;
