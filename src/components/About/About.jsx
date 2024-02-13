@@ -33,7 +33,7 @@ export const About = () => {
               </div>
               <div>
                 <p>Nahuel Medina</p>
-                <p>Simón Andrés</p>
+                <p>Andrés Arboleda</p>
                 <p>Tomas Pon</p>
               </div>
             </div>
