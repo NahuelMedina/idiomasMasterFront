@@ -255,5 +255,4 @@ function CourseForm({ onSubmit }) {
     </div>
   );
 }
-
 export default CourseForm;
