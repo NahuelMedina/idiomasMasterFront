@@ -9,9 +9,6 @@ import {
   POST_COURSE_REQUEST,
   POST_COURSE_SUCCESS,
   FILTERED_COURSES,
-  CART,
-  ALLCART,
-  ALL_CART_STATUS
 } from "./actiontypes";
 import axios from "axios";
 
@@ -64,14 +61,19 @@ export const orderPrice = (orden) => {
 export function search(value) {
   return async function (dispatch) {
     try {
-      console.log(value);
       const { data } = await axios.get(
         `http://localhost:3000/getCourse/name?name=${value}`
       );
-      dispatch({
+      console.log(data);
+      if(Array.isArray(data)){
+        dispatch({
         type: SEARCH,
-        payload: data,
+        payload: [data, value]
       });
+      } else {
+        alert("No se encontraron resultados")
+      }
+      
     } catch (error) {
       alert(error);
     }
@@ -133,40 +135,3 @@ export const filteredCourses = (data) => {
     payload: data
   };
 };
-export const addCart = (data)=>{
-  return async function (dispatch) {
-    try {
-      dispatch({
-        type: CART,
-        payload: data,
-      });
-    } catch (error) {
-      alert(error);
-    }
-  };
-}
-
-export const allCartFunction = (value)=>{
-  return async function (dispatch) {
-    try {
-      dispatch({
-        type: ALLCART,
-        payload: value,
-      });
-    } catch (error) {
-      alert(error);
-    }
-  };
-}
-export const allCartStatus = (value)=>{
-  return async function (dispatch) {
-    try {
-      dispatch({
-        type: ALL_CART_STATUS,
-        payload: value,
-      });
-    } catch (error) {
-      alert(error);
-    }
-  };
-}

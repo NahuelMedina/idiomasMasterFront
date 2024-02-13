@@ -9,21 +9,24 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { Card } from "../Card/Card";
 
 function HomeC() {
+
+  
+
   const sortByDescending = (data) => {
     return data.sort((a, b) => b.price - a.price);
   };
-
   const sortByAscending = (data) => {
     return data.sort((a, b) => a.price - b.price);
   };
+
   const [language, setLanguage] = useState("all");
   const [level, setLevel] = useState("all");
   const [num, setNum] = useState("all");
   const [courses, setCourses] = useState([]);
 
+
   const [pagePosition, setPagePosition] = useState(1);
   const itemsOnPage = 3;
-
   const nextPage = () => {
     setPagePosition((prevPagePosition) => {
       if (prevPagePosition < pageNum) {
@@ -33,7 +36,6 @@ function HomeC() {
       }
     });
   };
-
   const prevPage = () => {
     setPagePosition((prevPagePosition) => {
       if (prevPagePosition > 1) {
@@ -43,7 +45,7 @@ function HomeC() {
       }
     });
   };
-
+  
   useEffect(() => {
     setPagePosition(1);
   }, [courses]);
@@ -56,6 +58,7 @@ function HomeC() {
   const renderCards = itemsArray[pagePosition - 1] || [];
 
   useEffect(() => {
+   
     const getAllCourse = async () => {
       const response = await axios.get(
         `http://localhost:3000/getCourseFilters?language=${language}&level=${level}`
@@ -77,7 +80,8 @@ function HomeC() {
 
   useEffect(() => {
     const getCourses = async () => {
-      try {
+      try { 
+    
         const response = await axios.get(`http://localhost:3000/getAllCourses`);
 
         if (response.data) {

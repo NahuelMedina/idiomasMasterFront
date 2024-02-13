@@ -35,6 +35,7 @@ export const Card = ({ course }) => {
         <button className="text-black text-[25px]">Obtener Ahora</button>
       </Link>
       </div>
+     
     </div>
   );
 };

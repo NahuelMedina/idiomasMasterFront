@@ -5,8 +5,8 @@ import { Landing } from "../components/Landing/Landing";
 import { Login } from "./Login/Login";
 import  HomeC  from "./pagination/HomeC";
 import { Detail } from "./Detail/detail";
-import { ShoppingCart } from "./ShoppingCart/ShoppingCart";
 import { CourseForm } from "./CourseForm/CourseForm";
 import { About } from "./About/About";
-export { Navbar, Card, Register, Landing, Login, HomeC, Detail,CourseForm,About, ShoppingCart };
+import { SearchHome } from "./SearchBar/SearchHome";
+export { Navbar, Card, Register, Landing, Login, HomeC, Detail,CourseForm,About,SearchHome };
 

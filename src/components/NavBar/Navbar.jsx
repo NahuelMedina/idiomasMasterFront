@@ -1,7 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { FaUserGraduate } from "react-icons/fa";
-import { TiShoppingCart } from "react-icons/ti";
 
 
 
@@ -36,16 +35,7 @@ export const Navbar = () => {
           </div>
         </Link>
       </div>
-      <div>
-        {location.pathname !== "/" ? <SearchBar></SearchBar> : <Link></Link>}
-      </div>
-      <div>
-        <Link to='/cart' > 
-            {location.pathname !=='/' && location.pathname !== '/createCourse' ? (
-              <TiShoppingCart />
-           ) : null }
-        </Link>
-      </div>
+      
       {location.pathname !== "/register" && location.pathname !== "/login" ? (
         <div className=" relative flex flex-row items-center justify-evenly w-[200px] h-full mr-[80px]">
           <Link

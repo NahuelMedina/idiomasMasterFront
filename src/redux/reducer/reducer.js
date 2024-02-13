@@ -6,9 +6,6 @@ import {
     FILTER_LEVEL,
     ORDER_PRICE,
     SEARCH,
-    CART,
-    ALLCART,
-    ALL_CART_STATUS
 } from "../action/actiontypes";
 
 let initialState = {
@@ -16,10 +13,7 @@ let initialState = {
     coursesCopy: [],
     courseDetail: [],
     coursesName: [],
-    coursesCart: [],
-    allCart: [],
-    statusCart: false,
-    bito: false
+    courseLanguage: '',
 
 };
 
@@ -71,52 +65,18 @@ const reducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 courses: state.coursesCopy,
-                coursesName: payload,
+                coursesName: payload[0],
+                courseLanguage: payload[1],
             };
 
         case FILTERED_COURSES: 
-
-        console.log(payload)
 
         return {
             ...state,
             courses: payload
         }
-        case CART:
-                return{
-                ...state,
-                courses: state.coursesCopy,
-                coursesCart: [payload],
-                bito: true
-            }
-        case ALLCART:
-            let aux = [...state.coursesCart, payload]
-            function eliminarDuplicados(aux) {
-                return Array.from(new Set(aux));
-            }
-            let aux2 = eliminarDuplicados(aux)
-            return{
-                ...state,
-                courses: state.coursesCopy,
-                allCart: aux2
-            }
-        case ALL_CART_STATUS:
-            const bito2 = [...state.allCart].some(obj => obj === payload)
-            console.log(bito2);
-            if(state.bito){
-                return{
-                    ...state,
-                    courses: state.coursesCopy,
-                    statusCart: true                
-                }
-            } else {
-                return{
-                    ...state,
-                    courses: state.coursesCopy,
-                    statusCart: false               
-                }
-            }
-          
+        
+       
         default:
             return state;
     }

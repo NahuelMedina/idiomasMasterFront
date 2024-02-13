@@ -1,36 +1,25 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { addCart,  allCartFunction,  allCartStatus,  getCoursesDetail,  } from "../../redux/action/actions";
+import { getCoursesDetail,  } from "../../redux/action/actions";
 import { SiLevelsdotfyi } from "react-icons/si";
 import { FaCalendarDays } from "react-icons/fa6";
 import { GiDuration } from "react-icons/gi";
 import { FaHourglassStart } from "react-icons/fa";
 import { FaHourglassEnd } from "react-icons/fa";
-import { TiShoppingCart } from "react-icons/ti";
 
 export const Detail = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.courseDetail);
-  const course = useSelector(state => state.coursesCart)
-  const allCart = useSelector(state => state.allCart)
-  const status = useSelector(state => state.statusCart)
 
-  console.log(course);
-  console.log(allCart)
 
-  useEffect(() => {
+  useEffect((event) => {
     dispatch(getCoursesDetail(params.id));
     
   }, []);
 
-  const handleCart = ()=>{
-      dispatch(addCart(detail));
-      dispatch(allCartFunction(detail));
-      dispatch(allCartStatus(detail));
-  }
-
+ 
   return (
     <div className="bg-[#FFFFFF] w-screen h-screen text-white container flex justify-center items-center">
       <div className="flex justify-center h-[95%] w-4/5 bg-[#1E68AD] p-10 rounded-md">
@@ -69,9 +58,12 @@ export const Detail = () => {
                 Finaliza el dia {detail?.finish_time}
               </p>
             </div>
+            <div className="flex">
             <button className=" text-start mt-5 mb-16 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
               <p className=" m-2 text-2xl  "> Comprar ahora</p>{" "}
             </button>
+            </div>
+           
           </div>
         </div>
         <div className="flex justify-center items-center w-2/5">

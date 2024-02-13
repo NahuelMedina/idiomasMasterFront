@@ -8,7 +8,7 @@ import {
   Detail,
   CourseForm,
   About,
-  ShoppingCart
+  SearchHome,
 } from "./components";
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/createCourse" element={<CourseForm />} />
-        <Route path="/cart" element={<ShoppingCart />} />
+        <Route path="/search" element={<SearchHome />} />
       </Routes>
     </>
   );
