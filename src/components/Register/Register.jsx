@@ -31,6 +31,20 @@ const Register = () => {
     setErrors(registerValidate({ ...state, [name]: value }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setCourse((prevCourse) => ({
+          ...prevCourse,
+          image: reader.result,
+        }));
+      };
+    }
+  };
+
   const buttonDisabled = () => {
     let buttonAux = false;
 
@@ -45,7 +59,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
-    navigate("/home");
+    navigate("/");
   };
 
   return (
@@ -124,10 +138,11 @@ const Register = () => {
                 <label htmlFor="img">Imagen URL</label>
                 <input
                   className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
+                  onChange={handleImageChange}
                   name="img"
                   id="img"
-                  type="text"
+                  type="file"
+                  accept="image/*"
                 />
               </div>
             </div>
