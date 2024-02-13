@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getCoursesDetail } from "../../redux/action/actions";
+import { Link, useParams } from "react-router-dom";
+import { getCoursesDetail,  } from "../../redux/action/actions";
 import { SiLevelsdotfyi } from "react-icons/si";
 import { FaCalendarDays } from "react-icons/fa6";
 import { GiDuration } from "react-icons/gi";
@@ -13,8 +13,10 @@ export const Detail = () => {
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.courseDetail);
 
-  useEffect(() => {
+
+  useEffect((event) => {
     dispatch(getCoursesDetail(params.id));
+    
   }, []);
 
   const fechaIni = new Date(detail?.start_time);
@@ -69,9 +71,12 @@ export const Detail = () => {
                 Finaliza el dia {detail?.finish_time}
               </p>
             </div>
+            <div className="flex">
             <button className=" text-start mt-5 mb-16 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
               <p className=" m-2 text-2xl  "> Comprar ahora</p>{" "}
             </button>
+            </div>
+           
           </div>
         </div>
         <div className="flex justify-center items-center w-2/5">
@@ -85,3 +90,4 @@ export const Detail = () => {
     </div>
   );
 };
+

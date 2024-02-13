@@ -1,16 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { FaUserGraduate } from "react-icons/fa";
+
+
+
 export const Navbar = () => {
   const location = useLocation();
   return (
     <div className="flex h-20 w-screen justify-between items-center text-white bg-black">
       <div className="flex items-center justify-evenly w-[700px] h-full ">
         <Link to="/" className="h-full">
-          <div className="flex items-center justify-center h-full w-[200px]">
+          <div className="flex items-center justify-center h-full w-[60px]">
             <img
               className="w-32"
-              src="src\assets\logo\logo_idiomaster-removebg-preview.png"
+              src="src\assets\logo\logo4.png"
             ></img>
           </div>
         </Link>
@@ -32,9 +35,7 @@ export const Navbar = () => {
           </div>
         </Link>
       </div>
-      <div>
-        {location.pathname !== "/" ? <SearchBar></SearchBar> : <Link></Link>}
-      </div>
+      
       {location.pathname !== "/register" && location.pathname !== "/login" ? (
         <div className=" relative flex flex-row items-center justify-evenly w-[200px] h-full mr-[80px]">
           <Link

@@ -7,7 +7,9 @@ import { postCourseData } from "../../redux/action/actions";
 import './CourseForm.css'
 import { useNavigate } from "react-router-dom";
 
-function CourseForm({ onSubmit }) {
+
+
+export function CourseForm({ onSubmit }) {
   const [course, setCourse] = useState({
     language: "",
     level: "",
@@ -64,13 +66,13 @@ function CourseForm({ onSubmit }) {
 
   return (
     <div className="">
-      <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center containerCourse" >
-        <div className="ContainerForm">
+      <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center containerCourse">
+        <div className="pt-5">
           <div >
 
-            <div className="bg-white rounded shadow-lg p-4 px-4 md:p-18 mb-0 ContainerFromInt">
-              <h1 className=" Titulo font-semibold text-xl text-gray-600">Crear nuevo curso</h1>
-              <p className="Subtitulo text-gray-500 mb-6" >Completa el formulario, por favor.</p>
+            <div className="bg-white  shadow-lg p-4 px-4 md:p-18 mb-0 bg-[#1f69d7f3] rounded-lg">
+              <h1 className=" font-bold text-3xl text-[#13177d] ">Crear nuevo curso</h1>
+              <p className=" text-[#13177d] mb-6 font-semibold text-lg" >Completa el formulario, por favor.</p>
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                 <div className="text-gray-600">
                 </div>
@@ -248,4 +250,3 @@ function CourseForm({ onSubmit }) {
   );
 }
 
-export default CourseForm;

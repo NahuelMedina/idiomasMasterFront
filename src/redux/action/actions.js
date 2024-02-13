@@ -61,14 +61,19 @@ export const orderPrice = (orden) => {
 export function search(value) {
   return async function (dispatch) {
     try {
-      console.log(value);
       const { data } = await axios.get(
         `http://localhost:3000/getCourse/name?name=${value}`
       );
-      dispatch({
+      console.log(data);
+      if(Array.isArray(data)){
+        dispatch({
         type: SEARCH,
-        payload: data,
+        payload: [data, value]
       });
+      } else {
+        alert("No se encontraron resultados")
+      }
+      
     } catch (error) {
       alert(error);
     }
