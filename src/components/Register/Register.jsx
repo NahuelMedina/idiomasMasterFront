@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import registerValidate from "../Utils/registerValidate";
 import { useDispatch } from "react-redux";
 import { postUser } from "../../redux/action/actions";
 
 const Register = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [state, setState] = useState({
     name: "",
@@ -15,15 +16,8 @@ const Register = () => {
     age: "",
   });
 
-  const [errors, setErrors] = useState({
-    name: "Nombre obligatorio.",
-    lastname: "",
-    email: "",
-    password: "",
-    img: "",
-    age: "",
-  });
-
+  const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
   const handleChange = (e) => {
     e.preventDefault();
     console.log(e.target);
@@ -51,6 +45,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
+    navigate("/home");
   };
 
   return (
@@ -164,4 +159,4 @@ const Register = () => {
   );
 };
 
-export default Register
+export default Register;

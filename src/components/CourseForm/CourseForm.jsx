@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import validation from "./validation"
+import validation from "./validation";
 import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { postCourseData } from "../../redux/action/actions";
-import './CourseForm.css'
+import "./CourseForm.css";
 import { useNavigate } from "react-router-dom";
-
-
 
 export function CourseForm({ onSubmit }) {
   const [course, setCourse] = useState({
@@ -20,7 +18,7 @@ export function CourseForm({ onSubmit }) {
     finish_time: "",
     location: "",
     image: "",
-    status: true
+    status: true,
   });
 
   const navigate = useNavigate();
@@ -31,14 +29,14 @@ export function CourseForm({ onSubmit }) {
   const handleStartDateChange = (date) => {
     setCourse((prevCourse) => ({
       ...prevCourse,
-      start_time: date
+      start_time: date,
     }));
   };
 
   const handleEndDateChange = (date) => {
     setCourse((prevCourse) => ({
       ...prevCourse,
-      finish_time: date
+      finish_time: date,
     }));
   };
 
@@ -46,7 +44,7 @@ export function CourseForm({ onSubmit }) {
     const { name, value } = e.target;
     setCourse((prevCourse) => ({
       ...prevCourse,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -58,29 +56,28 @@ export function CourseForm({ onSubmit }) {
       console.log("Datos enviados al hacer clic:", course);
       dispatch(postCourseData(course));
       window.alert("El curso se ha creado exitosamente."); // Actualizar el mensaje de éxito
-      navigate('/home')
+      navigate("/home");
     }
   };
-
-
 
   return (
     <div className="">
       <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center containerCourse">
         <div className="pt-5">
-          <div >
-
+          <div>
             <div className="bg-white  shadow-lg p-4 px-4 md:p-18 mb-0 bg-[#1f69d7f3] rounded-lg">
-              <h1 className=" font-bold text-3xl text-[#13177d] ">Crear nuevo curso</h1>
-              <p className=" text-[#13177d] mb-6 font-semibold text-lg" >Completa el formulario, por favor.</p>
+              <h1 className=" font-bold text-3xl text-[#13177d] ">
+                Crear nuevo curso
+              </h1>
+              <p className=" text-[#13177d] mb-6 font-semibold text-lg">
+                Completa el formulario, por favor.
+              </p>
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                <div className="text-gray-600">
-                </div>
+                <div className="text-gray-600"></div>
 
                 <p className="font-medium text-lg">Detalles del curso</p>
                 <div className="lg:col-span-2">
                   <form onSubmit={handleSubmit}>
-
                     <label htmlFor="language">Lenguaje:</label>
                     <select
                       id="language"
@@ -90,15 +87,19 @@ export function CourseForm({ onSubmit }) {
                       required
                       className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                     >
-                      <option value="" >Seleccione un idioma</option>
+                      <option value="">Seleccione un idioma</option>
                       <option value="English">Inglés</option>
                       <option value="French">Francés</option>
                       <option value="German">Alemán</option>
                       <option value="Italian">Italiano</option>
                       <option value="Dutch">Holandés</option>
                       <option value="Portuguese">Portugués</option>
-                    </select><br /><br />
-                    {errors.language && <p className="text-red-500">{errors.language}</p>}
+                    </select>
+                    <br />
+                    <br />
+                    {errors.language && (
+                      <p className="text-red-500">{errors.language}</p>
+                    )}
 
                     <label htmlFor="level">Nivel:</label>
                     <select
@@ -113,8 +114,12 @@ export function CourseForm({ onSubmit }) {
                       <option value="Beginner">Principiante</option>
                       <option value="Intermediate">Intermedio</option>
                       <option value="Advanced">Avanzado</option>
-                    </select><br /><br />
-                    {errors.level && <p className="text-red-500">{errors.level}</p>}
+                    </select>
+                    <br />
+                    <br />
+                    {errors.level && (
+                      <p className="text-red-500">{errors.level}</p>
+                    )}
 
                     <label htmlFor="price">Precio:</label>
                     <div className="relative">
@@ -130,8 +135,11 @@ export function CourseForm({ onSubmit }) {
                         className="h-10 border mt-1 rounded pl-10 w-full bg-gray-50"
                       />
                     </div>
-                    <br /><br />
-                    {errors.price && <p className="text-red-500">{errors.price}</p>}
+                    <br />
+                    <br />
+                    {errors.price && (
+                      <p className="text-red-500">{errors.price}</p>
+                    )}
                     <label htmlFor="duration">Duración:</label>
                     <select
                       id="duration"
@@ -146,8 +154,12 @@ export function CourseForm({ onSubmit }) {
                       <option value="2 Months">2 Meses</option>
                       <option value="3 Months">3 Meses</option>
                       <option value="4 Months">4 Meses</option>
-                    </select><br /><br />
-                    {errors.duration && <p className="text-red-500">{errors.duration}</p>}
+                    </select>
+                    <br />
+                    <br />
+                    {errors.duration && (
+                      <p className="text-red-500">{errors.duration}</p>
+                    )}
 
                     <label htmlFor="schedule">Horario:</label>
                     <select
@@ -161,9 +173,13 @@ export function CourseForm({ onSubmit }) {
                       <option value="">Seleccione un horario</option>
                       <option value="On Weekends">Fines de semana</option>
                       <option value="During the week">Durante la semana</option>
-                      <option value="Monday-Wednesday-Friday">Lunes, Miércoles, Viernes</option>
+                      <option value="Monday-Wednesday-Friday">
+                        Lunes, Miércoles, Viernes
+                      </option>
                       <option value="Tuesday-Thursday">Martes, Jueves</option>
-                    </select><br /><br />
+                    </select>
+                    <br />
+                    <br />
 
                     <label htmlFor="start_time">Fecha de inicio: </label>
                     <div className="relative">
@@ -193,7 +209,8 @@ export function CourseForm({ onSubmit }) {
                         autoComplete="off"
                       />
                     </div>
-                    <br /><br />
+                    <br />
+                    <br />
 
                     <label htmlFor="location">Ubicación:</label>
                     <select
@@ -224,7 +241,9 @@ export function CourseForm({ onSubmit }) {
                       <option value="Portugal">Portugal</option>
                       <option value="Suecia">Suecia</option>
                       <option value="Suiza">Suiza</option>
-                    </select><br /><br />
+                    </select>
+                    <br />
+                    <br />
                     <label htmlFor="image">URL de la imagen:</label>
                     <input
                       type="text"
@@ -234,8 +253,15 @@ export function CourseForm({ onSubmit }) {
                       onChange={handleChange}
                       required
                       className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                    /><br /><br />
-                    <button type="submit" className="bg-blue-950 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">Crear Curso</button>
+                    />
+                    <br />
+                    <br />
+                    <button
+                      type="submit"
+                      className="bg-blue-950 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Crear Curso
+                    </button>
                     <div className="text-green-500 mt-8 text-lg">
                       {successMessage}
                     </div>
@@ -249,4 +275,3 @@ export function CourseForm({ onSubmit }) {
     </div>
   );
 }
-
