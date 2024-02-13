@@ -13,7 +13,6 @@ export const Landing = () => {
   const search = useSelector((state) => state.coursesName);
   const [num, setNum] = useState(0);
 
-  console.log(card_landing_reviews)
 
   useEffect(() => {
     function set_landing() {
@@ -30,13 +29,11 @@ export const Landing = () => {
 
   return (
     <div className=" w-screen h-screen bg-black text-white">
-             <div className="flex justify-end items-center w-screen h-[80px] bg-[#1E68AD]">
-      
-            <SearchBar></SearchBar>
-
-
-           
-          </div>
+      <div className="flex justify-end items-center w-screen h-[80px] bg-[#1E68AD]">
+        <div className="mr-10">
+          <SearchBar></SearchBar>
+        </div>
+      </div>
      
       <div className="flex flex-row justify-end items-center w-screen h-[600px] relative bg-white">
         <div className=" flex w-full h-full absolute left-0 z-20 bg-gradient-to-r from-black via-white/10 to-white/0">

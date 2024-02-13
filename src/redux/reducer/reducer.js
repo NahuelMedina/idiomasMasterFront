@@ -13,6 +13,8 @@ let initialState = {
     coursesCopy: [],
     courseDetail: [],
     coursesName: [],
+    courseLanguage: '',
+
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -24,10 +26,12 @@ const reducer = (state = initialState, { type, payload }) => {
                 coursesCopy: payload, // Actualiza la copia de seguridad de los cursos
             };
         case COURSE_DETAIL:
+            
             return {
                 ...state,
                 courseDetail: payload,
-            };
+            } 
+           
         case FILTER_LANGUAGE:
             const filteredByLanguage = state.coursesCopy.filter(course => course.language === payload);
             return {
@@ -61,17 +65,18 @@ const reducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 courses: state.coursesCopy,
-                coursesName: payload,
+                coursesName: payload[0],
+                courseLanguage: payload[1],
             };
 
         case FILTERED_COURSES: 
-
-        console.log(payload)
 
         return {
             ...state,
             courses: payload
         }
+        
+       
         default:
             return state;
     }
