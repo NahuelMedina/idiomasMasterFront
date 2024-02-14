@@ -9,6 +9,7 @@ import {
   POST_COURSE_REQUEST,
   POST_COURSE_SUCCESS,
   FILTERED_COURSES,
+  ADD_FAV
 } from "./actiontypes";
 import axios from "axios";
 
@@ -120,7 +121,6 @@ export const postUser = (state) => async (dispatch) => {
 
 export const getUser = (state) => async (dispatch) => {
   try {
-    console.log(state);
     const response = await axios.post("http://localhost:3000/getUser", state);
     alert("Se a conectado", response.data);
   } catch (error) {
@@ -134,4 +134,18 @@ export const filteredCourses = (data) => {
     type: FILTERED_COURSES,
     payload: data
   };
+};
+
+export const addFav = (value) =>  {
+  return async function(dispatch){
+     try {
+      dispatch({
+        type: ADD_FAV,
+        payload: value
+      });
+  } catch (error) {
+    alert(error)
+  }
+  }
+ 
 };

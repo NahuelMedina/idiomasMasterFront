@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-import { SearchBar } from "../SearchBar/SearchBar";
 import { FaUserGraduate } from "react-icons/fa";
 
 
@@ -35,7 +34,9 @@ export const Navbar = () => {
           </div>
         </Link>
       </div>
-      
+      <Link to='/favorite'>
+        <h1>Favoritos</h1>
+      </Link>
       {location.pathname !== "/register" && location.pathname !== "/login" ? (
         <div className=" relative flex flex-row items-center justify-evenly w-[200px] h-full mr-[80px]">
           <Link

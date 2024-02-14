@@ -10,6 +10,7 @@ import {
   About,
   SearchHome,
 } from "./components";
+import Favorite from "./components/Favorite/Favorite";
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/createCourse" element={<CourseForm />} />
         <Route path="/search" element={<SearchHome />} />
+        <Route path="/favorite" element={<Favorite />} />
       </Routes>
     </>
   );
