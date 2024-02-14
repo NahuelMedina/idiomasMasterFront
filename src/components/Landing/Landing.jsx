@@ -28,7 +28,7 @@ export const Landing = () => {
 
 
   return (
-    <div className=" w-screen h-screen bg-black text-white">
+    <div className=" w-full h-full bg-black text-white">
       <div className="flex justify-end items-center w-screen h-[80px] bg-[#1E68AD]">
         <div className="mr-10">
           <SearchBar></SearchBar>
