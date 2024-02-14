@@ -114,8 +114,8 @@ function HomeC() {
   };
 
   return (
-    <div className="bg-green-200 text-white flex flex-row w-full h-screen items-center justify-center">
-      <div className="h-full w-[15%] text-black justify-start bg-gradient-to-r bg-[#1E68AD] relative flex flex-col  items-center">
+    <div className="bg-white text-white flex flex-row w-full h-full items-center justify-center">
+      <div className="h-full min-w-[300px] text-black justify-start bg-gradient-to-r bg-[#1E68AD] relative flex flex-col  items-center">
         <div className="w-full h-[200px] flex flex-col items-center justify-center">
           <FaLanguage className="text-[80px] text-yellow-400" />
           <h1 className="text-[25px] m-[10px] text-yellow-400">
@@ -176,21 +176,21 @@ function HomeC() {
         </div>
       </div>
 
-      <div className="flex flex-col items-start justify-start bg-white h-full w-[85%] relative">
+      <div className="flex flex-col items-start justify-star h-full w-[85%] relative">
         <div className=" w-[600px] border-b-[2px] border-[#848484] my-[10px] mx-[90px]">
           <h1 className="text-[35px] text-[#1F1F1F] m-[2px]">{`Cursos Encontrados: ${courses.length}`}</h1>
         </div>
-        <div className="flex justify-evenly items-center h-[75%] w-full">
+        <div className="flex justify-evenly items-center h-[80%] w-full ">
           {courses &&
             courses.length > 0 &&
             renderCards.map((element, index) => (
-              <div key={index}>
+              <div className='overflow-hidden h-[80%] w-[30%] rounded-[10px]  transform transition-transform hover:scale-105 duration-500 ease-in-out flex items-center justify-center p-0'>
                 <Card course={element} />
               </div>
             ))}
         </div>
 
-        <div className="h-[70px] items-center justify-center flex flex-row w-full">
+        <div className="h-[30px] items-center justify-center flex flex-row w-full">
           <IoIosArrowDropleft
             className={`text-[50px] m-[30px] ${
               pagePosition === 1 ? "cursor-not-allowed" : "cursor-pointer"
