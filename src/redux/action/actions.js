@@ -122,7 +122,7 @@ export const postUser = (state) => async (dispatch) => {
 export const getUser = (state) => async (dispatch) => {
   try {
     const response = await axios.post("http://localhost:3000/getUser", state);
-    alert("Se a conectado", response.data);
+    alert("Se ha conectado", response.data);
   } catch (error) {
     const message = error.response.data.message;
     alert(`${message}`);
