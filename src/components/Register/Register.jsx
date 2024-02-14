@@ -17,10 +17,8 @@ const Register = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState("");
   const handleChange = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const { name, value } = e.target;
 
     setState({
@@ -37,8 +35,8 @@ const Register = () => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        setCourse((prevCourse) => ({
-          ...prevCourse,
+        setState((prevState) => ({
+          ...prevState,
           image: reader.result,
         }));
       };
@@ -64,7 +62,6 @@ const Register = () => {
 
   return (
     <div className="w-screen h-screen  bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
-      {console.log(state)}
       <div className="flex m-5 h-[95%]">
         <div className=" w-3/5 h-full">
           <img
