@@ -7,11 +7,8 @@ import { TbMessageLanguage } from "react-icons/tb";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
 import { Card } from "../Card/Card";
-
+const URL = import.meta.env.VITE_URL_HOST;
 function HomeC() {
-
-  
-
   const sortByDescending = (data) => {
     return data.sort((a, b) => b.price - a.price);
   };
@@ -23,7 +20,6 @@ function HomeC() {
   const [level, setLevel] = useState("all");
   const [num, setNum] = useState("all");
   const [courses, setCourses] = useState([]);
-
 
   const [pagePosition, setPagePosition] = useState(1);
   const itemsOnPage = 3;
@@ -45,7 +41,7 @@ function HomeC() {
       }
     });
   };
-  
+
   useEffect(() => {
     setPagePosition(1);
   }, [courses]);
@@ -58,10 +54,9 @@ function HomeC() {
   const renderCards = itemsArray[pagePosition - 1] || [];
 
   useEffect(() => {
-   
     const getAllCourse = async () => {
       const response = await axios.get(
-        `http://localhost:3000/getCourseFilters?language=${language}&level=${level}`
+        `${URL}/getCourseFilters?language=${language}&level=${level}`
       );
 
       if (num === "A" || num === "all") {
@@ -80,9 +75,8 @@ function HomeC() {
 
   useEffect(() => {
     const getCourses = async () => {
-      try { 
-    
-        const response = await axios.get(`http://localhost:3000/getAllCourses`);
+      try {
+        const response = await axios.get(`${URL}/getAllCourses`);
 
         if (response.data) {
           setCourses(response.data);
@@ -214,4 +208,4 @@ function HomeC() {
   );
 }
 
-export default HomeC
+export default HomeC;
