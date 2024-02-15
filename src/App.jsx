@@ -9,11 +9,13 @@ import {
   CourseForm,
   About,
   SearchHome,
+  Favorite,
+  ShopCart
 } from "./components";
 import AdminHome from "./components/Admin/adminHome";
 import AdminNavbar from "./components/Admin/adminNavbar";
 
-import Favorite from "./components/Favorite/Favorite";
+
 function App() {
   const location = useLocation();
   return (
@@ -33,6 +35,7 @@ function App() {
           <Route path="/search" element={<SearchHome />} />
           <Route path="/admindashboard" element={<AdminHome />} />
           <Route path="/favorite" element={<Favorite />} />
+          <Route path="/cart" element={<ShopCart />} />
       </Routes>
       </div>
     </div>

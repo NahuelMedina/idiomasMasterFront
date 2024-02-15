@@ -100,11 +100,7 @@ export const SearchHome = () =>{
 
 
       return (
-<<<<<<< HEAD
         <div className="bg-green-200 text-white flex flex-row w-full h-screen items-center justify-center  ">
-=======
-        <div className="bg-green-200 text-white flex flex-row w-full h-full items-center justify-center">
->>>>>>> e99de8575c1617c81ca5b4971b2d07e302af400e
           <div className="h-full w-[15%] text-black justify-start bg-gradient-to-r bg-[#1E68AD] relative flex flex-col  items-center">
             <div className="w-full h-[200px] flex flex-col items-center justify-center">
               <FaLanguage className="text-[80px] text-yellow-400" />
