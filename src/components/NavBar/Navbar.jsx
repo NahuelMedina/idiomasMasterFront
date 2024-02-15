@@ -1,10 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
+
 import { IoLogIn } from "react-icons/io5";
 import { PiStudentBold } from "react-icons/pi";
 import { FaDiscourse } from "react-icons/fa6";
 import { BsFillInfoSquareFill } from "react-icons/bs";
 
-
+import { FaUserGraduate } from "react-icons/fa";
 
 export const Navbar = () => {
   const location = useLocation();
@@ -13,10 +14,7 @@ export const Navbar = () => {
       <div className="flex items-center justify-evenly w-[700px] h-full ">
         <Link to="/" className="h-full">
           <div className="flex items-center justify-center h-full w-[60px]">
-            <img
-              className="w-32"
-              src="src\assets\logo\logo4.png"
-            ></img>
+            <img className="w-32" src="src\assets\logo\logo4.png"></img>
           </div>
         </Link>
 
@@ -33,7 +31,12 @@ export const Navbar = () => {
           </div>
         </Link>
       </div>
-      
+      <Link to="/favorite">
+        <h1>Favoritos</h1>
+      </Link>
+      <Link to="/cart">
+        <h1>Carrito</h1>
+      </Link>
       {location.pathname !== "/register" && location.pathname !== "/login" ? (
         <div className=" relative flex flex-row items-center justify-evenly w-[400px] h-full mr-[80px]">
           <Link
@@ -42,7 +45,7 @@ export const Navbar = () => {
           >
             <div className="flex items-center justify-evenly h-full w-full transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
               <h1 className="text-[20px]">Ingresa</h1>
-              <IoLogIn  className="text-[40px]" />
+              <IoLogIn className="text-[40px]" />
             </div>
           </Link>
 
