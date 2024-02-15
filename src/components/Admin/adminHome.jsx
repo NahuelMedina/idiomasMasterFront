@@ -70,7 +70,7 @@ export default function AdminHome() {
         <div className="w-full h-[8%] flex items-center pl-[40px] border-b-[2px] border-gray-300">
           <h1 className="text-gray-800 text-[30px]">Admin Dashboard</h1>
         </div>
-        <div className="w-full h-[90%]  grid grid-cols-2 grid-rows-2 gap-[15px]">
+        <div className="w-full h-[90%]  grid grid-cols-2 grid-rows-2 gap-[15px] overflow-hidden">
           <div className="h-full w-full  flex items-center justify-center">
             <DashProducts data={prodData} />
           </div>
