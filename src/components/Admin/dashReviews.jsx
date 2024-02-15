@@ -17,8 +17,8 @@ export default function DashReviews({data}){
     return(
         <div className="bg-blue-200 h-[90%] w-[90%] rounded-[10px] bg-gradient-to-r from-green-500 to-green-700 flex flex-col">
           <div className="w-full h-[30%]  flex flex-row items-center pl-[50px]">
-          <GoCodeReview  className="text-white text-[40px] mr-[20px]" />
-            <h1 className="text-white text-[40px]">{`Reviews`}</h1>
+          <GoCodeReview  className="text-white text-[35px] mr-[20px]" />
+            <h1 className="text-white text-[35px]">{`Reviews`}</h1>
           </div>
          <div className="w-full h-[65%] flex flex-row">
             <div className="h-full w-[50%]  border-r-[1px] border-white">
@@ -26,7 +26,7 @@ export default function DashReviews({data}){
                     <h1 className="text-white text-[20px]">Waiting Reply</h1>
                 </div>
                 <div className="w-full h-[70%]  flex items-center justify-center flex-col">
-                    <h1 className="text-white text-[100px]">{`${InactiveProduct.length}`}</h1>
+                    <h1 className="text-white text-[70px]">{`${InactiveProduct.length}`}</h1>
                 </div>
             </div>
             <div className="h-full w-[50%]  ">
@@ -34,7 +34,7 @@ export default function DashReviews({data}){
                     <h1 className="text-white text-[20px]">Active Reviews</h1>
                 </div>
                 <div className="w-full h-[70%]  flex items-center justify-center flex-col">
-                    <h1 className="text-white text-[100px]">{`${data.length}`}</h1>
+                    <h1 className="text-white text-[70px]">{`${data.length}`}</h1>
                 </div>
             </div>
 

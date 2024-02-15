@@ -12,12 +12,10 @@ import {
   ADD_FAV
 } from "./actiontypes";
 import axios from "axios";
-
-const url = import.meta.env.VITE_URL_HOST;
-
+const URL = import.meta.env.VITE_URL_HOST;
 export const getAllCourses = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("http://localhost:3000/getAllCourses");
+    const { data } = await axios.get(`${URL}/getAllCourses`);
     dispatch({
       type: ALL_COURSES,
       payload: data,
@@ -30,7 +28,7 @@ export const getAllCourses = () => async (dispatch) => {
 export function getCoursesDetail(id) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`http://localhost:3000/getCourse/${id}`);
+      const { data } = await axios.get(`${URL}/getCourse/${id}`);
       dispatch({
         type: COURSE_DETAIL,
         payload: data,
@@ -62,19 +60,16 @@ export const orderPrice = (orden) => {
 export function search(value) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3000/getCourse/name?name=${value}`
-      );
+      const { data } = await axios.get(`${URL}/getCourse/name?name=${value}`);
       console.log(data);
-      if(Array.isArray(data)){
+      if (Array.isArray(data)) {
         dispatch({
-        type: SEARCH,
-        payload: [data, value]
-      });
+          type: SEARCH,
+          payload: [data, value],
+        });
       } else {
-        alert("No se encontraron resultados")
+        alert("No se encontraron resultados");
       }
-      
     } catch (error) {
       alert(error);
     }
@@ -96,10 +91,7 @@ export const postCourseFailure = (error) => ({
 
 export const postCourseData = (courseData) => async (dispatch) => {
   try {
-    const response = await axios.post(
-      "http://localhost:3000/createCourse",
-      courseData
-    );
+    const response = await axios.post(`${URL}/createCourse`, courseData);
     console.log("Solicitud POST exitosa:", response.data);
   } catch (error) {
     console.error("Error al enviar los datos del curso:", error.message);
@@ -108,11 +100,8 @@ export const postCourseData = (courseData) => async (dispatch) => {
 
 export const postUser = (state) => async (dispatch) => {
   try {
-    const response = await axios.post(
-      "http://localhost:3000/createUser",
-      state
-    );
-    alert("Creado con Exito", response.data);
+    const response = await axios.post(`${URL}/createUser`, state);
+    alert("Usuario creado con Exito", response.data);
   } catch (error) {
     const message = error.response.data;
     alert(`${message}`);
@@ -121,7 +110,8 @@ export const postUser = (state) => async (dispatch) => {
 
 export const getUser = (state) => async (dispatch) => {
   try {
-    const response = await axios.post("http://localhost:3000/getUser", state);
+    console.log(state);
+    const response = await axios.post(`${URL}/getUser"`, state);
     alert("Se ha conectado", response.data);
   } catch (error) {
     const message = error.response.data.message;
@@ -132,7 +122,7 @@ export const getUser = (state) => async (dispatch) => {
 export const filteredCourses = (data) => {
   return {
     type: FILTERED_COURSES,
-    payload: data
+    payload: data,
   };
 };
 
