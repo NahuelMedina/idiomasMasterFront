@@ -1,10 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-
 import { IoLogIn } from "react-icons/io5";
 import { PiStudentBold } from "react-icons/pi";
 import { FaDiscourse } from "react-icons/fa6";
 import { BsFillInfoSquareFill } from "react-icons/bs";
-
 import { FaUserGraduate } from "react-icons/fa";
 
 export const Navbar = () => {
