@@ -50,7 +50,7 @@ export const reviewData = async () => {
 
 export const idProduct = async (id) => {
   try {
-    const response = await axios.get(`http://localhost:3000/getCourseId/${id}`);
+    const response = await axios.get(`http://localhost:3000/getCourse/${id}`);
 
     if (response) {
       return response;
