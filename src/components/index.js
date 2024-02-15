@@ -10,11 +10,10 @@ import { About } from "./About/About";
 import { SearchHome } from "./SearchBar/SearchHome";
 import { Configuration } from "./Configuration/Configuration";
 import { AuthProvider } from "./AuthProvider/AuthProvider";
-export { Navbar, Card, Register, Landing, Login, HomeC, Detail,CourseForm,About,SearchHome, Configuration, AuthProvider };
 import Favorite from "./Favorite/Favorite";
 import ShopCart from "./ShopCart/ShopCart";
 
 
 
-export { Navbar, Card, Register, Landing, Login, HomeC, Detail,CourseForm,About,SearchHome, Favorite, ShopCart };
+export { Navbar, Card, Register, Landing, Login, HomeC, Detail,CourseForm,About,SearchHome, Favorite, ShopCart, Configuration, AuthProvider };
 

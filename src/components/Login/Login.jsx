@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getUser } from "../../redux/action/actions";
 import  LoginButton from "../../googleLogin"
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const Login = () => {
   const dispatch = useDispatch();
+  const { isAuthenticated, user } = useAuth0();
 
-  const [states, setStates] = useState({
+
+  const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
@@ -15,8 +18,8 @@ export const Login = () => {
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    setStates({
-      ...states,
+    setUserData({
+      ...userData,
       [name]: value,
     });
   };
@@ -24,8 +27,8 @@ export const Login = () => {
   const buttonDisabled = () => {
     let buttonAux = false;
     
-    for (const state in states) {
-      if (states[state].length <= 0) {
+    for (const user in userData) {
+      if (userData[user].length <= 0) {
         buttonAux = true;
         return buttonAux;
       }
@@ -34,12 +37,26 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getUser(states));
+    dispatch(getUser(userData));
   };
 
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      // Mapear los datos recibidos de Google a los datos esperados por la acción registerUser
+      const userData = {
+        name: user.given_name,
+        lastname: user.family_name,
+        img: user.picture,
+        email: user.email
+      };
+      // Llamar a la acción para registrar al usuario
+      dispatch(postUser(userData));
+    }
+  }, [isAuthenticated, user, dispatch]);
+  
   return (
     <div className="w-screen h-screen bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
-      {console.log(states)}
+      {console.log(userData)}
       <div className="flex m-5 h-[95%]">
         <div className="w-3/5 h-full">
           <img

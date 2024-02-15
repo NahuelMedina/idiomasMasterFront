@@ -65,6 +65,16 @@ export const Navbar = () => {
           </div>
         </Link>
       )}
+      {isAuthenticated && (
+      <Link to='/favorite'>
+        <h1>Favoritos</h1>
+      </Link>
+      )}
+      {isAuthenticated && (
+        <Link to='/cart'>
+          <img style={{width:'38px'}} src="src\assets\fotos\cart.png" alt="" />
+        </Link>
+      )}
 
       {isAuthenticated && (
         <div className="relative flex flex-row items-center justify-evenly w-[200px] h-full mr-[80px]">

@@ -9,7 +9,6 @@ import {
   CourseForm,
   About,
   SearchHome,
-
   Configuration,
   AuthProvider,
   Favorite,
@@ -24,14 +23,12 @@ function App() {
   const location = useLocation();
   return (
     <>
+    <AuthProvider>
     <div className="w-screen h-screen min-h-[750px] flex flex-col">
     <div className="w-full h-[80px]">
     {location.pathname.startsWith("/admindashboard") ? <AdminNavbar /> : <Navbar />}
     </div>
     <div className="w-full h-[95%]">
-    <AuthProvider>
-
-      <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<HomeC />} />
@@ -42,13 +39,14 @@ function App() {
         <Route path="/createCourse" element={<CourseForm />} />
         <Route path="/search" element={<SearchHome />} />
         <Route path="/admindashboard" element={<AdminHome />} />
-          <Route path="/admindashboard/products" element={<AdminProducts/>} />
-          <Route path="/favorite" element={<Favorite />} />
-          <Route path="/cart" element={<ShopCart />} />
+        <Route path="/configuracion" element={<Configuration />} />
+        <Route path="/admindashboard/products" element={<AdminProducts/>} />
+        <Route path="/favorite" element={<Favorite />} />
+        <Route path="/cart" element={<ShopCart />} />
       </Routes>
-      </AuthProvider>
       </div>
     </div>
+      </AuthProvider>
     </>
   );
 }
