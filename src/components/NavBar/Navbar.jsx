@@ -1,8 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
+
 import { IoLogIn } from "react-icons/io5";
 import { PiStudentBold } from "react-icons/pi";
 import { FaDiscourse } from "react-icons/fa6";
 import { BsFillInfoSquareFill } from "react-icons/bs";
+
+import { FaUserGraduate } from "react-icons/fa";
+
 
 
 
@@ -33,7 +37,12 @@ export const Navbar = () => {
           </div>
         </Link>
       </div>
-      
+      <Link to='/favorite'>
+        <h1>Favoritos</h1>
+      </Link>
+      <Link to='/cart'>
+        <h1>Carrito</h1>
+      </Link>
       {location.pathname !== "/register" && location.pathname !== "/login" ? (
         <div className=" relative flex flex-row items-center justify-evenly w-[400px] h-full mr-[80px]">
           <Link

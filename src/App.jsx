@@ -9,12 +9,15 @@ import {
   CourseForm,
   About,
   SearchHome,
+  Favorite,
+  ShopCart
 } from "./components";
 import AdminHome from "./components/Admin/adminHome";
 import AdminNavbar from "./components/Admin/adminNavbar";
 import AdminProducts from "./components/Admin/adminProducts";
 import UserLanding from "./components/User/UserLand";
 import UserNavbar from "./components/User/UserNavbar";
+
 
 function App() {
   const location = useLocation();
@@ -38,8 +41,14 @@ function App() {
           <Route path="/admindashboard" element={<AdminHome />} />
           <Route path="/admindashboard/products" element={<AdminProducts/>} />
 
+
           <Route path="/user/home" element={<UserLanding/>} />
-        </Routes>
+      
+
+          <Route path="/favorite" element={<Favorite />} />
+          <Route path="/cart" element={<ShopCart />} />
+      </Routes>
+
       </div>
     </div>
   );
