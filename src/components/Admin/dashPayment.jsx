@@ -28,8 +28,8 @@ export default function DashPayment({data}){
     return(
         <div className="bg-blue-200 h-[90%] w-[90%] rounded-[10px] bg-gradient-to-r from-pink-500 to-purple-500 flex flex-col">
           <div className="w-full h-[30%]  flex flex-row items-center pl-[50px]">
-          <GrMoney className="text-white text-[40px] mr-[20px]" />
-            <h1 className="text-white text-[40px]">{`Payments`}</h1>
+          <GrMoney className="text-white text-[35px] mr-[20px]" />
+            <h1 className="text-white text-[35px]">{`Payments`}</h1>
           </div>
          <div className="w-full h-[65%] flex flex-row">
             <div className="h-full w-[50%]  border-r-[1px] border-white">
@@ -37,7 +37,7 @@ export default function DashPayment({data}){
                     <h1 className="text-white text-[20px]">Total Payments</h1>
                 </div>
                 <div className="w-full h-[70%]  flex items-center justify-center flex-col">
-                    <h1 className="text-white text-[90px]">{`$ ${InactiveProduct}`}</h1>
+                    <h1 className="text-white text-[70px]">{`$ ${InactiveProduct}`}</h1>
                 </div>
             </div>
             <div className="h-full w-[50%]  ">
@@ -45,7 +45,7 @@ export default function DashPayment({data}){
                     <h1 className="text-white text-[20px]">Active Payments</h1>
                 </div>
                 <div className="w-full h-[70%]  flex items-center justify-center flex-col">
-                    <h1 className="text-white text-[100px]">{`${activeProduct.length}`}</h1>
+                    <h1 className="text-white text-[70px]">{`${activeProduct.length}`}</h1>
                 </div>
             </div>
 

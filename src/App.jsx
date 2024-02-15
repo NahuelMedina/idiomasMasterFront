@@ -12,6 +12,7 @@ import {
 } from "./components";
 import AdminHome from "./components/Admin/adminHome";
 import AdminNavbar from "./components/Admin/adminNavbar";
+import AdminProducts from "./components/Admin/adminProducts";
 
 function App() {
   const location = useLocation();
@@ -31,6 +32,7 @@ function App() {
           <Route path="/createCourse" element={<CourseForm />} />
           <Route path="/search" element={<SearchHome />} />
           <Route path="/admindashboard" element={<AdminHome />} />
+          <Route path="/admindashboard/products" element={<AdminProducts/>} />
         </Routes>
       </div>
     </div>
