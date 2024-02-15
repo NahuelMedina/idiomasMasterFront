@@ -1,33 +1,19 @@
 
 import React, { useEffect } from 'react';
-// import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 
-// import {AuthContext} from "../AuthProvider/AuthProvider";
-
 const ProfileSection = () => {
-//   const { auth } = useContext(AuthContext);
-//   const user = useSelector(state => state.userDataSession);
-//   console.log("ESTO TRAE AUTH", auth); 
-
-//   useEffect(() => {
-//     console.log(auth); 
-//   }, [auth]); 
-
-//   if (!auth) {
-//     return null;
-//   }
-
-const { user, isAuthenticated } = useAuth0();
+const { user, isAuthenticated, isLoading } = useAuth0();
 
 console.log("ESTO VIENE DE USER", user)
 
-if (!isAuthenticated) {
-  return <div>Please log in</div>;
+if (isLoading) {
+  return <div>Loading ...</div>;
 }
 
   return (
+    isAuthenticated && (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
       <div className="flex flex-col items-center space-y-5">
         <img style={{backgroundSize:'cover', objectFit:'cover'}}className="object-cover w-30 h-30 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"  src={user.picture} alt="Bordered avatar" /> 
@@ -55,7 +41,8 @@ if (!isAuthenticated) {
         </div>
       </div>
     </div>
-  );
+  )
+  )
 };
 
 export default ProfileSection;

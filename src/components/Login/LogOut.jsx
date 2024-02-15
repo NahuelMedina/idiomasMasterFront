@@ -7,11 +7,7 @@ const LogoutButton = () => {
   return (
     isAuthenticated && (
       <button
-        onClick={() =>
-          logout({
-            returnTo: window.location.origin
-          })
-        }
+        onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
         className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
       >
         Cerrar Sesión
