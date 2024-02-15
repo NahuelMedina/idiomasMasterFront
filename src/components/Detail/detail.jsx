@@ -1,40 +1,63 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { getCoursesDetail,  } from "../../redux/action/actions";
+import { Await, useParams } from "react-router-dom";
+import { getCoursesDetail } from "../../redux/action/actions";
 import { SiLevelsdotfyi } from "react-icons/si";
 import { FaCalendarDays } from "react-icons/fa6";
 import { GiDuration } from "react-icons/gi";
 import { FaHourglassStart } from "react-icons/fa";
 import { FaHourglassEnd } from "react-icons/fa";
-
+import axios from "axios";
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+const URL = import.meta.env.VITE_URL_HOST;
+const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 export const Detail = () => {
+  const [preferenceId, setPreferenceId] = useState(null);
   const params = useParams();
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.courseDetail);
 
+  initMercadoPago(PUBLIC_KEY, {
+    locale: "es-MX",
+  });
 
   useEffect((event) => {
     dispatch(getCoursesDetail(params.id));
-    
   }, []);
+
+  const createPreference = async (product) => {
+    try {
+      const { data } = await axios.post(`${URL}/createPreference`, product);
+      return data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleBuy = async (product) => {
+    const id = await createPreference(product);
+    if (id) {
+      setPreferenceId(id);
+    }
+  };
 
   const fechaIni = new Date(detail?.start_time);
   const añoI = fechaIni.getFullYear();
-  const mesI = ('0' + (fechaIni.getMonth() + 1)).slice(-2); // Sumar 1 al mes ya que en JavaScript los meses van de 0 a 11
-  const diaI = ('0' + fechaIni.getDate()).slice(-2);
+  const mesI = ("0" + (fechaIni.getMonth() + 1)).slice(-2); // Sumar 1 al mes ya que en JavaScript los meses van de 0 a 11
+  const diaI = ("0" + fechaIni.getDate()).slice(-2);
 
   const fechaInicial = `${añoI}-${mesI}-${diaI}`;
 
   const fechafin = new Date(detail?.finish_time);
   const añoF = fechafin.getFullYear();
-  const mesF = ('0' + (fechafin.getMonth() + 1)).slice(-2); // Sumar 1 al mes ya que en JavaScript los meses van de 0 a 11
-  const diaF = ('0' + fechafin.getDate()).slice(-2);
+  const mesF = ("0" + (fechafin.getMonth() + 1)).slice(-2); // Sumar 1 al mes ya que en JavaScript los meses van de 0 a 11
+  const diaF = ("0" + fechafin.getDate()).slice(-2);
 
   const fechaFinal = `${añoF}-${mesF}-${diaF}`;
 
   return (
     <div className="bg-[#FFFFFF] w-screen h-screen text-white container flex justify-center items-center">
+      {console.log(detail)}
       <div className="flex justify-center h-[95%] w-4/5 bg-[#1E68AD] p-10 rounded-md">
         <div className=" flex flex-col justify-center items-start text-center h-full w-3/5">
           <div className=" flex flex-col justify-center items-start rounded-xl">
@@ -72,11 +95,18 @@ export const Detail = () => {
               </p>
             </div>
             <div className="flex">
-            <button className=" text-start mt-5 mb-16 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-              <p className=" m-2 text-2xl  "> Comprar ahora</p>{" "}
-            </button>
+              <button
+                onClick={() => handleBuy(detail)}
+                className=" text-start mt-5 mb-10 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
+              >
+                <p className=" m-2 text-2xl  "> Comprar ahora</p>{" "}
+                {preferenceId && (
+                  <Wallet
+                    initialization={{ preferenceId, redirectMode: "modal" }}
+                  />
+                )}
+              </button>
             </div>
-           
           </div>
         </div>
         <div className="flex justify-center items-center w-2/5">
@@ -90,4 +120,3 @@ export const Detail = () => {
     </div>
   );
 };
-

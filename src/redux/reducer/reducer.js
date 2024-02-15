@@ -6,6 +6,7 @@ import {
     FILTER_LEVEL,
     ORDER_PRICE,
     SEARCH,
+    ADD_FAV,
     SET_USER_DATA
 } from "../action/actiontypes";
 
@@ -15,6 +16,9 @@ let initialState = {
     courseDetail: [],
     coursesName: [],
     courseLanguage: '',
+    favorites: [],
+    allFavorites: [],
+
     userData: "",
 };
 
@@ -71,18 +75,30 @@ const reducer = (state = initialState, { type, payload }) => {
             };
 
         case FILTERED_COURSES: 
+
         return {
             ...state,
             courses: payload
         }
+        
+        case ADD_FAV:
+            const aux = []
+                if(!aux.find(c => c === payload)){
+                    aux.push(payload)
+                }
+            
+            return{
+                ...state,
+                favorites:aux,
+                allFavorites: [...state.favorites, payload]
+            }
+
+            case SET_USER_DATA:
+                return {
+                  ...state,
+                  userData: action.payload
+                };
        
-        case SET_USER_DATA:
-            return {
-              ...state,
-              userData: action.payload
-            };
-
-
         default:
             return state;
     }

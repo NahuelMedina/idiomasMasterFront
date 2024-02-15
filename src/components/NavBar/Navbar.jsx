@@ -1,4 +1,5 @@
-;import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { SearchBar } from "../SearchBar/SearchBar";
 import { FaUserGraduate } from "react-icons/fa";
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react"; // Importa useAuth0 desde el paquete de Auth0
@@ -21,7 +22,7 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="flex h-20 w-screen justify-between items-center text-white bg-black">
+    <div className="flex h-[80px] w-full justify-between items-center text-white bg-black">
       <div className="flex items-center justify-evenly w-[700px] h-full ">
         <Link to="/" className="h-full">
           <div className="flex items-center justify-center h-full w-[60px]">
