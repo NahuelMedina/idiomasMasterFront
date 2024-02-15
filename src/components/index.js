@@ -8,5 +8,7 @@ import { Detail } from "./Detail/detail";
 import  CourseForm  from "./CourseForm/CourseForm";
 import { About } from "./About/About";
 import { SearchHome } from "./SearchBar/SearchHome";
-export { Navbar, Card, Register, Landing, Login, HomeC, Detail,CourseForm,About,SearchHome };
+import { Configuration } from "./Configuration/Configuration";
+import { AuthProvider } from "./AuthProvider/AuthProvider";
+export { Navbar, Card, Register, Landing, Login, HomeC, Detail,CourseForm,About,SearchHome, Configuration, AuthProvider };
 

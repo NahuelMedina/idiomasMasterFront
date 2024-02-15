@@ -6,6 +6,7 @@ import {
     FILTER_LEVEL,
     ORDER_PRICE,
     SEARCH,
+    SET_USER_DATA
 } from "../action/actiontypes";
 
 let initialState = {
@@ -14,7 +15,7 @@ let initialState = {
     courseDetail: [],
     coursesName: [],
     courseLanguage: '',
-
+    userData: "",
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -70,13 +71,18 @@ const reducer = (state = initialState, { type, payload }) => {
             };
 
         case FILTERED_COURSES: 
-
         return {
             ...state,
             courses: payload
         }
-        
        
+        case SET_USER_DATA:
+            return {
+              ...state,
+              userData: action.payload
+            };
+
+
         default:
             return state;
     }

@@ -9,10 +9,14 @@ import {
   CourseForm,
   About,
   SearchHome,
+  Configuration,
+  AuthProvider 
 } from "./components";
+
 function App() {
   return (
     <>
+    <AuthProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />
@@ -23,7 +27,9 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/createCourse" element={<CourseForm />} />
         <Route path="/search" element={<SearchHome />} />
+        <Route path="/configuracion" element={<Configuration />} />
       </Routes>
+      </AuthProvider>
     </>
   );
 }
