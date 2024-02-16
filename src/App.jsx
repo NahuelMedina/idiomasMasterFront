@@ -17,6 +17,8 @@ import {
 import AdminHome from "./components/Admin/adminHome";
 import AdminNavbar from "./components/Admin/adminNavbar";
 import AdminProducts from "./components/Admin/adminProducts";
+import UserLanding from "./components/User/UserLand";
+import UserNavbar from "./components/User/UserNavbar";
 
 
 function App() {
@@ -25,25 +27,32 @@ function App() {
     <>
     <AuthProvider>
     <div className="w-screen h-screen min-h-[750px] flex flex-col">
-    <div className="w-full h-[80px]">
-    {location.pathname.startsWith("/admindashboard") ? <AdminNavbar /> : <Navbar />}
-    </div>
-    <div className="w-full h-[95%]">
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<HomeC />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/createCourse" element={<CourseForm />} />
-        <Route path="/search" element={<SearchHome />} />
-        <Route path="/admindashboard" element={<AdminHome />} />
-        <Route path="/configuracion" element={<Configuration />} />
-        <Route path="/admindashboard/products" element={<AdminProducts/>} />
-        <Route path="/favorite" element={<Favorite />} />
-        <Route path="/cart" element={<ShopCart />} />
+      <div className="w-full h-[80px]">
+      {location.pathname.startsWith("/admindashboard") ? <AdminNavbar /> : null}
+      {location.pathname.startsWith("/user") ? <UserNavbar /> : null}
+      {!location.pathname.startsWith("/user") && !location.pathname.startsWith("/admindashboard") ? <Navbar /> : null}
+      </div>
+      <div className="w-full h-[95%]">
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/home" element={<HomeC />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/createCourse" element={<CourseForm />} />
+          <Route path="/search" element={<SearchHome />} />
+          <Route path="/admindashboard" element={<AdminHome />} />
+          <Route path="/admindashboard/products" element={<AdminProducts/>} />
+          <Route path="/configuracion" element={<Configuration/>} />
+
+          <Route path="/user/home" element={<UserLanding/>} />
+      
+
+          <Route path="/favorite" element={<Favorite />} />
+          <Route path="/cart" element={<ShopCart />} />
       </Routes>
+
       </div>
     </div>
       </AuthProvider>

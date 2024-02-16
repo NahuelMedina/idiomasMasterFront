@@ -1,6 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
+
+import { IoLogIn } from "react-icons/io5";
+import { PiStudentBold } from "react-icons/pi";
+import { FaDiscourse } from "react-icons/fa6";
+import { BsFillInfoSquareFill } from "react-icons/bs";
+
 import { SearchBar } from "../SearchBar/SearchBar";
 import { FaUserGraduate } from "react-icons/fa";
+
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react"; // Importa useAuth0 desde el paquete de Auth0
 import LogoutButton from '../Login/LogOut';
@@ -35,15 +42,17 @@ export const Navbar = () => {
         </Link>
 
         <Link to="/about" className="h-full">
-          <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-            <h1>Sobre Nosotros</h1>
+          <div className="flex items-center justify-evenly h-full w-[250px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+            <h1 className="text-[20px]">Sobre Nosotros</h1>
+            <BsFillInfoSquareFill className="text-[40px]" />
           </div>
         </Link>
 
         
         <Link to="/home" className="h-full">
-          <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-            <h1>Cursos</h1>
+          <div className="flex items-center justify-evenly h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+            <h1 className="text-[20px]">Cursos</h1>
+            <FaDiscourse className="text-[40px]" />
           </div>
         </Link>
 
@@ -57,7 +66,6 @@ export const Navbar = () => {
           </>
         )}
       </div>
-
       {!isAuthenticated && (
         <Link to="/login" className="h-full">
           <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
