@@ -9,7 +9,6 @@ import {
   POST_COURSE_REQUEST,
   POST_COURSE_SUCCESS,
   FILTERED_COURSES,
-  ADD_FAV
 } from "./actiontypes";
 import axios from "axios";
 const URL = import.meta.env.VITE_URL_HOST;
@@ -126,16 +125,3 @@ export const filteredCourses = (data) => {
   };
 };
 
-export const addFav = (value) =>  {
-  return async function(dispatch){
-     try {
-      dispatch({
-        type: ADD_FAV,
-        payload: value
-      });
-  } catch (error) {
-    alert(error)
-  }
-  }
- 
-};

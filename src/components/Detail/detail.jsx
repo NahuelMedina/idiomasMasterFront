@@ -9,14 +9,48 @@ import { FaHourglassStart } from "react-icons/fa";
 import { FaHourglassEnd } from "react-icons/fa";
 import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
+
+
 export const Detail = () => {
   const [preferenceId, setPreferenceId] = useState(null);
   const params = useParams();
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.courseDetail);
+  const [isCart, setIsCart] = useState(false)
+  const [cart, setCart] = useLocalStorage("cart", "")
+  
 
+//Carrito
+
+useEffect(()=>{
+  setCart(JSON.parse(window.localStorage.getItem("cart")))
+  if (cart.length === 0) {
+    return; 
+}
+    const isCourseCart = cart.some(cartCourse => cartCourse._id === detail._id);
+    setIsCart(isCourseCart);
+}, [detail,cart])
+
+
+
+const handleCart = () => {
+  setIsCart(!isCart);
+  const currentCart = JSON.parse(window.localStorage.getItem("cart")) || [];
+  
+  const updatedCart = isCart
+    ? currentCart.filter(c => c._id !== detail._id) // Eliminar del carrito
+    : [...currentCart, detail]; // Agregar al carrito
+  
+  setCart(updatedCart);
+  window.localStorage.setItem("cart", JSON.stringify(updatedCart));
+};
+
+
+
+//Mercado Pago
   initMercadoPago(PUBLIC_KEY, {
     locale: "es-MX",
   });
@@ -94,7 +128,7 @@ export const Detail = () => {
                 Finaliza el dia {fechaFinal}
               </p>
             </div>
-            <div className="flex">
+            <div className="flex ">
               <button
                 onClick={() => handleBuy(detail)}
                 className=" text-start mt-5 mb-10 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
@@ -106,6 +140,22 @@ export const Detail = () => {
                   />
                 )}
               </button>
+              { isCart ? (
+            <div className="flex">
+              <button onClick={handleCart} 
+                className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+              <p className=" m-2 text-2xl  ">Eliminar del Carrito</p>
+                </button>
+            </div>
+            ):( 
+            <div className="flex">
+                <button onClick={handleCart}    
+                className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                <p className=" m-2 text-2xl  ">Agregar al Carrito</p>
+                  </button>
+            </div>)
+      }
+             
             </div>
           </div>
         </div>
