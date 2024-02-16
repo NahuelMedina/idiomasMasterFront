@@ -178,8 +178,8 @@ function HomeC() {
           {courses &&
             courses.length > 0 &&
             renderCards.map((element, index) => (
-              <div className='overflow-hidden h-[80%] w-[30%] rounded-[10px]  transform transition-transform hover:scale-105 duration-500 ease-in-out flex items-center justify-center p-0'>
-                <Card course={element} />
+              <div key={index} className='overflow-hidden h-[80%] w-[30%] rounded-[10px]  transform transition-transform hover:scale-105 duration-500 ease-in-out flex items-center justify-center p-0'>
+                <Card  course={element} />
               </div>
             ))}
         </div>

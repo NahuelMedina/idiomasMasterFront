@@ -6,7 +6,6 @@ import {
   FILTER_LEVEL,
   ORDER_PRICE,
   SEARCH,
-  ADD_FAV,
   SET_USER_DATA,
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
@@ -94,17 +93,6 @@ const reducer = (state = initialState, { type, payload }) => {
         courses: payload,
       };
 
-    case ADD_FAV:
-      const aux = [];
-      if (!aux.find((c) => c === payload)) {
-        aux.push(payload);
-      }
-
-      return {
-        ...state,
-        favorites: aux,
-        allFavorites: [...state.favorites, payload],
-      };
 
     case GET_USER_REQUEST:
       return {

@@ -9,7 +9,6 @@ import {
   POST_COURSE_REQUEST,
   POST_COURSE_SUCCESS,
   FILTERED_COURSES,
-  ADD_FAV,
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
@@ -144,19 +143,6 @@ export const filteredCourses = (data) => {
   };
 };
 
-export const addFav = (value) =>  {
-  return async function(dispatch){
-     try {
-      dispatch({
-        type: ADD_FAV,
-        payload: value
-      });
-  } catch (error) {
-    alert(error)
-  }
-  }
- 
-};
 
 export const adminProduct = (data) => {
   return {

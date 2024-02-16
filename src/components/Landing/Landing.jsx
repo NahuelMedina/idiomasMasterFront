@@ -7,6 +7,9 @@ import Landing_card from "../Landing_card/Landing_card";
 import { card_landing_data } from "../Utils/landing_cards";
 import Landing_reviews from "../Landing_reviews/Landing_reviews";
 import card_landing_reviews from "../Utils/landing_reviews";
+import { FaHeart } from "react-icons/fa";
+import { TiShoppingCart } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 export const Landing = () => {
  
@@ -26,10 +29,11 @@ export const Landing = () => {
     setTimeout(set_landing, 5000);
   }, [num]);
 
-
+console.log(localStorage);
   return (
-    <div className=" w-full h-full bg-black text-white">
+    <div className="  w-full h-full bg-black text-white">
       <div className="flex justify-end items-center w-screen h-[80px] bg-[#1E68AD]">
+        
         <div className="mr-10">
           <SearchBar></SearchBar>
         </div>

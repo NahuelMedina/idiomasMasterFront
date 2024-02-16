@@ -81,18 +81,18 @@ const Favorite = () => {
 
 
   return (
-    <div className='bg-white h-screen w-screen '>
+    <div className='bg-white  w-full h-full overflow-hidden '>
       {
         favCourse &&
         favCourse.length > 0 ? (
-          <div  className="bg-[#FF6B6C] h-[40px] w-[230px] bottom-1 left-6 absolute  flex flex-row items-center justify-center overflow-y-hidden overflow-x-hidden  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
+          <div  className="bg-[#FF6B6C] h-[40px] w-[230px] bottom-8 left-6 absolute  flex flex-row items-center justify-center overflow-y-hidden overflow-x-hidden  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
         <button onClick={handleEliminate}>Eliminar Todos</button>
       </div>
         ) : (
           <Link></Link>
         )
       }
-      <div  className="bg-[#FF6B6C] h-[40px] w-[230px] bottom-1 right-6 absolute  flex flex-row items-center justify-center overflow-y-hidden overflow-x-hidden  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
+      <div  className="bg-[#FF6B6C] h-[40px] w-[230px] bottom-6 right-8 absolute  flex flex-row items-center justify-center overflow-y-hidden overflow-x-hidden  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
        <Link to='/home'> 
        <button >Ver mas cursos</button>
        </Link>

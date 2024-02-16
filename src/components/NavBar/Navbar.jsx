@@ -4,6 +4,9 @@ import { IoLogIn } from "react-icons/io5";
 import { FaDiscourse } from "react-icons/fa";
 import { BsFillInfoSquareFill } from "react-icons/bs";
 import { useAuth0 } from "@auth0/auth0-react";
+import { FaHeart } from "react-icons/fa";
+
+
 
 export const Navbar = () => {
   const { isAuthenticated, logout } = useAuth0();
@@ -56,11 +59,13 @@ export const Navbar = () => {
       </div>
 
       <Link to='/favorite'>
-        <h1>Favoritos</h1>
+        <button title="Favoritos"><FaHeart className=" text-red-600 m-6 text-[40px]" /> </button>
       </Link>
-      <Link to='/cart'>
-        <h1>Carrito</h1>
-      </Link>
+      {isAuthenticated && (
+        <Link to='/cart'>
+          <img style={{width:'38px'}} src="src\assets\fotos\cart.png" alt="" />
+        </Link>
+      )}
 
       {location.pathname !== "/register" && location.pathname !== "/login" && (
         <div className=" relative flex flex-row items-center justify-evenly w-[400px] h-full mr-[80px]">

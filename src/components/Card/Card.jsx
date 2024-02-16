@@ -10,6 +10,7 @@ import { TbListDetails } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 
+
 export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
 
   const location = useLocation()
@@ -18,14 +19,16 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const [isCart, setIsCart] = useState(false)
   const [cart, setCart] = useLocalStorage("cart", "")
 
+
+
   // Sector Carrito
 useEffect(()=>{
-  if (cart.length === 0) {
+  if (!cart || cart.length === 0) {
     return; 
 }
     const isCourseCart = cart.some(cartCourse => cartCourse._id === course._id);
     setIsCart(isCourseCart);
-})
+}, [course,cart])
 
 
 const handleCart = ()=>{
@@ -39,10 +42,11 @@ const handleCart = ()=>{
       setCart([course])
     }
   } else {
+    removeFromCart(course._id);
     const eliminateItemCart = JSON.parse(window.localStorage.getItem("cart"))
     const filteredCart = eliminateItemCart.filter(c => c._id !== course._id)
     setCart(filteredCart)
-    removeFromCart(course._id);
+    
   }
 }
 
@@ -50,7 +54,7 @@ const handleCart = ()=>{
 
   // Sector Favoritos
   useEffect(() => {
-    if (fav.length === 0) {
+    if (!fav && fav.length === 0) {
       return; 
   }
       const isCourseFav = fav.some(favCourse => favCourse._id === course._id);
@@ -81,7 +85,11 @@ const handleCart = ()=>{
     const filteredFav = eliminateItem.filter(c => c._id !== course._id)
     setFav(filteredFav)
   };
-console.log(cart);
+
+
+
+
+
 
 if(location.pathname === '/cart'){
   return (
@@ -123,17 +131,17 @@ if(location.pathname === '/cart'){
        </div>
       </div>
       <div className="grid grid-rows-0 gap-0 w-[350px] h-[240px] border-t border-black ">
-      <div className="bg-[#FF6B6C] w-full h-[80px] flex flex-row items-center justify-center   border-x border-black ">
-      <Link to={`/detail/${course._id}`} className="bg-[#FF6B6C] w-full h-[80px]  flex flex-row items-center justify-center hover:bg-yellow-500" >
-      <TbListDetails   className="text-[25px] m-[15px] h-[80px] "/>
+      <div className="bg-[#FF6B6C] w-full  h-[120px] flex flex-row items-center justify-center   border-x border-black ">
+      <Link to={`/detail/${course._id}`} className="bg-[#FF6B6C] w-full  h-[120px]  flex flex-row items-center justify-center hover:bg-yellow-500" >
+      <TbListDetails   className="text-[25px] m-[15px]  h-[120px] "/>
         <button className="text-black text-[25px]">Detalle del producto</button>
       </Link>
       </div>
-      <div className="bg-[#FF6B6C] h-[80px] w-full flex flex-row items-center justify-center border-x border-t border-black  hover:bg-yellow-500">
+      <div className="bg-[#FF6B6C] h-[120px] w-full flex flex-row items-center justify-center border-x border-t border-black  hover:bg-yellow-500">
      { isCart ? (
             <div className="flex">
-              <RxCross2  className="text-[25px] m-[15px] "/>
-              <button onClick={handleCart}  className="text-black text-[25px]  ">Eliminar del carrito</button>
+              <RxCross2  className="text-[35px] m-[15px] "/>
+              <button onClick={handleCart}  className="text-black text-[25px] w-full  ">Eliminar del carrito</button>
             </div>
             ):( 
             <div className="flex">
@@ -142,12 +150,7 @@ if(location.pathname === '/cart'){
             </div>)
       }
       </div>
-      <div className="bg-[#FF6B6C] w-full h-[80px] flex flex-row items-center justify-center border-y border-x border-black ">
-      <Link to={`/detail/${course._id}`} className="bg-[#FF6B6C] w-full h-[80px] border-y  border-black flex flex-row items-center justify-center hover:bg-yellow-500" >
-      <FaShoppingBasket  className="text-[25px] m-[15px] h-[80px]"/>
-        <button className="text-black text-[25px] h-[80px]">Comprar curso</button>
-      </Link>
-      </div>
+     
       </div>
     </div>
   );
