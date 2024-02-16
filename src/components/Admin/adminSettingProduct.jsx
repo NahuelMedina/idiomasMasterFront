@@ -73,7 +73,7 @@ export default function AdminSettingProduct() {
     if (response.data) {
       setCourse(response.data);
       setImagePreview(response.data.image);
-      dispatch(adminProduct({}))
+      c
     }
 
     setSearchTerm("");

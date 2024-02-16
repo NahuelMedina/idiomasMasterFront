@@ -23,10 +23,10 @@ export default function AdminNavbar() {
           <FaStore className="text-[30px] group-hover:text-[#2d53d9] transition-colors duration-300 ease-in-out" />
           <h1 className="text-[20px] group-hover:text-[#2d53d9] transition-colors duration-300 ease-in-out cursor-pointer">Products</h1>
         </Link>
-        <div className="flex h-full w-[20%] items-center justify-evenly group hover:bg-white cursor-pointer transition-colors duration-300 ease-in-out">
+        <Link to="/admindashboard/users" className="flex h-full w-[20%] items-center justify-evenly group hover:bg-white cursor-pointer transition-colors duration-300 ease-in-out">
           <FaUsers className="text-[30px] group-hover:text-[#2d53d9] transition-colors duration-300 ease-in-out" />
           <h1 className="text-[20px] group-hover:text-[#2d53d9] transition-colors duration-300 ease-in-out cursor-pointer">Users</h1>
-        </div>
+        </Link>
         <div className="flex h-full w-[20%] items-center justify-evenly group hover:bg-white cursor-pointer transition-colors duration-300 ease-in-out">
           <MdNotificationsActive className="text-[30px] group-hover:text-[#2d53d9] transition-colors duration-300 ease-in-out" />
           <h1 className="text-[20px] group-hover:text-[#2d53d9] transition-colors duration-300 ease-in-out cursor-pointer">
