@@ -9,11 +9,8 @@ import  CourseForm  from "./CourseForm/CourseForm";
 import { About } from "./About/About";
 import { SearchHome } from "./SearchBar/SearchHome";
 import { Configuration } from "./Configuration/Configuration";
-import { AuthProvider } from "./AuthProvider/AuthProvider";
 import Favorite from "./Favorite/Favorite";
 import ShopCart from "./ShopCart/ShopCart";
+import { AuthProvider } from "./AuthProvider/AuthProvider"
 
-
-
-export { Navbar, Card, Register, Landing, Login, HomeC, Detail,CourseForm,About,SearchHome, Favorite, ShopCart, Configuration, AuthProvider };
-
+export { Navbar, Card, Register, Landing, Login, HomeC, Detail, CourseForm, About, SearchHome, Favorite, ShopCart, Configuration, AuthProvider };

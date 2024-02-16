@@ -9,7 +9,10 @@ import {
   POST_COURSE_REQUEST,
   POST_COURSE_SUCCESS,
   FILTERED_COURSES,
-  ADD_FAV
+  ADD_FAV,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE
 } from "./actiontypes";
 import axios from "axios";
 const URL = import.meta.env.VITE_URL_HOST;
@@ -98,9 +101,9 @@ export const postCourseData = (courseData) => async (dispatch) => {
   }
 };
 
-export const postUser = (state) => async (dispatch) => {
+export const postUser = (userData) => async (dispatch) => {
   try {
-    const response = await axios.post(`${URL}/createUser`, state);
+    const response = await axios.post(`${URL}/createUser`, userData);
     alert("Usuario creado con Exito", response.data);
   } catch (error) {
     const message = error.response.data;
@@ -108,16 +111,30 @@ export const postUser = (state) => async (dispatch) => {
   }
 };
 
-export const getUser = (state) => async (dispatch) => {
+
+export const getUser = (userData) => async (dispatch) => {
   try {
-    console.log(state);
-    const response = await axios.post(`${URL}/getUser"`, state);
-    alert("Se ha conectado", response.data);
+    console.log("Datos de usuario:", userData);
+    dispatch({ type: GET_USER_REQUEST });
+
+    const response = await axios.post(`${URL}/getUser`, userData);
+    console.log("Respuesta del servidor:", response.data);
+    
+    // Verificamos si el usuario se ha autenticado correctamente
+    if (response.data) {
+      dispatch({ type: GET_USER_SUCCESS, payload: response.data });
+      alert("¡Se ha iniciado sesión exitosamente!");
+    } else {
+      dispatch({ type: GET_USER_FAILURE, payload: "No se ha podido iniciar sesión." });
+      alert("¡No se ha podido iniciar sesión!");
+    }
   } catch (error) {
-    const message = error.response.data.message;
-    alert(`${message}`);
+    console.error("Error al obtener usuario:", error);
+    dispatch({ type: GET_USER_FAILURE, payload: error.message });
+    alert("Ha ocurrido un error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.");
   }
 };
+
 
 export const filteredCourses = (data) => {
   return {

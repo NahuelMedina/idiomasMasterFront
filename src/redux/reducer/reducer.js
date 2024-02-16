@@ -7,7 +7,10 @@ import {
     ORDER_PRICE,
     SEARCH,
     ADD_FAV,
-    SET_USER_DATA
+    SET_USER_DATA,
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_FAILURE
 } from "../action/actiontypes";
 
 let initialState = {
@@ -18,8 +21,12 @@ let initialState = {
     courseLanguage: '',
     favorites: [],
     allFavorites: [],
-
     userData: "",
+    loading: false,
+    error: null,
+    user: {
+        loading: false,
+      },
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -93,12 +100,27 @@ const reducer = (state = initialState, { type, payload }) => {
                 allFavorites: [...state.favorites, payload]
             }
 
-            case SET_USER_DATA:
-                return {
-                  ...state,
-                  userData: action.payload
-                };
        
+                case GET_USER_REQUEST:
+                    return {
+                      ...state,
+                      loading: true,
+                      error: null
+                    };
+                    case GET_USER_SUCCESS:
+                        return {
+                          ...state,
+                          loading: false,
+                          user: payload, // Cambiar action.payload por payload
+                          error: null
+                        };
+                      case GET_USER_FAILURE:
+                        return {
+                          ...state,
+                          loading: false,
+                          error: payload // Cambiar action.payload por payload
+                        };
+
         default:
             return state;
     }
