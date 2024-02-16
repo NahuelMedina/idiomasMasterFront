@@ -12,6 +12,7 @@ import {
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
   ADMINPRODUCT,
+  ADMINUSER,
 } from "../action/actiontypes";
 
 let initialState = {
@@ -29,6 +30,7 @@ let initialState = {
     loading: false,
   },
   adminProduct: null,
+  adminUser: null
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -130,6 +132,12 @@ const reducer = (state = initialState, { type, payload }) => {
         return{
             ...state,
             adminProduct: payload
+        };
+
+        case ADMINUSER:
+        return{
+            ...state,
+            adminUser: payload
         }
 
     default:
