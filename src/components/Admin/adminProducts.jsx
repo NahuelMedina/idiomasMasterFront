@@ -2,8 +2,13 @@ import { useState } from "react";
 import AdminProductsAll from "./adminProductsAll";
 import AdminAddProduct from "./adminAddProduct";
 import AdminSettingProduct from "./adminSettingProduct";
+import { useDispatch } from "react-redux";
+import { adminProduct } from "../../redux/action/actions";
 
 export default function AdminProducts() {
+
+  const dispatch = useDispatch()
+
   const [options, setOptions] = useState({
     main: true,
     add: false,
@@ -18,7 +23,20 @@ export default function AdminProducts() {
       [element]: true,
     };
     setOptions(updatedOptions);
+    dispatch(adminProduct({}))
+
   };
+
+  const setSettings = () => {
+
+    const updatedOptions = {
+      main: false,
+      add: false,
+      setting: true,
+    };
+    setOptions(updatedOptions);
+
+  }
 
   return (
     <div className="h-full w-full bg-[#f1f1f1] flex items-center justify-center">
@@ -27,7 +45,7 @@ export default function AdminProducts() {
           <div className="h-full w-[20%]">
             <h1 className="text-gray-800 text-[30px]">Products</h1>
           </div>
-          <div className="bg-green-200 w-[500px] h-full flex flex-row">
+          <div className="bg-[#151139] w-[500px] h-full flex flex-row">
             <div
               className={`h-full w-[33%] flex items-center justify-center cursor-pointer group ${
                 options.main ? "bg-[#151139]" : "bg-gray-200 cursor-not-allowed"
@@ -73,10 +91,10 @@ export default function AdminProducts() {
             </div>
           </div>
         </div>
-        <div className="w-full h-[90%] bg-green-200">
-          {options.main ? <AdminProductsAll /> : null}
+        <div className="w-full h-[90%] bg-[#292b54]">
+          {options.main ? <AdminProductsAll setSettings={setSettings} /> : null}
           {options.add ? <AdminAddProduct /> : null}
-          {options.setting ? <AdminSettingProduct /> : null}
+          {options.setting ? <AdminSettingProduct  /> : null}
         </div>
       </div>
     </div>
