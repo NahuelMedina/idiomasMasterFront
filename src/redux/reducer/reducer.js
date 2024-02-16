@@ -6,6 +6,10 @@ import {
     FILTER_LEVEL,
     ORDER_PRICE,
     SEARCH,
+    SET_USER_DATA,
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_FAILURE
 } from "../action/actiontypes";
 
 let initialState = {
@@ -14,6 +18,12 @@ let initialState = {
     courseDetail: [],
     coursesName: [],
     courseLanguage: '',
+    userData: "",
+    loading: false,
+    error: null,
+    user: {
+        loading: false,
+      },
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -74,7 +84,28 @@ const reducer = (state = initialState, { type, payload }) => {
                 ...state,
                 courses: payload
             }
+      
        
+                case GET_USER_REQUEST:
+                    return {
+                      ...state,
+                      loading: true,
+                      error: null
+                    };
+                    case GET_USER_SUCCESS:
+                        return {
+                          ...state,
+                          loading: false,
+                          user: payload, // Cambiar action.payload por payload
+                          error: null
+                        };
+                      case GET_USER_FAILURE:
+                        return {
+                          ...state,
+                          loading: false,
+                          error: payload // Cambiar action.payload por payload
+                        };
+
         default:
             return state;
     }
