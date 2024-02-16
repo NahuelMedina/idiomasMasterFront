@@ -29,20 +29,11 @@ export const Landing = () => {
     setTimeout(set_landing, 5000);
   }, [num]);
 
-
+console.log(localStorage);
   return (
-    <div className=" w-full h-full bg-black text-white">
+    <div className="  w-full h-full bg-black text-white">
       <div className="flex justify-end items-center w-screen h-[80px] bg-[#1E68AD]">
-        <div className="flex p-2  absolute left-10 w-[100px]">
-          <Link to='/favorite' >
-         
-            <button title="Favoritos"><FaHeart className=" text-red-600 m-6 text-[40px]" /> </button>
-          </Link>
-         <Link to='/cart'>
-         
-          <button title="Carrito"><TiShoppingCart className="text-[40px] m-6"/></button>
-         </Link>
-      </div>
+        
         <div className="mr-10">
           <SearchBar></SearchBar>
         </div>

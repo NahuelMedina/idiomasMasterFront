@@ -20,14 +20,15 @@ export const Detail = () => {
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.courseDetail);
   const [isCart, setIsCart] = useState(false)
-  const [cart, setCart] = useLocalStorage("cart", "")
+  const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem("cart")))
+  const [isFav, setIsFav] = useState(false)
+  const [fav, setFav] = useState(JSON.parse(window.localStorage.getItem("fav")))
   
 
 //Carrito
 
 useEffect(()=>{
-  setCart(JSON.parse(window.localStorage.getItem("cart")))
-  if (cart.length === 0) {
+  if (!cart || cart.length === 0) {
     return; 
 }
     const isCourseCart = cart.some(cartCourse => cartCourse._id === detail._id);
@@ -48,6 +49,28 @@ const handleCart = () => {
   window.localStorage.setItem("cart", JSON.stringify(updatedCart));
 };
 
+//Favoritos
+useEffect(()=>{
+  if (!fav || fav.length === 0) {
+    return; 
+}
+    const isCoursefav = fav.some(favCourse => favCourse._id === detail._id);
+    setIsFav(isCoursefav);
+}, [detail,fav])
+
+
+
+const handleFavorite = () => {
+  setIsFav(!isFav);
+  const currentfav = JSON.parse(window.localStorage.getItem("fav")) || [];
+  
+  const updatedfav = isFav
+    ? currentfav.filter(c => c._id !== detail._id) // Eliminar del carrito
+    : [...currentfav, detail]; // Agregar al carrito
+  
+  setFav(updatedfav);
+  window.localStorage.setItem("fav", JSON.stringify(updatedfav));
+};
 
 
 //Mercado Pago
@@ -90,8 +113,7 @@ const handleCart = () => {
   const fechaFinal = `${añoF}-${mesF}-${diaF}`;
 
   return (
-    <div className="bg-[#FFFFFF] w-screen h-screen text-white container flex justify-center items-center">
-      {console.log(detail)}
+    <div className="bg-[#FFFFFF]  w-full h-full text-white container flex justify-center items-center">
       <div className="flex justify-center h-[95%] w-4/5 bg-[#1E68AD] p-10 rounded-md">
         <div className=" flex flex-col justify-center items-start text-center h-full w-3/5">
           <div className=" flex flex-col justify-center items-start rounded-xl">
@@ -141,22 +163,31 @@ const handleCart = () => {
                 )}
               </button>
               { isCart ? (
-            <div className="flex">
-              <button onClick={handleCart} 
-                className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-              <p className=" m-2 text-2xl  ">Eliminar del Carrito</p>
-                </button>
-            </div>
-            ):( 
-            <div className="flex">
-                <button onClick={handleCart}    
-                className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-                <p className=" m-2 text-2xl  ">Agregar al Carrito</p>
-                  </button>
-            </div>)
-      }
+                  <div className="flex">
+                    <button onClick={handleCart} 
+                      className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                    <p className=" m-2 text-2xl  ">Eliminar del Carrito</p>
+                      </button>
+                  </div>
+                  ):( 
+                  <div className="flex">
+                      <button onClick={handleCart}    
+                      className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                      <p className=" m-2 text-2xl  ">Agregar al Carrito</p>
+                        </button>
+                  </div>)
+                }
              
             </div>
+            <div className="">
+                { 
+                      isFav  ? (
+                        <button onClick={handleFavorite} className=" absolute top-[230px] left-[750px] text-5xl ">❤️</button>
+                      ) : (
+                        <button onClick={handleFavorite} className=" absolute top-[230px] left-[750px] text-5xl ">🤍</button>
+                      )
+                  } 
+                </div>
           </div>
         </div>
         <div className="flex justify-center items-center w-2/5">
@@ -170,3 +201,5 @@ const handleCart = () => {
     </div>
   );
 };
+
+

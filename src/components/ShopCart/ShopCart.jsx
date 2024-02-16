@@ -3,8 +3,8 @@ import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import { Card } from '../Card/Card';
-
-
+import { FaPlus } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa";
 
 const ShopCart = () => {
   
@@ -12,7 +12,7 @@ const ShopCart = () => {
   const [renderCards, setRenderCards] = useState([]);
   const [pageNum, setPageNum] = useState(0);
   const [total, setTotal] = useState(0)
-
+  const [items, setItems] = useState(1)
 
   const getCart = ()=>{
       return JSON.parse(localStorage.getItem('cart'))
@@ -23,9 +23,11 @@ const ShopCart = () => {
   },[])
 
  useEffect(()=>{
+  if (cartCourse === null) {
+    return; }
   var aux = 0
   cartCourse.forEach(c=> {
-    aux += c.price
+    aux += c.price * (c.items || 1)
   })
   setTotal(aux)
 
@@ -89,12 +91,30 @@ return
 }, [cartCourse, itemsOnPage, pagePosition])
 
 
+// Mas y Menos uno
 
 
+const handleMinusOne = (id) => {
   
-  if(!cartCourse.length >0){
+  setCartCourse((prevCart) =>
+    prevCart.map((course) =>
+     course._id === id ? { ...course, items: Math.max(1, (course.items || 1)- 1) } : course
+    )
+  );
+};
+console.log(cartCourse);
+const handlePlusOne = (id) => {
+  setCartCourse((prevCart) =>
+    prevCart.map((course) =>
+      course._id === id ? { ...course, items: (course.items ||1)+ 1 } : course
+    )
+  );
+};
+
+
+  if(cartCourse === null || !cartCourse.length >0){
     return (
-      <div className='bg-white h-screen wscreen'>
+      <div className='bg-white  w-full h-full'>
       <div className='flex justify-center items-center text-3xl font-bold text-black'>
         <h1 className=''>No hay cursos en el carrito</h1>
       </div>
@@ -112,33 +132,44 @@ return
   }
   
   return (
-    <div className='bg-white h-screen wscreen grid '>-
+    <div className='bg-white  w-full h-full grid '>-
       <div className='bottom-[180px] right-[70px] absolute h-24 p-3'>
-           <div  className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center overflow-y-hidden overflow-x-hidden  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
+           <div  className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
             <button >Comprar todos</button>
           </div>
-          <div  className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center overflow-y-hidden overflow-x-hidden  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
+          <div  className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
             <button onClick={handleEliminate}>Vaciar carrito</button>
           </div>
-          <div  className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center overflow-y-hidden overflow-x-hidden  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
+          <div  className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
             <Link to='/home'> 
                 <button >Ver mas cursos</button>
             </Link>
           </div>
         </div> 
-      { cartCourse !== null && cartCourse.length > 0 ?(<div className=" justify-center w-[400px] h-[500px] border border-[#848484] mt-[5px] mx-[90px] absolute top-[100px] right-5 ">
-            <p className="text-[25px] p-1 h-[30px] w-[300px]  text-[#1F1F1F] m-[2px]">{`Cantidad de Productos: ${cartCourse.length}`}</p>
-            <p className='border-b border-black p-1 w-[300px]  ' ></p>
-            {
-                  cartCourse.map((c,index)=>(
-                    <div key={index}  className='flex m-3'>  
-                      <p className='w-[300px] text-5  font-semibold text-black'>-{c.language}</p>
-                      <p>${c.price}</p>
-                      </div>
-                  ))
-            }
-            <p className='absolute bottom-2 right-3'>Total: ${total}</p>
-          </div>):(
+      { cartCourse !== null && cartCourse.length > 0 ?(
+          <div className="bg-gray-200 w-[400px] h-[488px] overflow-y-auto border border-gray-400 mt-5 mx-5 absolute top-24 right-5 rounded-lg overflow-hidden shadow-lg">
+          <p className="text-lg text-gray-800 font-semibold bg-gray-300 py-2 px-4">Cursos elegidos: {cartCourse.length}</p>
+          <div className="border-b border-gray-400"></div>
+          {cartCourse.map((c, index) => (
+            <div key={index} className="flex items-center justify-between px-4 py-2 border-b border-gray-400">
+              <div className="flex items-center">
+                <p className="text-lg text-gray-600 font-semibold mr-2">{(c.items || 1)}</p>
+                <button onClick={() => handleMinusOne(c._id)}  className="p-2 focus:outline-none text-1xl text-black rounded-full">
+                  <FaMinus />
+                </button>
+                <p className="text-lg text-gray-800 font-semibold mx-2">{c.language}</p>
+                <button onClick={() => handlePlusOne(c._id)}  className="p-2 focus:outline-none text-1xl text-black rounded-full">
+                  <FaPlus />
+                </button>
+              </div>
+              <p className="text-lg text-gray-800 font-semibold">${c.price * (c.items || 1)}</p>
+            </div>
+          ))}
+            <div className="flex items-center justify-end px-4 py-2 border-b border-gray-400">
+              <p className="text-xl text-gray-800 font-semibold">Total: ${total}</p>
+            </div>
+        </div>
+        ):(
             <Link></Link>
           )}
     

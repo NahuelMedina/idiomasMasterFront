@@ -1,13 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-
+import { FaHeart } from "react-icons/fa";
+import { TiShoppingCart } from "react-icons/ti";
 import { IoLogIn } from "react-icons/io5";
 import { PiStudentBold } from "react-icons/pi";
 import { FaDiscourse } from "react-icons/fa6";
 import { BsFillInfoSquareFill } from "react-icons/bs";
-
 import { SearchBar } from "../SearchBar/SearchBar";
 import { FaUserGraduate } from "react-icons/fa";
-
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react"; // Importa useAuth0 desde el paquete de Auth0
 import LogoutButton from '../Login/LogOut';
@@ -75,12 +74,12 @@ export const Navbar = () => {
       )}
       {isAuthenticated && (
       <Link to='/favorite'>
-        <h1>Favoritos</h1>
+        <button title="Favoritos"><FaHeart className=" text-red-600 m-6 text-[40px]" /> </button>
       </Link>
       )}
       {isAuthenticated && (
         <Link to='/cart'>
-          <img style={{width:'38px'}} src="src\assets\fotos\cart.png" alt="" />
+          <button title="Carrito"><TiShoppingCart className="text-[40px] m-6"/></button>
         </Link>
       )}
 

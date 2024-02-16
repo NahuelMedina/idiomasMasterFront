@@ -9,10 +9,6 @@ import { RxCross2 } from "react-icons/rx";
 import { TbListDetails } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-const URL = import.meta.env.VITE_URL_HOST;
-const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
-import axios from 'axios';
 
 
 export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
@@ -22,13 +18,12 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const [fav, setFav] =useLocalStorage("fav", "")
   const [isCart, setIsCart] = useState(false)
   const [cart, setCart] = useLocalStorage("cart", "")
-  const [preferenceId, setPreferenceId] = useState(null);
 
 
 
   // Sector Carrito
 useEffect(()=>{
-  if (cart.length === 0) {
+  if (!cart || cart.length === 0) {
     return; 
 }
     const isCourseCart = cart.some(cartCourse => cartCourse._id === course._id);
@@ -59,7 +54,7 @@ const handleCart = ()=>{
 
   // Sector Favoritos
   useEffect(() => {
-    if (fav.length === 0) {
+    if (!fav && fav.length === 0) {
       return; 
   }
       const isCourseFav = fav.some(favCourse => favCourse._id === course._id);
@@ -93,26 +88,7 @@ const handleCart = ()=>{
 
 
 
-// Pasarela de pago
-initMercadoPago(PUBLIC_KEY, {
-  locale: "es-MX",
-});
 
-const createPreference = async (product) => {
-  try {
-    const { data } = await axios.post(`${URL}/createPreference`, product);
-    return data;
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-const handleBuy = async (product) => {
-  const id = await createPreference(product);
-  if (id) {
-    setPreferenceId(id);
-  }
-};
 
 
 if(location.pathname === '/cart'){
