@@ -9,6 +9,8 @@ import {
   CourseForm,
   About,
   SearchHome,
+  Configuration,
+  AuthProvider,
   Favorite,
   ShopCart
 } from "./components";
@@ -22,6 +24,8 @@ import UserNavbar from "./components/User/UserNavbar";
 function App() {
   const location = useLocation();
   return (
+    <>
+    <AuthProvider>
     <div className="w-screen h-screen min-h-[750px] flex flex-col">
       <div className="w-full h-[80px]">
       {location.pathname.startsWith("/admindashboard") ? <AdminNavbar /> : null}
@@ -40,7 +44,7 @@ function App() {
           <Route path="/search" element={<SearchHome />} />
           <Route path="/admindashboard" element={<AdminHome />} />
           <Route path="/admindashboard/products" element={<AdminProducts/>} />
-
+          <Route path="/configuracion" element={<Configuration/>} />
 
           <Route path="/user/home" element={<UserLanding/>} />
       
@@ -51,6 +55,8 @@ function App() {
 
       </div>
     </div>
+      </AuthProvider>
+    </>
   );
 }
 

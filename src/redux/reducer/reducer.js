@@ -6,7 +6,11 @@ import {
     FILTER_LEVEL,
     ORDER_PRICE,
     SEARCH,
-    ADD_FAV
+    ADD_FAV,
+    SET_USER_DATA,
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_FAILURE
 } from "../action/actiontypes";
 
 let initialState = {
@@ -17,7 +21,12 @@ let initialState = {
     courseLanguage: '',
     favorites: [],
     allFavorites: [],
-
+    userData: "",
+    loading: false,
+    error: null,
+    user: {
+        loading: false,
+      },
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -74,10 +83,11 @@ const reducer = (state = initialState, { type, payload }) => {
 
         case FILTERED_COURSES: 
 
-            return {
-                ...state,
-                courses: payload
-            }
+        return {
+            ...state,
+            courses: payload
+        }
+        
         case ADD_FAV:
             const aux = []
                 if(!aux.find(c => c === payload)){
@@ -89,7 +99,28 @@ const reducer = (state = initialState, { type, payload }) => {
                 favorites:aux,
                 allFavorites: [...state.favorites, payload]
             }
+
        
+                case GET_USER_REQUEST:
+                    return {
+                      ...state,
+                      loading: true,
+                      error: null
+                    };
+                    case GET_USER_SUCCESS:
+                        return {
+                          ...state,
+                          loading: false,
+                          user: payload, // Cambiar action.payload por payload
+                          error: null
+                        };
+                      case GET_USER_FAILURE:
+                        return {
+                          ...state,
+                          loading: false,
+                          error: payload // Cambiar action.payload por payload
+                        };
+
         default:
             return state;
     }
