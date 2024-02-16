@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import validation from "../CourseForm/validation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { IoSearchCircle } from "react-icons/io5";
 import { idProduct, putProduct } from "./userData";
 import { FaCircle } from "react-icons/fa";
+import { adminProduct } from "../../redux/action/actions";
 
 export default function AdminSettingProduct() {
   const initialCourseState = {
@@ -21,19 +22,47 @@ export default function AdminSettingProduct() {
     status: true,
   };
 
+  const data = useSelector((state) => state.adminProduct);
+
   const [course, setCourse] = useState(initialCourseState);
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
-  const [imagePreview, setImagePreview] = useState(null); // Estado para almacenar la vista previa de la imagen
+  const [imagePreview, setImagePreview] = useState(null); 
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Restablecer el formulario a su estado inicial
+  useEffect(() => {
+
+    if(data){
+
+      const {_id, language, level, price, duration, schedule, location, image, status, start_time, finish_time } = data;
+
+      setCourse({
+        _id,
+        language,
+        level,
+        price,
+        duration,
+        schedule,
+        location,
+        image,
+        status,
+        start_time,
+        finish_time,
+      });
+
+      setImagePreview(image)
+    }
+
+    
+
+  }, [])
+
   const resetForm = () => {
     setCourse(initialCourseState);
     setErrors({});
     setSuccessMessage("");
-    setImagePreview(null); // Limpiar la vista previa de la imagen
+    setImagePreview(null);
   };
 
   const handleFetch = async (event) => {
@@ -44,6 +73,7 @@ export default function AdminSettingProduct() {
     if (response.data) {
       setCourse(response.data);
       setImagePreview(response.data.image);
+      dispatch(adminProduct({}))
     }
 
     setSearchTerm("");
@@ -100,7 +130,7 @@ export default function AdminSettingProduct() {
     if (Object.keys(errors).length === 0) {
       try {
         await putProduct({
-          id: course._id, // Usar el ID del curso actual
+          id: course._id, 
           language: course.language,
           level: course.level,
           price: course.price,
@@ -113,7 +143,8 @@ export default function AdminSettingProduct() {
           finish_time: course.finish_time,
         });
         window.alert("El curso se ha actualizado exitosamente.");
-        resetForm(); // Restablecer el formulario después de enviar los datos
+        resetForm();
+        dispatch(adminProduct({}))
       } catch (error) {
         console.error("Error al actualizar el curso:", error.message);
       }
@@ -148,7 +179,7 @@ export default function AdminSettingProduct() {
         {course._id && course._id.length > 0 && (
           <div className="h-full w-[60%] flex items-center justify-center bg-[#373a6c] ">
             <div className="h-full w-[50%] flex items-center justify-center">
-              <h1 className="text-yellow-500 text-[20px]">{`Product Id: ${course._id}`}</h1>
+              <h1 className="text-yellow-500 text-[18px]">{`Product Id: ${course._id}`}</h1>
             </div>
 
             <div className="h-full w-[50%] flex items-center justify-center">

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import validation from "../CourseForm/validation";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { postCourseData } from "../../redux/action/actions";
 
-export default function AdminAddProduct({ data }) {
+export default function AdminAddProduct() {
   const initialCourseState = {
     language: "",
     level: "",
@@ -18,6 +18,8 @@ export default function AdminAddProduct({ data }) {
     image: "",
     status: true,
   };
+
+ 
 
   const [course, setCourse] = useState(initialCourseState);
   const dispatch = useDispatch();

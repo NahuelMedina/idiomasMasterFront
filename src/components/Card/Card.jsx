@@ -94,7 +94,7 @@ const handleCart = ()=>{
 if(location.pathname === '/cart'){
   return (
     <div className=' flex h-[240px] w-[1200px] m-5 text-black rounded-[10px] shadow-lg shadow-black/50 transform transition-transform '>
-      <div className="h-[240px] w-[400px] bg-green-200 overflow-hidden items-center justify-center flex">
+      <div className="h-[240px] w-[400px] bg-[#151139] overflow-hidden items-center justify-center flex">
         <img src={course.image} alt={course.lenguage} className='h-full w-full '/>
       </div>
       <div className="bg-[#1E68AD] h-[240px] w-[500px] flex flex-col justify-start">

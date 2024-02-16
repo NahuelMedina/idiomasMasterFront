@@ -11,7 +11,8 @@ import {
   FILTERED_COURSES,
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
-  GET_USER_FAILURE
+  GET_USER_FAILURE,
+  ADMINPRODUCT
 } from "./actiontypes";
 import axios from "axios";
 const URL = import.meta.env.VITE_URL_HOST;
@@ -142,3 +143,10 @@ export const filteredCourses = (data) => {
   };
 };
 
+
+export const adminProduct = (data) => {
+  return {
+    type: ADMINPRODUCT,
+    payload: data,
+  };
+};
