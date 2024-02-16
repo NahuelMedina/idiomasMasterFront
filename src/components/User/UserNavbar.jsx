@@ -1,16 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
-
 import { IoLogIn } from "react-icons/io5";
 import { PiStudentBold } from "react-icons/pi";
 import { FaDiscourse } from "react-icons/fa6";
 import { BsFillInfoSquareFill } from "react-icons/bs";
-
-import { FaUserGraduate } from "react-icons/fa";
-
+import "../"
 
 
 
-export const Navbar = () => {
+export default function UserNavbar () {
   const location = useLocation();
   return (
     <div className="flex h-[80px] w-full justify-between items-center text-white bg-black">
@@ -19,7 +16,7 @@ export const Navbar = () => {
           <div className="flex items-center justify-center h-full w-[60px]">
             <img
               className="w-32"
-              src="src\assets\logo\logo4.png"
+              src="img/logo4.png"
             ></img>
           </div>
         </Link>
@@ -37,7 +34,7 @@ export const Navbar = () => {
           </div>
         </Link>
       </div>
-    
+      
       {location.pathname !== "/register" && location.pathname !== "/login" ? (
         <div className=" relative flex flex-row items-center justify-evenly w-[400px] h-full mr-[80px]">
           <Link
