@@ -9,10 +9,9 @@ import {
   POST_COURSE_REQUEST,
   POST_COURSE_SUCCESS,
   FILTERED_COURSES,
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_FAILURE,
-  ADMINPRODUCT
+  ADMINPRODUCT,
+  ADMINUSER,
+  ADMINREVIEW
 } from "./actiontypes";
 import axios from "axios";
 const URL = import.meta.env.VITE_URL_HOST;
@@ -111,29 +110,37 @@ export const postUser = (userData) => async (dispatch) => {
   }
 };
 
+export const postThirdPartyUser = (user) => async (dispatch) => {
+  try {
+    const userData = {
+      name: user.given_name,
+      lastname: user.family_name,
+      email: user.email,
+      img: user.picture,
+    };
+console.log("ESTO ES USERDATA EN THIRPARTY", userData)
+    const response = await axios.post(`${URL}/createUser`, userData);
+    alert("Usuario creado con éxito", response.data);
+  } catch (error) {
+    const message = error.response.data;
+    alert(`${message}`);
+  }
+};
+
 
 export const getUser = (userData) => async (dispatch) => {
   try {
-    console.log("Datos de usuario:", userData);
-    dispatch({ type: GET_USER_REQUEST });
-
+    console.log("Estado:", userData);
     const response = await axios.post(`${URL}/getUser`, userData);
     console.log("Respuesta del servidor:", response.data);
-    
-    // Verificamos si el usuario se ha autenticado correctamente
-    if (response.data) {
-      dispatch({ type: GET_USER_SUCCESS, payload: response.data });
-      alert("¡Se ha iniciado sesión exitosamente!");
-    } else {
-      dispatch({ type: GET_USER_FAILURE, payload: "No se ha podido iniciar sesión." });
-      alert("¡No se ha podido iniciar sesión!");
-    }
+    alert("Se ha conectado", response.data);
   } catch (error) {
     console.error("Error al obtener usuario:", error);
-    dispatch({ type: GET_USER_FAILURE, payload: error.message });
-    alert("Ha ocurrido un error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.");
+    const message = error.response.data.message;
+    alert(`${message}`);
   }
 };
+
 
 
 export const filteredCourses = (data) => {
@@ -147,6 +154,20 @@ export const filteredCourses = (data) => {
 export const adminProduct = (data) => {
   return {
     type: ADMINPRODUCT,
+    payload: data,
+  };
+};
+
+export const adminUser = (data) => {
+  return {
+    type: ADMINUSER,
+    payload: data,
+  };
+};
+
+export const adminReview = (data) => {
+  return {
+    type: ADMINREVIEW,
     payload: data,
   };
 };
