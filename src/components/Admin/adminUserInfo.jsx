@@ -12,6 +12,7 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { IoChevronForward } from "react-icons/io5";
 import UserPaymentCard from "./userPaymentCard";
+import { FaSearchPlus } from "react-icons/fa";
 
 export default function AdminInfoUser() {
     const initialUserState = {
@@ -220,7 +221,10 @@ export default function AdminInfoUser() {
           </div>
         )}
       </div>
-      <div className="bg-[#282a54] w-full h-[96%] grid grid-cols-3 gap-[5px] p-[5px]">
+
+      {user._id && user._id.length ?(
+        <>
+              <div className="bg-[#282a54] w-full h-[96%] grid grid-cols-3 gap-[5px] p-[5px]">
         <div className="bg-[#282a54] w-full h-full flex flex-col gap-[5px] rounded-[10px]">
           <div className="w-full h-[25%] bg-[#373a6c] pl-[20px] rounded-[10px]">
             <div className="w-full h-[40%] flex items-center">
@@ -364,6 +368,19 @@ export default function AdminInfoUser() {
           </div>
         </div>
       </div>
+        </>
+      ):(
+
+        <>
+            <div className=" w-full h-full rounded-[10px] items-center justify-center flex">
+         <h1 className="text-yellow-500 text-[40px]">Search a User</h1>
+         <FaSearchPlus className="text-white text-[40px] ml-[30px]" />
+        </div>
+        </>
+
+      )}
+
+
     </div>
   );
 }

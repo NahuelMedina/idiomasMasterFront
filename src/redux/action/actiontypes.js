@@ -11,3 +11,4 @@ export const FILTERED_COURSES = "FILTERED_COURSES";
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const ADMINPRODUCT = 'ADMINPRODUCT';
 export const ADMINUSER = 'ADMINUSER';
+export const ADMINREVIEW = 'ADMINREVIEW';

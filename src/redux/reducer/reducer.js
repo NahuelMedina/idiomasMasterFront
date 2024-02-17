@@ -8,7 +8,8 @@ import {
   SEARCH,
   ADMINPRODUCT,
   ADMINUSER,
-  SET_USER_DATA
+  SET_USER_DATA,
+  ADMINREVIEW
 } from "../action/actiontypes";
 
 let initialState = {
@@ -29,7 +30,8 @@ let initialState = {
     loading: false,
   },
   adminProduct: null,
-  adminUser: null
+  adminUser: null,
+  adminReview: null
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -38,7 +40,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         courses: payload,
-        coursesCopy: payload, // Actualiza la copia de seguridad de los cursos
+        coursesCopy: payload,
       };
     case COURSE_DETAIL:
       return {
@@ -68,7 +70,7 @@ const reducer = (state = initialState, { type, payload }) => {
       if (payload === "default") {
         return {
           ...state,
-          courses: state.coursesCopy, // Revierte al estado inicial
+          courses: state.coursesCopy,
         };
       }
       const sortOrder = payload === "A" ? 1 : -1;
@@ -81,7 +83,6 @@ const reducer = (state = initialState, { type, payload }) => {
         coursesName: sortedArray,
       };
     case SEARCH:
-      // Revierte al estado inicial antes de realizar la búsqueda
       return {
         ...state,
         courses: state.coursesCopy,
@@ -112,6 +113,12 @@ const reducer = (state = initialState, { type, payload }) => {
             ...state,
             userData: action.payload,
           };
+      
+        case ADMINREVIEW:
+          return{
+            ...state,
+            adminReview: payload
+          }
 
     default:
       return state;
