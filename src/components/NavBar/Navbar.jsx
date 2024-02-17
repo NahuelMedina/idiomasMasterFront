@@ -23,7 +23,7 @@ export const Navbar = () => {
 
     logout({ returnTo: window.location.origin });
     localStorage.removeItem("auth");
-    navigate("/home");
+    navigate("/");
   };
 
   return (
@@ -49,18 +49,11 @@ export const Navbar = () => {
           </div>
         </Link>
 
-        {isAuthenticated && (
-          <Link to="/createCourse" className="h-full">
-            <div className="flex items-center justify-center h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-              <h1>Crear Curso</h1>
-            </div>
-          </Link>
-        )}
       </div>
-
-      <Link to='/favorite'>
+{ isAuthenticated &&
+     ( <Link to='/favorite'>
         <button title="Favoritos"><FaHeart className=" text-red-600 m-6 text-[40px]" /> </button>
-      </Link>
+      </Link>)}
       {isAuthenticated && (
         <Link to='/cart'>
           <img style={{width:'38px'}} src="src\assets\fotos\cart.png" alt="" />

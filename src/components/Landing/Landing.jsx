@@ -16,7 +16,6 @@ export const Landing = () => {
   const search = useSelector((state) => state.coursesName);
   const [num, setNum] = useState(0);
 
-
   useEffect(() => {
     function set_landing() {
       if (num < 4) {
@@ -29,7 +28,6 @@ export const Landing = () => {
     setTimeout(set_landing, 5000);
   }, [num]);
 
-console.log(localStorage);
   return (
     <div className="  w-full h-full bg-black text-white">
       <div className="flex justify-end items-center w-screen h-[80px] bg-[#1E68AD]">

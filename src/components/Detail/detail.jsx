@@ -38,6 +38,10 @@ useEffect(()=>{
 
 
 const handleCart = () => {
+  if(!isAuthenticated){
+    alert('Necesitas registrarte para agregar al carrito')
+    return
+  }
   setIsCart(!isCart);
   const currentCart = JSON.parse(window.localStorage.getItem("cart")) || [];
   
@@ -61,6 +65,10 @@ useEffect(()=>{
 
 
 const handleFavorite = () => {
+  if(!isAuthenticated){
+    alert('Necesitas registrarte para agregar a favoritos')
+    return
+  }
   setIsFav(!isFav);
   const currentfav = JSON.parse(window.localStorage.getItem("fav")) || [];
   
