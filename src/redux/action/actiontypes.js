@@ -15,3 +15,4 @@ export const GET_USER_FAILURE = 'GET_USER_FAILURE';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const ADMINPRODUCT = 'ADMINPRODUCT';
 export const ADMINUSER = 'ADMINUSER';
+export const ADMINREVIEW = 'ADMINREVIEW';

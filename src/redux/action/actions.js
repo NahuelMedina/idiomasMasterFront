@@ -14,7 +14,8 @@ import {
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
   ADMINPRODUCT,
-  ADMINUSER
+  ADMINUSER,
+  ADMINREVIEW
 } from "./actiontypes";
 import axios from "axios";
 const URL = import.meta.env.VITE_URL_HOST;
@@ -169,6 +170,13 @@ export const adminProduct = (data) => {
 export const adminUser = (data) => {
   return {
     type: ADMINUSER,
+    payload: data,
+  };
+};
+
+export const adminReview = (data) => {
+  return {
+    type: ADMINREVIEW,
     payload: data,
   };
 };
