@@ -9,7 +9,7 @@ export default function DashPayment({data}){
 
     useEffect(() => {
 
-        const active = data.filter((element) =>  element.status === "Approved")
+        const active = data.filter((element) =>  element.status === "approved")
         setActiveProducts(active)
 
         const inactive = active.reduce((acc, element) => {
@@ -20,7 +20,9 @@ export default function DashPayment({data}){
             }
         }, 0);
 
-        setInactiveProducts(inactive)
+        const total = Math.floor(inactive * 0.00026)
+
+        setInactiveProducts(total)
 
 
     }, [data])

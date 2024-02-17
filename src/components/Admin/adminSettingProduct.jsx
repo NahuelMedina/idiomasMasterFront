@@ -7,6 +7,7 @@ import { IoSearchCircle } from "react-icons/io5";
 import { idProduct, putProduct } from "./userData";
 import { FaCircle } from "react-icons/fa";
 import { adminProduct } from "../../redux/action/actions";
+import { FaSearchPlus } from "react-icons/fa";
 
 export default function AdminSettingProduct() {
   const initialCourseState = {
@@ -209,7 +210,10 @@ export default function AdminSettingProduct() {
           </div>
         )}
       </div>
-      <form
+
+      {course._id && course._id.length ?(
+<>
+<form
         onSubmit={handleSubmit}
         className="bg-[#282a54] w-full h-[96%] grid grid-cols-3 gap-[5px] p-[5px]"
       >
@@ -475,6 +479,23 @@ export default function AdminSettingProduct() {
           </div>
         </div>
       </form>
+</>
+
+      ):(
+<>
+<div className=" w-full h-full rounded-[10px] items-center justify-center flex">
+         <h1 className="text-yellow-500 text-[40px]">Search a Product</h1>
+         <FaSearchPlus className="text-white text-[40px] ml-[30px]" />
+        </div>
+     
+</>
+
+
+      )}
+
+
+
+
     </div>
   );
 }

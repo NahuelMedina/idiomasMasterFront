@@ -138,7 +138,9 @@ export const putUser = async ({
 
 export const userCourses = async (id) => {
   try {
-    const response = await axios.get(`http://localhost:3000/getUserCourses/${id}`);
+    const response = await axios.get(
+      `http://localhost:3000/getUserCourses/${id}`
+    );
 
     if (response) {
       return response;
@@ -150,7 +152,37 @@ export const userCourses = async (id) => {
 
 export const userPayments = async (id) => {
   try {
-    const response = await axios.get(`http://localhost:3000/getUserPayment/${id}`);
+    const response = await axios.get(
+      `http://localhost:3000/getUserPayment/${id}`
+    );
+
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const idReview = async (id) => {
+  try {
+    const response = await axios.get(`http://localhost:3000/getReviews/${id}`);
+
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const putReview = async ({ reply, view, reviewId }) => {
+  try {
+    const response = await axios.put(`http://localhost:3000/putReview`, {
+      reply,
+      view,
+      reviewId,
+    });
 
     if (response) {
       return response;
