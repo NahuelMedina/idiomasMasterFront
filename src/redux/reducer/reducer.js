@@ -6,12 +6,9 @@ import {
   FILTER_LEVEL,
   ORDER_PRICE,
   SEARCH,
-  SET_USER_DATA,
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_FAILURE,
   ADMINPRODUCT,
   ADMINUSER,
+  SET_USER_DATA
 } from "../action/actiontypes";
 
 let initialState = {
@@ -22,7 +19,10 @@ let initialState = {
   courseLanguage: "",
   favorites: [],
   allFavorites: [],
-  userData: "",
+  userData: {
+    email: "",
+    password: "",
+  },
   loading: false,
   error: null,
   user: {
@@ -95,27 +95,6 @@ const reducer = (state = initialState, { type, payload }) => {
         courses: payload,
       };
 
-
-    case GET_USER_REQUEST:
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
-    case GET_USER_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        user: payload, // Cambiar action.payload por payload
-        error: null,
-      };
-    case GET_USER_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: payload, // Cambiar action.payload por payload
-      };
-
     case ADMINPRODUCT:
         return{
             ...state,
@@ -127,6 +106,12 @@ const reducer = (state = initialState, { type, payload }) => {
             ...state,
             adminUser: payload
         }
+
+        case SET_USER_DATA:
+          return {
+            ...state,
+            userData: action.payload,
+          };
 
     default:
       return state;
