@@ -6,13 +6,10 @@ import {
   FILTER_LEVEL,
   ORDER_PRICE,
   SEARCH,
-  SET_USER_DATA,
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_FAILURE,
   ADMINPRODUCT,
   ADMINUSER,
-  ADMINREVIEW,
+  SET_USER_DATA,
+  ADMINREVIEW
 } from "../action/actiontypes";
 
 let initialState = {
@@ -23,7 +20,10 @@ let initialState = {
   courseLanguage: "",
   favorites: [],
   allFavorites: [],
-  userData: "",
+  userData: {
+    email: "",
+    password: "",
+  },
   loading: false,
   error: null,
   user: {
@@ -40,7 +40,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         courses: payload,
-        coursesCopy: payload, // Actualiza la copia de seguridad de los cursos
+        coursesCopy: payload,
       };
     case COURSE_DETAIL:
       return {
@@ -70,7 +70,7 @@ const reducer = (state = initialState, { type, payload }) => {
       if (payload === "default") {
         return {
           ...state,
-          courses: state.coursesCopy, // Revierte al estado inicial
+          courses: state.coursesCopy,
         };
       }
       const sortOrder = payload === "A" ? 1 : -1;
@@ -83,7 +83,6 @@ const reducer = (state = initialState, { type, payload }) => {
         coursesName: sortedArray,
       };
     case SEARCH:
-      // Revierte al estado inicial antes de realizar la búsqueda
       return {
         ...state,
         courses: state.coursesCopy,
@@ -95,27 +94,6 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         courses: payload,
-      };
-
-
-    case GET_USER_REQUEST:
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
-    case GET_USER_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        user: payload, // Cambiar action.payload por payload
-        error: null,
-      };
-    case GET_USER_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: payload, // Cambiar action.payload por payload
       };
 
     case ADMINPRODUCT:
@@ -130,6 +108,12 @@ const reducer = (state = initialState, { type, payload }) => {
             adminUser: payload
         }
 
+        case SET_USER_DATA:
+          return {
+            ...state,
+            userData: action.payload,
+          };
+      
         case ADMINREVIEW:
           return{
             ...state,

@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch  } from "react-redux";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { Card } from "../Card/Card";
 import { useEffect, useState } from "react";
@@ -10,12 +10,22 @@ import card_landing_reviews from "../Utils/landing_reviews";
 import { FaHeart } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
 import { Link } from "react-router-dom";
+import { postThirdPartyUser } from "../../redux/action/actions"; // Importa la acción adecuada
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const Landing = () => {
  
   const search = useSelector((state) => state.coursesName);
   const [num, setNum] = useState(0);
+  const { isAuthenticated, user } = useAuth0();
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log("Registrando usuario:", user);
+      dispatch(postThirdPartyUser(user));
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     function set_landing() {
@@ -29,7 +39,6 @@ export const Landing = () => {
     setTimeout(set_landing, 5000);
   }, [num]);
 
-console.log(localStorage);
   return (
     <div className="  w-full h-full bg-black text-white">
       <div className="flex justify-end items-center w-screen h-[80px] bg-[#1E68AD]">
