@@ -13,6 +13,7 @@ const CourseSection = () => {
     const userCourses = useSelector(state => state.userCourses)
     const [userData, setUserData] = useState(null); 
     const [isUserLoaded, setIsUserLoaded] = useState(false);
+    const [userLogin, setUserLogin] = useState(JSON.parse(localStorage.getItem('userData')))
 
     useEffect(() => {
         dispatch(getAllUsers());
@@ -20,14 +21,15 @@ const CourseSection = () => {
     }, [user, dispatch]);
 
     useEffect(() => {
-        if (allUsers && !isUserLoaded) {
+        if (allUsers && !isUserLoaded && !userLogin) {
             allUsers.forEach(u => {
                 if (u.email === user.email) {
                   setUserData(u);
                     setIsUserLoaded(true);
                 }
             });
-        }
+        } 
+       
     }, [allUsers, user, isUserLoaded]);
 
     useEffect(()=>{
@@ -35,16 +37,18 @@ const CourseSection = () => {
 
         dispatch(getUserCourses(userData._id))
       }
+      if(userLogin ){
+        dispatch(getUserCourses(userLogin._id))
+      }
     },[userData])
 
-console.log(userCourses);
 
 
 return (
   <div>
   {
-    userCourses && userCourses.map((c)=> (
-    <div className="bg-white rounded-lg overflow-hidden shadow-lg mb-4">
+    userCourses && userCourses.map((c, index)=> (
+    <div key={index}  className="bg-white rounded-lg overflow-hidden shadow-lg mb-4">
       <img src={c.image} alt={c.language} className="w-full h-32 object-cover" />
       <div className="p-4">
         <h3 className="text-2xl font-semibold mb-2 text-gray-800">{c.language}</h3>
