@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const URL = import.meta.env.VITE_URL_HOST
+
 export const productData = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/getAllCourses`);
+    const response = await axios.get(`${URL}/getAllCourses`);
 
     if (response) {
       return response;
@@ -14,7 +16,7 @@ export const productData = async () => {
 
 export const usersData = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/getAllUsers`);
+    const response = await axios.get(`${URL}/getAllUsers`);
 
     if (response) {
       return response;
@@ -26,7 +28,7 @@ export const usersData = async () => {
 
 export const paymentData = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/getAllPayments`);
+    const response = await axios.get(`${URL}/getAllPayments`);
 
     if (response) {
       return response;
@@ -38,7 +40,7 @@ export const paymentData = async () => {
 
 export const reviewData = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/getAllReviews`);
+    const response = await axios.get(`${URL}/getAllReviews`);
 
     if (response) {
       return response;
@@ -50,7 +52,7 @@ export const reviewData = async () => {
 
 export const idProduct = async (id) => {
   try {
-    const response = await axios.get(`http://localhost:3000/getCourse/${id}`);
+    const response = await axios.get(`${URL}/getCourse/${id}`);
 
     if (response) {
       return response;
@@ -74,7 +76,7 @@ export const putProduct = async ({
   finish_time,
 }) => {
   try {
-    const response = await axios.put(`http://localhost:3000/putCourse`, {
+    const response = await axios.put(`${URL}/putCourse`, {
       id,
       language,
       level,
@@ -96,7 +98,7 @@ export const putProduct = async ({
 
 export const idUser = async (id) => {
   try {
-    const response = await axios.get(`http://localhost:3000/getUserbyId/${id}`);
+    const response = await axios.get(`${URL}/getUserbyId/${id}`);
 
     if (response) {
       return response;
@@ -118,7 +120,7 @@ export const putUser = async ({
   age,
 }) => {
   try {
-    const response = await axios.put(`http://localhost:3000/putUser`, {
+    const response = await axios.put(`${URL}/putUser`, {
       profile,
       id,
       name,
@@ -139,7 +141,7 @@ export const putUser = async ({
 export const userCourses = async (id) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/getUserCourses/${id}`
+      `${URL}/getUserCourses/${id}`
     );
 
     if (response) {
@@ -153,7 +155,7 @@ export const userCourses = async (id) => {
 export const userPayments = async (id) => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/getUserPayment/${id}`
+      `${URL}/getUserPayment/${id}`
     );
 
     if (response) {
@@ -166,7 +168,7 @@ export const userPayments = async (id) => {
 
 export const idReview = async (id) => {
   try {
-    const response = await axios.get(`http://localhost:3000/getReviews/${id}`);
+    const response = await axios.get(`${URL}/getReviews/${id}`);
 
     if (response) {
       return response;
@@ -178,9 +180,9 @@ export const idReview = async (id) => {
 
 export const putReview = async ({ reply, view, reviewId }) => {
   try {
-    const response = await axios.put(`http://localhost:3000/putReview`, {
+    const response = await axios.put(`${URL}/putReview`, {
       reply,
-      view,
+      view, 
       reviewId,
     });
 
