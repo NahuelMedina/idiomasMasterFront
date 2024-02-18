@@ -9,6 +9,9 @@ import {
   ADMINPRODUCT,
   ADMINUSER,
   SET_USER_DATA,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE,
+  SET_EDITED_DATA,
   ADMINREVIEW,
   ALL_USERS,
   USER_COURSES
@@ -20,12 +23,9 @@ let initialState = {
   courseDetail: [],
   coursesName: [],
   courseLanguage: "",
-  userData: {
-    email: "",
-    password: "",
-  },
-  loading: false,
+  userData: "",
   error: null,
+  loading: false,
   user: {
     loading: false,
   },
@@ -42,6 +42,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         courses: payload,
+        coursesCopy: payload,
         coursesCopy: payload,
       };
     case COURSE_DETAIL:
@@ -72,6 +73,7 @@ const reducer = (state = initialState, { type, payload }) => {
       if (payload === "default") {
         return {
           ...state,
+          courses: state.coursesCopy, 
           courses: state.coursesCopy,
         };
       }
@@ -85,6 +87,7 @@ const reducer = (state = initialState, { type, payload }) => {
         coursesName: sortedArray,
       };
     case SEARCH:
+
       return {
         ...state,
         courses: state.coursesCopy,
@@ -113,7 +116,7 @@ const reducer = (state = initialState, { type, payload }) => {
         case SET_USER_DATA:
           return {
             ...state,
-            userData: action.payload,
+            userData: payload,
           };
       
         case ADMINREVIEW:
@@ -131,6 +134,23 @@ const reducer = (state = initialState, { type, payload }) => {
               ...state,
               userCourses: payload
             }
+          case GET_USER_SUCCESS:
+            return {
+              ...state,
+              userData: payload,
+              error: null
+            };
+          case GET_USER_FAILURE:
+            return {
+              ...state,
+              userData: null,
+              error: payload
+            };
+            case SET_EDITED_DATA:
+              return {
+                ...state,
+                ...action.payload
+              };
     default:
       return state;
   }

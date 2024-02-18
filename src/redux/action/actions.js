@@ -11,7 +11,8 @@ import {
   FILTERED_COURSES,
   ADMINPRODUCT,
   ADMINUSER,
-  ADMINREVIEW,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE,
   SET_USER_DATA,
   ALL_USERS,
   USER_COURSES
@@ -134,17 +135,40 @@ console.log("ESTO ES USERDATA EN THIRPARTY", userData)
 export const getUser = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/getUser`, userData);
+    console.log("Respuesta del servidor:", response.data);
+
+    localStorage.setItem('userData', JSON.stringify(response.data));
+
     dispatch({
-      type: SET_USER_DATA,
-      payload: response,
+      type: GET_USER_SUCCESS,
+      payload: response.data
     });
+
+    alert("Se ha conectado");
   } catch (error) {
     console.error("Error al obtener usuario:", error);
-    const message = error.response.data.message;
-    alert(`${message}`);
+
+    dispatch({
+      type: GET_USER_FAILURE,
+      payload: error.payload.data.message
+    });
+
+    alert(error.payload.data.message);
   }
 };
 
+
+export const updateUser = (changedFields) => async (dispatch) => {
+  try {
+    const response = await axios.put(`${URL}/putUser`, changedFields);
+    console.log("Respuesta del servidor al guardar cambios:", response.data);
+    // Dispara una acción para actualizar los datos en el store local de Redux
+    // Aquí podrías dispatchear otra acción si necesitas actualizar otros datos en el store
+  } catch (error) {
+    console.error("Error al guardar cambios:", error);
+    // Podrías dispatchear otra acción para manejar el error si es necesario
+  }
+};
 
 
 export const filteredCourses = (data) => {
