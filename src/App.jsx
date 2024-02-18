@@ -43,7 +43,6 @@ function App() {
     }
   }, [data.status]);
 
-  console.log(userData);
   return (
     <>
       <AuthProvider>

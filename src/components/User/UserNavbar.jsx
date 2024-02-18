@@ -7,6 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { FaHeart } from "react-icons/fa";
 import LogoutButton from '../Login/LogOut';
 import { useLocalStorage } from '../../CustomHook/UseLocalStorage';
+import logo4 from '../../../public/img/logo4.png'
 
 export default function UserNavbar () {
   const { user, isAuthenticated, logout } = useAuth0();
@@ -20,7 +21,7 @@ export default function UserNavbar () {
       <div className="flex items-center justify-start w-[50%] h-full">
         <Link to="/user/home" className="h-full">
           <div className="flex items-center justify-center h-full w-[60px]">
-            <img className="w-32" src="src/assets/logo/logo4.png" alt="Logo" />
+            <img className="w-32" src={logo4} alt="Logo" />
           </div>
         </Link>
 
