@@ -15,7 +15,9 @@ import {
   GET_USER_FAILURE
 } from "./actiontypes";
 import axios from "axios";
+
 const URL = import.meta.env.VITE_URL_HOST;
+
 export const getAllCourses = () => async (dispatch) => {
   try {
     const { data } = await axios.get(`${URL}/getAllCourses`);
@@ -158,6 +160,7 @@ export const getUser = (userData) => async (dispatch) => {
 
 export const updateUser = (changedFields) => async (dispatch) => {
   try {
+    console.log(changedFields, "ESTO ENVIA LA ACTION UPDATEUSER")
     const response = await axios.put(`${URL}/putUser`, changedFields);
     console.log("Respuesta del servidor al guardar cambios:", response.data);
     // Dispara una acción para actualizar los datos en el store local de Redux
