@@ -1,12 +1,14 @@
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom"; 
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { getUser } from "../../redux/action/actions";
-import  LoginButton from "../../googleLogin";
-import { useLocalStorage } from "../../CustomHook/UseLocalStorage"; 
+import LoginButton from "../../googleLogin";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+import { useEffect, useState } from "react";
 
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const data = useSelector((state) => state.userData);
 
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
@@ -20,7 +22,7 @@ export const Login = () => {
 
   const buttonDisabled = () => {
     let buttonAux = false;
-    
+
     for (const user in userData) {
       if (userData[user].length <= 0) {
         buttonAux = true;
@@ -28,21 +30,36 @@ export const Login = () => {
       }
     }
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await dispatch(getUser(userData));
 
-      localStorage.setItem('userData', JSON.stringify(payload));
-      setUserDataLocally({ ...userData, isAuthenticated: true });
-      window.location.reload();
-      navigate('/');
+      console.log("Submitting form with data:", userData);
+      const response = await dispatch(getUser(userData));
+      console.log("Response from server:", response);
+
+      // localStorage.setItem('userData', JSON.stringify(payload));
+      // setUserDataLocally({ ...userData, isAuthenticated: true });
+
+      // console.log('Redirecting to homepage...');
+      // console.log(response.data)
+      // navigate('/');
+      // window.location.reload();
+
     } catch (error) {
-      console.error('Error al iniciar sesión:', error);
+      console.error("Error al iniciar sesión:", error);
     }
   };
+
+  useEffect(() => {
+    if (data) {
+     
+      localStorage.setItem("userData", JSON.stringify(data));
+      setUserDataLocally({ ...data, isAuthenticated: true });
+
+    }
+  }, [data.status]);
 
   return (
     <div className="w-full h-full bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
