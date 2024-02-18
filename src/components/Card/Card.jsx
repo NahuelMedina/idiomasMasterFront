@@ -9,7 +9,8 @@ import { RxCross2 } from "react-icons/rx";
 import { TbListDetails } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
-
+import { useAuth0 } from "@auth0/auth0-react";
+import Swal from 'sweetalert2'
 
 export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
 
@@ -18,6 +19,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const [fav, setFav] =useLocalStorage("fav", "")
   const [isCart, setIsCart] = useState(false)
   const [cart, setCart] = useLocalStorage("cart", "")
+  const { isAuthenticated} = useAuth0();
 
 
 
@@ -32,6 +34,14 @@ useEffect(()=>{
 
 
 const handleCart = ()=>{
+  if(!isAuthenticated){
+    Swal.fire({
+      icon: "info",
+      title: "Necesitas registrarte para agregar al Carrito!",
+      footer: '<a href="/register">Registrarse</a>'
+    });
+    return
+  }
   setIsCart(!isCart);
   if(!isCart){
     const itemCart = JSON.parse(window.localStorage.getItem("cart"))
@@ -63,6 +73,14 @@ const handleCart = ()=>{
 
 
   const handleFavorite = ()=>{
+    if(!isAuthenticated){
+      Swal.fire({
+        icon: "info",
+        title:  "Necesitas registrarte para agregar a Favoritos!",
+        footer: '<a href="/register">Registrarse</a>'
+      });
+      return
+    }
     setIsFav(!isFav);
     if (!isFav) {
       const item = JSON.parse(window.localStorage.getItem("fav"))
