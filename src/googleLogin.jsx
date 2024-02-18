@@ -17,10 +17,6 @@ const LoginButton = () => {
             <button onClick={() => loginWithRedirect({ screen_hint: 'signup', connection: 'google-oauth2', onSuccess })}>
                 <img src="https://raw.githubusercontent.com/react-native-google-signin/google-signin/HEAD/img/signin-button.png" alt="" className="w-50 h-14" />
             </button>
-            <br />
-            <button onClick={() => loginWithRedirect({ screen_hint: 'signup', connection: 'facebook', onSuccess })}>
-                <img src="https://www.freeiconspng.com/img/18026" alt="" className="w-50 h-14" />
-            </button>
         </div>
     );
 };
