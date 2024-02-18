@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Await, useLocation, useParams } from "react-router-dom";
-import { getCoursesDetail } from "../../redux/action/actions";
+import { createPreference, getCoursesDetail } from "../../redux/action/actions";
 import { SiLevelsdotfyi } from "react-icons/si";
 import { FaCalendarDays } from "react-icons/fa6";
 import { GiDuration } from "react-icons/gi";
@@ -9,9 +9,10 @@ import { FaHourglassStart } from "react-icons/fa";
 import { FaHourglassEnd } from "react-icons/fa";
 import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+import { useAuth0 } from "@auth0/auth0-react";
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
+import Swal from "sweetalert2";
 
 export const Detail = () => {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -27,6 +28,7 @@ export const Detail = () => {
   const [fav, setFav] = useState(
     JSON.parse(window.localStorage.getItem("fav"))
   );
+  const { isAuthenticated } = useAuth0();
 
   //Carrito
 
@@ -41,6 +43,14 @@ export const Detail = () => {
   }, [detail, cart]);
 
   const handleCart = () => {
+    if (!isAuthenticated) {
+      Swal.fire({
+        icon: "info",
+        title: "Necesitas registrarte para agregar al Carrito!",
+        footer: '<a href="/register">Registrarse</a>',
+      });
+      return;
+    }
     setIsCart(!isCart);
     const currentCart = JSON.parse(window.localStorage.getItem("cart")) || [];
 
@@ -62,6 +72,14 @@ export const Detail = () => {
   }, [detail, fav]);
 
   const handleFavorite = () => {
+    if (!isAuthenticated) {
+      Swal.fire({
+        icon: "info",
+        title: "Necesitas registrarte para agregar a Favoritos!",
+        footer: '<a href="/register">Registrarse</a>',
+      });
+      return;
+    }
     setIsFav(!isFav);
     const currentfav = JSON.parse(window.localStorage.getItem("fav")) || [];
 
@@ -82,22 +100,16 @@ export const Detail = () => {
     dispatch(getCoursesDetail(params.id));
   }, []);
 
-  const createPreference = async (product) => {
-    try {
-      const { data } = await axios.post(`${URL}/createPreference`, product);
-      window.location.href = data;
-    } catch (error) {
-      console.log(error.message);
-    }
+  const initCreatePreference = (p) => {
+    dispatch(createPreference(p));
   };
 
-  const createPayment = async () => {
+  const createPayment = () => {
     try {
       const paymentId = location.search.split("&")[2].split("=")[1];
-      const response = await axios.post(`${URL}/createPayment`, {
+      axios.post(`${URL}/createPayment`, {
         data: paymentId,
       });
-      return response;
     } catch (error) {
       console.log(error.message);
     }
@@ -162,7 +174,7 @@ export const Detail = () => {
             </div>
             <div className="flex ">
               <button
-                onClick={() => createPreference(detail)}
+                onClick={() => initCreatePreference(detail)}
                 className=" text-start mt-5 mb-10 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
               >
                 <p className=" m-2 text-2xl  "> Comprar ahora</p>{" "}

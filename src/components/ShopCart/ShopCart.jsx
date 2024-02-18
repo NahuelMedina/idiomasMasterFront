@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Card } from "../Card/Card";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { createPreference } from "../../redux/action/actions";
 const URL = import.meta.env.VITE_URL_HOST;
 const ShopCart = () => {
   const [cartCourse, setCartCourse] = useState([]);
@@ -13,7 +15,8 @@ const ShopCart = () => {
   const [pageNum, setPageNum] = useState(0);
   const [total, setTotal] = useState(0);
   const [items, setItems] = useState(1);
-
+  const dispatch = useDispatch();
+  const location = useLocation();
   const getCart = () => {
     return JSON.parse(localStorage.getItem("cart"));
   };
@@ -53,17 +56,24 @@ const ShopCart = () => {
   };
 
   // Mercado pago
-  const createPreferenceCart = async () => {
+  const initCreatePreferenceCart = (p) => {
+    dispatch(createPreference(p));
+  };
+
+  const createPayment = () => {
     try {
-      const { data } = await axios.post(`${URL}/createPreference`, {
-        price: total,
-        coursesCart: cartCourse,
+      const paymentId = location.search.split("&")[2].split("=")[1];
+      axios.post(`${URL}/createPayment`, {
+        data: paymentId,
       });
-      window.location.href = data;
     } catch (error) {
       console.log(error.message);
     }
   };
+  if (location.key === "default") {
+    createPayment();
+    location.key = "";
+  }
 
   // Paginado
   const [pagePosition, setPagePosition] = useState(1);
@@ -149,7 +159,16 @@ const ShopCart = () => {
       -
       <div className="bottom-[180px] right-[70px] absolute h-24 p-3">
         <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <button onClick={() => createPreferenceCart()}>Comprar todos</button>
+          <button
+            onClick={() =>
+              initCreatePreferenceCart({
+                price: total,
+                coursesCart: cartCourse,
+              })
+            }
+          >
+            Comprar todos
+          </button>
         </div>
         <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
           <button onClick={handleEliminate}>Vaciar carrito</button>

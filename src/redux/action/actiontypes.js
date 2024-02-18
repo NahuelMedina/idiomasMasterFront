@@ -15,3 +15,5 @@ export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_FAILURE = 'GET_USER_FAILURE';
 export const SET_EDITED_DATA = 'SET_EDITED_DATA'
 export const ADMINREVIEW = 'ADMINREVIEW';
+export const ALL_USERS = 'ALL_USERS'
+export const USER_COURSES = 'USER_COURSES'

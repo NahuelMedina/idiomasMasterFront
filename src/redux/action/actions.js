@@ -12,10 +12,15 @@ import {
   ADMINPRODUCT,
   ADMINUSER,
   GET_USER_SUCCESS,
-  GET_USER_FAILURE
+  GET_USER_FAILURE,
+  SET_USER_DATA,
+  ALL_USERS,
+  USER_COURSES,
 } from "./actiontypes";
 import axios from "axios";
+
 const URL = import.meta.env.VITE_URL_HOST;
+
 export const getAllCourses = () => async (dispatch) => {
   try {
     const { data } = await axios.get(`${URL}/getAllCourses`);
@@ -119,7 +124,7 @@ export const postThirdPartyUser = (user) => async (dispatch) => {
       email: user.email,
       img: user.picture,
     };
-console.log("ESTO ES USERDATA EN THIRPARTY", userData)
+    console.log("ESTO ES USERDATA EN THIRPARTY", userData);
     const response = await axios.post(`${URL}/createUser`, userData);
     alert("Usuario creado con éxito", response.data);
   } catch (error) {
@@ -128,18 +133,16 @@ console.log("ESTO ES USERDATA EN THIRPARTY", userData)
   }
 };
 
-
 export const getUser = (userData) => async (dispatch) => {
   try {
-    console.log("Estado:", userData);
     const response = await axios.post(`${URL}/getUser`, userData);
     console.log("Respuesta del servidor:", response.data);
 
-    localStorage.setItem('userData', JSON.stringify(response.data));
+    localStorage.setItem("userData", JSON.stringify(response.data));
 
     dispatch({
       type: GET_USER_SUCCESS,
-      payload: response.data
+      payload: response.data,
     });
 
     alert("Se ha conectado");
@@ -148,16 +151,16 @@ export const getUser = (userData) => async (dispatch) => {
 
     dispatch({
       type: GET_USER_FAILURE,
-      payload: error.payload.data.message
+      payload: error.payload.data.message,
     });
 
     alert(error.payload.data.message);
   }
 };
 
-
 export const updateUser = (changedFields) => async (dispatch) => {
   try {
+    console.log(changedFields, "ESTO ENVIA LA ACTION UPDATEUSER");
     const response = await axios.put(`${URL}/putUser`, changedFields);
     console.log("Respuesta del servidor al guardar cambios:", response.data);
     // Dispara una acción para actualizar los datos en el store local de Redux
@@ -168,14 +171,12 @@ export const updateUser = (changedFields) => async (dispatch) => {
   }
 };
 
-
 export const filteredCourses = (data) => {
   return {
     type: FILTERED_COURSES,
     payload: data,
   };
 };
-
 
 export const adminProduct = (data) => {
   return {
@@ -196,4 +197,41 @@ export const adminReview = (data) => {
     type: ADMINREVIEW,
     payload: data,
   };
+};
+
+export function getAllUsers() {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`${URL}/getAllUsers`);
+      dispatch({
+        type: ALL_USERS,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+
+export function getUserCourses(id) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`${URL}/getUserCourses/${id}`);
+      dispatch({
+        type: USER_COURSES,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+
+export const createPreference = async (product) => {
+  try {
+    const { data } = await axios.post(`${URL}/createPreference`, product);
+    window.location.href = data;
+  } catch (error) {
+    console.log(error.message);
+  }
 };
