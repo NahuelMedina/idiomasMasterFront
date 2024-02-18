@@ -1,14 +1,13 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; 
 import { getUser } from "../../redux/action/actions";
-import  LoginButton from "../../googleLogin"
-import { useLocalStorage } from "../../CustomHook/UseLocalStorage"; // Importa tu custom hook
-
+import  LoginButton from "../../googleLogin";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage"; 
 
 export const Login = () => {
   const dispatch = useDispatch();
-  
+  const navigate = useNavigate();
+
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
     password: "",
@@ -29,17 +28,24 @@ export const Login = () => {
       }
     }
   };
+  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("userData:", userData);
-    dispatch(getUser(userData))
-      .then(() => {
-        setUserDataLocally({ ...userData, isAuthenticated: true });
-      })
-      .catch((error) => {
-        console.error("Error al iniciar sesión:", error);
-      });
+    try {
+      console.log('Submitting form with data:', userData);
+      const response = await dispatch(getUser(userData));
+      console.log('Response from server:', response);
+
+      localStorage.setItem('userData', JSON.stringify(payload));
+      setUserDataLocally({ ...userData, isAuthenticated: true });
+
+      console.log('Redirecting to homepage...');
+      navigate('/');
+      window.location.reload();
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+    }
   };
 
   return (
