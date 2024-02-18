@@ -33,16 +33,12 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('Submitting form with data:', userData);
       const response = await dispatch(getUser(userData));
-      console.log('Response from server:', response);
 
       localStorage.setItem('userData', JSON.stringify(payload));
       setUserDataLocally({ ...userData, isAuthenticated: true });
-
-      console.log('Redirecting to homepage...');
-      navigate('/');
       window.location.reload();
+      navigate('/');
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
     }
