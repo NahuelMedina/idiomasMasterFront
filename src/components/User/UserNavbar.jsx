@@ -20,7 +20,7 @@ export default function UserNavbar () {
       <div className="flex items-center justify-start w-[50%] h-full">
         <Link to="/user/home" className="h-full">
           <div className="flex items-center justify-center h-full w-[60px]">
-            <img className="w-32" src='../../../public/img/logo4.png' alt="Logo" />
+            <img className="w-32" src='/img/logo4.png' alt="Logo" />
           </div>
         </Link>
 
