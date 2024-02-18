@@ -8,7 +8,7 @@ export default function DashReviews({data}){
 
     useEffect(() => {
 
-        const inactive = data.filter((element) =>  element.view === false)
+        const inactive = data.filter((element) => !element.reply);
         setInactiveProducts(inactive)
 
 

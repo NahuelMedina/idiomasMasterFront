@@ -5,7 +5,7 @@ import { IoSearchCircle } from "react-icons/io5";
 import { FaCircle } from "react-icons/fa";
 import { adminProduct } from "../../redux/action/actions";
 import { RiFileUserLine } from "react-icons/ri";
-import { idUser } from "./userData";
+import { idUser, putUser } from "./userData";
 
 export default function AdminSettingUser() {
   const initialUserState = {
@@ -93,8 +93,6 @@ export default function AdminSettingUser() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (Object.keys(errors).length === 0) {
       try {
         await putUser({
           profile: user.profile,
@@ -113,7 +111,7 @@ export default function AdminSettingUser() {
       } catch (error) {
         console.error("Error al actualizar el curso:", error.message);
       }
-    }
+
   };
 
   return (

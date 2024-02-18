@@ -191,4 +191,9 @@ export const adminUser = (data) => {
   };
 };
 
-
+export const adminReview = (data) => {
+  return {
+    type: ADMINREVIEW,
+    payload: data,
+  };
+};

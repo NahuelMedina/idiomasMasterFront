@@ -20,6 +20,7 @@ import AdminProducts from "./components/Admin/adminProducts";
 import UserLanding from "./components/User/UserLand";
 import UserNavbar from "./components/User/UserNavbar";
 import AdminUsers from "./components/Admin/adminUsers";
+import AdminNotifications from "./components/Admin/adminNotifications";
 
 function App() {
   const location = useLocation();
@@ -56,6 +57,10 @@ function App() {
               <Route
                 path="/admindashboard/users"
                 element={<AdminUsers />}
+              />
+              <Route
+                path="/admindashboard/notifications"
+                element={<AdminNotifications />}
               />
               <Route path="/configuracion" element={<Configuration />} />
 

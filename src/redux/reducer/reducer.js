@@ -11,7 +11,8 @@ import {
   SET_USER_DATA,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
-  SET_EDITED_DATA
+  SET_EDITED_DATA,
+  ADMINREVIEW
 } from "../action/actiontypes";
 
 let initialState = {
@@ -29,7 +30,8 @@ let initialState = {
     loading: false,
   },
   adminProduct: null,
-  adminUser: null
+  adminUser: null,
+  adminReview: null
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -38,6 +40,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         courses: payload,
+        coursesCopy: payload,
         coursesCopy: payload,
       };
     case COURSE_DETAIL:
@@ -69,6 +72,7 @@ const reducer = (state = initialState, { type, payload }) => {
         return {
           ...state,
           courses: state.coursesCopy, 
+          courses: state.coursesCopy,
         };
       }
       const sortOrder = payload === "A" ? 1 : -1;
@@ -112,6 +116,12 @@ const reducer = (state = initialState, { type, payload }) => {
             ...state,
             userData: payload,
           };
+      
+        case ADMINREVIEW:
+          return{
+            ...state,
+            adminReview: payload
+          }
 
           case GET_USER_SUCCESS:
             return {
