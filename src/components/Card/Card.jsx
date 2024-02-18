@@ -36,12 +36,10 @@ useEffect(()=>{
 const handleCart = ()=>{
   if(!isAuthenticated){
     Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Necesitas registrarte para agregar al carrito!",
+      icon: "info",
+      title: "Necesitas registrarte para agregar al Carrito!",
       footer: '<a href="/register">Registrarse</a>'
     });
-    alert('')
     return
   }
   setIsCart(!isCart);
@@ -76,7 +74,11 @@ const handleCart = ()=>{
 
   const handleFavorite = ()=>{
     if(!isAuthenticated){
-      alert('Necesitas registrarte para agregar a favoritos')
+      Swal.fire({
+        icon: "info",
+        title:  "Necesitas registrarte para agregar a Favoritos!",
+        footer: '<a href="/register">Registrarse</a>'
+      });
       return
     }
     setIsFav(!isFav);
