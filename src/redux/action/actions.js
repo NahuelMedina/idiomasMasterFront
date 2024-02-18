@@ -11,7 +11,10 @@ import {
   FILTERED_COURSES,
   ADMINPRODUCT,
   ADMINUSER,
-  ADMINREVIEW
+  ADMINREVIEW,
+  SET_USER_DATA,
+  ALL_USERS,
+  USER_COURSES
 } from "./actiontypes";
 import axios from "axios";
 const URL = import.meta.env.VITE_URL_HOST;
@@ -130,10 +133,11 @@ console.log("ESTO ES USERDATA EN THIRPARTY", userData)
 
 export const getUser = (userData) => async (dispatch) => {
   try {
-    console.log("Estado:", userData);
     const response = await axios.post(`${URL}/getUser`, userData);
-    console.log("Respuesta del servidor:", response.data);
-    alert("Se ha conectado", response.data);
+    dispatch({
+      type: SET_USER_DATA,
+      payload: response,
+    });
   } catch (error) {
     console.error("Error al obtener usuario:", error);
     const message = error.response.data.message;
@@ -171,3 +175,36 @@ export const adminReview = (data) => {
     payload: data,
   };
 };
+
+
+
+export function getAllUsers() {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`${URL}/getAllUsers`);
+      dispatch({
+        type: ALL_USERS,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+
+
+export function getUserCourses(id) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`${URL}/getUserCourses/${id}`);
+      dispatch({
+        type: USER_COURSES,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+
+

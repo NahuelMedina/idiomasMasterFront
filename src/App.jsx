@@ -49,7 +49,6 @@ function App() {
               <Route path="/createCourse" element={<CourseForm />} />
               <Route path="/search" element={<SearchHome />} />
               <Route path="/admindashboard" element={<AdminHome />} />
-
               <Route
                 path="/admindashboard/products"
                 element={<AdminProducts />}
@@ -63,19 +62,7 @@ function App() {
                 element={<AdminNotifications />}
               />
               <Route path="/configuracion" element={<Configuration />} />
-
               <Route path="/user/home" element={<UserLanding />} />
-
-              <Route path="/favorite" element={<Favorite />} />
-              <Route path="/cart" element={<ShopCart />} />
-
-              <Route
-                path="/admindashboard/products"
-                element={<AdminProducts />}
-              />
-
-              <Route path="/user/home" element={<UserLanding />} />
-
               <Route path="/favorite" element={<Favorite />} />
               <Route path="/cart" element={<ShopCart />} />
             </Routes>

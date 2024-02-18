@@ -12,3 +12,5 @@ export const SET_USER_DATA = 'SET_USER_DATA';
 export const ADMINPRODUCT = 'ADMINPRODUCT';
 export const ADMINUSER = 'ADMINUSER';
 export const ADMINREVIEW = 'ADMINREVIEW';
+export const ALL_USERS = 'ALL_USERS'
+export const USER_COURSES = 'USER_COURSES'

@@ -9,7 +9,9 @@ import {
   ADMINPRODUCT,
   ADMINUSER,
   SET_USER_DATA,
-  ADMINREVIEW
+  ADMINREVIEW,
+  ALL_USERS,
+  USER_COURSES
 } from "../action/actiontypes";
 
 let initialState = {
@@ -18,8 +20,6 @@ let initialState = {
   courseDetail: [],
   coursesName: [],
   courseLanguage: "",
-  favorites: [],
-  allFavorites: [],
   userData: {
     email: "",
     password: "",
@@ -31,7 +31,9 @@ let initialState = {
   },
   adminProduct: null,
   adminUser: null,
-  adminReview: null
+  adminReview: null,
+  allUsers: [],
+  userCourses: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -119,7 +121,16 @@ const reducer = (state = initialState, { type, payload }) => {
             ...state,
             adminReview: payload
           }
-
+          case ALL_USERS:
+            return{
+              ...state,
+              allUsers: payload
+            }
+          case USER_COURSES:
+            return{
+              ...state,
+              userCourses: payload
+            }
     default:
       return state;
   }

@@ -8,7 +8,7 @@ import { useLocalStorage } from '../../CustomHook/UseLocalStorage';
 const ProfileSection = () => {
 const { user, isAuthenticated, isLoading } = useAuth0();
 const [userData] = useLocalStorage("userData", {});
-console.log(userData, "userDataaa")
+console.log(user)
 const defaultAvatarUrl = 'https://static-00.iconduck.com/assets.00/profile-circle-icon-1023x1024-ucnnjrj1.png';
 const avatarUrl = user?.picture || userData?.img || defaultAvatarUrl;
 const nombre =  user?.given_name || userData?.name

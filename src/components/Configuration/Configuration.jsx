@@ -4,6 +4,7 @@ import ProfileSection from './ProfileSection';
 import PaymentSection from './PaymentSection';
 import PrivacySection from './PrivacySection';
 import NotificationSection from './NotificationSection';
+import CourseSection from './CourseSection';
 
 export const Configuration = () => {
   const [selectedSection, setSelectedSection] = useState('perfil'); // Por defecto selecciona la sección de perfil
@@ -19,6 +20,8 @@ export const Configuration = () => {
         return <PrivacySection />;
       case 'notificaciones':
         return <NotificationSection />;
+      case 'cursos':
+        return <CourseSection />
       default:
         return <ProfileSection />;
     }
@@ -40,6 +43,9 @@ export const Configuration = () => {
           </a>
           <a href="#" className={`flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 border rounded-full ${selectedSection === 'notificaciones' ? 'bg-indigo-100 focus:bg-indigo-100' : ''}`} onClick={() => setSelectedSection('notificaciones')}>
             Notificaciones
+          </a>
+          <a href="#" className={`flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 border rounded-full ${selectedSection === 'cursos' ? 'bg-indigo-100 focus:bg-indigo-100' : ''}`} onClick={() => setSelectedSection('cursos')}>
+            Cursos
           </a>
         </div>
       </aside>
