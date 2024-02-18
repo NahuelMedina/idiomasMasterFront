@@ -61,12 +61,12 @@ const Register = () => {
   };
 
   return (
-    <div className="w-screen h-screen  bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
+    <div className="w-full h-full bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
       <div className="flex m-5 h-[95%]">
         <div className=" w-3/5 h-full">
           <img
             className="h-full object-cover rounded-l-md"
-            src="src\assets\fotos\image-register.jpg"
+            src="public\img\image-register.jpg"
             alt=""
           />
         </div>

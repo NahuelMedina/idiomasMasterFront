@@ -34,6 +34,7 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+
       console.log("Submitting form with data:", userData);
       const response = await dispatch(getUser(userData));
       console.log("Response from server:", response);
@@ -45,6 +46,7 @@ export const Login = () => {
       // console.log(response.data)
       // navigate('/');
       // window.location.reload();
+
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
@@ -60,12 +62,12 @@ export const Login = () => {
   }, [data.status]);
 
   return (
-    <div className="w-screen h-screen bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
+    <div className="w-full h-full bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
       <div className="flex m-5 h-[95%]">
         <div className="w-3/5 h-full">
           <img
             className="h-full object-cover rounded-l-md"
-            src="src\assets\fotos\image-login.jpg"
+            src="public\img\image-login.jpg"
             alt=""
           />
         </div>

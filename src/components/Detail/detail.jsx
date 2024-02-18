@@ -9,9 +9,10 @@ import { FaHourglassStart } from "react-icons/fa";
 import { FaHourglassEnd } from "react-icons/fa";
 import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+import { useAuth0 } from "@auth0/auth0-react";
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
+import Swal from 'sweetalert2'
 
 
 export const Detail = () => {
@@ -23,6 +24,8 @@ export const Detail = () => {
   const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem("cart")))
   const [isFav, setIsFav] = useState(false)
   const [fav, setFav] = useState(JSON.parse(window.localStorage.getItem("fav")))
+  const { isAuthenticated} = useAuth0();
+
   
 
 //Carrito
@@ -38,6 +41,14 @@ useEffect(()=>{
 
 
 const handleCart = () => {
+  if(!isAuthenticated){
+    Swal.fire({
+      icon: "info",
+      title: "Necesitas registrarte para agregar al Carrito!",
+      footer: '<a href="/register">Registrarse</a>'
+    });
+    return
+  }
   setIsCart(!isCart);
   const currentCart = JSON.parse(window.localStorage.getItem("cart")) || [];
   
@@ -61,6 +72,14 @@ useEffect(()=>{
 
 
 const handleFavorite = () => {
+  if(!isAuthenticated){
+    Swal.fire({
+      icon: "info",
+      title:  "Necesitas registrarte para agregar a Favoritos!",
+      footer: '<a href="/register">Registrarse</a>'
+    });
+    return
+  }
   setIsFav(!isFav);
   const currentfav = JSON.parse(window.localStorage.getItem("fav")) || [];
   

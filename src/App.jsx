@@ -88,6 +88,7 @@ function App() {
               <Route path="/detail/:id" element={<Detail />} />
               <Route path="/search" element={<SearchHome />} />
 
+
               {Object.keys(data).length === 0 &&
               data.isAuthenticated === undefined &&
               Object.keys(userData).length === 0 ? (
@@ -120,6 +121,7 @@ function App() {
                 <>
                 
                 <Route path="/admindashboard" element={<AdminHome />} />
+
               <Route
                 path="/admindashboard/products"
                 element={<AdminProducts />}
@@ -129,6 +131,7 @@ function App() {
                 path="/admindashboard/notifications"
                 element={<AdminNotifications />}
               />
+
               <Route
                 path="/admindashboard/settings"
                 element={<AdminSettings />}
@@ -138,6 +141,7 @@ function App() {
               ) : null}
 
              
+
             </Routes>
           </div>
         </div>

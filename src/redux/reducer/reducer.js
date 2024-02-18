@@ -12,7 +12,9 @@ import {
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
   SET_EDITED_DATA,
-  ADMINREVIEW
+  ADMINREVIEW,
+  ALL_USERS,
+  USER_COURSES
 } from "../action/actiontypes";
 
 let initialState = {
@@ -21,8 +23,6 @@ let initialState = {
   courseDetail: [],
   coursesName: [],
   courseLanguage: "",
-  favorites: [],
-  allFavorites: [],
   userData: "",
   error: null,
   loading: false,
@@ -31,7 +31,9 @@ let initialState = {
   },
   adminProduct: null,
   adminUser: null,
-  adminReview: null
+  adminReview: null,
+  allUsers: [],
+  userCourses: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -122,7 +124,16 @@ const reducer = (state = initialState, { type, payload }) => {
             ...state,
             adminReview: payload
           }
-
+          case ALL_USERS:
+            return{
+              ...state,
+              allUsers: payload
+            }
+          case USER_COURSES:
+            return{
+              ...state,
+              userCourses: payload
+            }
           case GET_USER_SUCCESS:
             return {
               ...state,
