@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import registerValidate from "../Utils/registerValidate";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postUser } from "../../redux/action/actions";
+import Swal from 'sweetalert2'
+import './ColoredToast.css'
 
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const postError = useSelector(state => state.postError)
   const [state, setState] = useState({
     name: "",
     lastname: "",
@@ -15,6 +18,21 @@ const Register = () => {
     password: "",
     age: "",
   });
+
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    iconColor: 'white',
+    customClass: {
+      popup: 'colored-toast',
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+  })
+
+
 
   const [errors, setErrors] = useState({});
   const handleChange = (e) => {
@@ -37,7 +55,7 @@ const Register = () => {
       reader.onload = () => {
         setState((prevState) => ({
           ...prevState,
-          image: reader.result,
+          img: reader.result,
         }));
       };
     }
@@ -57,7 +75,18 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
-    navigate("/");
+    if(postError === null){
+      Toast.fire({
+        icon: 'success',
+        title: "Usuario creado con Exito",
+      })
+      setStatus(false)
+    } else{
+      Toast.fire({
+        icon: 'error',
+        title: `${postError}`,
+      })
+    }
   };
 
   return (

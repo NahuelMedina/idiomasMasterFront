@@ -43,7 +43,6 @@ const CourseSection = () => {
     },[userData])
 
 
-
 return (
   <div>
   {

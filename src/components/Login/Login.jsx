@@ -5,6 +5,8 @@ import LoginButton from "../../googleLogin";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useEffect, useState } from "react";
 import { getmailUser } from "../Admin/userData";
+import Swal from 'sweetalert2'
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -16,6 +18,26 @@ export const Login = () => {
     email: "",
     password: "",
   });
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    iconColor: 'white',
+    customClass: {
+      popup: 'colored-toast',
+    },
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    background: 'green',
+    color: 'white'
+  })
+  
+  
+
+
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +54,7 @@ export const Login = () => {
       }
     }
   };
-
+ console.log(userData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -51,6 +73,10 @@ export const Login = () => {
         };
         setUserDataLocally(updatedUserData);
         dispatch(setUserdata(updatedUserData));
+        Toast.fire({
+          icon: 'success',
+          title: "Logueado con exito",
+        })
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
