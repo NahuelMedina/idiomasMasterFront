@@ -24,12 +24,12 @@ import AdminNotifications from "./components/Admin/adminNotifications";
 import AdminSettings from "./components/Admin/adminSettings";
 import { useLocalStorage } from "./CustomHook/UseLocalStorage";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const navigate = useNavigate();
   const data = useSelector((state) => state.userData);
-  const [userData] = useLocalStorage("userData", {});
+    const [userData, setUserLogin] = useState(JSON.parse(localStorage.getItem('userData')))
 
   useEffect(() => {
     if (data) {
@@ -42,7 +42,7 @@ function App() {
       }
     }
   }, [data.status]);
-
+console.log(userData);
   return (
     <>
       <AuthProvider>

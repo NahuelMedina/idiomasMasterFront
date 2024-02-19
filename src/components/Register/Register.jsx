@@ -57,7 +57,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
-    navigate("/user/home");
+    
   };
 
   return (
