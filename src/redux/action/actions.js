@@ -16,6 +16,7 @@ import {
   SET_USER_DATA,
   ALL_USERS,
   USER_COURSES,
+  POST_USER_FAIL,
 } from "./actiontypes";
 import axios from "axios";
 
@@ -109,10 +110,16 @@ export const postCourseData = (courseData) => async (dispatch) => {
 export const postUser = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/createUser`, userData);
-    alert("Usuario creado con Exito", response.data);
+    
+    //alert("Usuario creado con Exito", response.data);
   } catch (error) {
     const message = error.response.data;
-    alert(`${message}`);
+    dispatch({
+      type: POST_USER_FAIL,
+      payload: response,
+    });
+    
+    //alert(`${message}`);
   }
 };
 
@@ -126,6 +133,7 @@ export const postThirdPartyUser = (user) => async (dispatch) => {
     };
     console.log("ESTO ES USERDATA EN THIRPARTY", userData);
     const response = await axios.post(`${URL}/createUser`, userData);
+
     alert("Usuario creado con éxito", response.data);
   } catch (error) {
     const message = error.response.data;
@@ -145,7 +153,7 @@ export const getUser = (userData) => async (dispatch) => {
       payload: response.data,
     });
 
-    alert("Se ha conectado");
+    //alert("Se ha conectado");
     
   } catch (error) {
     console.error("Error al obtener usuario:", error);
@@ -236,3 +244,11 @@ export const createPreference = async (product) => {
     console.log(error.message);
   }
 };
+
+export const setUserdata = (user) => {
+
+  return {
+    type: SET_USER_DATA,
+    payload: user,
+  };
+}

@@ -30,6 +30,9 @@ export const Detail = () => {
   );
   const { isAuthenticated } = useAuth0();
 
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
+
+
   //Carrito
 
   useEffect(() => {
@@ -43,7 +46,7 @@ export const Detail = () => {
   }, [detail, cart]);
 
   const handleCart = () => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated && !userData.hasOwnProperty('email')) {
       Swal.fire({
         icon: "info",
         title: "Necesitas registrarte para agregar al Carrito!",
@@ -72,7 +75,7 @@ export const Detail = () => {
   }, [detail, fav]);
 
   const handleFavorite = () => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated && !userData.hasOwnProperty('email')) {
       Swal.fire({
         icon: "info",
         title: "Necesitas registrarte para agregar a Favoritos!",

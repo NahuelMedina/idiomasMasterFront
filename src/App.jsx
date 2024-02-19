@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import {
   Navbar,
   Landing,
@@ -6,7 +6,6 @@ import {
   Register,
   Login,
   Detail,
-  CourseForm,
   About,
   SearchHome,
   Configuration,
@@ -23,64 +22,52 @@ import AdminUsers from "./components/Admin/adminUsers";
 import AdminNotifications from "./components/Admin/adminNotifications";
 import AdminSettings from "./components/Admin/adminSettings";
 import { useLocalStorage } from "./CustomHook/UseLocalStorage";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 function App() {
+  const [userData, setUserData] = useLocalStorage("userData", {});
+  const loginData = useSelector((state) => state.userData);
   const navigate = useNavigate();
-  const data = useSelector((state) => state.userData);
-  const [userData] = useLocalStorage("userData", {});
+  const [data, setData] = useState({});
 
   useEffect(() => {
-    if (data) {
-      if (data.profile === "admin") {
-        navigate("/admindashboard");
+    setData(userData);
+  }, []);
 
-      } else {
-        navigate("/user/home");
-        
-      }
+  useEffect(() => {
+    if (loginData.isAuthenticated && Object.keys(data).length === 0) {
+      setData(loginData);
     }
-  }, [data.status]);
+  }, [loginData.isAuthenticated]);
 
-  console.log(userData);
+  useEffect(() => {
+    if (data.profile) {
+      navigate(data.profile === "admin" ? "/admindashboard" : "/user/home");
+    }
+  }, [data]);
+
   return (
     <>
       <AuthProvider>
         <div className="w-screen h-screen min-h-[750px] flex flex-col">
           <div className="w-full h-[80px]">
             {Object.keys(data).length === 0 &&
-            data.isAuthenticated === undefined &&
-            Object.keys(userData).length === 0 ? (
+            data.isAuthenticated === undefined ? (
               <Navbar />
             ) : null}
 
-            {(Object.keys(data).length &&
-              data.isAuthenticated &&
-              data.profile === "user") ||
-            (Object.keys(userData).length && userData.profile === "user") ? (
-              <>
-                <UserNavbar />
-              </>
+            {Object.keys(data).length &&
+            data.isAuthenticated &&
+            data.profile === "user" ? (
+              <UserNavbar />
             ) : null}
 
-            {(Object.keys(data).length &&
-              data.isAuthenticated &&
-              data.profile === "user") ||
-            (Object.keys(userData).length && userData.profile === "admin") ? (
-              <>
-                <AdminNavbar />
-              </>
+            {Object.keys(data).length &&
+            data.isAuthenticated &&
+            data.profile === "admin" ? (
+              <AdminNavbar />
             ) : null}
-
-            {/* {location.pathname.startsWith("/admindashboard") ? (
-              
-            ) : null}
-            {location.pathname.startsWith("/user") ? <UserNavbar /> : null}
-            {!location.pathname.startsWith("/user") &&
-            !location.pathname.startsWith("/admindashboard") ? (
-             
-            ) : null} */}
           </div>
           <div className="w-full h-[95%]">
             <Routes>
@@ -88,10 +75,8 @@ function App() {
               <Route path="/detail/:id" element={<Detail />} />
               <Route path="/search" element={<SearchHome />} />
 
-
               {Object.keys(data).length === 0 &&
-              data.isAuthenticated === undefined &&
-              Object.keys(userData).length === 0 ? (
+              data.isAuthenticated === undefined ? (
                 <>
                   <Route path="/" element={<Landing />} />
                   <Route path="/register" element={<Register />} />
@@ -100,10 +85,9 @@ function App() {
                 </>
               ) : null}
 
-              {(Object.keys(data).length &&
-                data.isAuthenticated &&
-                data.profile === "user") ||
-              (Object.keys(userData).length && userData.profile === "user") ? (
+              {Object.keys(data).length &&
+              data.isAuthenticated &&
+              data.profile === "user" ? (
                 <>
                   <Route path="/configuracion" element={<Configuration />} />
                   <Route path="/user/home" element={<UserLanding />} />
@@ -112,36 +96,29 @@ function App() {
                 </>
               ) : null}
 
-              {/* <Route path="/createCourse" element={<CourseForm />} /> */}
-
-              {(Object.keys(data).length &&
-                data.isAuthenticated &&
-                data.profile === "user") ||
-              (Object.keys(userData).length && userData.profile === "admin") ? (
+              {Object.keys(data).length &&
+              data.isAuthenticated &&
+              data.profile === "admin" ? (
                 <>
-                
-                <Route path="/admindashboard" element={<AdminHome />} />
-
-              <Route
-                path="/admindashboard/products"
-                element={<AdminProducts />}
-              />
-              <Route path="/admindashboard/users" element={<AdminUsers />} />
-              <Route
-                path="/admindashboard/notifications"
-                element={<AdminNotifications />}
-              />
-
-              <Route
-                path="/admindashboard/settings"
-                element={<AdminSettings />}
-              />
-
+                  <Route path="/admindashboard" element={<AdminHome />} />
+                  <Route
+                    path="/admindashboard/products"
+                    element={<AdminProducts />}
+                  />
+                  <Route
+                    path="/admindashboard/users"
+                    element={<AdminUsers />}
+                  />
+                  <Route
+                    path="/admindashboard/notifications"
+                    element={<AdminNotifications />}
+                  />
+                  <Route
+                    path="/admindashboard/settings"
+                    element={<AdminSettings />}
+                  />
                 </>
               ) : null}
-
-             
-
             </Routes>
           </div>
         </div>

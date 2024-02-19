@@ -14,7 +14,8 @@ import {
   SET_EDITED_DATA,
   ADMINREVIEW,
   ALL_USERS,
-  USER_COURSES
+  USER_COURSES,
+  POST_USER_FAIL
 } from "../action/actiontypes";
 
 let initialState = {
@@ -34,6 +35,8 @@ let initialState = {
   adminReview: null,
   allUsers: [],
   userCourses: [],
+  postStatus: null,
+  postError: null,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -151,6 +154,13 @@ const reducer = (state = initialState, { type, payload }) => {
                 ...state,
                 ...action.payload
               };
+          
+          case POST_USER_FAIL:
+            return{
+              ...state,
+              postStatus: false,
+              postError: payload
+            }
     default:
       return state;
   }
