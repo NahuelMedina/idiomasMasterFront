@@ -25,27 +25,31 @@ export const Landing = () => {
       try {
         if (isAuthenticated && user && user.email) {
           console.log(user.email);
-          const response = await getGoogleUser({email: user.email});
+          console.log(user);
+          const response = await getGoogleUser({
+            email: user.email,
+            name: user.given_name,
+            lastname: user.family_name,
+            image: user.picture,
+          });
           console.log(response);
-          // Si la respuesta contiene datos
+
           if (response && response.data) {
-            // Actualiza los datos del usuario con los datos obtenidos y establece la autenticación en verdadero
             const updatedUserData = {
               ...userData,
               ...response.data,
               isAuthenticated: true,
             };
-            // Actualiza los datos del usuario en el almacenamiento local y en el estado global
+
             setUserDataLocally(updatedUserData);
             dispatch(setUserdata(updatedUserData));
           }
         }
       } catch (error) {
-        console.error('Error al obtener los datos del usuario:', error);
+        console.error("Error al obtener los datos del usuario:", error);
       }
     };
-  
-    // Llama a la función para obtener los datos del usuario cuando isAuthenticated cambie
+
     fetchUserData();
   }, [isAuthenticated, user, setUserDataLocally, dispatch]);
 
