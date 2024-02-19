@@ -1,4 +1,4 @@
-import { useSelector, useDispatch  } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { useEffect, useState } from "react";
 import { landing_string } from "../Utils/landing_string";
@@ -10,7 +10,6 @@ import { postThirdPartyUser } from "../../redux/action/actions"; // Importa la a
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const Landing = () => {
- 
   const [num, setNum] = useState(0);
   const { isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
@@ -35,17 +34,16 @@ export const Landing = () => {
   }, [num]);
 
   return (
-    <div className="  w-full h-full bg-black text-white overflow-x-auto">
-      <div className="flex justify-end items-center w-screen h-[80px] bg-[#1E68AD]">
-        
-        <div className="mr-10">
+    <div className="w-full h-[150px] bg-black text-white">
+      <div className="flex justify-end items-end w-full h-full bg-[#1E68AD]">
+        <div className="mr-5 mb-1">
           <SearchBar></SearchBar>
         </div>
       </div>
-     
-      <div className="flex flex-row justify-end items-center w-screen h-[600px] relative bg-white">
-        <div className=" flex w-full h-full absolute left-0 z-20 bg-gradient-to-r from-black via-white/10 to-white/0">
-          <div className="h-full w-[950px] items-center justify-center flex flex-col">
+
+      <div className="flex flex-row justify-end items-center w-full h-[600px] relative bg-white">
+        <div className=" flex w-full h-full absolute   bg-gradient-to-r from-black via-white/10 to-white/0">
+          <div className="h-full items-center ml-[20px] justify-center flex flex-col">
             <p className="text-[40px] text-white border-b-4 border-white">{`${landing_string[num].title}`}</p>
             <p className={`${landing_string[num].color} `}>
               {" "}
@@ -54,10 +52,10 @@ export const Landing = () => {
           </div>
         </div>
 
-        <div className="flex w-full h-full  absolute z-0 ">
+        <div className="flex w-full h-full  ">
           <img
             src={`img/Rail_0${num}.png`}
-            className="object-cover h-full w-full"
+            className="object-cover "
             alt="Imagen"
           />
         </div>
@@ -66,14 +64,19 @@ export const Landing = () => {
         id="landing_descripton"
         className="w-full h-[420px] relative flex items-center justify-evenly bg-white"
       >
-        {card_landing_data.map((element, index) => (
-          <Landing_card
-            key={index}
-            img={element.img}
-            title={element.title}
-            description={element.description}
-          />
-        ))}
+        <div
+          id="main_landing_card"
+          className=" flex justify-between items-center h-full w-full   "
+        >
+          {card_landing_data.map((element, index) => (
+            <Landing_card
+              key={index}
+              img={element.img}
+              title={element.title}
+              description={element.description}
+            />
+          ))}
+        </div>
       </div>
       {/* <marquee direction="left" behavior="alternate" scrollamount="5" className="text-black">
         <div className="w-full h-[50px] bg-white text-black">
@@ -82,18 +85,17 @@ export const Landing = () => {
         
         
         </marquee> */}
-      <div className="flex flex-row items-center justify-evenly w-screen h-[600px] relative bg-[#ff5555]">
-      {card_landing_reviews.map((element, index) => (
-        <Landing_reviews
-        img={element.img}
-        key={index}
-        review={element.review}
-        name={element.name}
-        location={element.location}
-        />
+      <div className="flex flex-row items-center justify-evenly w-full h-[600px] relative bg-[#ff5555]">
+        {card_landing_reviews.map((element, index) => (
+          <Landing_reviews
+            img={element.img}
+            key={index}
+            review={element.review}
+            name={element.name}
+            location={element.location}
+          />
         ))}
       </div>
-
     </div>
   );
 };

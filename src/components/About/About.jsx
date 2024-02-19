@@ -1,6 +1,6 @@
 export const About = () => {
   return (
-    <div className="w-screen flex animate-fade animate-once animate-ease-in">
+    <div className="w-screen h-screen mt-[80px] flex animate-fade animate-once animate-ease-in">
       <div className="w-3/5	">
         <img
           className="w-full h-full object-cover"
