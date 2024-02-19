@@ -4,7 +4,6 @@ import { Card } from "../Card/Card";
 import { FaLanguage } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { FaRankingStar } from "react-icons/fa6";
-import { TbMessageLanguage } from "react-icons/tb";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
 import { useSelector } from "react-redux";
@@ -101,7 +100,7 @@ export const SearchHome = () =>{
 
 
       return (
-        <div className="bg-green-200 text-white flex flex-row w-full h-screen items-center justify-center">
+        <div className="bg-green-200 text-white flex flex-row w-full h-full items-center justify-center  ">
           <div className="h-full w-[15%] text-black justify-start bg-gradient-to-r bg-[#1E68AD] relative flex flex-col  items-center">
             <div className="w-full h-[200px] flex flex-col items-center justify-center">
               <FaLanguage className="text-[80px] text-yellow-400" />

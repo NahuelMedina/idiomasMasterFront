@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import registerValidate from "../Utils/registerValidate";
 import { useDispatch } from "react-redux";
 import { postUser } from "../../redux/action/actions";
 
 const Register = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [state, setState] = useState({
     name: "",
@@ -15,18 +16,9 @@ const Register = () => {
     age: "",
   });
 
-  const [errors, setErrors] = useState({
-    name: "Nombre obligatorio.",
-    lastname: "",
-    email: "",
-    password: "",
-    img: "",
-    age: "",
-  });
-
+  const [errors, setErrors] = useState({});
   const handleChange = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const { name, value } = e.target;
 
     setState({
@@ -35,6 +27,20 @@ const Register = () => {
     });
 
     setErrors(registerValidate({ ...state, [name]: value }));
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setState((prevState) => ({
+          ...prevState,
+          image: reader.result,
+        }));
+      };
+    }
   };
 
   const buttonDisabled = () => {
@@ -51,16 +57,16 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
+    navigate("/");
   };
 
   return (
-    <div className="w-screen h-screen  bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
-      {console.log(state)}
+    <div className="w-full h-full bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
       <div className="flex m-5 h-[95%]">
         <div className=" w-3/5 h-full">
           <img
             className="h-full object-cover rounded-l-md"
-            src="src\assets\fotos\image-register.jpg"
+            src="img\image-register.jpg"
             alt=""
           />
         </div>
@@ -94,7 +100,7 @@ const Register = () => {
                   type="text"
                 />
                 <span style={{ color: "red" }}>{errors.lastname}</span>
-                <label htmlFor="password">Constraseña</label>
+                <label htmlFor="password">Contraseña</label>
                 <input
                   className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
                   onChange={handleChange}
@@ -129,10 +135,11 @@ const Register = () => {
                 <label htmlFor="img">Imagen URL</label>
                 <input
                   className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
+                  onChange={handleImageChange}
                   name="img"
                   id="img"
-                  type="text"
+                  type="file"
+                  accept="image/*"
                 />
               </div>
             </div>
@@ -164,4 +171,4 @@ const Register = () => {
   );
 };
 
-export default Register
+export default Register;

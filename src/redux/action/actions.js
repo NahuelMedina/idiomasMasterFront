@@ -9,14 +9,21 @@ import {
   POST_COURSE_REQUEST,
   POST_COURSE_SUCCESS,
   FILTERED_COURSES,
+  ADMINPRODUCT,
+  ADMINUSER,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE,
+  SET_USER_DATA,
+  ALL_USERS,
+  USER_COURSES,
 } from "./actiontypes";
 import axios from "axios";
 
-const url = import.meta.env.VITE_URL_HOST;
+const URL = import.meta.env.VITE_URL_HOST;
 
 export const getAllCourses = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("http://localhost:3000/getAllCourses");
+    const { data } = await axios.get(`${URL}/getAllCourses`);
     dispatch({
       type: ALL_COURSES,
       payload: data,
@@ -29,7 +36,7 @@ export const getAllCourses = () => async (dispatch) => {
 export function getCoursesDetail(id) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`http://localhost:3000/getCourse/${id}`);
+      const { data } = await axios.get(`${URL}/getCourse/${id}`);
       dispatch({
         type: COURSE_DETAIL,
         payload: data,
@@ -61,19 +68,16 @@ export const orderPrice = (orden) => {
 export function search(value) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3000/getCourse/name?name=${value}`
-      );
+      const { data } = await axios.get(`${URL}/getCourse/name?name=${value}`);
       console.log(data);
-      if(Array.isArray(data)){
+      if (Array.isArray(data)) {
         dispatch({
-        type: SEARCH,
-        payload: [data, value]
-      });
+          type: SEARCH,
+          payload: [data, value],
+        });
       } else {
-        alert("No se encontraron resultados")
+        alert("No se encontraron resultados");
       }
-      
     } catch (error) {
       alert(error);
     }
@@ -95,43 +99,140 @@ export const postCourseFailure = (error) => ({
 
 export const postCourseData = (courseData) => async (dispatch) => {
   try {
-    const response = await axios.post(
-      "http://localhost:3000/createCourse",
-      courseData
-    );
+    const response = await axios.post(`${URL}/createCourse`, courseData);
     console.log("Solicitud POST exitosa:", response.data);
   } catch (error) {
     console.error("Error al enviar los datos del curso:", error.message);
   }
 };
 
-export const postUser = (state) => async (dispatch) => {
+export const postUser = (userData) => async (dispatch) => {
   try {
-    const response = await axios.post(
-      "http://localhost:3000/createUser",
-      state
-    );
-    alert("Creado con Exito", response.data);
+    const response = await axios.post(`${URL}/createUser`, userData);
+    alert("Usuario creado con Exito", response.data);
   } catch (error) {
     const message = error.response.data;
     alert(`${message}`);
   }
 };
 
-export const getUser = (state) => async (dispatch) => {
+export const postThirdPartyUser = (user) => async (dispatch) => {
   try {
-    console.log(state);
-    const response = await axios.post("http://localhost:3000/getUser", state);
-    alert("Se a conectado", response.data);
+    const userData = {
+      name: user.given_name,
+      lastname: user.family_name,
+      email: user.email,
+      img: user.picture,
+    };
+    console.log("ESTO ES USERDATA EN THIRPARTY", userData);
+    const response = await axios.post(`${URL}/createUser`, userData);
+    alert("Usuario creado con éxito", response.data);
   } catch (error) {
-    const message = error.response.data.message;
+    const message = error.response.data;
     alert(`${message}`);
+  }
+};
+
+export const getUser = (userData) => async (dispatch) => {
+  try {
+    const response = await axios.post(`${URL}/getUser`, userData);
+    console.log("Respuesta del servidor:", response.data);
+
+    localStorage.setItem("userData", JSON.stringify(response.data));
+
+    dispatch({
+      type: GET_USER_SUCCESS,
+      payload: response.data,
+    });
+
+    alert("Se ha conectado");
+    
+  } catch (error) {
+    console.error("Error al obtener usuario:", error);
+
+    dispatch({
+      type: GET_USER_FAILURE,
+      payload: error.payload.data.message,
+    });
+
+    alert(error.payload.data.message);
+  }
+};
+
+export const updateUser = (changedFields) => async (dispatch) => {
+  try {
+    console.log(changedFields, "ESTO ENVIA LA ACTION UPDATEUSER");
+    const response = await axios.put(`${URL}/putUser`, changedFields);
+    console.log("Respuesta del servidor al guardar cambios:", response.data);
+    // Dispara una acción para actualizar los datos en el store local de Redux
+    // Aquí podrías dispatchear otra acción si necesitas actualizar otros datos en el store
+  } catch (error) {
+    console.error("Error al guardar cambios:", error);
+    // Podrías dispatchear otra acción para manejar el error si es necesario
   }
 };
 
 export const filteredCourses = (data) => {
   return {
     type: FILTERED_COURSES,
-    payload: data
+    payload: data,
   };
+};
+
+export const adminProduct = (data) => {
+  return {
+    type: ADMINPRODUCT,
+    payload: data,
+  };
+};
+
+export const adminUser = (data) => {
+  return {
+    type: ADMINUSER,
+    payload: data,
+  };
+};
+
+export const adminReview = (data) => {
+  return {
+    type: ADMINREVIEW,
+    payload: data,
+  };
+};
+
+export function getAllUsers() {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`${URL}/getAllUsers`);
+      dispatch({
+        type: ALL_USERS,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+
+export function getUserCourses(id) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`${URL}/getUserCourses/${id}`);
+      dispatch({
+        type: USER_COURSES,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+
+export const createPreference = async (product) => {
+  try {
+    const { data } = await axios.post(`${URL}/createPreference`, product);
+    window.location.href = data;
+  } catch (error) {
+    console.log(error.message);
+  }
 };

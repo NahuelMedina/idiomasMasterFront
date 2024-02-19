@@ -1,18 +1,26 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch  } from "react-redux";
 import { SearchBar } from "../SearchBar/SearchBar";
-import { Card } from "../Card/Card";
 import { useEffect, useState } from "react";
 import { landing_string } from "../Utils/landing_string";
 import Landing_card from "../Landing_card/Landing_card";
 import { card_landing_data } from "../Utils/landing_cards";
 import Landing_reviews from "../Landing_reviews/Landing_reviews";
 import card_landing_reviews from "../Utils/landing_reviews";
+import { postThirdPartyUser } from "../../redux/action/actions"; // Importa la acción adecuada
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const Landing = () => {
  
-  const search = useSelector((state) => state.coursesName);
   const [num, setNum] = useState(0);
+  const { isAuthenticated, user } = useAuth0();
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log("Registrando usuario:", user);
+      dispatch(postThirdPartyUser(user));
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     function set_landing() {
@@ -26,10 +34,10 @@ export const Landing = () => {
     setTimeout(set_landing, 5000);
   }, [num]);
 
-
   return (
-    <div className=" w-screen h-screen bg-black text-white">
+    <div className="  w-full h-full bg-black text-white overflow-x-auto">
       <div className="flex justify-end items-center w-screen h-[80px] bg-[#1E68AD]">
+        
         <div className="mr-10">
           <SearchBar></SearchBar>
         </div>

@@ -4,7 +4,7 @@ export const About = () => {
       <div className="w-3/5	">
         <img
           className="w-full h-full object-cover"
-          src="src\assets\fotos\image-about.jpg"
+          src="img\image-about.jpg"
           alt=""
         />
       </div>
@@ -33,7 +33,7 @@ export const About = () => {
               </div>
               <div>
                 <p>Nahuel Medina</p>
-                <p>Simón Andrés</p>
+                <p>Andrés Arboleda</p>
                 <p>Tomas Pon</p>
               </div>
             </div>

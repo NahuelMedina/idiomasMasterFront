@@ -1,5 +1,5 @@
 import { IoSearchCircle } from "react-icons/io5";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { search } from "../../redux/action/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,17 +9,20 @@ export const SearchBar = () => {
   const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState("");
 
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(search(searchTerm));
     setSearchTerm("");
-    navigate("/search");
-  };
+      navigate("/search");
+  }
   
   const handleSearch = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
-  };
+  }
+  
+  
 
   return (
     <div className="flex items-center justify-start h-full w-[400px]">

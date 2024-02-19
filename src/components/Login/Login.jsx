@@ -1,49 +1,73 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { getUser } from "../../redux/action/actions";
+import LoginButton from "../../googleLogin";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+import { useEffect, useState } from "react";
 
 export const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const data = useSelector((state) => state.userData);
 
-  const [states, setStates] = useState({
+  const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
     password: "",
   });
 
   const handleChange = (e) => {
-    e.preventDefault();
     const { name, value } = e.target;
-    setStates({
-      ...states,
-      [name]: value,
-    });
+    setUserDataLocally({ ...userData, [name]: value });
   };
 
   const buttonDisabled = () => {
     let buttonAux = false;
 
-    for (const state in states) {
-      if (states[state].length <= 0) {
+    for (const user in userData) {
+      if (userData[user].length <= 0) {
         buttonAux = true;
         return buttonAux;
       }
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(getUser(states));
+    try {
+
+      console.log("Submitting form with data:", userData);
+      const response = await dispatch(getUser(userData));
+      console.log("Response from server:", response);
+
+      // localStorage.setItem('userData', JSON.stringify(payload));
+      // setUserDataLocally({ ...userData, isAuthenticated: true });
+
+      // console.log('Redirecting to homepage...');
+      // console.log(response.data)
+      // navigate('/');
+      // window.location.reload();
+
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+    }
   };
 
+  useEffect(() => {
+    if (data) {
+     
+      localStorage.setItem("userData", JSON.stringify(data));
+      setUserDataLocally({ ...data, isAuthenticated: true });
+
+    }
+  }, [data.status]);
+
   return (
-    <div className="w-screen h-screen  bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
-      {console.log(states)}
+    <div className="w-full h-full bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
       <div className="flex m-5 h-[95%]">
         <div className="w-3/5 h-full">
           <img
             className="h-full object-cover rounded-l-md"
-            src="src\assets\fotos\image-login.jpg"
+            src="img\image-login.jpg"
             alt=""
           />
         </div>
@@ -53,9 +77,9 @@ export const Login = () => {
           </h2>
           <form
             onSubmit={handleSubmit}
-            className="h-full w-full flex justify-center items-center flex-col bg-[#1E68AD] text-[#FFFFFF] text-lg pt-10 font-medium rounded-r-md"
+            className="h-full w-full flex justify-center items-center flex-col bg-[#1E68AD] text-[#FFFFFF] text-lg pt-10 font-medium rounded-r-md m-0" // Añadir clase m-0 aquí
           >
-            <div className="flex flex-col gap-2 w-2/4 h-2/5 text-center items-center">
+            <div className="flex flex-col gap-2 w-2/4 h-2/6 text-center items-center">
               <label htmlFor="email">Email</label>
               <input
                 onChange={handleChange}
@@ -65,12 +89,12 @@ export const Login = () => {
                 id="email"
                 type="email"
               />
-              <label htmlFor="password">Constraseña</label>
+              <label htmlFor="password">Contraseña</label>
               <input
                 onChange={handleChange}
-                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C] w-60"
+                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C] w-60 mb-2" // Añadir margen inferior aquí
                 name="password"
-                placeholder="Constraseña..."
+                placeholder="Contraseña..."
                 id="password"
                 type="password"
               />
@@ -81,6 +105,7 @@ export const Login = () => {
               type="submit"
               value="Iniciar Sesion"
             />
+            <LoginButton />
             <div>
               <div className="mt-2">
                 <ul>
