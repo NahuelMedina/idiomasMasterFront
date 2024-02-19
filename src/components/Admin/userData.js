@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = import.meta.env.VITE_URL_HOST
+const URL = import.meta.env.VITE_URL_HOST;
 
 export const productData = async () => {
   try {
@@ -140,9 +140,7 @@ export const putUser = async ({
 
 export const userCourses = async (id) => {
   try {
-    const response = await axios.get(
-      `${URL}/getUserCourses/${id}`
-    );
+    const response = await axios.get(`${URL}/getUserCourses/${id}`);
 
     if (response) {
       return response;
@@ -154,9 +152,7 @@ export const userCourses = async (id) => {
 
 export const userPayments = async (id) => {
   try {
-    const response = await axios.get(
-      `${URL}/getUserPayment/${id}`
-    );
+    const response = await axios.get(`${URL}/getUserPayment/${id}`);
 
     if (response) {
       return response;
@@ -182,8 +178,38 @@ export const putReview = async ({ reply, view, reviewId }) => {
   try {
     const response = await axios.put(`${URL}/putReview`, {
       reply,
-      view, 
+      view,
       reviewId,
+    });
+
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const getmailUser = async ({ email, password }) => {
+  try {
+    const response = await axios.post(`${URL}/getUser`, {
+      email,
+      password,
+    });
+
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const getGoogleUser = async ({ email }) => {
+  try {
+    console.log(email)
+    const response = await axios.post(`${URL}/getGoogleUser`, {
+      email,
     });
 
     if (response) {
