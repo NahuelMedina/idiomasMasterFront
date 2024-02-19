@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getUser } from "../../redux/action/actions";
+import { getUser, setUserdata } from "../../redux/action/actions";
 import LoginButton from "../../googleLogin";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useEffect, useState } from "react";
+import { getmailUser } from "../Admin/userData";
 import Swal from 'sweetalert2'
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -11,7 +12,7 @@ export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.userData);
-  const {isAuthenticated} = useAuth0()
+ 
 
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
@@ -26,7 +27,7 @@ export const Login = () => {
       popup: 'colored-toast',
     },
     showConfirmButton: false,
-    timer: 5000,
+    timer: 2000,
     timerProgressBar: true,
     background: 'green',
     color: 'white'
@@ -57,37 +58,30 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-
       console.log("Submitting form with data:", userData);
-      const response = await dispatch(getUser(userData));
-      console.log("Response from server:", response);
-        await Toast.fire({
+      const response = await getmailUser({
+        email: userData.email,
+        password: userData.password,
+      });
+      console.log("Response from server:", response.data);
+
+      if (response.status === 200) {
+        const updatedUserData = {
+          ...userData,
+          ...response.data,
+          isAuthenticated: true,
+        };
+        setUserDataLocally(updatedUserData);
+        dispatch(setUserdata(updatedUserData));
+        Toast.fire({
           icon: 'success',
           title: "Logueado con exito",
         })
-      // localStorage.setItem('userData', JSON.stringify(payload));
-      // setUserDataLocally({ ...userData, isAuthenticated: true });
-
-      // console.log('Redirecting to homepage...');
-      // console.log(response.data)
-      // navigate('/');
-      // window.location.reload();
-     
+      }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
   };
-
-  useEffect(() => {
-    if (data) {
-     
-      localStorage.setItem("userData", JSON.stringify(data));
-      setUserDataLocally({ ...data, isAuthenticated: true });
-    } 
-   
-  }, [data.status]);
-console.log(data);
-
 
   return (
     <div className="w-full h-full bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
@@ -95,7 +89,7 @@ console.log(data);
         <div className="w-3/5 h-full">
           <img
             className="h-full object-cover rounded-l-md"
-            src="/img/image-login.jpg"
+            src="img\image-login.jpg"
             alt=""
           />
         </div>
