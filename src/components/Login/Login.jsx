@@ -67,7 +67,7 @@ export const Login = () => {
         <div className="w-3/5 h-full">
           <img
             className="h-full object-cover rounded-l-md"
-            src="public\img\image-login.jpg"
+            src="img\image-login.jpg"
             alt=""
           />
         </div>

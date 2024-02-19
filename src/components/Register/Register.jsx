@@ -66,7 +66,7 @@ const Register = () => {
         <div className=" w-3/5 h-full">
           <img
             className="h-full object-cover rounded-l-md"
-            src="public\img\image-register.jpg"
+            src="img\image-register.jpg"
             alt=""
           />
         </div>

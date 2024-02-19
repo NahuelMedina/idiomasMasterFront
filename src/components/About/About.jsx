@@ -4,7 +4,7 @@ export const About = () => {
       <div className="w-3/5	">
         <img
           className="w-full h-full object-cover"
-          src="public\img\image-about.jpg"
+          src="img\image-about.jpg"
           alt=""
         />
       </div>
