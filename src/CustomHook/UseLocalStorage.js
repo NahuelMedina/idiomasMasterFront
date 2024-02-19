@@ -1,26 +1,38 @@
-import { useState } from "react"
+import { useEffect, useState } from "react";
 
-
-export const useLocalStorage =  (key, initialValue) =>{
-
-const [storedValue, setStateValue] = useState(()=>{
+export const useLocalStorage = (key, initialValue) => {
+  const [storedValue, setStoredValue] = useState(() => {
     try {
-        const item = window.localStorage.getItem(key)
-        return item ? JSON.parse(item) : initialValue
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-        return initialValue
+      console.error("Error al obtener datos del localStorage:", error);
+      return initialValue;
     }
-})
+  });
 
-const setValue = (value)=>{
-try {
-    setStateValue(value)
-    window.localStorage.setItem(key, JSON.stringify(value))
-} catch (error) {
-    console.log(error);
-}    
-}
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === key) {
+        setStoredValue(JSON.parse(event.newValue));
+      }
+    };
 
+    window.addEventListener("storage", handleStorageChange);
 
-    return [storedValue, setValue]
-}
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [key]);
+
+  const setValue = (value) => {
+    try {
+      setStoredValue(value);
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.error("Error al guardar datos en localStorage:", error);
+    }
+  };
+
+  return [storedValue, setValue];
+};

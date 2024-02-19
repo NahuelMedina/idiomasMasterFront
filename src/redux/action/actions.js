@@ -236,3 +236,11 @@ export const createPreference = async (product) => {
     console.log(error.message);
   }
 };
+
+export const setUserdata = (user) => {
+
+  return {
+    type: SET_USER_DATA,
+    payload: user,
+  };
+}
