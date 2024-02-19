@@ -137,7 +137,7 @@ const ShopCart = () => {
 
   if (cartCourse === null || !cartCourse.length > 0) {
     return (
-      <div className="bg-white  w-full h-full">
+      <div className="bg-white mt-[80px] w-full h-full">
         <div className="flex justify-center items-center text-3xl font-bold text-black">
           <h1 className="">No hay cursos en el carrito</h1>
         </div>
