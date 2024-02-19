@@ -19,13 +19,6 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const [isCart, setIsCart] = useState(false);
   const [cart, setCart] = useLocalStorage("cart", "");
   const { isAuthenticated } = useAuth0();
-
-  const location = useLocation()
-  const [isFav, setIsFav] = useState(false)
-  const [fav, setFav] =useLocalStorage("fav", "")
-  const [isCart, setIsCart] = useState(false)
-  const [cart, setCart] = useLocalStorage("cart", "")
-  const { isAuthenticated} = useAuth0();
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
 
   console.log(userData);
