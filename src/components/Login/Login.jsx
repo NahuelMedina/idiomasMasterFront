@@ -4,16 +4,39 @@ import { getUser } from "../../redux/action/actions";
 import LoginButton from "../../googleLogin";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useEffect, useState } from "react";
+import Swal from 'sweetalert2'
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.userData);
+  const {isAuthenticated} = useAuth0()
 
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
     password: "",
   });
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'center',
+    iconColor: 'white',
+    customClass: {
+      popup: 'colored-toast',
+    },
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    background: 'green',
+    color: 'white'
+  })
+  
+  
+
+
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +53,7 @@ export const Login = () => {
       }
     }
   };
-
+ console.log(userData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -38,7 +61,10 @@ export const Login = () => {
       console.log("Submitting form with data:", userData);
       const response = await dispatch(getUser(userData));
       console.log("Response from server:", response);
-
+        await Toast.fire({
+          icon: 'success',
+          title: "Logueado con exito",
+        })
       // localStorage.setItem('userData', JSON.stringify(payload));
       // setUserDataLocally({ ...userData, isAuthenticated: true });
 
@@ -46,7 +72,7 @@ export const Login = () => {
       // console.log(response.data)
       // navigate('/');
       // window.location.reload();
-
+     
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
@@ -57,9 +83,11 @@ export const Login = () => {
      
       localStorage.setItem("userData", JSON.stringify(data));
       setUserDataLocally({ ...data, isAuthenticated: true });
-
-    }
+    } 
+   
   }, [data.status]);
+
+
 
   return (
     <div className="w-full h-full bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
@@ -67,7 +95,7 @@ export const Login = () => {
         <div className="w-3/5 h-full">
           <img
             className="h-full object-cover rounded-l-md"
-            src="public\img\image-login.jpg"
+            src="/img/image-login.jpg"
             alt=""
           />
         </div>

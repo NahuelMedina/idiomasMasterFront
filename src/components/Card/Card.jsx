@@ -20,7 +20,9 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const [isCart, setIsCart] = useState(false)
   const [cart, setCart] = useLocalStorage("cart", "")
   const { isAuthenticated} = useAuth0();
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
 
+  console.log(userData);
 
 
   // Sector Carrito
@@ -34,7 +36,7 @@ useEffect(()=>{
 
 
 const handleCart = ()=>{
-  if(!isAuthenticated){
+  if(!isAuthenticated && !userData.hasOwnProperty('email')){
     Swal.fire({
       icon: "info",
       title: "Necesitas registrarte para agregar al Carrito!",
@@ -73,7 +75,7 @@ const handleCart = ()=>{
 
 
   const handleFavorite = ()=>{
-    if(!isAuthenticated){
+    if(!isAuthenticated && !userData.hasOwnProperty('email')){
       Swal.fire({
         icon: "info",
         title:  "Necesitas registrarte para agregar a Favoritos!",

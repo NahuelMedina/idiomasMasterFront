@@ -20,7 +20,7 @@ export const Navbar = () => {
         <div className="flex items-center  w-[50%] h-full">
           <Link to="/" className="h-full">
             <div className="flex items-center justify-center h-full w-[60px] mx-10">
-              <img className="w-32" src="public\img\logo4.png" alt="Logo" />
+              <img className="w-32" src='/img/logo4.png' alt="Logo" />
             </div>
           </Link>
 
@@ -53,7 +53,7 @@ export const Navbar = () => {
         <div className="flex items-center justify-start w-[50%] h-full">
           <Link to="/" className="h-full">
             <div className="flex items-center justify-center h-full w-[60px] mx-10">
-              <img className="w-32" src="public\img\logo4.png" alt="Logo" />
+              <img className="w-32" src='/img/logo4.png' alt="Logo" />
             </div>
           </Link>
 
@@ -75,7 +75,7 @@ export const Navbar = () => {
         <div className="flex items-center justify-end w-[50%] h-full">
           <Link to="/cart">
             <div className="flex items-center justify-evenly h-20 w-[50px] mx-5 transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-              <img style={{width:'38px'}} src="public\img\cart.png" alt="" />
+              <img style={{width:'38px'}} src="/img/cart.png" alt="" />
             </div>
           </Link>
 

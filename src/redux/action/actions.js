@@ -146,7 +146,7 @@ export const getUser = (userData) => async (dispatch) => {
       payload: response.data
     });
 
-    alert("Se ha conectado");
+    //alert("Se ha conectado");
     
   } catch (error) {
     console.error("Error al obtener usuario:", error);

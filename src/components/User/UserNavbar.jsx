@@ -19,43 +19,43 @@ export default function UserNavbar () {
     <div className="flex h-[80px] w-full justify-between items-center text-white bg-black">
       <div className="flex items-center justify-start w-[50%] h-full">
         <Link to="/user/home" className="h-full">
-          <div className="flex items-center justify-center h-full w-[60px]">
-            <img className="w-32" src='/img/logo4.png' alt="Logo" />
-          </div>
+         <div className="flex items-center justify-center h-full w-[60px] mx-10">
+              <img className="w-32" src='/img/logo4.png' alt="Logo" />
+            </div>
         </Link>
 
         <Link to="/home" className="h-full">
-          <div className="flex items-center justify-evenly h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-            <h1 className="text-[20px]">Cursos</h1>
-            <FaDiscourse className="text-[40px]" />
-          </div>
+            <div className="flex mx-10 items-center justify-evenly h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+              <h1 className="text-[20px]">Cursos</h1>
+              <FaDiscourse className="text-[40px]" />
+            </div>
         </Link>
       </div>
 
       <div className="flex items-center justify-end w-[50%] h-full">
-        <Link to="/cart">
-          <div className="flex items-center justify-evenly h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-            <img style={{width:'38px'}} src="src\assets\fotos\cart.png" alt="" />
-          </div>
-        </Link>
+          <Link to="/cart">
+            <div className="flex items-center justify-evenly h-20 w-[50px] mx-5 transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+              <img style={{width:'38px'}} src="/img/cart.png" alt="" />
+            </div>
+          </Link>
 
-        <Link to="/favorite">
-          <div className="flex items-center justify-evenly h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-            <FaHeart className="text-[25px]"/>
-          </div>
-        </Link>
+          <Link to="/favorite">
+            <div className="flex items-center justify-evenly h-20 w-[50px] mr-[80px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+              <FaHeart className="text-[25px] text-red-700"/>
+            </div>
+          </Link>
 
         <Link to="/configuracion">
-          <div className="flex items-center justify-evenly h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-            <h1 className="text-[28px]">⚙</h1>
-            <img src={userData?.img || user?.picture || defaultAvatarUrl} style={{width:'28px', borderRadius:'50%', position:'relative', top:'2px', left:'-20px'}} alt="" />
-          </div>
+        <div className="flex items-center justify-evenly h-20 w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+              <h1 className="text-[28px]">⚙</h1>
+              <img className="text-[28px]" src={userData?.img || user?.picture || defaultAvatarUrl} style={{width:'28px', borderRadius:'50%', position:'relative', top:'2px', left:'-20px'}} alt="" />
+            </div>
         </Link>
 
         <Link to="/" onClick={() => logout()}>
-          <div className="flex items-center justify-evenly h-10 w-200 transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-none border-t-[4px]">
-            <LogoutButton />
-          </div>
+             <div className="flex mx-10 items-center justify-evenly h-20 w-200 transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-none border-t-[4px]">
+              <LogoutButton />
+            </div>
         </Link>
       </div>
     </div>

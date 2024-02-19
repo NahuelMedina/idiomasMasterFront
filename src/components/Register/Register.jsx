@@ -37,7 +37,7 @@ const Register = () => {
       reader.onload = () => {
         setState((prevState) => ({
           ...prevState,
-          image: reader.result,
+          img: reader.result,
         }));
       };
     }
@@ -57,7 +57,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
-    navigate("/");
+    navigate("/user/home");
   };
 
   return (
@@ -66,7 +66,7 @@ const Register = () => {
         <div className=" w-3/5 h-full">
           <img
             className="h-full object-cover rounded-l-md"
-            src="public\img\image-register.jpg"
+            src="/img/image-register.jpg"
             alt=""
           />
         </div>
