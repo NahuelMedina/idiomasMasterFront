@@ -106,8 +106,7 @@ export default function AdminManageReview() {
   };
 
   useEffect(() => {
-
-    if(review.student_review.length > 0){
+    if (review.student_review.length > 0) {
       const fetchData = async () => {
         try {
           const response = await idUser(review.student_review);
@@ -121,11 +120,7 @@ export default function AdminManageReview() {
       };
 
       fetchData();
-
     }
-   
-
-    
   }, [review.student_review]);
 
   const handleSubmit = async (e) => {
@@ -176,7 +171,7 @@ export default function AdminManageReview() {
             />
           </div>
         </div>
-  
+
         {review._id && review._id.length > 0 && (
           <div className="h-full w-[60%] flex items-center justify-center bg-[#373a6c] ">
             <div className="h-full w-[50%] flex items-center justify-center">
@@ -188,7 +183,7 @@ export default function AdminManageReview() {
           </div>
         )}
       </div>
-  
+
       {review._id && review._id.length ? (
         <>
           <form className="bg-[#282a54] w-full h-[96%] grid grid-rows-2 gap-[5px] p-[5px]">
@@ -241,12 +236,13 @@ export default function AdminManageReview() {
       ) : (
         <>
           <div className="w-full h-full rounded-[10px] items-center justify-center flex">
-            <h1 className="text-yellow-500 text-[40px]">Search a New Review to Reply</h1>
+            <h1 className="text-yellow-500 text-[40px]">
+              Search a New Review to Reply
+            </h1>
             <FaSearchPlus className="text-white text-[40px] ml-[30px]" />
           </div>
         </>
       )}
     </div>
   );
-  
 }

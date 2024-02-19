@@ -17,3 +17,4 @@ export const SET_EDITED_DATA = 'SET_EDITED_DATA'
 export const ADMINREVIEW = 'ADMINREVIEW';
 export const ALL_USERS = 'ALL_USERS'
 export const USER_COURSES = 'USER_COURSES'
+export const POST_USER_FAIL = 'POST_USER_FAIL'

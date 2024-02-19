@@ -6,32 +6,64 @@ import Landing_card from "../Landing_card/Landing_card";
 import { card_landing_data } from "../Utils/landing_cards";
 import Landing_reviews from "../Landing_reviews/Landing_reviews";
 import card_landing_reviews from "../Utils/landing_reviews";
-import { postThirdPartyUser } from "../../redux/action/actions"; // Importa la acción adecuada
+import { postThirdPartyUser, setUserdata } from "../../redux/action/actions"; // Importa la acción adecuada
 import { useAuth0 } from "@auth0/auth0-react";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+import { getGoogleUser } from "../Admin/userData";
 
 export const Landing = () => {
   const [num, setNum] = useState(0);
   const { isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
+  const [userData, setUserDataLocally] = useLocalStorage("userData", {
+    email: "",
+    password: "",
+  });
 
   useEffect(() => {
-    if (isAuthenticated) {
-      console.log("Registrando usuario:", user);
-      dispatch(postThirdPartyUser(user));
-    }
-  }, [isAuthenticated]);
+    const fetchUserData = async () => {
+      try {
+        if (isAuthenticated && user && user.email) {
+          console.log(user.email);
+          console.log(user);
+          const response = await getGoogleUser({
+            email: user.email,
+            name: user.given_name,
+            lastname: user.family_name,
+            image: user.picture,
+          });
+          console.log(response);
 
-  useEffect(() => {
-    function set_landing() {
-      if (num < 4) {
-        setNum(num + 1);
-      } else if (num === 4) {
-        setNum(0);
+          if (response && response.data) {
+            const updatedUserData = {
+              ...userData,
+              ...response.data,
+              isAuthenticated: true,
+            };
+
+            setUserDataLocally(updatedUserData);
+            dispatch(setUserdata(updatedUserData));
+          }
+        }
+      } catch (error) {
+        console.error("Error al obtener los datos del usuario:", error);
       }
-    }
+    };
 
-    setTimeout(set_landing, 5000);
-  }, [num]);
+    fetchUserData();
+  }, [isAuthenticated, user, setUserDataLocally, dispatch]);
+
+  // useEffect(() => {
+  //   function set_landing() {
+  //     if (num < 4) {
+  //       setNum(num + 1);
+  //     } else if (num === 4) {
+  //       setNum(0);
+  //     }
+  //   }
+
+  //   setTimeout(set_landing, 5000);
+  // }, [num]);
 
   return (
     <div className="w-full h-[150px] bg-black text-white">
