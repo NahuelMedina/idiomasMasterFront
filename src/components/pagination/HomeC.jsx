@@ -108,18 +108,18 @@ function HomeC() {
   };
 
   return (
-    <div className="bg-white text-white flex flex-row w-full h-full items-center justify-center">
-      <div className="h-full min-w-[300px] text-black justify-start bg-gradient-to-r bg-[#1E68AD] relative flex flex-col  items-center">
-        <div className="w-full h-[200px] flex flex-col items-center justify-center">
+    <div className="bg-white mt-[80px] h-full text-white flex flex-row w-full  items-center justify-center">
+      <div className="h-screen  min-w-[300px] text-black justify-start bg-gradient-to-r bg-[#1E68AD] relative flex flex-col items-center">
+        <div className="w-full  text-center flex flex-col items-center justify-center">
           <FaLanguage className="text-[80px] text-yellow-400" />
-          <h1 className="text-[25px] m-[10px] text-yellow-400">
+          <p className="text-[25px] m-[10px] text-yellow-400">
             Busca el idioma Ideal para ti
-          </h1>
+          </p>
         </div>
-        <div className=" w-full h-[450px] flex flex-col items-center justify-evenly ">
+        <div className=" w-full h-full flex flex-col items-center justify-evenly ">
           <div className="bg-[#1e417a] w-full h-[50px] flex flex-row items-center justify-evenly">
             <RiMoneyDollarCircleLine className="text-[30px] text-white " />
-            <h1 className="text-[20px] text-white">Precio Curso</h1>
+            <p className="text-[20px] text-white">Precio Curso</p>
           </div>
           <select
             className="h-9 w-[200px] border mt-1 rounded px-4 bg-gray-50"
@@ -134,7 +134,7 @@ function HomeC() {
           </select>
           <div className="bg-[#1e417a] w-full h-[50px]  flex flex-row items-center justify-evenly">
             <FaRankingStar className="text-[30px] text-white " />
-            <h1 className="text-[20px] text-white">Nivel Curso</h1>
+            <p className="text-[20px] text-white">Nivel Curso</p>
           </div>
           <select
             className="h-9 w-[200px] border mt-1 rounded px-4 bg-gray-50"
@@ -150,7 +150,7 @@ function HomeC() {
           </select>
           <div className="bg-[#1e417a] w-full h-[50px]  flex flex-row items-center justify-evenly">
             <TbMessageLanguage className="text-[30px] text-white" />
-            <h1 className="text-[20px] text-white">Idioma</h1>
+            <p className="text-[20px] text-white">Idioma</p>
           </div>
           <select
             className="h-9 w-[200px] border mt-1 rounded px-4 bg-gray-50"
@@ -170,7 +170,7 @@ function HomeC() {
         </div>
       </div>
 
-      <div className="flex flex-col items-start justify-star h-full w-[85%] relative">
+      <div className="flex flex-col items-start justify-star h-full w-full relative">
         <div className=" w-[600px] border-b-[2px] border-[#848484] my-[10px] mx-[90px]">
           <h1 className="text-[35px] text-[#1F1F1F] m-[2px]">{`Cursos Encontrados: ${courses.length}`}</h1>
         </div>
@@ -178,25 +178,23 @@ function HomeC() {
           {courses &&
             courses.length > 0 &&
             renderCards.map((element, index) => (
-              <div key={index} className='overflow-hidden h-[80%] w-[30%] rounded-[10px]  transform transition-transform hover:scale-105 duration-500 ease-in-out flex items-center justify-center p-0'>
-                <Card  course={element} />
-              </div>
+              <Card key={index} course={element} />
             ))}
         </div>
 
-        <div className="h-[30px] items-center justify-center flex flex-row w-full">
+        <div className="h-[30px]  items-center justify-evenly flex flex-row w-full">
           <IoIosArrowDropleft
-            className={`text-[50px] m-[30px] ${
+            className={`text-[50px] ${
               pagePosition === 1 ? "cursor-not-allowed" : "cursor-pointer"
             } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
             onClick={prevPage}
             disabled={pagePosition === 1}
           />
           <div className="w-[50px] flex items-center justify-center">
-            <h1 className="text-[30px] m-[30px] text-black">{`${pagePosition}`}</h1>
+            <h1 className="text-[30px] text-black">{`${pagePosition}`}</h1>
           </div>
           <IoIosArrowDropright
-            className={`text-[50px] m-[30px] ${
+            className={`text-[50px] ${
               pagePosition === pageNum ? "cursor-not-allowed" : "cursor-pointer"
             } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
             onClick={nextPage}

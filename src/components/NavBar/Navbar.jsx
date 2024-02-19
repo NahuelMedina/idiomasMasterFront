@@ -5,97 +5,93 @@ import { FaDiscourse } from "react-icons/fa";
 import { BsFillInfoSquareFill } from "react-icons/bs";
 import { useAuth0 } from "@auth0/auth0-react";
 import { FaHeart } from "react-icons/fa";
-import LogoutButton from '../Login/LogOut';
-import { useLocalStorage } from '../../CustomHook/UseLocalStorage';
+import LogoutButton from "../Login/LogOut";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 
 export const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth0();
   const location = useLocation();
   const [userData] = useLocalStorage("userData", {});
-  const defaultAvatarUrl = 'https://www.pngitem.com/pimgs/m/508-5087236_tab-profile-f-user-icon-white-fill-hd.png';
+  const defaultAvatarUrl =
+    "https://www.pngitem.com/pimgs/m/508-5087236_tab-profile-f-user-icon-white-fill-hd.png";
 
   if (!isAuthenticated && !Object.keys(userData).length) {
     return (
-      <div className="flex h-[80px] w-full justify-between items-center text-white bg-black">
-        <div className="flex items-center  w-[50%] h-full">
-          <Link to="/" className="h-full">
-            <div className="flex items-center justify-center h-full w-[60px] mx-10">
-              <img className="w-32" src="img\logo4.png" alt="Logo" />
-            </div>
+      <div className="flex h-[80px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#000000e1] border-[#ffffff] border-b-2 border-solid">
+        <div className="flex ml-2 items-center gap-10 justify-around">
+          <Link to="/" className="h-full flex justify-center items-center">
+            <img className="w-16" src="public\img\logo4.png" alt="Logo" />
+          </Link>
+          <Link
+            to="/about"
+            className="h-full flex justify-between items-center"
+          >
+            Sobre Nosotros
+            <BsFillInfoSquareFill className="text-[30px] ml-1" />
           </Link>
 
-          <Link to="/about" className="h-full">
-            <div className="flex mx-10 items-center justify-evenly h-full w-[250px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-              <h1 className="text-[20px]">Sobre Nosotros</h1>
-              <BsFillInfoSquareFill className="text-[40px]" />
-            </div>
+          <Link to="/home" className="h-full flex items-center justify-center">
+            Cursos
+            <FaDiscourse className="text-[30px] ml-1" />
           </Link>
-
-          <Link to="/home" className="h-full">
-            <div className="flex mx-10 items-center justify-evenly h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-              <h1 className="text-[20px]">Cursos</h1>
-              <FaDiscourse className="text-[40px]" />
-            </div>
-          </Link>
-
-          <Link to="/login" className="h-full">
-            <div className="flex items-center ml-[900px] justify-evenly h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-              <h1>Ingresar</h1>
-              <IoLogIn className="text-[40px]" />
-            </div>
+        </div>
+        <div>
+          <Link
+            to="/login"
+            className="h-full flex items-center justify-center mr-[20px]"
+          >
+            Ingresar
+            <IoLogIn className="text-[30px] ml-1" />
           </Link>
         </div>
       </div>
     );
   } else {
     return (
-      <div className="flex h-[80px] w-full  items-center text-white bg-black">
-        <div className="flex items-center justify-start w-[50%] h-full">
-          <Link to="/" className="h-full">
-            <div className="flex items-center justify-center h-full w-[60px] mx-10">
-              <img className="w-32" src="img\logo4.png" alt="Logo" />
-            </div>
+      <div className="flex h-[80px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#000000e1] border-[#ffffff] border-b-2 border-solid">
+        <div className="flex ml-2 items-center justify-around h-full gap-10">
+          <Link to="/" className="h-full flex justify-center items-center">
+            <img className="w-16" src="public\img\logo4.png" alt="Logo" />
+          </Link>
+          <Link to="/about" className="h-full flex items-center">
+            Sobre Nosotros
+            <BsFillInfoSquareFill className="text-[30px] ml-1" />
           </Link>
 
-          <Link to="/about" className="h-full">
-            <div className="flex mx-10 items-center justify-evenly h-full w-[250px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-              <h1 className="text-[20px]">Sobre Nosotros</h1>
-              <BsFillInfoSquareFill className="text-[40px]" />
-            </div>
-          </Link>
-
-          <Link to="/home" className="h-full">
-            <div className="flex mx-10 items-center justify-evenly h-full w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-              <h1 className="text-[20px]">Cursos</h1>
-              <FaDiscourse className="text-[40px]" />
-            </div>
+          <Link to="/home" className="h-full flex items-center">
+            Cursos
+            <FaDiscourse className="text-[30px] ml-1" />
           </Link>
         </div>
 
-        <div className="flex items-center justify-end w-[50%] h-full">
+        <div className="flex items-center justify-around h-full w-[40%]">
           <Link to="/cart">
-            <div className="flex items-center justify-evenly h-20 w-[50px] mx-5 transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-              <img style={{width:'38px'}} src="img\cart.png" alt="" />
-            </div>
+            <img className="w-[38px]" src="public\img\cart.png" alt="" />
           </Link>
 
           <Link to="/favorite">
-            <div className="flex items-center justify-evenly h-20 w-[50px] mr-[80px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-              <FaHeart className="text-[25px] text-red-700"/>
-            </div>
+            <FaHeart className="text-[25px] text-red-700" />
           </Link>
 
-          <Link to="/configuracion">
-            <div className="flex items-center justify-evenly h-20 w-[150px] transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-              <h1 className="text-[28px]">⚙</h1>
-              <img src={userData?.img || user?.picture || defaultAvatarUrl} style={{width:'28px', borderRadius:'50%', position:'relative', top:'2px', left:'-20px'}} alt="" />
-            </div>
+          <Link
+            to="/configuracion"
+            className="flex items-center text-[28px] justify-center gap-9"
+          >
+            ⚙
+            <img
+              src={userData?.img || user?.picture || defaultAvatarUrl}
+              style={{
+                width: "28px",
+                borderRadius: "50%",
+                position: "relative",
+                top: "2px",
+                left: "-20px",
+              }}
+              alt=""
+            />
           </Link>
-
           <Link to="/" onClick={() => logout()}>
-            <div className="flex mx-10 items-center justify-evenly h-20 w-200 transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-none border-t-[4px]">
-              <LogoutButton />
-            </div>
+            <LogoutButton />
           </Link>
         </div>
       </div>

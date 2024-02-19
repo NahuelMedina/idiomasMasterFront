@@ -5,14 +5,13 @@ import LoginButton from "../../googleLogin";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useEffect, useState } from "react";
 import { getmailUser } from "../Admin/userData";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.userData);
- 
 
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
@@ -21,23 +20,17 @@ export const Login = () => {
 
   const Toast = Swal.mixin({
     toast: true,
-    position: 'center',
-    iconColor: 'white',
+    position: "center",
+    iconColor: "white",
     customClass: {
-      popup: 'colored-toast',
+      popup: "colored-toast",
     },
     showConfirmButton: false,
     timer: 2000,
     timerProgressBar: true,
-    background: 'green',
-    color: 'white'
-  })
-  
-  
-
-
-
-
+    background: "green",
+    color: "white",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,7 +47,7 @@ export const Login = () => {
       }
     }
   };
- console.log(userData);
+  console.log(userData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -74,9 +67,9 @@ export const Login = () => {
         setUserDataLocally(updatedUserData);
         dispatch(setUserdata(updatedUserData));
         Toast.fire({
-          icon: 'success',
+          icon: "success",
           title: "Logueado con exito",
-        })
+        });
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
@@ -84,7 +77,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="w-full h-full bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
+    <div className="w-full h-full mt-[80px] bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
       <div className="flex m-5 h-[95%]">
         <div className="w-3/5 h-full">
           <img
