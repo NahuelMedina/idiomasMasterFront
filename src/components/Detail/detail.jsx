@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Await, useParams } from "react-router-dom";
-import { getCoursesDetail } from "../../redux/action/actions";
+import { Await, useLocation, useParams } from "react-router-dom";
+import { createPreference, getCoursesDetail } from "../../redux/action/actions";
 import { SiLevelsdotfyi } from "react-icons/si";
 import { FaCalendarDays } from "react-icons/fa6";
 import { GiDuration } from "react-icons/gi";
@@ -12,87 +12,86 @@ import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { useAuth0 } from "@auth0/auth0-react";
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
-import Swal from 'sweetalert2'
-
+import Swal from "sweetalert2";
 
 export const Detail = () => {
   const [preferenceId, setPreferenceId] = useState(null);
   const params = useParams();
+  const location = useLocation();
   const dispatch = useDispatch();
   const detail = useSelector((state) => state.courseDetail);
-  const [isCart, setIsCart] = useState(false)
-  const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem("cart")))
-  const [isFav, setIsFav] = useState(false)
-  const [fav, setFav] = useState(JSON.parse(window.localStorage.getItem("fav")))
-  const { isAuthenticated} = useAuth0();
+  const [isCart, setIsCart] = useState(false);
+  const [cart, setCart] = useState(
+    JSON.parse(window.localStorage.getItem("cart"))
+  );
+  const [isFav, setIsFav] = useState(false);
+  const [fav, setFav] = useState(
+    JSON.parse(window.localStorage.getItem("fav"))
+  );
+  const { isAuthenticated } = useAuth0();
 
-  
+  //Carrito
 
-//Carrito
-
-useEffect(()=>{
-  if (!cart || cart.length === 0) {
-    return; 
-}
-    const isCourseCart = cart.some(cartCourse => cartCourse._id === detail._id);
+  useEffect(() => {
+    if (!cart || cart.length === 0) {
+      return;
+    }
+    const isCourseCart = cart.some(
+      (cartCourse) => cartCourse._id === detail._id
+    );
     setIsCart(isCourseCart);
-}, [detail,cart])
+  }, [detail, cart]);
 
+  const handleCart = () => {
+    if (!isAuthenticated) {
+      Swal.fire({
+        icon: "info",
+        title: "Necesitas registrarte para agregar al Carrito!",
+        footer: '<a href="/register">Registrarse</a>',
+      });
+      return;
+    }
+    setIsCart(!isCart);
+    const currentCart = JSON.parse(window.localStorage.getItem("cart")) || [];
 
+    const updatedCart = isCart
+      ? currentCart.filter((c) => c._id !== detail._id) // Eliminar del carrito
+      : [...currentCart, detail]; // Agregar al carrito
 
-const handleCart = () => {
-  if(!isAuthenticated){
-    Swal.fire({
-      icon: "info",
-      title: "Necesitas registrarte para agregar al Carrito!",
-      footer: '<a href="/register">Registrarse</a>'
-    });
-    return
-  }
-  setIsCart(!isCart);
-  const currentCart = JSON.parse(window.localStorage.getItem("cart")) || [];
-  
-  const updatedCart = isCart
-    ? currentCart.filter(c => c._id !== detail._id) // Eliminar del carrito
-    : [...currentCart, detail]; // Agregar al carrito
-  
-  setCart(updatedCart);
-  window.localStorage.setItem("cart", JSON.stringify(updatedCart));
-};
+    setCart(updatedCart);
+    window.localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
 
-//Favoritos
-useEffect(()=>{
-  if (!fav || fav.length === 0) {
-    return; 
-}
-    const isCoursefav = fav.some(favCourse => favCourse._id === detail._id);
+  //Favoritos
+  useEffect(() => {
+    if (!fav || fav.length === 0) {
+      return;
+    }
+    const isCoursefav = fav.some((favCourse) => favCourse._id === detail._id);
     setIsFav(isCoursefav);
-}, [detail,fav])
+  }, [detail, fav]);
 
+  const handleFavorite = () => {
+    if (!isAuthenticated) {
+      Swal.fire({
+        icon: "info",
+        title: "Necesitas registrarte para agregar a Favoritos!",
+        footer: '<a href="/register">Registrarse</a>',
+      });
+      return;
+    }
+    setIsFav(!isFav);
+    const currentfav = JSON.parse(window.localStorage.getItem("fav")) || [];
 
+    const updatedfav = isFav
+      ? currentfav.filter((c) => c._id !== detail._id) // Eliminar del carrito
+      : [...currentfav, detail]; // Agregar al carrito
 
-const handleFavorite = () => {
-  if(!isAuthenticated){
-    Swal.fire({
-      icon: "info",
-      title:  "Necesitas registrarte para agregar a Favoritos!",
-      footer: '<a href="/register">Registrarse</a>'
-    });
-    return
-  }
-  setIsFav(!isFav);
-  const currentfav = JSON.parse(window.localStorage.getItem("fav")) || [];
-  
-  const updatedfav = isFav
-    ? currentfav.filter(c => c._id !== detail._id) // Eliminar del carrito
-    : [...currentfav, detail]; // Agregar al carrito
-  
-  setFav(updatedfav);
-  window.localStorage.setItem("fav", JSON.stringify(updatedfav));
-};
+    setFav(updatedfav);
+    window.localStorage.setItem("fav", JSON.stringify(updatedfav));
+  };
 
-
-//Mercado Pago
+  //Mercado Pago
   initMercadoPago(PUBLIC_KEY, {
     locale: "es-MX",
   });
@@ -101,21 +100,25 @@ const handleFavorite = () => {
     dispatch(getCoursesDetail(params.id));
   }, []);
 
-  const createPreference = async (product) => {
+  const initCreatePreference = (p) => {
+    dispatch(createPreference(p));
+  };
+
+  const createPayment = () => {
     try {
-      const { data } = await axios.post(`${URL}/createPreference`, product);
-      return data;
+      const paymentId = location.search.split("&")[2].split("=")[1];
+      axios.post(`${URL}/createPayment`, {
+        data: paymentId,
+      });
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const handleBuy = async (product) => {
-    const id = await createPreference(product);
-    if (id) {
-      setPreferenceId(id);
-    }
-  };
+  if (location.key === "default") {
+    createPayment();
+    location.key = "";
+  }
 
   const fechaIni = new Date(detail?.start_time);
   const añoI = fechaIni.getFullYear();
@@ -171,7 +174,7 @@ const handleFavorite = () => {
             </div>
             <div className="flex ">
               <button
-                onClick={() => handleBuy(detail)}
+                onClick={() => initCreatePreference(detail)}
                 className=" text-start mt-5 mb-10 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
               >
                 <p className=" m-2 text-2xl  "> Comprar ahora</p>{" "}
@@ -181,32 +184,43 @@ const handleFavorite = () => {
                   />
                 )}
               </button>
-              { isCart ? (
-                  <div className="flex">
-                    <button onClick={handleCart} 
-                      className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+              {isCart ? (
+                <div className="flex">
+                  <button
+                    onClick={handleCart}
+                    className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
+                  >
                     <p className=" m-2 text-2xl  ">Eliminar del Carrito</p>
-                      </button>
-                  </div>
-                  ):( 
-                  <div className="flex">
-                      <button onClick={handleCart}    
-                      className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-                      <p className=" m-2 text-2xl  ">Agregar al Carrito</p>
-                        </button>
-                  </div>)
-                }
-             
+                  </button>
+                </div>
+              ) : (
+                <div className="flex">
+                  <button
+                    onClick={handleCart}
+                    className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
+                  >
+                    <p className=" m-2 text-2xl  ">Agregar al Carrito</p>
+                  </button>
+                </div>
+              )}
             </div>
             <div className="">
-                { 
-                      isFav  ? (
-                        <button onClick={handleFavorite} className=" absolute top-[230px] left-[750px] text-5xl ">❤️</button>
-                      ) : (
-                        <button onClick={handleFavorite} className=" absolute top-[230px] left-[750px] text-5xl ">🤍</button>
-                      )
-                  } 
-                </div>
+              {isFav ? (
+                <button
+                  onClick={handleFavorite}
+                  className=" absolute top-[230px] left-[750px] text-5xl "
+                >
+                  ❤️
+                </button>
+              ) : (
+                <button
+                  onClick={handleFavorite}
+                  className=" absolute top-[230px] left-[750px] text-5xl "
+                >
+                  🤍
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <div className="flex justify-center items-center w-2/5">
@@ -220,5 +234,3 @@ const handleFavorite = () => {
     </div>
   );
 };
-
-
