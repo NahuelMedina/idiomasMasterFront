@@ -35,10 +35,10 @@ function App() {
     if (data) {
       if (data.profile === "admin") {
         navigate("/admindashboard");
-        window.location.reload();
+
       } else {
         navigate("/user/home");
-        window.location.reload();
+        
       }
     }
   }, [data.status]);
