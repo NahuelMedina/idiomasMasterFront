@@ -12,7 +12,7 @@ const LogoutButton = () => {
     setUserDataLocally({});
     logout({ logoutParams: { returnTo: window.location.origin } }).then(() => {
       navigate("/")
-      window.location.reload(); // Recarga la página después de cerrar la sesión
+     
     });
   };
 
