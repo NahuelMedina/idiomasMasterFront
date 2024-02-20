@@ -1,11 +1,11 @@
 import React from 'react';
 
-const PrivacySection = () => {
+const ReviewSection = () => {
   return (
     <div>
-      <h2>Configuración de Privacidad</h2>
+      <h2>Configuración de Review</h2>
     </div>
   );
 };
 
-export default PrivacySection;
+export default ReviewSection;

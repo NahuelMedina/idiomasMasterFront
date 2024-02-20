@@ -503,7 +503,7 @@ export default function AdminSettingProduct() {
       ) : (
         <>
           <div className=" w-full h-full rounded-[10px] items-center justify-center flex">
-            <h1 className="text-yellow-500 text-[40px]">Search a Product</h1>
+            <h1 className="text-yellow-500 text-[40px]">Search a User</h1>
             <FaSearchPlus className="text-white text-[40px] ml-[30px]" />
           </div>
         </>

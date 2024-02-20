@@ -1,22 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useLocalStorage } from '../../CustomHook/UseLocalStorage';
-import { updateUser } from '../../redux/action/actions';
-import { useDispatch } from 'react-redux'; 
+import React, { useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+import { idUser, putUser } from "../Admin/userData";
+import { PiNotePencilBold } from "react-icons/pi";
 
 const ProfileSection = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [userData] = useLocalStorage("userData", {});
-  const dispatch = useDispatch();
+  const [imagePreview, setImagePreview] = useState(null);
 
-  const defaultAvatarUrl = 'https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=';
+  const defaultAvatarUrl =
+    "https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=";
   const [editedData, setEditedData] = useState({
-    id: userData?._id || '',
-    name: userData?.name || '',
-    lastname: userData?.lastname || '',
-    email: userData?.email || '',
-    password: userData.password || '',
-    img: userData?.img || user?.picture || defaultAvatarUrl,
+   
   });
 
   const handleInputChange = (event) => {
@@ -24,48 +20,62 @@ const ProfileSection = () => {
     console.log("Input cambiado:", { [name]: value });
     setEditedData({
       ...editedData,
-      [name]: value
+      [name]: value,
     });
   };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setEditedData({
-        ...editedData,
-        img: reader.result,
-      });
-    };
-
-    reader.readAsDataURL(file);
-  };
-
-  const handleSaveChanges = async () => {
-    try {
-      const allFields = editedData;
-
-      console.log("Campos a enviar:", allFields);
-
-      dispatch(updateUser(allFields));
-    } catch (error) {
-      console.error("Error al guardar cambios:", error);
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setEditedData((prevCourse) => ({
+          ...prevCourse,
+          img: reader.result,
+        }));
+        setImagePreview(reader.result);
+      };
     }
   };
 
   useEffect(() => {
-    if (user?.sub.includes('google')) {
-      setEditedData({
-        ...editedData,
-        name: user?.given_name || userData?.name || '',
-        lastname: user?.family_name || userData?.lastname || '',
-        email: user?.email || userData?.email || '',
-        password: '', // Bloquea la contraseña
-      });
-    }
-  }, [user, userData]);
+    const fecthUser = async () => {
+      const response = await idUser(userData._id);
 
+      if (response.data) {
+        console.log(response.data)
+        setEditedData({
+          ...editedData,
+          id: response.data._id,
+          name: response.data.name,
+          lastname: response.data.lastname,
+          email: response.data.email,
+          age: response.data.age,
+        });
+        setImagePreview(response.data?.img || defaultAvatarUrl);
+      }
+    };
+    fecthUser();
+  }, [userData]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+
+      await putUser({
+        id: editedData.id,
+        name: editedData.name,
+        lastname: editedData.lastname,
+        email: editedData.email,
+        img: editedData.img,
+        password: editedData.password,
+        age: editedData.age,
+      });
+      window.alert("El Usuario se ha actualizado exitosamente.");
+    } catch (error) {
+      console.error("Error al actualizar el curso:", error.message);
+    }
+  };
 
   if (isLoading) {
     return <div>Loading ...</div>;
@@ -73,41 +83,128 @@ const ProfileSection = () => {
 
   return (
     (isAuthenticated || Object.keys(userData).length > 0) && (
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        <div className="flex flex-col items-center space-y-5">
-          <img className="object-cover, w-30 h-30 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"  src={editedData.img} alt="Bordered avatar" />
-          <div className="flex flex-col space-y-5">
-          <input type="file" accept="image/*" onChange={handleFileChange} style={{ display: 'none'}} id="file-input" />
-            {!user?.sub.includes('google') && (
-              <label htmlFor="file-input" className="py-0.4 px-4 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 cursor-pointer">
-                Cambiar foto
-              </label>
-            )}
-            <button type="button" className={`py-0.4 px-3 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200 ${user?.sub.includes('google') && 'opacity-50 cursor-not-allowed'}`} disabled={user?.sub.includes('google')}>
-              Eliminar foto
+      <div className="flex flex-rows w-full h-full gap-8 items-center">
+        <div className=" w-[60%] h-[90%] grid grid-rows-5 overflow-hidden flex items-center justify-center">
+          <div className="h-[80%] w-full bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
+            <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
+              <h1 className="text-[18px] ml-[50px] text-white">Nombre</h1>
+            </div>
+            <div className="w-[70%] h-[full] flex items-center justify-evenly">
+              <input
+                type="text"
+                id="first_name"
+                name="name"
+                className={`h-10 w-[45%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white" ${
+                  user?.sub.includes("google") &&
+                  "opacity-50 cursor-not-allowed"
+                }`}
+                placeholder="Ingresa Nombre"
+                value={editedData.name}
+                onChange={handleInputChange}
+                required
+                readOnly={user?.sub.includes("google")}
+              />
+              <input
+                type="text"
+                id="last_name"
+                name="lastname"
+                className={`h-10 w-[45%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white" ${
+                  user?.sub.includes("google") &&
+                  "opacity-50 cursor-not-allowed"
+                }`}
+                placeholder="Ingresa Apellido"
+                value={editedData.lastname}
+                onChange={handleInputChange}
+                required
+                readOnly={user?.sub.includes("google")}
+              />
+            </div>
+          </div>
+          <div className="h-[80%] w-full bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
+            <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
+              <h1 className="text-[18px] ml-[50px] text-white">Email</h1>
+            </div>
+            <div className="w-[70%] h-[full] flex items-center justify-evenly">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className={`h-10 w-[90%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white"  ${
+                  user?.sub.includes("google") &&
+                  "opacity-50 cursor-not-allowed"
+                }`}
+                placeholder="Ingresa tu Email para Modificarlo"
+                value={editedData.email}
+                onChange={handleInputChange}
+                required
+                readOnly={user?.sub.includes("google")}
+              />
+            </div>
+          </div>
+          <div className="h-[80%] w-full bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
+            <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
+              <h1 className="text-[18px] ml-[50px] text-white">Contraseña</h1>
+            </div>
+            <div className="w-[70%] h-[full] flex items-center justify-evenly">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className={`h-10 w-[90%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white" ${
+                  user?.sub.includes("google") &&
+                  "opacity-50 cursor-not-allowed"
+                }`}
+                placeholder="Ingresa tu Nueva Contraseña"
+                value={editedData.password}
+                onChange={handleInputChange}
+                required
+                readOnly={user?.sub.includes("google")}
+              />
+            </div>
+          </div>
+          <div className="h-[80%] w-[60%] bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
+            <div className="w-[52%] h-[full] bg-[#2d53d9] flex items-center ">
+              <h1 className="text-[18px] ml-[50px] text-white">Edad</h1>
+            </div>
+            <div className="w-[50%] h-[full] flex items-center justify-evenly">
+              <input
+                type="age"
+                id="age"
+                name="age"
+                className= "h-10 w-[90%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white"
+                placeholder="Ingresa tu Nueva Contraseña"
+                value={editedData.age}
+                onChange={handleInputChange}
+                required
+          
+              />
+            </div>
+          </div>
+          <div className="h-full w-full  bg-[#2d53d9] flex items-center justify-center flex-row rounded-b-[10px] overflow-hidden">
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
+            >
+              Guardar
             </button>
           </div>
         </div>
-        <div className="flex flex-col space-y-5">
-          <div className="flex flex-col space-y-5">
-            <label htmlFor="first_name" className="block mt-3 text-sm font-medium text-indigo-900 dark:text-black">Nombre</label>
-            <input type="text" id="first_name" name="name" className={`bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" ${user?.sub.includes('google') && 'opacity-50 cursor-not-allowed'}`} placeholder="Nombre" value={editedData.name} onChange={handleInputChange}  required readOnly={user?.sub.includes('google')} />
+        <div className="w-[40%] h-[90%] flex flex-col items-start relative ">
+        <div className="flex flex-col w-full h-[70%] items-center">
+          <div className="flex flex-col w-full h-[70%] items-center justfify-center">
+          <img className="object-fit w-[250px] h-[250px] rounded-[250px] border-[1px] border-gray-200"  src={imagePreview} alt="Bordered avatar" />
           </div>
-          <div className="flex flex-col space-y-5">
-            <label htmlFor="last_name" className="block mt-3 text-sm font-medium text-indigo-900 dark:text-black">Apellido</label>
-            <input type="text" id="last_name" name="lastname" className={`bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" ${user?.sub.includes('google') && 'opacity-50 cursor-not-allowed'}`} placeholder="Apellido" value={editedData.lastname} onChange={handleInputChange}  required readOnly={user?.sub.includes('google')} />
+          
+          <div className="flex flex-row w-full h-[20%] items-center justify-evenly">
+          <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none'}} id="file-input" />
+            {!user?.sub.includes('google') && (
+              <label htmlFor="file-input" className="w-[150px] h-[50px] border-2 border-black/30 hover:bg-yellow-400 text-black font-bold rounded rounded-[10px] cursor-pointer flex items-center justify-center">
+                Cambiar foto
+              </label>
+            )}
           </div>
-          <div className="flex flex-col space-y-5">
-            <label htmlFor="email" className="block mt-3 text-sm font-medium text-indigo-900 dark:text-black">Email</label>
-            <input type="email" id="email" name="email" className={`bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" ${user?.sub.includes('google') && 'opacity-50 cursor-not-allowed'}`} placeholder="Email" value={editedData.email} onChange={handleInputChange}  required readOnly={user?.sub.includes('google')} />
-          </div>
-          <div className="flex flex-col space-y-5">
-            <label htmlFor="password" className="block mt-3 text-sm font-medium text-indigo-900 dark:text-black">Nueva contraseña</label>
-            <input type="password" id="password" name="password" className={`bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" ${user?.sub.includes('google') && 'opacity-50 cursor-not-allowed'}`} placeholder="*************" value={editedData.password} onChange={handleInputChange}  required readOnly={user?.sub.includes('google')}/>
-          </div>
-          <div className="flex justify-end">
-            <button type="submit" onClick={handleSaveChanges} className={`text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800" ${user?.sub.includes('google') && 'opacity-50 cursor-not-allowed'}`}>Guardar</button>
-          </div>
+        </div>
         </div>
       </div>
     )
