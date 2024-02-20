@@ -16,6 +16,7 @@ import {
   SET_USER_DATA,
   ALL_USERS,
   USER_COURSES,
+  POST_USER_SUCCESS,
   POST_USER_FAIL,
 } from "./actiontypes";
 import axios from "axios";
@@ -110,13 +111,16 @@ export const postCourseData = (courseData) => async (dispatch) => {
 export const postUser = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/createUser`, userData);
-    
+    dispatch({
+      type: POST_USER_SUCCESS,
+      payload: response,
+    });
     //alert("Usuario creado con Exito", response.data);
   } catch (error) {
     const message = error.response.data;
     dispatch({
       type: POST_USER_FAIL,
-      payload: response,
+      payload: message,
     });
     
     //alert(`${message}`);
