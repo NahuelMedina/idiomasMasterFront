@@ -9,8 +9,9 @@ import './ColoredToast.css'
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const postStatus = useSelector(state => state.postStatus)
   const postError = useSelector(state => state.postError)
-  const [status, setStatus] = useState(true)
+  const [status, setStatus] = useState(postStatus)
   const [state, setState] = useState({
     name: "",
     lastname: "",

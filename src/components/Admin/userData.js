@@ -207,10 +207,7 @@ export const getmailUser = async ({ email, password }) => {
 
 export const getGoogleUser = async ({ email, name, lastname, image }) => {
   try {
-    console.log(email)
-    console.log(name)
-    console.log(lastname)
-    console.log(image)
+    
     const response = await axios.post(`${URL}/getGoogleUser`, {
       email, name, lastname, image
     });

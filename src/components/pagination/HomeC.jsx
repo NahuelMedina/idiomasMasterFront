@@ -144,9 +144,9 @@ function HomeC() {
             defaultValue="all"
           >
             <option value="all">Nivel de Idioma</option>
-            <option value="Beginner">Principiante</option>
-            <option value="Intermediate">Intermedio</option>
-            <option value="Advanced">Avanzado</option>
+            <option value="Principiante">Principiante</option>
+            <option value="Intermedio">Intermedio</option>
+            <option value="Avanzado">Avanzado</option>
           </select>
           <div className="bg-[#1e417a] w-full h-[50px]  flex flex-row items-center justify-evenly">
             <TbMessageLanguage className="text-[30px] text-white" />
@@ -160,12 +160,12 @@ function HomeC() {
             defaultValue="all"
           >
             <option value="all">Idioma</option>
-            <option value="English">Ingles</option>
-            <option value="French">Frances</option>
-            <option value="German">Aleman</option>
-            <option value="Italian">Italiano</option>
-            <option value="Dutch">Holandés</option>
-            <option value="Portuguese">Portugues</option>
+            <option value="Ingles">Ingles</option>
+            <option value="Frances">Frances</option>
+            <option value="Aleman">Aleman</option>
+            <option value="Italiano">Italiano</option>
+            <option value="Holandes">Holandés</option>
+            <option value="Portugues">Portugues</option>
           </select>
         </div>
       </div>

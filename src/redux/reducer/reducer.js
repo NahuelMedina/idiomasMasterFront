@@ -15,6 +15,7 @@ import {
   ADMINREVIEW,
   ALL_USERS,
   USER_COURSES,
+  POST_USER_SUCCESS,
   POST_USER_FAIL
 } from "../action/actiontypes";
 
@@ -154,7 +155,11 @@ const reducer = (state = initialState, { type, payload }) => {
                 ...state,
                 ...action.payload
               };
-          
+          case POST_USER_SUCCESS:
+            return{
+              ...state,
+              postStatus: true
+            }
           case POST_USER_FAIL:
             return{
               ...state,

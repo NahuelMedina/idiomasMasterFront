@@ -32,7 +32,11 @@ export default function UserNavbar() {
         <Link to="/cart">
           <img className="w-[38px]" src="public\img\cart.png" alt="" />
         </Link>
-
+        <Link to="/cart">
+            <div className="flex items-center justify-evenly h-20 w-[50px] mx-5 transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
+              <img style={{width:'38px'}} src="img\cart.png" alt="" />
+            </div>
+          </Link>
         <Link to="/favorite">
           <FaHeart className="text-[25px] text-red-700" />
         </Link>
