@@ -137,7 +137,7 @@ const ShopCart = () => {
 
   if (cartCourse === null || !cartCourse.length > 0) {
     return (
-      <div className="bg-white  w-full h-full">
+      <div className="bg-white mt-[80px] w-full h-full">
         <div className="flex justify-center items-center text-3xl font-bold text-black">
           <h1 className="">No hay cursos en el carrito</h1>
         </div>
@@ -155,8 +155,7 @@ const ShopCart = () => {
   }
 
   return (
-    <div className="bg-white  w-full h-full grid ">
-      -
+    <div className="bg-white mt-[80px]  w-full h-full ">
       <div className="bottom-[180px] right-[70px] absolute h-24 p-3">
         <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
           <button
@@ -180,7 +179,7 @@ const ShopCart = () => {
         </div>
       </div>
       {cartCourse !== null && cartCourse.length > 0 ? (
-        <div className="bg-gray-200 w-[400px] h-[488px] overflow-y-auto border border-gray-400 mt-5 mx-5 absolute top-24 right-5 rounded-lg overflow-hidden shadow-lg">
+        <div className="bg-gray-200 w-[400px] border border-gray-400 absolute top-24 right-5 rounded-lg shadow-lg">
           <p className="text-lg text-gray-800 font-semibold bg-gray-300 py-2 px-4">
             Cursos elegidos: {cartCourse.length}
           </p>
@@ -225,30 +224,32 @@ const ShopCart = () => {
         <Link></Link>
       )}
       <div className=" ">
-        <div className="  h-[75%] w-full">
+        <div className=" w-[100%] ">
           {cartCourse &&
             cartCourse.length > 0 &&
             renderCards.map((element, index) => (
-              <div key={index} className="grid  ">
-                <Card course={element} removeFromCart={removeFromCart} />
-              </div>
+              <Card
+                key={index}
+                course={element}
+                removeFromCart={removeFromCart}
+              />
             ))}
         </div>
         <div className=" ">
           {cartCourse && cartCourse.length > 0 ? (
-            <div className="h-[70px] items-center justify-center flex flex-row">
+            <div className="h-[30px] items-center justify-center flex flex-row">
               <IoIosArrowDropleft
-                className={`text-[50px] m-[30px] ${
+                className={`text-[50px] ${
                   pagePosition === 1 ? "cursor-not-allowed" : "cursor-pointer"
                 } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
                 onClick={prevPage}
                 disabled={pagePosition === 1}
               />
               <div className="w-[50px] flex items-center justify-center">
-                <h1 className="text-[30px] m-[30px] text-black">{`${pagePosition}`}</h1>
+                <p className="text-[30px] text-black">{`${pagePosition}`}</p>
               </div>
               <IoIosArrowDropright
-                className={`text-[50px] m-[30px] ${
+                className={`text-[50px] ${
                   pagePosition === pageNum
                     ? "cursor-not-allowed"
                     : "cursor-pointer"

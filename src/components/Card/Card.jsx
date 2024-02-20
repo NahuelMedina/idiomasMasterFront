@@ -19,6 +19,10 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const [isCart, setIsCart] = useState(false);
   const [cart, setCart] = useLocalStorage("cart", "");
   const { isAuthenticated } = useAuth0();
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
+
+  console.log(userData);
+
 
   // Sector Carrito
   useEffect(() => {
@@ -32,7 +36,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   }, [course, cart]);
 
   const handleCart = () => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated && !userData.hasOwnProperty('email')) {
       Swal.fire({
         icon: "info",
         title: "Necesitas registrarte para agregar al Carrito!",
@@ -68,8 +72,9 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
     setIsFav(isCourseFav);
   }, [course, fav]);
 
-  const handleFavorite = () => {
-    if (!isAuthenticated) {
+
+  const handleFavorite = ()=>{
+    if(!isAuthenticated && !userData.hasOwnProperty('email')){
       Swal.fire({
         icon: "info",
         title: "Necesitas registrarte para agregar a Favoritos!",
@@ -102,12 +107,12 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
 
   if (location.pathname === "/cart") {
     return (
-      <div className=" flex h-[240px] w-[1200px] m-5 text-black rounded-[10px] shadow-lg shadow-black/50 transform transition-transform ">
+      <div className=" flex h-[240px] w-[65%] m-5 text-black rounded-[10px] shadow-lg shadow-black/50 transform transition-transform ">
         <div className="h-[240px] w-[400px] bg-[#151139] overflow-hidden items-center justify-center flex">
           <img
             src={course.image}
             alt={course.lenguage}
-            className="h-full w-full "
+            className="h-full w-full object-cover"
           />
         </div>
         <div className="bg-[#1E68AD] h-[240px] w-[500px] flex flex-col justify-start">
@@ -122,14 +127,14 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
                 {isFav ? (
                   <button
                     onClick={handleFavorite}
-                    className=" absolute top-2 right-[370px] text-2xl "
+                    className=" absolute top-2 right-[250px] text-2xl "
                   >
                     ❤️
                   </button>
                 ) : (
                   <button
                     onClick={handleFavorite}
-                    className=" absolute top-2 right-[370px] text-2xl "
+                    className=" absolute top-1 right-[250px] text-2xl "
                   >
                     🤍
                   </button>
@@ -203,12 +208,12 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   }
 
   return (
-    <div className="overflow-hidden h-[530px] w-[350px] m-5 text-black rounded-[10px] shadow-lg shadow-black/50 transform transition-transform ">
-      <div className="h-[230px] w-[450px] bg-green-200 overflow-hidden items-center justify-center flex">
+    <div className="overflow-hidden h-[530px] w-[300px] m-5 text-black rounded-[10px] flex-col justify-center items-center  shadow-lg shadow-black/50 transform transition-transform ">
+      <div className=" bg-green-200 ">
         <img
           src={course.image}
           alt={course.lenguage}
-          className="h-full w-full "
+          className="h-[250px] w-full object-cover"
         />
       </div>
       <div className="bg-[#1E68AD] h-[220px] w-full flex flex-col justify-start">
@@ -247,43 +252,50 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
               </button>
             </div>
           )}
-          <h2 className="text-white text-[30px] ">{course.language}</h2>
+          <p className="text-white text-[30px] ">{course.language}</p>
         </div>
         <div className=" w-full h-[50px]  flex flex-row items-center justify-start">
           <FaRankingStar className="text-[40px] text-yellow-400 m-[50px] " />
-          <h2 className="text-white text-[20px]">{course.level}</h2>
+          <p className="text-white text-[20px]">{course.level}</p>
         </div>
         <div className=" w-full h-[50px]  flex flex-row items-center justify-start">
           <GrSchedule className="text-[40px] text-yellow-400 m-[50px] " />
 
-          <h2 className="text-white text-[20px]">{course.schedule}</h2>
+          <p className="text-white text-[20px]">{course.schedule}</p>
         </div>
         <div className=" w-full h-[50px]  flex flex-row items-center justify-start">
           <LuCalendarSearch className="text-[40px] text-yellow-400 m-[50px] " />
-          <h2 className="text-white text-[20px]">{course.duration}</h2>
+          <p className="text-white text-[20px]">{course.duration}</p>
         </div>
       </div>
-      <div className="bg-[#FF6B6C] w-full h-[40px] flex flex-row items-center justify-center">
+      <div className="bg-[#FF6B6C] w-full text-xl  flex flex-row items-center justify-center">
         <Link
           to={`/detail/${course._id}`}
-          className="bg-[#FF6B6C] w-full h-[40px] flex flex-row items-center justify-center hover:bg-yellow-500"
+          className="bg-[#FF6B6C] w-full flex flex-row items-center justify-center hover:bg-yellow-500"
         >
-          <FaShoppingBasket className="text-[25px] m-[15px] " />
-          <button className="text-black text-[25px]">Obtener Ahora</button>
+          <button className="text-black flex  items-center justify-center h-[30px]">
+            <FaShoppingBasket className="mr-1" /> Obtener Ahora
+          </button>
         </Link>
       </div>
-      <div className="bg-[#FF6B6C] w-full h-[40px] flex flex-row items-center justify-center  hover:bg-yellow-500">
+      <div className="bg-[#FF6B6C] w-full text-xl  flex flex-row items-center justify-center  hover:bg-yellow-500">
         {isCart ? (
           <div className="flex">
-            <RxCross2 className="text-[25px] m-[15px] " />
-            <button onClick={handleCart} className="text-black text-[25px] ">
+            <button
+              onClick={handleCart}
+              className="text-black w-full h-[30px] flex items-center justify-center "
+            >
+              <RxCross2 className=" mr-1" />
               Eliminar del carrito
             </button>
           </div>
         ) : (
-          <div className="flex">
-            <FaCartShopping className="text-[25px] m-[15px] " />
-            <button onClick={handleCart} className="text-black text-[25px] ">
+          <div className="flex  w-full">
+            <button
+              onClick={handleCart}
+              className="text-black w-full flex items-center justify-center h-[30px]"
+            >
+              <FaCartShopping className=" mr-1" />
               Agregar al carrito
             </button>
           </div>
