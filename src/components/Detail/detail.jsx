@@ -30,8 +30,9 @@ export const Detail = () => {
   );
   const { isAuthenticated } = useAuth0();
 
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
-
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem("userData"))
+  );
 
   //Carrito
 
@@ -46,7 +47,7 @@ export const Detail = () => {
   }, [detail, cart]);
 
   const handleCart = () => {
-    if (!isAuthenticated && !userData.hasOwnProperty('email')) {
+    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
         title: "Necesitas registrarte para agregar al Carrito!",
@@ -75,7 +76,7 @@ export const Detail = () => {
   }, [detail, fav]);
 
   const handleFavorite = () => {
-    if (!isAuthenticated && !userData.hasOwnProperty('email')) {
+    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
         title: "Necesitas registrarte para agregar a Favoritos!",
@@ -95,9 +96,9 @@ export const Detail = () => {
   };
 
   //Mercado Pago
-  initMercadoPago(PUBLIC_KEY, {
-    locale: "es-MX",
-  });
+  // initMercadoPago(PUBLIC_KEY, {
+  //   locale: "es-MX",
+  // });
 
   useEffect((event) => {
     dispatch(getCoursesDetail(params.id));
@@ -181,11 +182,6 @@ export const Detail = () => {
                 className=" text-start mt-5 mb-10 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
               >
                 <p className=" m-2 text-2xl  "> Comprar ahora</p>{" "}
-                {preferenceId && (
-                  <Wallet
-                    initialization={{ preferenceId, redirectMode: "modal" }}
-                  />
-                )}
               </button>
               {isCart ? (
                 <div className="flex">

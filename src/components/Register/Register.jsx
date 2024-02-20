@@ -3,15 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import registerValidate from "../Utils/registerValidate";
 import { useDispatch, useSelector } from "react-redux";
 import { postUser } from "../../redux/action/actions";
-import Swal from 'sweetalert2'
-import './ColoredToast.css'
+import Swal from "sweetalert2";
+import "./ColoredToast.css";
 
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const postStatus = useSelector(state => state.postStatus)
-  const postError = useSelector(state => state.postError)
-  const [status, setStatus] = useState(postStatus)
+  const postStatus = useSelector((state) => state.postStatus);
+  const postError = useSelector((state) => state.postError);
+  const [status, setStatus] = useState(postStatus);
   const [state, setState] = useState({
     name: "",
     lastname: "",
@@ -21,20 +21,17 @@ const Register = () => {
     age: "",
   });
 
-
   const Toast = Swal.mixin({
     toast: true,
-    position: 'center',
-    iconColor: 'white',
+    position: "center",
+    iconColor: "white",
     customClass: {
-      popup: 'colored-toast',
+      popup: "colored-toast",
     },
     showConfirmButton: false,
     timer: 1500,
     timerProgressBar: true,
-  })
-
-
+  });
 
   const [errors, setErrors] = useState({});
   const handleChange = (e) => {
@@ -77,22 +74,22 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
-    if(postError === null){
+    if (postError === null) {
       Toast.fire({
-        icon: 'success',
+        icon: "success",
         title: "Usuario creado con Exito",
-      })
-      setStatus(false)
-    } else{
+      });
+      setStatus(false);
+    } else {
       Toast.fire({
-        icon: 'error',
+        icon: "error",
         title: `${postError}`,
-      })
+      });
     }
   };
 
   return (
-    <div className="w-full h-full mt-[80px] bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
+    <div className="w-full h-screen mt-[80px] bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
       <div className="flex m-5 h-[95%]">
         <div className=" w-3/5 h-full">
           <img
@@ -102,18 +99,17 @@ const Register = () => {
           />
         </div>
         <div className="w-2/5 h-full flex-col flex justify-center items-center">
-          <h2 className="absolute top-28 text-3xl font-bold text-[#FFFFFF]">
-            Registrarse
-          </h2>
           <form
             onSubmit={handleSubmit}
-            className="h-full w-full pt-20  flex justify-center items-center flex-col text-[#FFFFFF] bg-[#1E68AD] text-lg font-medium  rounded-r-md"
+            className="h-full w-full font-medium flex justify-center items-center flex-col text-[#FFFFFF] bg-[#1E68AD] rounded-r-md"
           >
-            <div className="flex w-full h-2/4 gap-1 text-center justify-center items-center ">
-              <div className="flex flex-col w-2/4 gap-2 p-8">
+            <img className="w-[20%]" src="/public/img/logo4.png" alt="" />
+            <h2 className=" text-3xl font-bold text-[#FFFFFF]">Registrarse</h2>
+            <div className="flex w-full h-2/4 gap-1 justify-center items-center ">
+              <div className="flex flex-col w-2/4 gap-[5px] p-5">
                 <label htmlFor="name">Nombre</label>
                 <input
-                  className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
+                  className="text-black rounded-sm h-[40px] pl-1 focus:border-2 border-[#FF6B6C]"
                   onChange={handleChange}
                   name="name"
                   placeholder="Nombre..."
@@ -123,7 +119,7 @@ const Register = () => {
                 <span style={{ color: "red" }}>{errors.name}</span>
                 <label htmlFor="lastname">Apellido</label>
                 <input
-                  className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
+                  className="text-black rounded-sm h-[40px] pl-1 focus:border-2 border-[#FF6B6C]"
                   onChange={handleChange}
                   name="lastname"
                   placeholder="Apellido..."
@@ -133,7 +129,7 @@ const Register = () => {
                 <span style={{ color: "red" }}>{errors.lastname}</span>
                 <label htmlFor="password">Contraseña</label>
                 <input
-                  className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
+                  className="text-black rounded-sm h-[40px] pl-1 focus:border-2 border-[#FF6B6C]"
                   onChange={handleChange}
                   placeholder="Contraseña..."
                   name="password"
@@ -142,10 +138,10 @@ const Register = () => {
                 />
                 <span style={{ color: "red" }}>{errors.password}</span>
               </div>
-              <div className="flex flex-col w-2/4 gap-2 p-8">
+              <div className="flex flex-col w-2/4 gap-[6px] p-5">
                 <label htmlFor="email">Email</label>
                 <input
-                  className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
+                  className="text-black rounded-sm h-[40px] pl-1 focus:border-2 border-[#FF6B6C]"
                   onChange={handleChange}
                   name="email"
                   placeholder="Email..."
@@ -155,7 +151,7 @@ const Register = () => {
                 <span style={{ color: "red" }}>{errors.email}</span>
                 <label htmlFor="age">Edad</label>
                 <input
-                  className="text-black rounded-md h-8 outline-none pl-1 remove-arrow  focus:border-2 border-[#FF6B6C]"
+                  className="text-black rounded-sm h-[40px] pl-1 remove-arrow  focus:border-2 border-[#FF6B6C]"
                   onChange={handleChange}
                   placeholder="Edad..."
                   name="age"
@@ -165,7 +161,7 @@ const Register = () => {
                 <span style={{ color: "red" }}>{errors.age}</span>
                 <label htmlFor="img">Imagen URL</label>
                 <input
-                  className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
+                  className="text-black rounded-sm h-[40px] pl-1 focus:border-2 border-[#FF6B6C]"
                   onChange={handleImageChange}
                   name="img"
                   id="img"
@@ -176,23 +172,19 @@ const Register = () => {
             </div>
             <input
               disabled={buttonDisabled()}
-              className="mt-10 relative top-5 bg-[#FFFFFF] text-[#000000] w-40 h-11 rounded-lg cursor-pointer hover:bg-[#FF6B6C] transition-colors hover:text-[#FFFFFF]  disabled:opacity-30	"
+              className=" relative bg-[#FFFFFF] text-[#000000] w-[300px] h-[40px] rounded-sm cursor-pointer hover:bg-[#FF6B6C] transition-colors hover:text-[#FFFFFF]  disabled:opacity-30	"
               type="submit"
               value="Registrarse"
             />
             <div>
-              <div className="mt-20">
-                <ul>
-                  <li>
-                    ¿Ya tienes una cuenta?{" "}
-                    <Link
-                      className="text-[#000000] font-bold text-xl hover:text-[#FF6B6C] transition-colors	"
-                      to="/login"
-                    >
-                      Iniciar Sesión
-                    </Link>
-                  </li>
-                </ul>
+              <div className="mt-[40px]">
+                ¿Ya tienes una cuenta?{" "}
+                <Link
+                  className="text-[#000000] font-bold text-xl hover:text-[#FF6B6C] transition-colors	"
+                  to="/login"
+                >
+                  Iniciar Sesión
+                </Link>
               </div>
             </div>
           </form>
