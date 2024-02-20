@@ -10,10 +10,10 @@ import { productData } from "../Admin/userData";
 import UserPromoCard from "./UserPromoCard";
 
 export default function UserLanding() {
-    const [userData, setUserData] = useState([]);
-    const [beginnerData, setBeginnerData] = useState([]);
-    const [popularData, setPopularData] = useState([]);
-    const [weekendData, setWeekendData] = useState([]);
+  const [userData, setUserData] = useState([]);
+  const [beginnerData, setBeginnerData] = useState([]);
+  const [popularData, setPopularData] = useState([]);
+  const [weekendData, setWeekendData] = useState([]);
 
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -75,7 +75,7 @@ export default function UserLanding() {
         const response = await userCourses();
 
         if (response) {
-            setUserData(response);
+          setUserData(response);
         }
       } catch (error) {
         return error.message;
@@ -93,7 +93,7 @@ export default function UserLanding() {
           filterData(response.data);
         }
       } catch (error) {
-        console.error('Error fetching product data:', error);
+        console.error("Error fetching product data:", error);
       }
     };
 
@@ -101,19 +101,23 @@ export default function UserLanding() {
   }, []);
 
   const filterData = (data) => {
-    const beginnerCourses = data.filter(element => element.level === 'Beginner');
+    const beginnerCourses = data.filter(
+      (element) => element.level === "Beginner"
+    );
     setBeginnerData(beginnerCourses);
 
-    const popularCourses = data.filter(element => element.rank === 5);
+    const popularCourses = data.filter((element) => element.rank === 5);
     setPopularData(popularCourses);
 
-    const weekendCourses = data.filter(element => element.schedule === 'On Weekends');
+    const weekendCourses = data.filter(
+      (element) => element.schedule === "On Weekends"
+    );
     setWeekendData(weekendCourses);
   };
 
   return (
-    <div className=" w-full h-full bg-white text-white">
-      <div className="flex justify-end items-center w-screen h-[80px] bg-[#1E68AD]">
+    <div className=" w-full h-full mt-[80px] bg-white text-white">
+      <div className="flex justify-end items-center w-full h-[80px] bg-[#1E68AD]">
         <div className="mr-10">
           <SearchBar></SearchBar>
         </div>

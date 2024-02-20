@@ -92,7 +92,7 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full h-full bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
+    <div className="w-full h-full mt-[80px] bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
       <div className="flex m-5 h-[95%]">
         <div className=" w-3/5 h-full">
           <img

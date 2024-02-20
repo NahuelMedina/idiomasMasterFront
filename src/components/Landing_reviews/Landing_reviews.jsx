@@ -5,7 +5,7 @@ export default function Landing_reviews({ img, review, name, location }) {
     <div className="w-[600px] h-[500px] rounded-[20px] shadow-2xl shadow-black/50 overflow-hidden flex flex-col">
       <div className="w-[full h-[70%] bg-white flex flex-row ">
         <div className="w-[50%] h-full overflow-hidden ">
-          <img src={img} className="w-full h-full"></img>
+          <img src={img} className="w-full h-full object-cover"></img>
         </div>
         <div className="w-[50%] h-full overflow-hidden p-6">
           <h1 className="text-black text-[15px]">"{review}"</h1>
