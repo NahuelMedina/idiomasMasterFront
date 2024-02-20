@@ -10,6 +10,7 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const postError = useSelector(state => state.postError)
+  const [status, setStatus] = useState(true)
   const [state, setState] = useState({
     name: "",
     lastname: "",
@@ -28,7 +29,7 @@ const Register = () => {
       popup: 'colored-toast',
     },
     showConfirmButton: false,
-    timer: 1500,
+    timer: 2000,
     timerProgressBar: true,
   })
 
@@ -75,13 +76,13 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
-    if(postError === null){
+    if (postError === null) {
       Toast.fire({
         icon: 'success',
         title: "Usuario creado con Exito",
       })
       setStatus(false)
-    } else{
+    } else {
       Toast.fire({
         icon: 'error',
         title: `${postError}`,

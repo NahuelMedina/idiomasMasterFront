@@ -54,9 +54,9 @@ export default function UserNavbar() {
             alt=""
           />
         </Link>
-        <Link to="/" onClick={() => logout()}>
-          <LogoutButton />
-        </Link>
+        {/* <Link to="/" onClick={() => logout()}>
+        </Link> */}
+        <LogoutButton />
       </div>
     </div>
   );

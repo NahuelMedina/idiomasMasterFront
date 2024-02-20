@@ -18,19 +18,7 @@ export const Login = () => {
     password: "",
   });
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "center",
-    iconColor: "white",
-    customClass: {
-      popup: "colored-toast",
-    },
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: true,
-    background: "green",
-    color: "white",
-  });
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,10 +54,12 @@ export const Login = () => {
         };
         setUserDataLocally(updatedUserData);
         dispatch(setUserdata(updatedUserData));
-        Toast.fire({
-          icon: "success",
-          title: "Logueado con exito",
-        });
+        Swal.fire({
+          icon: 'success',
+          title: '¡Loggeado con Éxito!',
+          showConfirmButton: false,
+          timer: 2200
+        });;
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
