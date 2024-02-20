@@ -50,78 +50,69 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <div className="w-screen h-screen min-h-[750px] flex flex-col">
-          <div className="w-full h-[80px]">
-            {Object.keys(data).length === 0 &&
-            data.isAuthenticated === undefined ? (
-              <Navbar />
-            ) : null}
+        {Object.keys(data).length === 0 &&
+        data.isAuthenticated === undefined ? (
+          <Navbar />
+        ) : null}
 
-            {Object.keys(data).length &&
-            data.isAuthenticated &&
-            data.profile === "user" ? (
-              <UserNavbar />
-            ) : null}
+        {Object.keys(data).length &&
+        data.isAuthenticated &&
+        data.profile === "user" ? (
+          <UserNavbar />
+        ) : null}
 
-            {Object.keys(data).length &&
-            data.isAuthenticated &&
-            data.profile === "admin" ? (
-              <AdminNavbar />
-            ) : null}
-          </div>
-          <div className="w-full h-[95%]">
-            <Routes>
-              <Route path="/home" element={<HomeC />} />
-              <Route path="/detail/:id" element={<Detail />} />
-              <Route path="/search" element={<SearchHome />} />
+        {Object.keys(data).length &&
+        data.isAuthenticated &&
+        data.profile === "admin" ? (
+          <AdminNavbar />
+        ) : null}
+        <Routes>
+          <Route path="/home" element={<HomeC />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/search" element={<SearchHome />} />
 
-              {Object.keys(data).length === 0 &&
-              data.isAuthenticated === undefined ? (
-                <>
-                  <Route path="/" element={<Landing />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/login" element={<Login />} />
-                </>
-              ) : null}
+          {Object.keys(data).length === 0 &&
+          data.isAuthenticated === undefined ? (
+            <>
+              <Route path="/" element={<Landing />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+            </>
+          ) : null}
 
-              {Object.keys(data).length &&
-              data.isAuthenticated &&
-              data.profile === "user" ? (
-                <>
-                  <Route path="/configuracion" element={<Configuration />} />
-                  <Route path="/user/home" element={<UserLanding />} />
-                  <Route path="/favorite" element={<Favorite />} />
-                  <Route path="/cart" element={<ShopCart />} />
-                </>
-              ) : null}
+          {Object.keys(data).length &&
+          data.isAuthenticated &&
+          data.profile === "user" ? (
+            <>
+              <Route path="/configuracion" element={<Configuration />} />
+              <Route path="/user/home" element={<UserLanding />} />
+              <Route path="/favorite" element={<Favorite />} />
+              <Route path="/cart" element={<ShopCart />} />
+            </>
+          ) : null}
 
-              {Object.keys(data).length &&
-              data.isAuthenticated &&
-              data.profile === "admin" ? (
-                <>
-                  <Route path="/admindashboard" element={<AdminHome />} />
-                  <Route
-                    path="/admindashboard/products"
-                    element={<AdminProducts />}
-                  />
-                  <Route
-                    path="/admindashboard/users"
-                    element={<AdminUsers />}
-                  />
-                  <Route
-                    path="/admindashboard/notifications"
-                    element={<AdminNotifications />}
-                  />
-                  <Route
-                    path="/admindashboard/settings"
-                    element={<AdminSettings />}
-                  />
-                </>
-              ) : null}
-            </Routes>
-          </div>
-        </div>
+          {Object.keys(data).length &&
+          data.isAuthenticated &&
+          data.profile === "admin" ? (
+            <>
+              <Route path="/admindashboard" element={<AdminHome />} />
+              <Route
+                path="/admindashboard/products"
+                element={<AdminProducts />}
+              />
+              <Route path="/admindashboard/users" element={<AdminUsers />} />
+              <Route
+                path="/admindashboard/notifications"
+                element={<AdminNotifications />}
+              />
+              <Route
+                path="/admindashboard/settings"
+                element={<AdminSettings />}
+              />
+            </>
+          ) : null}
+        </Routes>
       </AuthProvider>
     </>
   );
