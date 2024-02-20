@@ -21,8 +21,6 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const { isAuthenticated } = useAuth0();
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
 
-  console.log(userData);
-
 
   // Sector Carrito
   useEffect(() => {
