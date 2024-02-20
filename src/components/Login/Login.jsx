@@ -77,65 +77,63 @@ export const Login = () => {
   };
 
   return (
-    <div className="w-full h-full mt-[80px] bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
+    <div className="w-full h-screen mt-[80px] bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
       <div className="flex m-5 h-[95%]">
-        <div className="w-3/5 h-full">
+        <div className="w-[70%] h-full">
           <img
             className="h-full object-cover rounded-l-md"
             src="img\image-login.jpg"
             alt=""
           />
         </div>
-        <div className="w-2/5 h-full">
-          <h2 className="absolute top-32 right-60 text-3xl font-bold text-[#FFFFFF]">
-            Iniciar Sesion
-          </h2>
+        <div className="w-[40%] h-full">
           <form
             onSubmit={handleSubmit}
-            className="h-full w-full flex justify-center items-center flex-col bg-[#1E68AD] text-[#FFFFFF] text-lg pt-10 font-medium rounded-r-md m-0" // Añadir clase m-0 aquí
+            className="h-full w-full flex justify-center items-center flex-col bg-[#1E68AD] text-[#FFFFFF] font-medium rounded-r-md" // Añadir clase m-0 aquí
           >
-            <div className="flex flex-col gap-2 w-2/4 h-2/6 text-center items-center">
-              <label htmlFor="email">Email</label>
+            <img className="w-[20%]" src="/public/img/logo4.png" alt="" />
+            <h2 className="font-bold text-3xl mb-[30px]">Iniciar Sesion</h2>
+            <div className="flex flex-col gap-3 w-[330px] h-2/6 ">
+              <label htmlFor="email">E-mail</label>
               <input
                 onChange={handleChange}
-                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C] w-60"
+                className="text-black h-[40px] w-[330px] pl-1 rounded-sm focus:border-2 border-[#FF6B6C]  focus:rounded-sm  "
                 name="email"
-                placeholder="Email..."
                 id="email"
                 type="email"
               />
               <label htmlFor="password">Contraseña</label>
               <input
                 onChange={handleChange}
-                className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C] w-60 mb-2" // Añadir margen inferior aquí
+                className="text-black h-[40px] w-[330px] pl-1 rounded-sm focus:border-2 border-[#FF6B6C] focus:rounded-sm" // Añadir margen inferior aquí
                 name="password"
-                placeholder="Contraseña..."
                 id="password"
                 type="password"
               />
             </div>
             <input
               disabled={buttonDisabled()}
-              className="mb-8 bg-[#FFFFFF] text-[#000000] w-40 h-11 rounded-lg cursor-pointer disabled:opacity-30 transition-colors hover:bg-[#FF6B6C] hover:text-[#FFFFFF]"
+              className=" bg-[#FFFFFF] text-[#000000] w-[330px] h-[40px] rounded-sm cursor-pointer disabled:opacity-30 transition-colors hover:bg-[#FF6B6C] hover:text-[#FFFFFF]"
               type="submit"
               value="Iniciar Sesion"
             />
-            <LoginButton />
-            <div>
-              <div className="mt-2">
-                <ul>
-                  <li>
-                    ¿No tienes cuenta?{" "}
-                    <Link
-                      className="text-[#000000] font-semibold text-xl hover:text-[#FF6B6C] transition-colors"
-                      to="/register"
-                    >
-                      Registrate
-                    </Link>
-                  </li>
-                </ul>
+            <div className="m-[20px]">
+              <div>
+                ¿No tienes cuenta?{" "}
+                <Link
+                  className="text-[#000000] font-semibold text-xl hover:text-[#FF6B6C] transition-colors"
+                  to="/register"
+                >
+                  Registrate
+                </Link>
               </div>
             </div>
+            <div className="flex justify-center items-start gap-[10px]">
+              <hr className=" w-[145px] mt-[20px]" />
+              <p className="mt-[8px]">O</p>
+              <hr className=" w-[145px] mt-[20px]" />
+            </div>
+            <LoginButton />
           </form>
         </div>
       </div>
