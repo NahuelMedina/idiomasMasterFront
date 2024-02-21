@@ -95,41 +95,43 @@ const ProfileSection = () => {
   return (
     (isAuthenticated || Object.keys(userData).length > 0) && (
       <div className="flex flex-rows w-full h-full gap-8 items-center">
-        <div className=" w-[60%] h-[90%]  grid-rows-5 overflow-hidden flex items-center justify-center">
-          <div className="h-[80%] w-full bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
-            <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
-              <h1 className="text-[18px] ml-[50px] text-white">Nombre</h1>
-            </div>
-            <div className="w-[70%] h-[full] flex items-center justify-evenly">
-              <input
-                type="text"
-                id="first_name"
-                name="name"
-                className={`h-10 w-[45%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white" ${user?.sub.includes("google") &&
-                  "opacity-50 cursor-not-allowed"
-                  }`}
-                placeholder="Ingresa Nombre"
-                value={editedData.name}
-                onChange={handleInputChange}
-                required
-                readOnly={user?.sub.includes("google")}
-              />
-              <input
-                type="text"
-                id="last_name"
-                name="lastname"
-                className={`h-10 w-[45%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white" ${user?.sub.includes("google") &&
-                  "opacity-50 cursor-not-allowed"
-                  }`}
-                placeholder="Ingresa Apellido"
-                value={editedData.lastname}
-                onChange={handleInputChange}
-                required
-                readOnly={user?.sub.includes("google")}
-              />
-            </div>
+      <div className=" w-[60%] h-[90%] grid grid-rows-5 overflow-hidden flex items-center justify-center">
+        <div className="h-[80%] w-full bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
+          <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
+            <h1 className="text-[18px] ml-[50px] text-white">Nombre</h1>
           </div>
-          <div className="h-[80%] w-full bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
+          <div className="w-[70%] h-[full] flex items-center justify-evenly">
+            <input
+              type="text"
+              id="first_name"
+              name="name"
+              className={`h-10 w-[45%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white" ${
+                user?.sub.includes("google") &&
+                "opacity-50 cursor-not-allowed"
+              }`}
+              placeholder="Ingresa Nombre"
+              value={editedData.name}
+              onChange={handleInputChange}
+              required
+              readOnly={user?.sub.includes("google")}
+            />
+            <input
+              type="text"
+              id="last_name"
+              name="lastname"
+              className={`h-10 w-[45%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white" ${
+                user?.sub.includes("google") &&
+                "opacity-50 cursor-not-allowed"
+              }`}
+              placeholder="Ingresa Apellido"
+              value={editedData.lastname}
+              onChange={handleInputChange}
+              required
+              readOnly={user?.sub.includes("google")}
+            />
+          </div>
+        </div>
+        <div className="h-[80%] w-full bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
             <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
               <h1 className="text-[18px] ml-[50px] text-white">Email</h1>
             </div>
@@ -138,9 +140,10 @@ const ProfileSection = () => {
                 type="email"
                 id="email"
                 name="email"
-                className={`h-10 w-[90%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white"  ${user?.sub.includes("google") &&
+                className={`h-10 w-[90%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white"  ${
+                  user?.sub.includes("google") &&
                   "opacity-50 cursor-not-allowed"
-                  }`}
+                }`}
                 placeholder="Ingresa tu Email para Modificarlo"
                 value={editedData.email}
                 onChange={handleInputChange}
@@ -158,9 +161,10 @@ const ProfileSection = () => {
                 type="password"
                 id="password"
                 name="password"
-                className={`h-10 w-[90%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white" ${user?.sub.includes("google") &&
+                className={`h-10 w-[90%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white" ${
+                  user?.sub.includes("google") &&
                   "opacity-50 cursor-not-allowed"
-                  }`}
+                }`}
                 placeholder="Ingresa tu Nueva Contraseña"
                 value={editedData.password}
                 onChange={handleInputChange}
@@ -168,8 +172,8 @@ const ProfileSection = () => {
                 readOnly={user?.sub.includes("google")}
               />
             </div>
-          </div>
-          <div className="h-[80%] w-[60%] bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
+            </div>
+            <div className="h-[80%] w-[60%] bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
             <div className="w-[52%] h-[full] bg-[#2d53d9] flex items-center ">
               <h1 className="text-[18px] ml-[50px] text-white">Edad</h1>
             </div>
@@ -178,7 +182,7 @@ const ProfileSection = () => {
                 type="age"
                 id="age"
                 name="age"
-                className="h-10 w-[90%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white"
+                className= "h-10 w-[90%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white"
                 placeholder="Ingresa tu Nueva Contraseña"
                 value={editedData.age}
                 onChange={handleInputChange}
@@ -191,27 +195,27 @@ const ProfileSection = () => {
             <button
               type="submit"
               onClick={handleSubmit}
-              className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4  rounded-[10px]"
+              className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
             >
               Guardar
             </button>
           </div>
-        </div>
-        <div className="w-[40%] h-[90%] flex flex-col items-start relative ">
-          <div className="flex flex-col w-full h-[70%] items-center">
-            <div className="flex flex-col w-full h-[70%] items-center justfify-center">
-              <img className="object-fit w-[250px] h-[250px] rounded-[250px] border-[1px] border-gray-200" src={imagePreview} alt="Bordered avatar" />
-            </div>
-
-            <div className="flex flex-row w-full h-[20%] items-center justify-evenly">
-              <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} id="file-input" />
-              {!user?.sub.includes('google') && (
-                <label htmlFor="file-input" className="w-[150px] h-[50px] border-2 border-black/30 hover:bg-yellow-400 text-black font-bold rounded-[10px] cursor-pointer flex items-center justify-center">
-                  Cambiar foto
-                </label>
-              )}
-            </div>
           </div>
+        <div className="w-[40%] h-[90%] flex flex-col items-start relative ">
+        <div className="flex flex-col w-full h-[70%] items-center">
+          <div className="flex flex-col w-full h-[70%] items-center justfify-center">
+          <img className="object-fit w-[250px] h-[250px] rounded-[250px] border-[1px] border-gray-200"  src={imagePreview} alt="Bordered avatar" />
+          </div>
+
+          <div className="flex flex-row w-full h-[20%] items-center justify-evenly">
+          <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none'}} id="file-input" />
+            {!user?.sub.includes('google') && (
+              <label htmlFor="file-input" className="w-[150px] h-[50px] border-2 border-black/30 hover:bg-yellow-400 text-black font-bold rounded rounded-[10px] cursor-pointer flex items-center justify-center">
+                Cambiar foto
+              </label>
+            )}
+          </div>
+        </div>
         </div>
       </div>
     )
