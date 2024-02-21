@@ -41,7 +41,7 @@ export const Configuration = () => {
       <div className="h-[90%] w-[90%] flex flex-row min-w-[20%] ">
         <div className="flex-col-6 min-w-[20%] h-full pl-[15px] justify-end">
           <div
-            className={`flex items-center h-[10%] font-bold border-l-[2px]  border-t-[2px] border-b-[1px] cursor-pointer ${options.perfil
+            className={`flex items-center h-[10%] font-bold border-l-[1px]  border-t-[1px] border-b-[1px] cursor-pointer ${options.perfil
                 ? "bg-blue-500 text-white cursor-not-allowed border-blue-500"
                 : "bg-white"
               }`}
@@ -52,7 +52,7 @@ export const Configuration = () => {
             </p>
           </div>
           <div
-            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[2px]  border-t-[1px] border-b-[1px]   cursor-pointer ${options.cursos
+            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px] border-b-[1px]   cursor-pointer ${options.cursos
                 ? "bg-blue-500 text-white cursor-not-allowed border-blue-500"
                 : "bg-white"
               }`}
@@ -63,7 +63,7 @@ export const Configuration = () => {
             </p>
           </div>
           <div
-            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[2px]  border-t-[1px] border-b-[1px]   cursor-pointer ${options.pago
+            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px]  border-b-[1px]   cursor-pointer ${options.pago
                 ? "bg-blue-500 text-white cursor-not-allowed border-blue-500"
                 : "bg-white"
               }`}
@@ -72,7 +72,7 @@ export const Configuration = () => {
             <p className="text-[18px] ml-[20px] focus:text-white ">Mis Pagos</p>
           </div>
           <div
-            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[2px]  border-t-[1px] border-b-[1px]  cursor-pointer ${options.review
+            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px] border-b-[1px]  cursor-pointer ${options.review
                 ? "bg-blue-500 text-white cursor-not-allowed border-blue-500 "
                 : "bg-white"
               }`}
