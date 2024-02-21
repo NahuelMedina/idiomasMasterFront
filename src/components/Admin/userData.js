@@ -219,3 +219,4 @@ export const getGoogleUser = async ({ email, name, lastname, image }) => {
     throw new Error(error.message);
   }
 };
+
