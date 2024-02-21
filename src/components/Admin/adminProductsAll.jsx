@@ -24,31 +24,31 @@ export default function AdminProductsAll({setSettings}) {
           <h1>Num</h1>
         </div>
         <div className="h-full w-[18%]  bg-[#151139]  flex items-center justify-center text-white">
-          <h1>Product Id</h1>
+          <h1>Id Producto</h1>
         </div>
         <div className="h-full w-[12%]  bg-[#151139] flex items-center justify-center text-white ">
-          <h1>Updated Date</h1>
+          <h1>Fecha </h1>
         </div>
         <div className="h-full w-[10%]  bg-[#151139]  flex items-center justify-center text-white">
-          <h1>Type</h1>
+          <h1>Tipo</h1>
         </div>
         <div className="h-full w-[7%] bg-[#151139]  flex items-center justify-center text-white">
-          <h1>Cost</h1>
+          <h1>Costo</h1>
         </div>
         <div className="h-full w-[7%] bg-[#151139]  flex items-center justify-center text-white">
-          <h1>Students</h1>
+          <h1>Estudiantes</h1>
         </div>
         <div className="h-full w-[11%] bg-[#151139] flex items-center justify-center text-white">
-          <h1>Status</h1>
+          <h1>Estado</h1>
         </div>
         <div className="h-full w-[10%]  bg-[#151139]  flex items-center justify-center text-white">
-          <h1>Start Date</h1>
+          <h1>Fecha Inicio</h1>
         </div>
         <div className="h-full w-[10%]  bg-[#151139]  flex items-center justify-center text-white">
-          <h1>Finish Date</h1>
+          <h1>Fecha Cierre</h1>
         </div>
         <div className="h-full w-[11%]  bg-[#3b3194]  flex items-center justify-center text-white">
-          <h1>Update</h1>
+          <h1>Configurar</h1>
         </div>
       </div>
       <div className="bg-[#282a54] w-full h-[96%] max-h-[637px] overflow-y-scroll ">

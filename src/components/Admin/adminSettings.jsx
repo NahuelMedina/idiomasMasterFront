@@ -54,13 +54,13 @@ export default function AdminSettings() {
       <div className="h-[85%] w-[85%] flex flex-col">
         <div className="w-full h-[8%] flex items-center pl-[40px] justify-between">
           <div className="h-full w-[20%]">
-            <h1 className="text-gray-800 text-[30px]">Admin Settings</h1>
+            <h1 className="text-gray-800 text-[30px]">Configuracion Administrador</h1>
           </div>
         </div>
         <form className="w-[60%] h-[90%]  grid grid-rows-6 rounded-[10px] gap-[5px] overflow-hidden">
           <div className="h-full w-full  bg-white flex flex-row rounded-[10px] overflow-hidden">
             <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
-              <h1 className="text-[20px] ml-[50px] text-white">Name</h1>
+              <h1 className="text-[20px] ml-[50px] text-white">Nombre</h1>
             </div>
             <div className="w-[70%] h-[full] flex items-center justify-evenly">
               <input
@@ -98,14 +98,14 @@ export default function AdminSettings() {
           </div>
           <div className="h-full w-full  bg-white flex flex-row rounded-[10px] overflow-hidden">
             <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
-              <h1 className="text-[20px] ml-[50px] text-white">Password</h1>
+              <h1 className="text-[20px] ml-[50px] text-white">Contraseña</h1>
             </div>
             <div className="w-[60%] h-[full] flex items-center justify-center">
               <input
                 id="password"
                 name="password"
                 value={user.password}
-                placeholder="New user password"
+                placeholder="Nuevo Password"
                 onChange={handleChange}
                 type="password"
                 required
@@ -119,7 +119,7 @@ export default function AdminSettings() {
               type="submit"
               className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded"
             >
-              Update User
+              Actualizar Usuario
             </button>
           </div>
         </form>

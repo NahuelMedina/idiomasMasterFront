@@ -26,19 +26,19 @@ export default function AdminReviewsAll({ setSettings }) {
           <h1>Num</h1>
         </div>
         <div className="h-full w-[25%]  bg-[#151139]  flex items-center justify-center text-white">
-          <h1>Review Id</h1>
+          <h1>ID Reseña</h1>
         </div>
         <div className="h-full w-[15%]  bg-[#151139] flex items-center justify-center text-white ">
-          <h1>Posted Date</h1>
+          <h1>Fecha Creacion</h1>
         </div>
         <div className="h-full w-[10%]  bg-[#151139]  flex items-center justify-center text-white">
-          <h1>User Valoration</h1>
+          <h1>Valoracion</h1>
         </div>
         <div className="h-full w-[17%] bg-[#151139]  flex items-center justify-center text-white">
-          <h1>View</h1>
+          <h1>Vista</h1>
         </div>
         <div className="h-full w-[17%] bg-[#151139] flex items-center justify-center text-white">
-          <h1>Replied</h1>
+          <h1>Respuesta</h1>
         </div>
         <div className="h-full w-[16%]  bg-[#3b3194]  flex items-center justify-center text-white">
           <h1>Info</h1>
