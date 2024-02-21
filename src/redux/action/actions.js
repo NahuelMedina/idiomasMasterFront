@@ -17,6 +17,8 @@ import {
   ALL_USERS,
   USER_COURSES,
   POST_USER_FAIL,
+  REVIEW_SENT_SUCCESS,
+  REVIEW_SENT_ERROR
 } from "./actiontypes";
 import axios from "axios";
 
@@ -111,7 +113,6 @@ export const postUser = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/createUser`, userData);
     
-    //alert("Usuario creado con Exito", response.data);
   } catch (error) {
     const message = error.response.data;
     dispatch({
@@ -119,7 +120,6 @@ export const postUser = (userData) => async (dispatch) => {
       payload: response,
     });
     
-    //alert(`${message}`);
   }
 };
 
@@ -141,6 +141,32 @@ export const postThirdPartyUser = (user) => async (dispatch) => {
   }
 };
 
+export const postReview = (formData) => {
+  return async (dispatch) => {
+    try {
+      console.log('ESTO RECIBE ACTION FORMDATA:', formData);
+      const response = await axios.post(`${URL}/createReview`, formData);
+      console.log('Reseña guardada exitosamente:', response.data);
+      
+      dispatch(reviewPostSuccess(response.data));
+    } catch (error) {
+      console.error('Error al guardar la reseña:', error);
+      
+      dispatch(reviewPostError(error));
+    }
+  };
+};
+
+const reviewPostSuccess = (data) => ({
+  type: REVIEW_SENT_SUCCESS,
+  payload: data 
+});
+
+const reviewPostError = (error) => ({
+  type: REVIEW_SENT_ERROR,
+  payload: error
+});
+
 export const getUser = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/getUser`, userData);
@@ -152,8 +178,6 @@ export const getUser = (userData) => async (dispatch) => {
       type: GET_USER_SUCCESS,
       payload: response.data,
     });
-
-    //alert("Se ha conectado");
     
   } catch (error) {
     console.error("Error al obtener usuario:", error);
@@ -172,11 +196,8 @@ export const updateUser = (changedFields) => async (dispatch) => {
     console.log(changedFields, "ESTO ENVIA LA ACTION UPDATEUSER");
     const response = await axios.put(`${URL}/putUser`, changedFields);
     console.log("Respuesta del servidor al guardar cambios:", response.data);
-    // Dispara una acción para actualizar los datos en el store local de Redux
-    // Aquí podrías dispatchear otra acción si necesitas actualizar otros datos en el store
   } catch (error) {
     console.error("Error al guardar cambios:", error);
-    // Podrías dispatchear otra acción para manejar el error si es necesario
   }
 };
 
