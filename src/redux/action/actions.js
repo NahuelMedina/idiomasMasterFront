@@ -67,25 +67,27 @@ export const orderPrice = (orden) => {
     payload: orden,
   };
 };
+//
 export function search(value) {
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`${URL}/getCourse/name?name=${value}`);
       console.log(data);
-      if (Array.isArray(data)) {
+      if (Array.isArray(data) && data.length > 0) {
         dispatch({
           type: SEARCH,
           payload: [data, value],
         });
       } else {
-        console.log("no se encontraron cursos");
+        throw new Error("No se encontraron cursos");
       }
     } catch (error) {
-      console.log("no se encontraron cursos");
+      console.error("Error al buscar cursos:", error);
+      throw error; // Re-lanzamos el error para que se maneje en el componente que llama a esta función
     }
   };
 }
-
+//
 export const postCourseRequest = () => ({
   type: POST_COURSE_REQUEST,
 });

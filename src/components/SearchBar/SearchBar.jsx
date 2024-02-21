@@ -3,20 +3,39 @@ import { useDispatch } from "react-redux";
 import { search } from "../../redux/action/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Swal from "sweetalert2";
 export const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState("");
 
-
-  const handleSubmit = (event) => {
+  //
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(search(searchTerm));
-    setSearchTerm("");
-    navigate("/search");
-  }
+    try {
+      const response = await dispatch(search(searchTerm));
+      // Si llegamos aquí, significa que se encontraron cursos
+      Swal.fire({
+        icon: 'success',
+        title: 'Hora de aprender',
+        text: 'Se encontraron cursos con ese nombre.',
+        showConfirmButton: false,
+        timer: 2200
+      });
+      setSearchTerm("");
+      navigate("/search");
+    } catch (error) {
+      // Si se produce un error, significa que no se encontraron cursos
+      console.error('Error en la búsqueda:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Lo sentimos!',
+        text: 'No hay cursos con ese nombre. Por favor, inténtelo de nuevo.',
 
+      });
+    }
+  };
+  //
   const handleSearch = (event) => {
     const value = event.target.value;
     setSearchTerm(value);

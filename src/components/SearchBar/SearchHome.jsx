@@ -72,20 +72,7 @@ export const SearchHome = () => {
       const response = await axios.get(
         `http://localhost:3000/getCourseFilters?language=${language}&level=${level}`
       );
-      if (response.data) {
-        Swal.fire({
-          icon: 'success',
-          title: '¡Hora de Aprender!',
-          showConfirmButton: false,
-          timer: 2000
-        })
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Lo sentimos',
-          text: "No hay cursos con ese nombre, Por favor intente nuevamente con otro lenguaje"
-        })
-      }
+
       if (num === "A" || num === "all") {
         const sortedData = sortByDescending(response.data);
 
