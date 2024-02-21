@@ -95,7 +95,7 @@ const ProfileSection = () => {
   return (
     (isAuthenticated || Object.keys(userData).length > 0) && (
       <div className="flex flex-rows w-full h-full gap-8 items-center">
-        <div className=" w-[60%] h-[90%] grid grid-rows-5 overflow-hidden flex items-center justify-center">
+        <div className=" w-[60%] h-[90%]  grid-rows-5 overflow-hidden flex items-center justify-center">
           <div className="h-[80%] w-full bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
             <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
               <h1 className="text-[18px] ml-[50px] text-white">Nombre</h1>
@@ -191,7 +191,7 @@ const ProfileSection = () => {
             <button
               type="submit"
               onClick={handleSubmit}
-              className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
+              className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4  rounded-[10px]"
             >
               Guardar
             </button>
@@ -206,7 +206,7 @@ const ProfileSection = () => {
             <div className="flex flex-row w-full h-[20%] items-center justify-evenly">
               <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} id="file-input" />
               {!user?.sub.includes('google') && (
-                <label htmlFor="file-input" className="w-[150px] h-[50px] border-2 border-black/30 hover:bg-yellow-400 text-black font-bold rounded rounded-[10px] cursor-pointer flex items-center justify-center">
+                <label htmlFor="file-input" className="w-[150px] h-[50px] border-2 border-black/30 hover:bg-yellow-400 text-black font-bold rounded-[10px] cursor-pointer flex items-center justify-center">
                   Cambiar foto
                 </label>
               )}
