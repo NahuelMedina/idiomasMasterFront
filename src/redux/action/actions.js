@@ -78,10 +78,10 @@ export function search(value) {
           payload: [data, value],
         });
       } else {
-        alert("No se encontraron resultados");
+        console.log("no se encontraron cursos");
       }
     } catch (error) {
-      alert(error);
+      console.log("no se encontraron cursos");
     }
   };
 }

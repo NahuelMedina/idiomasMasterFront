@@ -63,6 +63,11 @@ export const Login = () => {
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al intentar ingresar',
+        text: "Error al iniciar sesión El correo electrónico/contraseña que ingresó es incorrecto. Verifique sus credenciales o intente utilizar un método diferente para iniciar sesión."
+      })
     }
   };
 
