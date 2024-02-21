@@ -49,11 +49,11 @@ const Register = () => {
   };
 
   const buttonDisabled = () => {
-    let buttonAux = false;
+    let buttonAux = true;
 
     for (const error in errors) {
       if (errors[error]) {
-        buttonAux = true;
+        buttonAux = false;
       }
     }
     return buttonAux;
