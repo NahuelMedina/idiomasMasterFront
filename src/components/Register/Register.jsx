@@ -54,9 +54,9 @@ const Register = () => {
     for (const error in errors) {
       if (errors[error]) {
         buttonAux = true;
-        return buttonAux;
       }
     }
+    return buttonAux;
   };
 
   const handleSubmit = (e) => {
