@@ -21,21 +21,6 @@ const Register = () => {
     age: "",
   });
 
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'center',
-    iconColor: 'white',
-    customClass: {
-      popup: 'colored-toast',
-    },
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-  })
-
-
-
   const [errors, setErrors] = useState({});
   const handleChange = (e) => {
     e.preventDefault();
@@ -77,17 +62,21 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
-    if(postError === null){
-      Toast.fire({
+    if (postError === null) {
+      Swal.fire({
         icon: 'success',
-        title: "Usuario creado con Exito",
-      })
+        title: '¡Usuario Creado Correctamente!',
+        showConfirmButton: false,
+        timer: 2300 // La alerta se cerrará automáticamente después de 1.5 segundos
+      });
       setStatus(false)
-    } else{
-      Toast.fire({
+      navigate("/login")
+    } else {
+      Swal.fire({
         icon: 'error',
-        title: `${postError}`,
-      })
+        title: 'Error al Crear Usuario',
+        text: `${postError}` // Puedes mostrar el mensaje de error específico si lo proporciona la función de registro
+      });
     }
   };
 
