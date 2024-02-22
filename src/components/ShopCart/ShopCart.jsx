@@ -6,25 +6,36 @@ import { Card } from "../Card/Card";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { createPreference } from "../../redux/action/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart, createPreference, deleteCart, getCartDB } from "../../redux/action/actions";
 const URL = import.meta.env.VITE_URL_HOST;
 const ShopCart = () => {
-  const [cartCourse, setCartCourse] = useState([]);
+  const [cartCourse, setCartCourse] = useState(JSON.parse(localStorage.getItem("cart")));
   const [renderCards, setRenderCards] = useState([]);
   const [pageNum, setPageNum] = useState(0);
   const [total, setTotal] = useState(0);
   const [items, setItems] = useState(1);
+  const currentCart = useSelector(state => state.currentCart)
   const dispatch = useDispatch();
   const location = useLocation();
-  const getCart = () => {
-    return JSON.parse(localStorage.getItem("cart"));
-  };
-
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
+  console.log(currentCart.courses);
+  const [isInCart, setIsInCart]= useState(false)
+  
   useEffect(() => {
-    setCartCourse(getCart());
-  }, []);
-
+    
+    if(isInCart === false){
+    dispatch(getCartDB(userData._id));
+    dispatch(addCart({
+      CoursesArray: JSON.parse(localStorage.getItem("cart")),
+      CartId: currentCart?._id
+    }));
+    setIsInCart(true)
+    }
+  
+  }, [cartCourse, userData._id, currentCart, dispatch]);
+  
+ 
   useEffect(() => {
     if (cartCourse === null) {
       return;
@@ -41,11 +52,13 @@ const ShopCart = () => {
     setCartCourse([]);
     setRenderCards();
     setPageNum();
+    setIsInCart(false)
   };
 
   const removeFromCart = (id) => {
     const updatedCart = cartCourse.filter((course) => course._id !== id);
     setCartCourse(updatedCart);
+    setIsInCart(false)
     const pageNums = Math.ceil(updatedCart.length / itemsOnPage);
     setPageNum(pageNums);
     const itemsArray = Array.from({ length: pageNums }, (_, index) =>
@@ -124,7 +137,6 @@ const ShopCart = () => {
       )
     );
   };
-  console.log(total);
   const handlePlusOne = (id) => {
     setCartCourse((prevCart) =>
       prevCart.map((course) =>
@@ -229,7 +241,7 @@ const ShopCart = () => {
             cartCourse.length > 0 &&
             renderCards.map((element, index) => (
               <Card
-                key={index}
+                key={element._id}
                 course={element}
                 removeFromCart={removeFromCart}
               />

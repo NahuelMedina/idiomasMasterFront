@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaLanguage } from "react-icons/fa";
@@ -7,19 +8,31 @@ import { TbMessageLanguage } from "react-icons/tb";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
 import { Card } from "../Card/Card";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart, deleteCart, getCartDB } from "../../redux/action/actions";
 const URL = import.meta.env.VITE_URL_HOST;
+
+
 function HomeC() {
+
   const sortByDescending = (data) => {
     return data.sort((a, b) => b.price - a.price);
   };
   const sortByAscending = (data) => {
     return data.sort((a, b) => a.price - b.price);
   };
-
+  const dispatch = useDispatch()
   const [language, setLanguage] = useState("all");
   const [level, setLevel] = useState("all");
   const [num, setNum] = useState("all");
   const [courses, setCourses] = useState([]);
+  const [userCart, setUserCart] =useState(JSON.parse(window.localStorage.getItem("cart")))
+
+// useEffect(()=>{
+//   dispatch(getCartDB(userData._id))
+// })
+
+
 
   const [pagePosition, setPagePosition] = useState(1);
   const itemsOnPage = 3;
@@ -177,8 +190,8 @@ function HomeC() {
         <div className="flex justify-evenly items-center h-[80%] w-full ">
           {courses &&
             courses.length > 0 &&
-            renderCards.map((element, index) => (
-              <Card key={index} course={element} />
+            renderCards.map((element) => (
+              <Card key={element._id} course={element}  />
             ))}
         </div>
 

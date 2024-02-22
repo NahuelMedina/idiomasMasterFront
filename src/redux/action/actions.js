@@ -18,6 +18,9 @@ import {
   USER_COURSES,
   POST_USER_SUCCESS,
   POST_USER_FAIL,
+  GET_CART,
+  ADD_CART,
+  DELETE_CART,
 } from "./actiontypes";
 import axios from "axios";
 
@@ -254,5 +257,44 @@ export const setUserdata = (user) => {
   return {
     type: SET_USER_DATA,
     payload: user,
+  };
+}
+
+export function getCartDB(id) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`${URL}/getCart/${id}`);
+      dispatch({
+        type: GET_CART,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+export function addCart(cart) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.put(`${URL}/addCartProduct`, cart);
+      dispatch({
+        type: ADD_CART,
+        payload: data,
+      });
+    } catch (error) {
+    }
+  };
+}
+export function deleteCart(cart) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.put(`${URL}/deleteCartProduct`, cart);
+      dispatch({
+        type: DELETE_CART,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
   };
 }

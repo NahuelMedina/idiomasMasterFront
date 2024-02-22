@@ -10,8 +10,9 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const postStatus = useSelector(state => state.postStatus)
+  const postStatusFail = useSelector(state => state.postStatusFail)
   const postError = useSelector(state => state.postError)
-  const [status, setStatus] = useState(postStatus)
+  const [status, setStatus] = useState(true)
   const [state, setState] = useState({
     name: "",
     lastname: "",
@@ -77,16 +78,21 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
-    if(postError === null){
+    if(postError ===  null && status ){
       Toast.fire({
         icon: 'success',
         title: "Usuario creado con Exito",
       })
       setStatus(false)
-    } else{
+    } else if(!status && postError !== null){
       Toast.fire({
         icon: 'error',
         title: `${postError}`,
+      })
+    } else {
+      Toast.fire({
+        icon: 'error',
+        title: "Error al crear el usuario",
       })
     }
   };

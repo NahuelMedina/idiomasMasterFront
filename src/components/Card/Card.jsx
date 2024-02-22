@@ -11,18 +11,23 @@ import { useEffect, useState } from "react";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
+import { addCart, deleteCart, getCartDB } from "../../redux/action/actions";
+import { useDispatch, useSelector } from "react-redux";
 
-export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
+export const Card = ({ course, removeFromFavorites, removeFromCart, }) => {
+  const dispatch = useDispatch()
   const location = useLocation();
+  const currentCart = useSelector(state => state.currentCart)
   const [isFav, setIsFav] = useState(false);
   const [fav, setFav] = useLocalStorage("fav", "");
   const [isCart, setIsCart] = useState(false);
   const [cart, setCart] = useLocalStorage("cart", "");
   const { isAuthenticated } = useAuth0();
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
-
-  console.log(userData);
-
+  const [cartState, setCartState ] = useState({
+    CourseId: "",
+    CartId: ""
+  })
 
   // Sector Carrito
   useEffect(() => {
@@ -36,6 +41,9 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   }, [course, cart]);
 
   const handleCart = () => {
+  dispatch(getCartDB(userData._id))
+
+    
     if (!isAuthenticated && !userData.hasOwnProperty('email')) {
       Swal.fire({
         icon: "info",
