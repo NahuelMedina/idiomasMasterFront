@@ -69,7 +69,7 @@ export default function AdminHome() {
     <div className="h-[90vh] w-full bg-[#f1f1f1] flex items-center justify-center">
       <div className="h-[85%] w-[85%] flex flex-col">
         <div className="w-full h-[8%] flex items-center pl-[40px] border-b-[2px] border-gray-300">
-          <h1 className="text-gray-800 text-[30px]">Admin Dashboard</h1>
+          <h1 className="text-gray-800 text-[30px]"> Dashboard de Administrador</h1>
         </div>
         <div className="w-full h-[90%]  grid grid-cols-2 grid-rows-2 gap-[15px] overflow-hidden">
           <div className="h-full w-full  flex items-center justify-center">

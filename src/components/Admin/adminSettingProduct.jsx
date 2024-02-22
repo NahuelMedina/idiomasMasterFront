@@ -163,14 +163,14 @@ export default function AdminSettingProduct() {
     <div className="w-full h-full flex flex-col border-[#151139] border-[1px] overflow-croll">
       <div className="w-full h-[40px] bg-[#151139]  flex flex-row items-center">
         <p className=" text-white ml-6 text-[20px]">
-          Search & Updated a Product
+          Busca & Configura un Producto
         </p>
       </div>
       <div className="w-full h-[20%] bg-[#151139]  flex flex-row ">
         <div className="h-full w-[40%] ">
           <div className="w-full h-full pl-[20px] bg-[#151139] flex flex-row items-center">
             <input
-              placeholder="Search Product by ID"
+              placeholder="Busca Producto por ID"
               type="search"
               value={searchTerm}
               className="w-[400px] h-[40px]  rounded-lg text-black px-6 py-3 text-base hover:border-[#7aacfd] cursor-pointer transition mr-[15px]"
@@ -187,7 +187,7 @@ export default function AdminSettingProduct() {
         {course._id && course._id.length > 0 && (
           <div className="h-full w-[60%] flex items-center justify-center bg-[#373a6c] ">
             <div className="h-full w-[50%] flex items-center justify-center">
-              <h1 className="text-yellow-500 text-[18px]">{`Product Id: ${course._id}`}</h1>
+              <h1 className="text-yellow-500 text-[18px]">{`ID Producto: ${course._id}`}</h1>
             </div>
 
             <div className="h-full w-[50%] flex items-center justify-center">
@@ -200,8 +200,8 @@ export default function AdminSettingProduct() {
                   required
                   className="h-10 w-[40%] border mt-1 rounded px-4 bg-gray-50"
                 >
-                  <option value={true}>Active</option>
-                  <option value={false}>Inactive</option>
+                  <option value={true}>Activo</option>
+                  <option value={false}>Inactivo</option>
                 </select>
                 {course.status ? (
                   <div className="h-full w-[30%]  flex flex-row items-center justify-center">
@@ -483,17 +483,13 @@ export default function AdminSettingProduct() {
                 </div>
               </div>
               <div className="w-full h-[25%] bg-[#373a6c] pl-[20px] rounded-[10px]">
-                <div className="w-full h-[25%] flex items-center justify-center">
-                  <label htmlFor="duration" className="text-white text-[20px]">
-                    Submit Product
-                  </label>
-                </div>
-                <div className="w-full h-[75%] flex items-center justify-center">
+       
+                <div className="w-full h-full flex items-center justify-center">
                   <button
                     type="submit"
                     className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded"
                   >
-                    Update Product
+                    Actualiza Producto
                   </button>
                 </div>
               </div>
@@ -503,7 +499,7 @@ export default function AdminSettingProduct() {
       ) : (
         <>
           <div className=" w-full h-full rounded-[10px] items-center justify-center flex">
-            <h1 className="text-yellow-500 text-[40px]">Search a User</h1>
+            <h1 className="text-yellow-500 text-[40px]">Busca un Producto</h1>
             <FaSearchPlus className="text-white text-[40px] ml-[30px]" />
           </div>
         </>
