@@ -5,6 +5,8 @@ import LoginButton from "../../googleLogin";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useEffect, useState } from "react";
 import { getmailUser } from "../Admin/userData";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -72,8 +74,109 @@ export const Login = () => {
   };
 
   return (
-    <div className="w-full h-full mt-[80px] bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
-      <div className="flex m-5 h-[95%]">
+    <div className="w-full h-[90vh] mt-[80px] grid grid-cols-2">
+      <div className="w-full h-full flex relative">
+        <img
+          className="h-full object-cover rounded-l-md animate-fade-right animate-ease-in-out"
+          src="img\image-login.jpg"
+          alt=""
+        />
+        <div className="absolute w-full h-full bg-black/50 animate-fade-right animate-ease-in-out"></div>
+      </div>
+      <div className="w-full h-full flex items-center justify-center bg-white">
+        <div className="bg-gradient-to-r from-sky-600 to-sky-600 w-[80%] h-[80%] rounded-[20px] flex flex-col items-center shadow-lg shadow-black/50 animate-fade-left animate-ease-in-out">
+          <div className=" w-[70%] h-[15%] flex items-center justify-center border-b-[1px] border-b-yellow-400">
+            <h1 className="text-[40px] text-yellow-400">Inicio de Sesion</h1>
+          </div>
+          <form onSubmit={handleSubmit} className=" w-[80%] h-[60%] grid grid-rows-3 py-[10px]">
+          <div className=" w-full h-full">
+              <div className=" w-full h-[70%] flex flex-col items-center justify-center">
+                <div className="h-[80%] w-[90%] rounded-[10px] bg-purple-500 flex flex-row overflow-hidden">
+                  <div className="w-[20%] h-full bg-sky-900 flex items-center justify-center">
+                    <MdEmail className="text-[40px] text-white" />
+                  </div>
+
+                  <input
+                    className="text-black w-[80%] h-full pl-[20px] text-[20px]"
+                    onChange={handleChange}
+                    name="email"
+                    placeholder="Ingresa tu Email"
+                    id="email"
+                    type="email"
+                  />
+                </div>
+              </div>
+              <div className=" w-full h-[30%] flex items-center justify-center">
+                {/* <span
+                  style={{
+                    color: "rgb(255,255,255)",
+                    fontSize: "15px",
+                    lineheight: ".75rem",
+                  }}
+                >
+                  {errors.email}
+                </span> */}
+              </div>
+            </div>
+            <div className=" w-full h-full">
+              <div className=" w-full h-[70%] flex flex-col items-center justify-center">
+                <div className="h-[80%] w-[90%] rounded-[10px] bg-purple-500 flex flex-row overflow-hidden">
+                  <div className="w-[20%] h-full bg-sky-900 flex items-center justify-center">
+                    <RiLockPasswordLine className="text-[40px] text-white" />
+                  </div>
+
+                  <input
+                    className="text-black w-[80%] h-full pl-[20px] text-[20px]"
+                    onChange={handleChange}
+                    placeholder="Ingresa tu Contraseña"
+                    name="password"
+                    id="password"
+                    type="password"
+                  />
+                </div>
+              </div>
+              <div className=" w-full h-[30%] flex items-center justify-center">
+                {/* <span
+                  style={{
+                    color: "rgb(255,255,255)",
+                    fontSize: "15px",
+                    lineheight: ".75rem",
+                  }}
+                >
+                  {errors.password}
+                </span> */}
+              </div>
+            </div>
+            <div className="w-full h-full flex items-center justify-center">
+                <input
+                  disabled={buttonDisabled()}
+                  className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded disabled:opacity-30 disabled:cursor-not-allowed"
+                  type="submit"
+                  value="Iniciar Sesion"
+                />
+              </div>
+          </form>
+          <div className=" w-[70%] h-[15%] flex items-center flex-col justify-evenly border-t-[1px] border-t-yellow-500">
+         
+          <LoginButton />
+          </div>
+          <div className=" w-[70%] h-[5%] flex items-center flex-col">
+         
+          <ul>
+                  <li li className="text-white">
+                    ¿No tienes cuenta?{" "}
+                    <Link
+                       className="text-yellow-400 font-bold text-xl hover:text-yellow-600	"
+                      to="/register"
+                    >
+                      Registrate
+                    </Link>
+                  </li>
+                </ul>
+         </div>
+        </div>
+      </div>
+      {/* <div className="flex m-5 h-[95%]">
         <div className="w-3/5 h-full">
           <img
             className="h-full object-cover rounded-l-md"
@@ -133,7 +236,7 @@ export const Login = () => {
             </div>
           </form>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
