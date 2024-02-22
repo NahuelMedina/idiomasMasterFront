@@ -16,8 +16,7 @@ import {
   SET_USER_DATA,
   ALL_USERS,
   USER_COURSES,
-  POST_USER_SUCCESS,
-  POST_USER_FAIL,
+  ADMINREVIEW,
 } from "./actiontypes";
 import axios from "axios";
 
@@ -67,27 +66,25 @@ export const orderPrice = (orden) => {
     payload: orden,
   };
 };
-//
 export function search(value) {
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`${URL}/getCourse/name?name=${value}`);
       console.log(data);
-      if (Array.isArray(data) && data.length > 0) {
+      if (Array.isArray(data)) {
         dispatch({
           type: SEARCH,
           payload: [data, value],
         });
       } else {
-        throw new Error("No se encontraron cursos");
+        alert("No se encontraron resultados");
       }
     } catch (error) {
-      console.error("Error al buscar cursos:", error);
-      throw error; // Re-lanzamos el error para que se maneje en el componente que llama a esta función
+      alert(error);
     }
   };
 }
-//
+
 export const postCourseRequest = () => ({
   type: POST_COURSE_REQUEST,
 });
@@ -113,19 +110,10 @@ export const postCourseData = (courseData) => async (dispatch) => {
 export const postUser = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/createUser`, userData);
-    dispatch({
-      type: POST_USER_SUCCESS,
-      payload: response,
-    });
-    //alert("Usuario creado con Exito", response.data);
+    alert("Usuario creado con Exito", response.data);
   } catch (error) {
     const message = error.response.data;
-    dispatch({
-      type: POST_USER_FAIL,
-      payload: message,
-    });
-
-    //alert(`${message}`);
+    alert(`${message}`);
   }
 };
 
@@ -139,7 +127,6 @@ export const postThirdPartyUser = (user) => async (dispatch) => {
     };
     console.log("ESTO ES USERDATA EN THIRPARTY", userData);
     const response = await axios.post(`${URL}/createUser`, userData);
-
     alert("Usuario creado con éxito", response.data);
   } catch (error) {
     const message = error.response.data;
@@ -159,8 +146,7 @@ export const getUser = (userData) => async (dispatch) => {
       payload: response.data,
     });
 
-    //alert("Se ha conectado");
-
+    alert("Se ha conectado");
   } catch (error) {
     console.error("Error al obtener usuario:", error);
 
@@ -252,9 +238,8 @@ export const createPreference = async (product) => {
 };
 
 export const setUserdata = (user) => {
-
   return {
     type: SET_USER_DATA,
     payload: user,
   };
-}
+};

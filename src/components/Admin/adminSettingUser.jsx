@@ -6,6 +6,7 @@ import { FaCircle } from "react-icons/fa";
 import { adminProduct } from "../../redux/action/actions";
 import { RiFileUserLine } from "react-icons/ri";
 import { idUser, putUser } from "./userData";
+import { FaSearchPlus } from "react-icons/fa";
 
 export default function AdminSettingUser() {
   const initialUserState = {
@@ -117,13 +118,13 @@ export default function AdminSettingUser() {
   return (
     <div className="w-full h-full flex flex-col border-[#151139] border-[1px] overflow-croll">
       <div className="w-full h-[40px] bg-[#151139]  flex flex-row items-center">
-        <p className=" text-white ml-6 text-[20px]">Search & Updated User</p>
+        <p className=" text-white ml-6 text-[20px]">Busca & Actualiza Usuario</p>
       </div>
       <div className="w-full h-[20%] bg-[#151139]  flex flex-row ">
         <div className="h-full w-[40%] ">
           <div className="w-full h-full pl-[20px] bg-[#151139] flex flex-row items-center">
             <input
-              placeholder="Search User by ID"
+              placeholder="Busca Usuario por ID"
               type="search"
               value={searchTerm}
               className="w-[400px] h-[40px]  rounded-lg text-black px-6 py-3 text-base hover:border-[#7aacfd] cursor-pointer transition mr-[15px]"
@@ -140,7 +141,7 @@ export default function AdminSettingUser() {
         {user._id && user._id.length > 0 && (
           <div className="h-full w-[60%] flex items-center justify-center bg-[#373a6c] ">
             <div className="h-full w-[50%] flex items-center justify-center">
-              <h1 className="text-yellow-500 text-[18px]">{`User Id: ${user._id}`}</h1>
+              <h1 className="text-yellow-500 text-[18px]">{`ID Usuario: ${user._id}`}</h1>
             </div>
 
             <div className="h-full w-[50%] flex items-center justify-center">
@@ -153,8 +154,8 @@ export default function AdminSettingUser() {
                   required
                   className="h-10 w-[40%] border mt-1 rounded px-4 bg-gray-50"
                 >
-                  <option value={true}>Active</option>
-                  <option value={false}>Inactive</option>
+                  <option value={true}>Activo</option>
+                  <option value={false}>Inactivo</option>
                 </select>
                 {user.status ? (
                   <div className="h-full w-[30%]  flex flex-row items-center justify-center">
@@ -170,7 +171,9 @@ export default function AdminSettingUser() {
           </div>
         )}
       </div>
-      <form
+      {user._id && user._id.length ?(
+        <>
+         <form
         onSubmit={handleSubmit}
         className="bg-[#282a54] w-full h-[96%] grid grid-cols-3 gap-[5px] p-[5px]"
       >
@@ -178,7 +181,7 @@ export default function AdminSettingUser() {
           <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
             <div className="w-full h-[25%] flex items-center">
               <label htmlFor="language" className="text-white text-[18px]">
-                Name
+                Nombre
               </label>
             </div>
             <div className="w-full h-[50%] flex items-center">
@@ -212,7 +215,7 @@ export default function AdminSettingUser() {
           <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
             <div className="w-full h-[25%] flex items-center">
               <label htmlFor="language" className="text-white text-[18px]">
-                Type
+               Tipo
               </label>
             </div>
             <div className="w-full h-[50%] flex items-center">
@@ -235,7 +238,7 @@ export default function AdminSettingUser() {
           <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
             <div className="w-full h-[25%] flex items-center">
               <label htmlFor="language" className="text-white text-[18px]">
-                Lastname
+                Apellido
               </label>
             </div>
             <div className="w-full h-[50%] flex items-center">
@@ -252,7 +255,7 @@ export default function AdminSettingUser() {
           <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
             <div className="w-full h-[25%] flex items-center">
               <label htmlFor="language" className="text-white text-[18px]">
-                Password
+                Contraseña
               </label>
             </div>
             <div className="w-full h-[50%] flex items-center">
@@ -261,7 +264,7 @@ export default function AdminSettingUser() {
                 name="password"
                 value={user.password}
                 onChange={handleChange}
-                placeholder="New user password"
+                placeholder="Nueva Contraseña"
                 className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
               ></input>
             </div>
@@ -269,7 +272,7 @@ export default function AdminSettingUser() {
           <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
             <div className="w-full h-[25%] flex items-center">
               <label htmlFor="language" className="text-white text-[18px]">
-                Age
+                Edad
               </label>
             </div>
             <div className="w-full h-[50%] flex items-center">
@@ -317,12 +320,24 @@ export default function AdminSettingUser() {
                 type="submit"
                 className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded"
               >
-                Update User
+                Actualizar Usuario
               </button>
             </div>
           </div>
         </div>
       </form>
+        </>
+        ):(
+
+          <>
+              <div className=" w-full h-full rounded-[10px] items-center justify-center flex">
+           <h1 className="text-yellow-500 text-[40px]">Busca un Usuario</h1>
+           <FaSearchPlus className="text-white text-[40px] ml-[30px]" />
+          </div>
+          </>
+  
+        )}
+     
     </div>
   );
 }
