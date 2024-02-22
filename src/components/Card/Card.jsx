@@ -235,14 +235,20 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
           <div className="w-full h-full px-[15px] flex items-center text-white justify-center items-center bg-sky-700 hover:bg-red-500 cursor:pointer hover:text-black">
             {isCart ? (
               <div className="flex cursor:pointer flex items-center justify-center">
-                <h1 onClick={handleCart} className="text-[15px] cursor:pointer ">
+                <h1
+                  onClick={handleCart}
+                  className="text-[15px] cursor:pointer "
+                >
                   Eliminar del carrito
                 </h1>
                 <FaRegTrashCan className="text-[30px] cursor:pointer" />
               </div>
             ) : (
               <div className=" flex items-center justify-center">
-                <button onClick={handleCart} className="text-[15px] cursor:pointer">
+                <button
+                  onClick={handleCart}
+                  className="text-[15px] cursor:pointer"
+                >
                   Agregar al carrito
                 </button>
                 <FaCartShopping className="text-[25px] cursor:pointer" />

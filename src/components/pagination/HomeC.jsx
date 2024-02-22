@@ -12,27 +12,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCart, deleteCart, getCartDB } from "../../redux/action/actions";
 const URL = import.meta.env.VITE_URL_HOST;
 
-
 function HomeC() {
-
   const sortByDescending = (data) => {
     return data.sort((a, b) => b.price - a.price);
   };
   const sortByAscending = (data) => {
     return data.sort((a, b) => a.price - b.price);
   };
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [language, setLanguage] = useState("all");
   const [level, setLevel] = useState("all");
   const [num, setNum] = useState("all");
   const [courses, setCourses] = useState([]);
-  const [userCart, setUserCart] =useState(JSON.parse(window.localStorage.getItem("cart")))
+  const [userCart, setUserCart] = useState(
+    JSON.parse(window.localStorage.getItem("cart"))
+  );
 
-// useEffect(()=>{
-//   dispatch(getCartDB(userData._id))
-// })
-
-
+  // useEffect(()=>{
+  //   dispatch(getCartDB(userData._id))
+  // })
 
   const [pagePosition, setPagePosition] = useState(1);
   const itemsOnPage = 2;
@@ -191,7 +189,7 @@ function HomeC() {
           {courses &&
             courses.length > 0 &&
             renderCards.map((element) => (
-              <Card key={element._id} course={element}  />
+              <Card key={element._id} course={element} />
             ))}
         </div>
 

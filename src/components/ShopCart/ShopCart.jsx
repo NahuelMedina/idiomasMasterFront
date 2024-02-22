@@ -284,31 +284,27 @@ const ShopCart = () => {
                   className="flex items-center justify-between px-4 py-2 border-b border-gray-400"
                 >
                   <div className="flex items-center justify-start  h-full w-[80%]">
-                  <div className="h-full w-[30%] flex flex-row items-center justify-evenly">
-                  <button
-                      onClick={() => handleMinusOne(c._id)}
-                      className="p-2 focus:outline-none text-1xl text-black rounded-full"
-                    >
-                      <FaMinus />
-                    </button>
-                    <p className="text-lg text-gray-600 font-semibold mr-2">
-                      {c.items || 1}
-                    </p>
-                    <button
-                      onClick={() => handlePlusOne(c._id)}
-                      className="p-2 focus:outline-none text-1xl text-black rounded-full"
-                    >
-                      <FaPlus />
-                    </button>
+                    <div className="h-full w-[30%] flex flex-row items-center justify-evenly">
+                      <button
+                        onClick={() => handleMinusOne(c._id)}
+                        className="p-2 focus:outline-none text-1xl text-black rounded-full"
+                      >
+                        <FaMinus />
+                      </button>
+                      <p className="text-lg text-gray-600 font-semibold mr-2">
+                        {c.items || 1}
+                      </p>
+                      <button
+                        onClick={() => handlePlusOne(c._id)}
+                        className="p-2 focus:outline-none text-1xl text-black rounded-full"
+                      >
+                        <FaPlus />
+                      </button>
+                    </div>
 
-
-</div>
-
-                    
                     <p className="text-lg text-gray-800 font-semibold mx-2">
                       {c.language}, {c.level}
                     </p>
-                    
                   </div>
                   <p className="text-lg text-gray-800 font-semibold">
                     ${c.price * (c.items || 1)}

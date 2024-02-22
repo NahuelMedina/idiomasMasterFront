@@ -20,8 +20,6 @@ export const Login = () => {
     password: "",
   });
 
-
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserDataLocally({ ...userData, [name]: value });
@@ -57,19 +55,19 @@ export const Login = () => {
         setUserDataLocally(updatedUserData);
         dispatch(setUserdata(updatedUserData));
         Swal.fire({
-          icon: 'success',
-          title: '¡Loggeado con Éxito!',
+          icon: "success",
+          title: "¡Loggeado con Éxito!",
           showConfirmButton: false,
-          timer: 2200
-        });;
+          timer: 2200,
+        });
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       Swal.fire({
-        icon: 'error',
-        title: 'Error al intentar ingresar',
-        text: "Error al iniciar sesión El correo electrónico/contraseña que ingresó es incorrecto. Verifique sus credenciales o intente utilizar un método diferente para iniciar sesión."
-      })
+        icon: "error",
+        title: "Error al intentar ingresar",
+        text: "Error al iniciar sesión El correo electrónico/contraseña que ingresó es incorrecto. Verifique sus credenciales o intente utilizar un método diferente para iniciar sesión.",
+      });
     }
   };
 
@@ -88,8 +86,11 @@ export const Login = () => {
           <div className=" w-[70%] h-[15%] flex items-center justify-center border-b-[1px] border-b-yellow-400">
             <h1 className="text-[40px] text-yellow-400">Inicio de Sesion</h1>
           </div>
-          <form onSubmit={handleSubmit} className=" w-[80%] h-[60%] grid grid-rows-3 py-[10px]">
-          <div className=" w-full h-full">
+          <form
+            onSubmit={handleSubmit}
+            className=" w-[80%] h-[60%] grid grid-rows-3 py-[10px]"
+          >
+            <div className=" w-full h-full">
               <div className=" w-full h-[70%] flex flex-col items-center justify-center">
                 <div className="h-[80%] w-[90%] rounded-[10px] bg-purple-500 flex flex-row overflow-hidden">
                   <div className="w-[20%] h-full bg-sky-900 flex items-center justify-center">
@@ -148,32 +149,30 @@ export const Login = () => {
               </div>
             </div>
             <div className="w-full h-full flex items-center justify-center">
-                <input
-                  disabled={buttonDisabled()}
-                  className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded disabled:opacity-30 disabled:cursor-not-allowed"
-                  type="submit"
-                  value="Iniciar Sesion"
-                />
-              </div>
+              <input
+                disabled={buttonDisabled()}
+                className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded disabled:opacity-30 disabled:cursor-not-allowed"
+                type="submit"
+                value="Iniciar Sesion"
+              />
+            </div>
           </form>
           <div className=" w-[70%] h-[15%] flex items-center flex-col justify-evenly border-t-[1px] border-t-yellow-500">
-         
-          <LoginButton />
+            <LoginButton />
           </div>
           <div className=" w-[70%] h-[5%] flex items-center flex-col">
-         
-          <ul>
-                  <li li className="text-white">
-                    ¿No tienes cuenta?{" "}
-                    <Link
-                       className="text-yellow-400 font-bold text-xl hover:text-yellow-600	"
-                      to="/register"
-                    >
-                      Registrate
-                    </Link>
-                  </li>
-                </ul>
-         </div>
+            <ul>
+              <li li className="text-white">
+                ¿No tienes cuenta?{" "}
+                <Link
+                  className="text-yellow-400 font-bold text-xl hover:text-yellow-600	"
+                  to="/register"
+                >
+                  Registrate
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       {/* <div className="flex m-5 h-[95%]">
