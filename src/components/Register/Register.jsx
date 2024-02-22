@@ -114,7 +114,10 @@ const Register = () => {
           <div className=" w-[70%] h-[10%] flex items-center justify-center border-b-[1px] border-b-yellow-400">
             <h1 className="text-[40px] text-yellow-400">Registro de Usuario</h1>
           </div>
-          <form onSubmit={handleSubmit} className=" w-[80%] h-[90%] grid grid-rows-6 py-[10px]">
+          <form
+            onSubmit={handleSubmit}
+            className=" w-[80%] h-[90%] grid grid-rows-6 py-[10px]"
+          >
             <div className=" w-full h-full">
               <div className=" w-full h-[70%] flex flex-col items-center justify-center">
                 <div className="h-[80%] w-[90%] rounded-[10px] bg-purple-500 flex flex-row overflow-hidden ">
@@ -286,111 +289,6 @@ const Register = () => {
           </form>
         </div>
       </div>
-      {/* <div className="flex m-5 h-[95%]">
-        <div className=" w-3/5 h-full">
-          <img
-            className="h-full object-cover rounded-l-md"
-            src="img\image-register.jpg"
-            alt=""
-          />
-        </div>
-        <div className="w-2/5 h-full flex-col flex justify-center items-center">
-          <h2 className="absolute top-28 text-3xl font-bold text-[#FFFFFF]">
-            Registrarse
-          </h2>
-          <form
-            onSubmit={handleSubmit}
-            className="h-full w-full pt-20  flex justify-center items-center flex-col text-[#FFFFFF] bg-[#1E68AD] text-lg font-medium  rounded-r-md"
-          >
-            <div className="flex w-full h-2/4 gap-1 text-center justify-center items-center ">
-              <div className="flex flex-col w-2/4 gap-2 p-8">
-                <label htmlFor="name">Nombre</label>
-                <input
-                  className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
-                  name="name"
-                  placeholder="Nombre..."
-                  id="name"
-                  type="text"
-                />
-                <span style={{ color: "rgb(240 90 18)", fontSize:'15px', lineheight:'.75rem' }}>{errors.name}</span>
-                <label htmlFor="lastname">Apellido</label>
-                <input
-                  className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
-                  name="lastname"
-                  placeholder="Apellido..."
-                  id="lastname"
-                  type="text"
-                />
-                <span style={{ color: "rgb(240 90 18)", fontSize:'15px' }}>{errors.lastname}</span>
-                <label htmlFor="password">Contraseña</label>
-                <input
-                  className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
-                  placeholder="Contraseña..."
-                  name="password"
-                  id="password"
-                  type="password"
-                />
-                <span style={{ color: "rgb(240 90 18)", fontSize:'15px' }}>{errors.password}</span>
-              </div>
-              <div className="flex flex-col w-2/4 gap-2 p-8">
-                <label htmlFor="email">Email</label>
-                <input
-                  className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
-                  name="email"
-                  placeholder="Email..."
-                  id="email"
-                  type="email"
-                />
-                <span style={{ color: "rgb(240 90 18)", fontSize:'15px' }}>{errors.email}</span>
-                <label htmlFor="age">Edad</label>
-                <input
-                  className="text-black rounded-md h-8 outline-none pl-1 remove-arrow  focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
-                  placeholder="Edad..."
-                  name="age"
-                  id="age"
-                  type="number"
-                />
-                <span style={{ color: "rgb(240 90 18)", fontSize:'15px' }}>{errors.age}</span>
-                <label htmlFor="img">Imagen URL</label>
-                <input
-                  className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleImageChange}
-                  name="img"
-                  id="img"
-                  type="file"
-                  accept="image/*"
-                />
-              </div>
-            </div>
-            <input
-              disabled={ buttonDisabled()}
-              className="mt-10 relative top-5 bg-[#FFFFFF] text-[#000000] w-40 h-11 rounded-lg cursor-pointer hover:bg-[#FF6B6C] transition-colors hover:text-[#FFFFFF]  disabled:opacity-30	"
-              type="submit"
-              value="Registrarse"
-            />
-            <div>
-              <div className="mt-20">
-                <ul>
-                  <li>
-                    ¿Ya tienes una cuenta?{" "}
-                    <Link
-                      className="text-[#000000] font-bold text-xl hover:text-[#FF6B6C] transition-colors	"
-                      to="/login"
-                    >
-                      Iniciar Sesión
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div> */}
     </div>
   );
 };
