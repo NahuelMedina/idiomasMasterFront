@@ -44,21 +44,23 @@ const CourseSection = () => {
 
 
 return (
-  <div>
+  <div className="flex flex-rows w-full h-full gap-8 items-center grid grid-cols-2 gap-[10px] grid-rows-auto overflow-hidden items-center justify-center p-[10px] overflow-y-scroll">
   {
     userCourses && userCourses.map((c, index)=> (
-    <div key={index}  className="bg-white rounded-lg overflow-hidden shadow-lg mb-4">
+    <div key={index}  className="flex item-center justify-center">
+      <div className="bg-white shadow-lg border-[1px] border-gray-200 flex flex-col w-[90%]">
       <img src={c.image} alt={c.language} className="w-full h-32 object-cover" />
       <div className="p-4">
         <h3 className="text-2xl font-semibold mb-2 text-gray-800">{c.language}</h3>
         <p className="text-gray-600 mb-2">Nivel {c.level}</p>
         <p className="text-gray-600 mb-2">Duración: {c.duration}</p>
-        <p className="text-gray-600 mb-2">Comienza el día: {c.start_time}</p>
-        <p className="text-gray-600 mb-2">Finaliza el día: {c.finish_time}</p>
+        <p className="text-gray-600 mb-2">Comienza el día: {c.start_time.split('T')[0]}</p>
+        <p className="text-gray-600 mb-2">Finaliza el día: {c.finish_time.split('T')[0]}</p>
         <p className="text-gray-600 mb-2">{c.schedule}</p>
         <div className="flex items-center justify-between mt-4">
           <p className="text-2xl font-semibold">${c.price}</p>
         </div>
+      </div>
       </div>
     </div>
     ))

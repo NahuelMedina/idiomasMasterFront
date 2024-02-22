@@ -14,6 +14,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 import Swal from "sweetalert2";
+import DetailReviews from "./detailReviews";
 
 export const Detail = () => {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -33,6 +34,7 @@ export const Detail = () => {
 
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
 
+  const [reviews, setReviews] = useState(false)
 
 
   useEffect(() => {
@@ -46,7 +48,7 @@ export const Detail = () => {
   }, [detail, cart]);
 
   const handleCart = () => {
-    if (!isAuthenticated && !userData.hasOwnProperty('email')) {
+    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
         title: "Necesitas registrarte para agregar al Carrito!",
@@ -75,7 +77,7 @@ export const Detail = () => {
   }, [detail, fav]);
 
   const handleFavorite = () => {
-    if (!isAuthenticated && !userData.hasOwnProperty('email')) {
+    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
         title: "Necesitas registrarte para agregar a Favoritos!",
@@ -137,102 +139,129 @@ export const Detail = () => {
 
   const fechaFinal = `${añoF}-${mesF}-${diaF}`;
 
-  return (
-<div className="bg-[#FFFFFF] w-full h-full text-white container flex flex-col justify-center items-center">
-      <div className="flex justify-center h-[95%] w-4/5 bg-[#1E68AD] p-10 rounded-md">
-        <div className=" flex flex-col justify-center items-start text-center h-full w-3/5">
-          <div className=" flex flex-col justify-center items-start rounded-xl">
-            <p className="font-medium text-center   text-[#FF6B6C] uppercase  mt-8 text-6xl animate-fade-right animate-ease-in-out">
-              {detail?.language}
-            </p>
-            <p className="text-[#FFFFFF] mt-5 mb-10 text-2xl font-normal opacity-70 text-start first-letter:text-3xl  ">
-              Comienza con tan solo ${detail?.price}
-            </p>
+  const handleReviews = () => {
 
-            <div className="text-[#FFFFFF] flex items-center gap-2   pb-1  font-normal  text-2xl  ">
-              <SiLevelsdotfyi />
-              <p className="border-b border-white/40 ">Nivel {detail?.level}</p>
-            </div>
-            <div className="text-[#FFFFFF] flex items-center gap-2 mt-5   pb-1 font-normal  text-2xl  ">
-              <FaCalendarDays />
-              <p className="border-b border-white/40">{detail?.schedule}</p>
-            </div>
-            <div className="text-[#FFFFFF] flex items-center gap-2 mt-5  pb-1 font-normal  text-2xl  ">
-              <GiDuration />
-              <p className="border-b border-white/40">
-                Duracion de {detail?.duration}
-              </p>
-            </div>
-            <div className="text-[#FFFFFF] flex items-center gap-2 mt-5  pb-1 font-normal  text-2xl  ">
-              <FaHourglassStart />
-              <p className="border-b border-white/40">
-                Empieza el dia {fechaInicial}
-              </p>
-            </div>
-            <div className="text-[#FFFFFF] flex items-center gap-2 mt-5 pb-1 mb-5 font-normal  text-2xl ">
-              <FaHourglassEnd />
-              <p className="border-b border-white/40">
-                Finaliza el dia {fechaFinal}
-              </p>
-            </div>
-            <div className="flex ">
-              <button
-                onClick={() => initCreatePreference(detail)}
-                className=" text-start mt-5 mb-10 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
-              >
-                <p className=" m-2 text-2xl  "> Comprar ahora</p>{" "}
-                {preferenceId && (
-                  <Wallet
-                    initialization={{ preferenceId, redirectMode: "modal" }}
-                  />
-                )}
-              </button>
-              {isCart ? (
-                <div className="flex">
-                  <button
-                    onClick={handleCart}
-                    className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
-                  >
-                    <p className=" m-2 text-2xl  ">Eliminar del Carrito</p>
-                  </button>
-                </div>
-              ) : (
-                <div className="flex">
-                  <button
-                    onClick={handleCart}
-                    className=" text-start mt-5 mb-10 ml-3 p-2 bg-[#FFFFFF] text-[#000000] hover:text-[#FFFFFF] hover:bg-[#FF6B6C] rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out"
-                  >
-                    <p className=" m-2 text-2xl  ">Agregar al Carrito</p>
-                  </button>
-                </div>
-              )}
-            </div>
-            <div className="">
-              {isFav ? (
-                <button
-                  onClick={handleFavorite}
-                  className=" absolute top-[230px] left-[750px] text-5xl "
-                >
-                  ❤️
-                </button>
-              ) : (
-                <button
-                  onClick={handleFavorite}
-                  className=" absolute top-[230px] left-[750px] text-5xl "
-                >
-                  🤍
-                </button>
-              )}
+    if(reviews){
+
+      setReviews(false)
+    } else {
+
+      setReviews(true)
+    }
+  }
+
+  return (
+    <div className="h-[90vh] mt-[10vh] w-full flex flex-col pt-[30px] items-center ">
+      <div className="flex flex-col min-h-[80%] w-[90%] bg-white border-[1px] border-gray-300 relative bg-white shadow-lg ">
+        <div className="w-full h-[17%] bg-[#1d67ad] flex items-center justify-center ">
+          <p className="font-medium   text-white uppercase text-6xl animate-fade-right animate-ease-in-out">
+            {detail?.language}
+          </p>
+          <img
+              src={`/img/${detail.language}.png`}
+              alt={detail.lenguage}
+              className="h-[60px] w-[60px] m-[25px] "
+            />
+        </div>
+        <div className="w-full h-[10%] bg-yellow-400 flex justify-center items-center">
+          <p className="text-black text-[25px] font-normal text-start">
+            Comienza con tan solo ${detail?.price}
+          </p>
+        </div>
+        <div className="w-full h-[56%] bg-white grid grid-cols-2 items-center justify-center">
+          <div className=" w-full- h-full flex items-center justify-center overflow-hidden">
+            <div className="w-[450px] h-full overflow-hidden">
+              <img
+                className="w-full h-full object-cover bg-white overflow-hidden animate-fade-left animate-ease-in-out"
+                src={detail?.image}
+                alt={detail?.lenguage}
+              />
             </div>
           </div>
+          <div className="bg-white w-full- h-full grid grid-rows-5 overflow-hidden">
+            <div className="text-black flex items-center  font-normal  text-2xl">
+              <SiLevelsdotfyi className="ml-[100px] " />
+              <p className="ml-[30px] ">Nivel {detail?.level}</p>
+            </div>
+            <div className="text-black flex items-center  font-normal  text-2xl">
+              <FaCalendarDays className="ml-[100px] " />
+              <p className="ml-[30px] ">{detail?.schedule}</p>
+            </div>
+            <div className="text-black flex items-center  font-normal  text-2xl">
+              <GiDuration className="ml-[100px] " />
+              <p className="ml-[30px] ">Duracion de {detail?.duration}</p>
+            </div>
+            <div className="text-black flex items-center  font-normal  text-2xl">
+              <FaHourglassStart className="ml-[100px] " />
+              <p className="ml-[30px] ">Empieza el dia {fechaInicial}</p>
+            </div>
+            <div className="text-black flex items-center  font-normal  text-2xl">
+              <FaHourglassEnd className="ml-[100px] " />
+              <p className="ml-[30px] ">Finaliza el dia {fechaFinal}</p>
+            </div>
+            <div className="w-[100px] h-[100px] flex items-center justify-center absolute right-[1px]">
+          {isFav ? (
+            <button onClick={handleFavorite} className=" text-5xl ">
+              ❤️
+            </button>
+          ) : (
+            <button onClick={handleFavorite} className=" text-5xl ">
+              🤍
+            </button>
+          )}
         </div>
-        <div className="flex justify-center items-center w-2/5">
-          <img
-            className=" h-4/5 object-cover bg-white rounded-lg overflow-hidden animate-fade-left animate-ease-in-out"
-            src={detail?.image}
-            alt={detail?.lenguage}
-          />
+          </div>
         </div>
+        <div className="w-full h-[17%] bg-[#1d67ad] flex items-center justify-center">
+          <button
+            onClick={() => initCreatePreference(detail)}
+            className="w-[270px] h-[70px] mr-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
+          >
+            <p className=" m-2 text-2xl  "> Comprar ahora</p>{" "}
+            {preferenceId && (
+              <Wallet
+                initialization={{ preferenceId, redirectMode: "modal" }}
+              />
+            )}
+          </button>
+          {isCart ? (
+            <div className="flex">
+              <button
+                onClick={handleCart}
+                className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
+              >
+                <p className=" m-2 text-2xl  ">Eliminar del Carrito</p>
+              </button>
+            </div>
+          ) : (
+            <div className="flex">
+              <button
+                onClick={handleCart}
+                className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
+              >
+                <p className=" m-2 text-2xl  ">Agregar al Carrito</p>
+              </button>
+            </div>
+          )}
+        </div>
+        
+      </div>
+      <div className="w-full min-h-[15%] flex items-center justify-center ">
+      <button
+    onClick={handleReviews} 
+    className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]">
+    {reviews ? 
+        ("Ocultar Comentarios") 
+        :
+        ("Mostrar Comentarios") 
+    }
+</button>
+      </div>
+      <div className="w-[80%] h-auto flex items-center justify-center ">
+        {reviews?
+      (<DetailReviews/>)
+      :(null)  
+      }
       </div>
       <hr />
       <br />

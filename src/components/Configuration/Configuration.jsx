@@ -1,61 +1,106 @@
-
-import React, { useState } from 'react';
-import ProfileSection from './ProfileSection';
-import PaymentSection from './PaymentSection';
-import PrivacySection from './PrivacySection';
-import NotificationSection from './NotificationSection';
-import CourseSection from './CourseSection';
+import React, { useState } from "react";
+import ProfileSection from "./ProfileSection";
+import PaymentSection from "./PaymentSection";
+import PrivacySection from "./PrivacySection";
+import NotificationSection from "./NotificationSection";
+import CourseSection from "./CourseSection";
+import ReviewSection from "./PrivacySection";
 
 export const Configuration = () => {
-  const [selectedSection, setSelectedSection] = useState('perfil'); // Por defecto selecciona la sección de perfil
+  const [selectedSection, setSelectedSection] = useState("perfil");
 
-  // funcion para renderizar la sección seleccionada
-  const renderSelectedSection = () => {
-    switch (selectedSection) {
-      case 'perfil':
-        return <ProfileSection />;
-      case 'pago':
-        return <PaymentSection />;
-      case 'privacidad':
-        return <PrivacySection />;
-      case 'notificaciones':
-        return <NotificationSection />;
-      case 'cursos':
-        return <CourseSection />
-      default:
-        return <ProfileSection />;
-    }
+  const [options, setOptions] = useState({
+    perfil: true,
+    pago: false,
+    review: false,
+    notificaciones: false,
+    cursos: false,
+  });
+
+  const handleClick = (element) => {
+    const updatedOptions = {
+      perfil: false,
+      pago: false,
+      review: false,
+      notificaciones: false,
+      cursos: false,
+      [element]: true,
+    };
+    setOptions(updatedOptions);
   };
 
+  // funcion para renderizar la sección seleccionada
+
   return (
-    <div className="bg-white w-full h-screen flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
-      <aside className="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
-        <div className="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
-          <h2 className="pl-3 mb-4 text-2xl font-semibold">Configuración</h2>
-          <a href="#" className={`flex items-center px-3 py-2.5 font-bold bg-white text-indigo-900 border rounded-full ${selectedSection === 'perfil' ? 'bg-indigo-100 focus:bg-indigo-100' : ''}`} onClick={() => setSelectedSection('perfil')}>
-            Perfil
-          </a>
-          <a href="#" className={`flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 border rounded-full ${selectedSection === 'pago' ? 'bg-indigo-100 focus:bg-indigo-100' : ''}`} onClick={() => setSelectedSection('pago')}>
-            Pago
-          </a>
-          <a href="#" className={`flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 border rounded-full ${selectedSection === 'privacidad' ? 'bg-indigo-100 focus:bg-indigo-100' : ''}`} onClick={() => setSelectedSection('privacidad')}>
-            Privacidad
-          </a>
-          <a href="#" className={`flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 border rounded-full ${selectedSection === 'notificaciones' ? 'bg-indigo-100 focus:bg-indigo-100' : ''}`} onClick={() => setSelectedSection('notificaciones')}>
-            Notificaciones
-          </a>
-          <a href="#" className={`flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 border rounded-full ${selectedSection === 'cursos' ? 'bg-indigo-100 focus:bg-indigo-100' : ''}`} onClick={() => setSelectedSection('cursos')}>
-            Cursos
-          </a>
-        </div>
-      </aside>
-      <main className="w-full flex-1">
-        <div className="p-2 md:p-4 h-full">
-          <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
-            {renderSelectedSection()}
+    <div className=" w-full h-[80vh] mt-[80px] flex flex-col items-center">
+      <div className="flex items-center w-[80%] h-[10%]  ">
+        <h2 className="pl-3 mb-4 text-[30px] font-semibold">
+          Configuracion Cuenta
+        </h2>
+      </div>
+      <div className="h-[90%] w-[90%] flex flex-row min-w-[20%] ">
+        <div className="flex-col-6 min-w-[20%] h-full pl-[15px] justify-end">
+          <div
+            className={`flex items-center h-[10%] font-bold border-l-[1px]  border-t-[1px] border-b-[1px] cursor-pointer ${options.perfil
+                ? "bg-blue-500 text-white cursor-not-allowed border-blue-500"
+                : "bg-white"
+              }`}
+            onClick={() => handleClick("perfil")}
+          >
+            <p className="text-[18px] ml-[20px] focus:text-white ">
+              Mi Perfil
+            </p>
           </div>
+          <div
+            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px] border-b-[1px]   cursor-pointer ${options.cursos
+                ? "bg-blue-500 text-white cursor-not-allowed border-blue-500"
+                : "bg-white"
+              }`}
+            onClick={() => handleClick("cursos")}
+          >
+            <p className="text-[18px] ml-[20px] focus:text-white ">
+              Mis Cursos
+            </p>
+          </div>
+          <div
+            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px]  border-b-[1px]   cursor-pointer ${options.pago
+                ? "bg-blue-500 text-white cursor-not-allowed border-blue-500"
+                : "bg-white"
+              }`}
+            onClick={() => handleClick("pago")}
+          >
+            <p className="text-[18px] ml-[20px] focus:text-white ">Mis Pagos</p>
+          </div>
+          <div
+            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px] border-b-[1px]  cursor-pointer ${options.review
+                ? "bg-blue-500 text-white cursor-not-allowed border-blue-500 "
+                : "bg-white"
+              }`}
+            onClick={() => handleClick("review")}
+          >
+            <p className="text-[18px] ml-[20px] focus:text-white ">
+              Mis Reseñas
+            </p>
+          </div>
+          {/* <div
+            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[2px]  border-t-[1px] border-b-[2px]   cursor-pointer ${
+              options.notificaciones
+                ? "bg-blue-500 text-white cursor-not-allowed border-blue-500 "
+                : "bg-white"
+            }`}
+            onClick={() => handleClick("notificaciones")}
+          >
+            <p className="text-[18px] ml-[20px] ">Notificaciones</p>
+          </div> */}
         </div>
-      </main>
+        <div className="w-full border-[1px] border-blue-500 ">
+          {options.perfil ? <ProfileSection /> : null}
+          {options.pago ? <PaymentSection /> : null}
+          {options.review ? <ReviewSection /> : null}
+          {options.notificaciones ? <NotificationSection /> : null}
+          {options.cursos ? <CourseSection /> : null}
+        </div>
+      </div>
     </div>
   );
 };

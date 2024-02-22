@@ -14,6 +14,7 @@ export default function ReviewCard({ index, id,  rating, date, view, reply, setS
 
     const response = await idReview(id);
     if (response.data) {
+      console.log(response.data)
       dispatch(adminReview(response.data));
       setSettings.setSettings();
     }

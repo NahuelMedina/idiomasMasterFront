@@ -24,15 +24,12 @@ export const Landing = () => {
     const fetchUserData = async () => {
       try {
         if (isAuthenticated && user && user.email) {
-          console.log(user.email);
-          console.log(user);
           const response = await getGoogleUser({
             email: user.email,
             name: user.given_name,
             lastname: user.family_name,
             image: user.picture,
           });
-          console.log(response);
 
           if (response && response.data) {
             const updatedUserData = {

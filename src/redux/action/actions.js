@@ -16,9 +16,13 @@ import {
   SET_USER_DATA,
   ALL_USERS,
   USER_COURSES,
+  POST_USER_SUCCESS,
   POST_USER_FAIL,
   REVIEW_SENT_SUCCESS,
-  REVIEW_SENT_ERROR
+  REVIEW_SENT_ERROR,
+  GET_CART,
+  ADD_CART,
+  DELETE_CART
 } from "./actiontypes";
 import axios from "axios";
 
@@ -112,14 +116,10 @@ export const postCourseData = (courseData) => async (dispatch) => {
 export const postUser = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/createUser`, userData);
-    
+    alert("Usuario creado con Exito", response.data);
   } catch (error) {
     const message = error.response.data;
-    dispatch({
-      type: POST_USER_FAIL,
-      payload: response,
-    });
-    
+    alert(`${message}`);
   }
 };
 
@@ -133,7 +133,6 @@ export const postThirdPartyUser = (user) => async (dispatch) => {
     };
     console.log("ESTO ES USERDATA EN THIRPARTY", userData);
     const response = await axios.post(`${URL}/createUser`, userData);
-
     alert("Usuario creado con éxito", response.data);
   } catch (error) {
     const message = error.response.data;
@@ -178,7 +177,8 @@ export const getUser = (userData) => async (dispatch) => {
       type: GET_USER_SUCCESS,
       payload: response.data,
     });
-    
+
+    alert("Se ha conectado");
   } catch (error) {
     console.error("Error al obtener usuario:", error);
 
@@ -267,9 +267,47 @@ export const createPreference = async (product) => {
 };
 
 export const setUserdata = (user) => {
-
   return {
     type: SET_USER_DATA,
     payload: user,
+  };
+}
+
+export function getCartDB(id) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`${URL}/getCart/${id}`);
+      dispatch({
+        type: GET_CART,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+export function addCart(cart) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.put(`${URL}/addCartProduct`, cart);
+      dispatch({
+        type: ADD_CART,
+        payload: data,
+      });
+    } catch (error) {
+    }
+  };
+}
+export function deleteCart(cart) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.put(`${URL}/deleteCartProduct`, cart);
+      dispatch({
+        type: DELETE_CART,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
   };
 }

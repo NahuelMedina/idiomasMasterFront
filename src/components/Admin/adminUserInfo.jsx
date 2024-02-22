@@ -176,13 +176,13 @@ export default function AdminInfoUser() {
   return (
     <div className="w-full h-full flex flex-col border-[#151139] border-[1px] overflow-croll">
       <div className="w-full h-[40px] bg-[#151139]  flex flex-row items-center">
-        <p className=" text-white ml-6 text-[20px]">Search User</p>
+        <p className=" text-white ml-6 text-[20px]">Busca un Usuario</p>
       </div>
       <div className="w-full h-[20%] bg-[#151139]  flex flex-row ">
         <div className="h-full w-[40%] ">
           <div className="w-full h-full pl-[20px] bg-[#151139] flex flex-row items-center">
             <input
-              placeholder="Search User by ID"
+              placeholder="Busca usuario por ID"
               type="search"
               value={searchTerm}
               className="w-[400px] h-[40px]  rounded-lg text-black px-6 py-3 text-base hover:border-[#7aacfd] cursor-pointer transition mr-[15px]"
@@ -199,13 +199,13 @@ export default function AdminInfoUser() {
         {user._id && user._id.length > 0 && (
           <div className="h-full w-[60%] flex items-center justify-center bg-[#373a6c] ">
             <div className="h-full w-[50%] flex items-center justify-center">
-              <h1 className="text-yellow-500 text-[18px]">{`User Id: ${user._id}`}</h1>
+              <h1 className="text-yellow-500 text-[18px]">{`ID Usuario: ${user._id}`}</h1>
             </div>
 
             <div className="h-full w-[50%] flex items-center justify-center">
               <div className="h-full w-[90%]  flex flex-row items-center justify-center">
                 <h1 className="text-[20px] text-white">{`${
-                  user.status ? "Active" : "Inactive"
+                  user.status ? "Activo" : "Inactivo"
                 }`}</h1>
                 {user.status ? (
                   <div className="h-full w-[30%]  flex flex-row items-center justify-center">
@@ -229,7 +229,7 @@ export default function AdminInfoUser() {
           <div className="w-full h-[25%] bg-[#373a6c] pl-[20px] rounded-[10px]">
             <div className="w-full h-[40%] flex items-center">
               <label htmlFor="language" className="text-yellow-500 text-[18px]">
-                User Name
+                Nombre Usuario
               </label>
             </div>
             <div className="w-full h-[50%] flex items-center">
@@ -241,7 +241,7 @@ export default function AdminInfoUser() {
           <div className="w-full h-[75%] bg-[#373a6c] pl-[20px] rounded-[10px]">
             <div className="w-full h-[10%] flex items-center">
               <label htmlFor="duration" className="text-yellow-500 text-[18px]">
-                Image Profile
+                Imagen de Perfil
               </label>
             </div>
             {user.img ? (
@@ -259,7 +259,7 @@ export default function AdminInfoUser() {
           <div className="w-full h-[25%] bg-[#373a6c] pl-[20px] rounded-[10px]">
             <div className="w-full h-[40%] flex items-center">
               <label htmlFor="language" className="text-yellow-500 text-[18px]">
-                Email
+                Email de Usuario
               </label>
             </div>
             <div className="w-full h-[50%] flex items-center">
@@ -271,7 +271,7 @@ export default function AdminInfoUser() {
           <div className="w-full h-[75%] bg-[#373a6c] pl-[20px] rounded-[10px] flex flex-col items-center justify-evenly">
             <div className="w-full h-[10%] flex items-center">
               <label htmlFor="duration" className="text-yellow-500 text-[18px]">
-                User Courses
+                Cursos del Usuario
               </label>
             </div>
             <div className="w-[95%]  h-[60%] flex flex-col items-center ">
@@ -315,7 +315,7 @@ export default function AdminInfoUser() {
           <div className="w-full h-[25%] bg-[#373a6c] pl-[20px] rounded-[10px]">
             <div className="w-full h-[40%] flex items-center">
               <label htmlFor="language" className="text-yellow-500 text-[18px]">
-                User Permitions
+                Permisos del Usuario
               </label>
             </div>
             <div className="w-full h-[50%] flex items-center">
@@ -327,7 +327,7 @@ export default function AdminInfoUser() {
           <div className="w-full h-[75%] bg-[#373a6c] pl-[20px] rounded-[10px] flex flex-col items-center justify-evenly">
             <div className="w-full h-[10%] flex items-center">
               <label htmlFor="duration" className="text-yellow-500 text-[18px]">
-                User Payments
+                Pagos del Usuario
               </label>
             </div>
             <div className="w-[95%]  h-[60%] flex flex-col items-center ">
@@ -373,7 +373,7 @@ export default function AdminInfoUser() {
 
         <>
             <div className=" w-full h-full rounded-[10px] items-center justify-center flex">
-         <h1 className="text-yellow-500 text-[40px]">Search a User</h1>
+         <h1 className="text-yellow-500 text-[40px]">Busca un Usuario</h1>
          <FaSearchPlus className="text-white text-[40px] ml-[30px]" />
         </div>
         </>

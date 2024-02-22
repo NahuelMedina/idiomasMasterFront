@@ -152,13 +152,13 @@ export default function AdminManageReview() {
   return (
     <div className="w-full h-full flex flex-col border-[#151139] border-[1px] ">
       <div className="w-full h-[40px] bg-[#151139] flex flex-row items-center">
-        <p className="text-white ml-6 text-[20px]">Search & Reply Review</p>
+        <p className="text-white ml-6 text-[20px]">Busca & Responde una Reseña</p>
       </div>
       <div className="w-full h-[20%] bg-[#151139] flex flex-row ">
         <div className="h-full w-[40%] ">
           <div className="w-full h-full pl-[20px] bg-[#151139] flex flex-row items-center">
             <input
-              placeholder="Search User by ID"
+              placeholder="Busca Reseña por ID"
               type="search"
               value={searchTerm}
               className="w-[400px] h-[40px] rounded-lg text-black px-6 py-3 text-base hover:border-[#7aacfd] cursor-pointer transition mr-[15px]"
@@ -175,10 +175,10 @@ export default function AdminManageReview() {
         {review._id && review._id.length > 0 && (
           <div className="h-full w-[60%] flex items-center justify-center bg-[#373a6c] ">
             <div className="h-full w-[50%] flex items-center justify-center">
-              <h1 className="text-yellow-500 text-[18px]">{`Review Id: ${review._id}`}</h1>
+              <h1 className="text-yellow-500 text-[18px]">{`ID Reseña: ${review._id}`}</h1>
             </div>
             <div className="h-full w-[30%] flex items-center justify-center">
-              <h1 className="text-yellow-500 text-[18px]">{`User Valoration: ${review.rating}`}</h1>
+              <h1 className="text-yellow-500 text-[18px]">{`Valoracion Usuario: ${review.rating}`}</h1>
             </div>
           </div>
         )}
@@ -190,28 +190,28 @@ export default function AdminManageReview() {
             <div className="bg-[#373a6b] w-full h-full rounded-[10px]">
               <div className="w-full h-[20%] flex items-center justify-evenly ">
                 <div className="h-full w-[30%] flex flex-row items-center justify-evenly">
-                  <h1 className="text-yellow-500">User Name:</h1>
+                  <h1 className="text-yellow-500">Nombre de Usuario:</h1>
                   <h1 className="text-white">
                     {user.name} {user.lastname}
                   </h1>
                 </div>
                 <div className="h-full w-[30%] flex flex-row items-center justify-evenly">
-                  <h1 className="text-yellow-500">User Email:</h1>
+                  <h1 className="text-yellow-500">Email Usuario:</h1>
                   <h1 className="text-white">{user.email}</h1>
                 </div>
                 <div className="h-full w-[30%] flex flex-row items-center justify-evenly">
-                  <h1 className="text-yellow-500">Course Id:</h1>
+                  <h1 className="text-yellow-500">ID del Curso:</h1>
                   <h1 className="text-white">{review.course_review}</h1>
                 </div>
               </div>
               <div className="w-full h-[80%] p-[20px]">
-                <h1 className="text-yellow-500 text-[18px]">User Review:</h1>
+                <h1 className="text-yellow-500 text-[18px]">Reseña del Usuario:</h1>
                 <h1 className="text-white text-[18px]">{review.body}</h1>
               </div>
             </div>
             <div className="bg-[#373a6b] w-full h-full rounded-[10px]">
               <div className="w-full h-[5%] pl-[20px] mt-[5px]">
-                <h1 className="text-yellow-500 text-[18px]">Post Reply</h1>
+                <h1 className="text-yellow-500 text-[18px]">Enviar una Respuesta</h1>
               </div>
               <div className="w-full h-[65%] p-[20px]">
                 <textarea
@@ -227,7 +227,7 @@ export default function AdminManageReview() {
                   className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded"
                   onClick={handleSubmit}
                 >
-                  Post Reply
+                  Enviar Respuesta
                 </button>
               </div>
             </div>
@@ -237,7 +237,7 @@ export default function AdminManageReview() {
         <>
           <div className="w-full h-full rounded-[10px] items-center justify-center flex">
             <h1 className="text-yellow-500 text-[40px]">
-              Search a New Review to Reply
+              Busca una Reseña
             </h1>
             <FaSearchPlus className="text-white text-[40px] ml-[30px]" />
           </div>
