@@ -12,30 +12,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCart, deleteCart, getCartDB } from "../../redux/action/actions";
 const URL = import.meta.env.VITE_URL_HOST;
 
-
 function HomeC() {
-
   const sortByDescending = (data) => {
     return data.sort((a, b) => b.price - a.price);
   };
   const sortByAscending = (data) => {
     return data.sort((a, b) => a.price - b.price);
   };
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [language, setLanguage] = useState("all");
   const [level, setLevel] = useState("all");
   const [num, setNum] = useState("all");
   const [courses, setCourses] = useState([]);
-  const [userCart, setUserCart] =useState(JSON.parse(window.localStorage.getItem("cart")))
+  const [userCart, setUserCart] = useState(
+    JSON.parse(window.localStorage.getItem("cart"))
+  );
 
-// useEffect(()=>{
-//   dispatch(getCartDB(userData._id))
-// })
-
-
+  // useEffect(()=>{
+  //   dispatch(getCartDB(userData._id))
+  // })
 
   const [pagePosition, setPagePosition] = useState(1);
-  const itemsOnPage = 3;
+  const itemsOnPage = 2;
   const nextPage = () => {
     setPagePosition((prevPagePosition) => {
       if (prevPagePosition < pageNum) {
@@ -121,8 +119,8 @@ function HomeC() {
   };
 
   return (
-    <div className="bg-white mt-[80px] h-full text-white flex flex-row w-full  items-center justify-center">
-      <div className="h-screen  min-w-[300px] text-black justify-start bg-gradient-to-r bg-[#1E68AD] relative flex flex-col items-center">
+    <div className="w-full h-[90vh] mt-[80px] flex flex-row">
+      <div className="h-full  min-w-[300px] text-black justify-start bg-gradient-to-r bg-[#1E68AD] relative flex flex-col items-center">
         <div className="w-full  text-center flex flex-col items-center justify-center">
           <FaLanguage className="text-[80px] text-yellow-400" />
           <p className="text-[25px] m-[10px] text-yellow-400">
@@ -191,7 +189,7 @@ function HomeC() {
           {courses &&
             courses.length > 0 &&
             renderCards.map((element) => (
-              <Card key={element._id} course={element}  />
+              <Card key={element._id} course={element} />
             ))}
         </div>
 
