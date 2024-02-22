@@ -10,6 +10,7 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const postStatus = useSelector(state => state.postStatus)
+  const postStatusFail = useSelector(state => state.postStatusFail)
   const postError = useSelector(state => state.postError)
   const [status, setStatus] = useState(postStatus)
 
