@@ -87,7 +87,7 @@ export default function AdminAddProduct() {
     <div className="w-full h-full flex flex-col border-[#151139] border-[1px]">
       <div className="w-full h-[40px] bg-[#151139]  flex flex-row items-center">
         <p className=" text-white ml-6 text-[20px]">
-          Complete & Submit a New Product
+          Completa & crea un nuevo Producto
         </p>
       </div>
       <form
@@ -340,17 +340,13 @@ export default function AdminAddProduct() {
             </div>
           </div>
           <div className="w-full h-[25%] bg-[#373a6c] pl-[20px] rounded-[10px]">
-            <div className="w-full h-[25%] flex items-center justify-center">
-              <label htmlFor="duration" className="text-white text-[20px]">
-                Submit Product
-              </label>
-            </div>
-            <div className="w-full h-[75%] flex items-center justify-center">
+           
+            <div className="w-full h-full flex items-center justify-center">
               <button
                 type="submit"
                 className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded"
               >
-                Add Product
+                Crear Producto
               </button>
             </div>
           </div>

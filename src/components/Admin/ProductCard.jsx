@@ -60,7 +60,7 @@ export default function ProductCard({
         <div className="h-full w-[11%]  flex flex-row items-center justify-center ">
           <div className="h-full w-[40%]  flex flex-row items-center justify-center ">
             <h1 className="ml-[20px] text-[14px] font-light text-white">
-              Active
+              Activo
             </h1>
           </div>
           <FaCircle className="text-[10px] ml-[15px] text-green-400" />
@@ -69,7 +69,7 @@ export default function ProductCard({
         <div className="h-full w-[11%]  flex flex-row items-center justify-center">
           <div className="h-full w-[40%]  flex flex-row items-center justify-center ">
             <h1 className="ml-[20px] text-[14px] font-light text-white">
-              Inactive
+              Inactivo
             </h1>
           </div>
           <FaCircle className="text-[10px] ml-[15px] text-red-500" />

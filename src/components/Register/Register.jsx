@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import registerValidate from "../Utils/registerValidate";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +12,8 @@ const Register = () => {
   const postStatus = useSelector(state => state.postStatus)
   const postStatusFail = useSelector(state => state.postStatusFail)
   const postError = useSelector(state => state.postError)
-  const [status, setStatus] = useState(true)
+  const [status, setStatus] = useState(postStatus)
+
   const [state, setState] = useState({
     name: "",
     lastname: "",
@@ -22,33 +23,30 @@ const Register = () => {
     age: "",
   });
 
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'center',
-    iconColor: 'white',
-    customClass: {
-      popup: 'colored-toast',
-    },
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-  })
+  const [errors, setErrors] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+    age: "",
+  });
 
 
-
-  const [errors, setErrors] = useState({});
   const handleChange = (e) => {
-    e.preventDefault();
     const { name, value } = e.target;
+
+    setErrors(registerValidate({
+      ...state,
+      [name]: value
+    }));
 
     setState({
       ...state,
-      [name]: value,
+      [name]: value
     });
-
-    setErrors(registerValidate({ ...state, [name]: value }));
   };
+
+  console.log(errors);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -64,38 +62,37 @@ const Register = () => {
     }
   };
 
-  const buttonDisabled = () => {
-    let buttonAux = false;
-
-    for (const error in errors) {
-      if (errors[error]) {
-        buttonAux = true;
-        return buttonAux;
-      }
-    }
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
-    if(postError ===  null && status ){
-      Toast.fire({
+    if (postError === null) {
+      Swal.fire({
         icon: 'success',
-        title: "Usuario creado con Exito",
-      })
+        title: '¡Usuario Creado Correctamente!',
+        showConfirmButton: false,
+        timer: 2300 // La alerta se cerrará automáticamente después de 1.5 segundos
+      });
       setStatus(false)
-    } else if(!status && postError !== null){
-      Toast.fire({
-        icon: 'error',
-        title: `${postError}`,
-      })
+      navigate("/login")
     } else {
-      Toast.fire({
+      Swal.fire({
         icon: 'error',
-        title: "Error al crear el usuario",
-      })
+        title: 'Error al Crear Usuario',
+        text: `${postError}` // Puedes mostrar el mensaje de error específico si lo proporciona la función de registro
+      });
     }
   };
+
+  const buttonDisabled = () => {
+    let btn = true;
+    if (Object.keys(errors).length === 0) {
+        btn = false;
+    }
+    return btn;
+}
+  console.log(errors);
+  console.log(buttonDisabled());
 
   return (
     <div className="w-full h-full mt-[80px] bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
@@ -126,7 +123,7 @@ const Register = () => {
                   id="name"
                   type="text"
                 />
-                <span style={{ color: "red" }}>{errors.name}</span>
+                <span style={{ color: "rgb(240 90 18)", fontSize:'15px', lineheight:'.75rem' }}>{errors.name}</span>
                 <label htmlFor="lastname">Apellido</label>
                 <input
                   className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
@@ -136,7 +133,7 @@ const Register = () => {
                   id="lastname"
                   type="text"
                 />
-                <span style={{ color: "red" }}>{errors.lastname}</span>
+                <span style={{ color: "rgb(240 90 18)", fontSize:'15px' }}>{errors.lastname}</span>
                 <label htmlFor="password">Contraseña</label>
                 <input
                   className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
@@ -146,7 +143,7 @@ const Register = () => {
                   id="password"
                   type="password"
                 />
-                <span style={{ color: "red" }}>{errors.password}</span>
+                <span style={{ color: "rgb(240 90 18)", fontSize:'15px' }}>{errors.password}</span>
               </div>
               <div className="flex flex-col w-2/4 gap-2 p-8">
                 <label htmlFor="email">Email</label>
@@ -158,7 +155,7 @@ const Register = () => {
                   id="email"
                   type="email"
                 />
-                <span style={{ color: "red" }}>{errors.email}</span>
+                <span style={{ color: "rgb(240 90 18)", fontSize:'15px' }}>{errors.email}</span>
                 <label htmlFor="age">Edad</label>
                 <input
                   className="text-black rounded-md h-8 outline-none pl-1 remove-arrow  focus:border-2 border-[#FF6B6C]"
@@ -168,7 +165,7 @@ const Register = () => {
                   id="age"
                   type="number"
                 />
-                <span style={{ color: "red" }}>{errors.age}</span>
+                <span style={{ color: "rgb(240 90 18)", fontSize:'15px' }}>{errors.age}</span>
                 <label htmlFor="img">Imagen URL</label>
                 <input
                   className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C]"
@@ -181,7 +178,7 @@ const Register = () => {
               </div>
             </div>
             <input
-              disabled={buttonDisabled()}
+              disabled={ buttonDisabled()}
               className="mt-10 relative top-5 bg-[#FFFFFF] text-[#000000] w-40 h-11 rounded-lg cursor-pointer hover:bg-[#FF6B6C] transition-colors hover:text-[#FFFFFF]  disabled:opacity-30	"
               type="submit"
               value="Registrarse"

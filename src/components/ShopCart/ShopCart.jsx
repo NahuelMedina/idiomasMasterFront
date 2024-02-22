@@ -72,21 +72,63 @@ const ShopCart = () => {
   const initCreatePreferenceCart = (p) => {
     dispatch(createPreference(p));
   };
-
   const createPayment = () => {
     try {
       const paymentId = location.search.split("&")[2].split("=")[1];
       axios.post(`${URL}/createPayment`, {
         data: paymentId,
-      });
+      })
+        .then(function (response) {
+          // Manejar la respuesta del servidor
+          if (response.status === 200) {
+            // Mostrar alerta de éxito
+            Swal.fire({
+              icon: 'success',
+              title: 'Pago confirmado',
+              text: 'El pago se ha confirmado correctamente.',
+            });
+          } else {
+            // Mostrar alerta de error
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al confirmar el pago',
+              text: 'Hubo un problema al procesar el pago. Por favor, inténtalo de nuevo más tarde.',
+            });
+          }
+        })
+        .catch(function (error) {
+          // Manejar errores de conexión u otros errores inesperados
+          console.error('Error al realizar la solicitud:', error);
+          // Mostrar alerta de error genérico
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un problema al realizar la solicitud. Por favor, inténtalo de nuevo más tarde.',
+          });
+        });
     } catch (error) {
       console.log(error.message);
     }
   };
+
   if (location.key === "default") {
     createPayment();
     location.key = "";
   }
+  // const createPayment = () => {
+  //   try {
+  //     const paymentId = location.search.split("&")[2].split("=")[1];
+  //     axios.post(`${URL}/createPayment`, {
+  //       data: paymentId,
+  //     });
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+  // if (location.key === "default") {
+  //   createPayment();
+  //   location.key = "";
+  // }
 
   // Paginado
   const [pagePosition, setPagePosition] = useState(1);
@@ -251,9 +293,8 @@ const ShopCart = () => {
           {cartCourse && cartCourse.length > 0 ? (
             <div className="h-[30px] items-center justify-center flex flex-row">
               <IoIosArrowDropleft
-                className={`text-[50px] ${
-                  pagePosition === 1 ? "cursor-not-allowed" : "cursor-pointer"
-                } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
+                className={`text-[50px] ${pagePosition === 1 ? "cursor-not-allowed" : "cursor-pointer"
+                  } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
                 onClick={prevPage}
                 disabled={pagePosition === 1}
               />
@@ -261,11 +302,10 @@ const ShopCart = () => {
                 <p className="text-[30px] text-black">{`${pagePosition}`}</p>
               </div>
               <IoIosArrowDropright
-                className={`text-[50px] ${
-                  pagePosition === pageNum
+                className={`text-[50px] ${pagePosition === pageNum
                     ? "cursor-not-allowed"
                     : "cursor-pointer"
-                } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
+                  } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
                 onClick={nextPage}
                 disabled={pagePosition === pageNum}
               />
