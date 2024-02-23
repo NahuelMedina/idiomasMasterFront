@@ -108,10 +108,11 @@ export const Detail = () => {
   }, []);
 
   const initCreatePreference = (p) => {
+
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
-        title: "Necesitas registrarte para realizar una compra!",
+        title: "Necesitas registrarte para realizar la Compra!",
         footer: '<a href="/register">Registrarse</a>',
       });
       return;
@@ -269,13 +270,10 @@ export const Detail = () => {
       </div>
       <div className="w-[80%] h-auto flex items-center justify-center ">
         {reviews ?
-          (<DetailReviews />)
+          (<ReviewComponent />)
           : (null)
         }
       </div>
-      <hr />
-      <br />
-      <ReviewComponent />
     </div>
   );
 };

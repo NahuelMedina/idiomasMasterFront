@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import {
   Navbar,
   Landing,
@@ -31,15 +31,22 @@ function App() {
   const loginData = useSelector((state) => state.userData);
   const navigate = useNavigate();
   const [data, setData] = useState({});
+
+  const [lastLocation, setLastLocation] = useState("");
+
+
   const { t, i18n } = useTranslation()
   useEffect(()=>{
     const lng = navigator.language
     i18n.changeLanguage(lng)
   },[])
   const lng = navigator.language
+
   useEffect(() => {
     setData(userData);
   }, []);
+
+  console.log(data);
 
   useEffect(() => {
     if (loginData.isAuthenticated && Object.keys(data).length === 0) {
@@ -49,9 +56,25 @@ function App() {
 
   useEffect(() => {
     if (data.profile) {
-      navigate(data.profile === "admin" ? "/admindashboard" : "/user/home");
+      const lastLocation = localStorage.getItem("lastLocation");
+
+      if (lastLocation) {
+        if (lastLocation === "/login") {
+          navigate(data.profile === "admin" ? "/admindashboard" : "/user/home");
+        } else {
+          navigate(lastLocation);
+        }
+      } else {
+        navigate(data.profile === "admin" ? "/admindashboard" : "/user/home");
+      }
     }
   }, [data]);
+
+  useEffect(() => {
+    const currentLocation = location.pathname;
+    localStorage.setItem("lastLocation", currentLocation);
+    setLastLocation(currentLocation);
+  }, [location.pathname]);
 
   return (
     <>

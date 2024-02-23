@@ -220,3 +220,22 @@ export const getGoogleUser = async ({ email, name, lastname, image }) => {
   }
 };
 
+
+
+export const deleteUser = async ({ email, id, password }) => {
+
+
+
+  try {
+    const response = await axios.post(`${URL}/deleteUser`, {
+      email, id, password
+    });
+
+    if (response.data) {
+        return response.data; 
+      }
+  } catch (error) {
+    return(error)
+  }
+};
+

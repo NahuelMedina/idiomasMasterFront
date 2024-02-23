@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import { addCart, deleteCart, getCartDB } from "../../redux/action/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { TiDelete } from "react-icons/ti";
 
 export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
 
   const handleCart = () => {
 
+
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
@@ -55,6 +57,8 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
       return;
     }
     dispatch(getCartDB(userData._id));
+    dispatch(getCartDB(userData._id));
+
     setIsCart(!isCart);
     if (!isCart) {
       const itemCart = JSON.parse(window.localStorage.getItem("cart"));
@@ -216,7 +220,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
                   onClick={handleRemoveFromFavorites}
                   className=" absolute top-2 right-2 text-3xl "
                 >
-                  <RxCrossCircled className="bg-white rounded-[15px]" />
+                  <TiDelete className="bg-white rounded-[15px]" />
                 </button>
               </div>
             )}
@@ -226,14 +230,14 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
           </div>
           <Link
             to={`/detail/${course._id}`}
-            className="bg-sky-700 w-full px-[15px] text-white h-full  flex flex-row items-center  justify-evenly hover:bg-yellow-500 cursor:pointer hover:text-black"
+            className="bg-yellow-400 w-full px-[15px] text-black h-full  flex flex-row items-center  justify-evenly hover:bg-yellow-500 cursor:pointer hover:text-black"
           >
             <h1 className=" text-[15px] cursor:pointer">
               Detalle del producto
             </h1>
             <TbListDetails className=" text-[35px] cursor:pointer " />
           </Link>
-          <div className="w-full h-full px-[15px] flex items-center text-white justify-center items-center bg-sky-700 hover:bg-red-500 cursor:pointer hover:text-black">
+          <div className="w-full h-full px-[15px] flex items-center text-white justify-center items-center bg-sky-700 hover:bg-red-500 cursor:pointer">
             {isCart ? (
               <div className="flex cursor:pointer flex items-center justify-center">
                 <h1
@@ -297,8 +301,11 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
     );
   }
 
+
+
+
   return (
-    <div className="overflow-hidden h-[80%] w-[40%] m-5 text-black rounded-[10px] flex-col justify-center items-center  shadow-lg shadow-black/50 transform transition-transform ">
+    <div className="overflow-hidden h-[90%] w-[40%] max-w-[450px] m-5 text-black rounded-[10px] flex-col justify-center items-center  shadow-lg shadow-black/50 transform transition-transform">
       <div className="h-[40%] w-full overflow-hidden ">
         <img
           src={course.image}

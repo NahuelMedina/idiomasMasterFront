@@ -78,17 +78,16 @@ export function search(value) {
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`${URL}/getCourse/name?name=${value}`);
-      console.log(data);
+      
       if (Array.isArray(data)) {
         dispatch({
           type: SEARCH,
           payload: [data, value],
         });
-      } else {
-        
-      }
+      } 
+
     } catch (error) {
-      alert(error);
+      console.log(error)
     }
   };
 }
