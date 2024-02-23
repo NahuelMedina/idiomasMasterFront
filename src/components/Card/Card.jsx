@@ -24,9 +24,10 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const [isCart, setIsCart] = useState(false);
   const [cart, setCart] = useLocalStorage("cart", "");
   const { isAuthenticated } = useAuth0();
-  const [userData, setUserData] = useState(
-    JSON.parse(localStorage.getItem("userData"))
-  );
+  const [userData] = useLocalStorage("userData", {})
+  // const [userData, setUserData] = useState(
+  //   JSON.parse(localStorage.getItem("userData"))
+  // );
   const [cartState, setCartState] = useState({
     CourseId: "",
     CartId: "",
@@ -44,7 +45,6 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   }, [course, cart]);
 
   const handleCart = () => {
-    dispatch(getCartDB(userData._id));
 
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
@@ -54,6 +54,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
       });
       return;
     }
+    dispatch(getCartDB(userData._id));
     setIsCart(!isCart);
     if (!isCart) {
       const itemCart = JSON.parse(window.localStorage.getItem("cart"));

@@ -162,7 +162,7 @@ export const Login = () => {
           </div>
           <div className=" w-[70%] h-[5%] flex items-center flex-col">
             <ul>
-              <li li className="text-white">
+              <li className="text-white">
                 ¿No tienes cuenta?{" "}
                 <Link
                   className="text-yellow-400 font-bold text-xl hover:text-yellow-600	"
