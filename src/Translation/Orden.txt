@@ -1,0 +1,6 @@
+1. Navbar
+2. searchbar
+3. searchHome y Home
+4. Landing
+5. Login
+6. Register

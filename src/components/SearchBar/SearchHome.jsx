@@ -9,10 +9,13 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
+
 
 
 export const SearchHome = () => {
 
+  const { t , i18n} = useTranslation()
   const searchName = useSelector(state => state.coursesName)
   const searchLanguage = useSelector(state => state.courseLanguage)
 
@@ -105,13 +108,13 @@ export const SearchHome = () => {
         <div className="w-full h-[200px] flex flex-col items-center justify-center">
           <FaLanguage className="text-[80px] text-yellow-400" />
           <h1 className="text-[25px] m-[10px] text-yellow-400">
-            Busca el idioma Ideal para ti
+            {t("BUSCA_IDIOMA")}
           </h1>
         </div>
         <div className=" w-full h-[450px] flex flex-col items-center justify-evenly ">
           <div className="bg-[#1e417a] w-full h-[50px] flex flex-row items-center justify-evenly">
             <RiMoneyDollarCircleLine className="text-[30px] text-white " />
-            <h1 className="text-[20px] text-white">Precio Curso</h1>
+            <h1 className="text-[20px] text-white">{t("PRECIO")}</h1>
           </div>
           <select
             className="h-9 w-[200px] border mt-1 rounded px-4 bg-gray-50"
@@ -120,13 +123,13 @@ export const SearchHome = () => {
             defaultValue="all"
             onChange={handleChangeNum}
           >
-            <option value="all">Precio del Curso</option>
-            <option value="A">Min a Max</option>
-            <option value="B">Max a Min</option>
+            <option value="all"><h1>{t("PRECIO_CURSO")}</h1></option>
+            <option value="A"><h1>{t("MIN_A_MAX")}</h1></option>
+            <option value="B"><h1>{t("MAX_A_MIN")}</h1></option>
           </select>
           <div className="bg-[#1e417a] w-full h-[50px]  flex flex-row items-center justify-evenly">
             <FaRankingStar className="text-[30px] text-white " />
-            <h1 className="text-[20px] text-white">Nivel Curso</h1>
+            <h1 className="text-[20px] text-white">{t("NIVEL_CURSO")}</h1>
           </div>
           <select
             className="h-9 w-[200px] border mt-1 rounded px-4 bg-gray-50"
@@ -135,10 +138,10 @@ export const SearchHome = () => {
             onChange={handleChangeLevel}
             defaultValue="all"
           >
-            <option value="all">Nivel de Idioma</option>
-            <option value="Principiante">Principiante</option>
-            <option value="Intermedio">Intermedio</option>
-            <option value="Avanzado">Avanzado</option>
+            <option value="all"><h1>{t("NIVEL_IDIOMA")}</h1></option>
+            <option value="Principiante"><h1>{t("PRINCIPIANTE")}</h1></option>
+            <option value="Intermedio"><h1>{t("INTERMEDIO")}</h1></option>
+            <option value="Avanzado"><h1>{t("AVANZADO")}</h1></option>
           </select>
 
 
@@ -148,11 +151,11 @@ export const SearchHome = () => {
       <div className="flex flex-col items-start justify-start bg-white h-full w-[85%] relative">
         <div className='flex '>
           <div className=" w-[900px] border-b-[2px] border-[#848484] my-[10px] mx-[90px]">
-            <h1 className="text-[35px] text-[#1F1F1F] m-[2px]">{`Cursos Encontrados: ${courses.length}`}</h1>
+          <h1 className="text-[35px] text-[#1F1F1F] m-[2px]">{t("CURSOS_ENCONTRADOS")} {courses.length}</h1>
           </div>
           <div className="bg-[#FF6B6C] h-[40px] flex flex-row items-center justify-center my-[10px] text-black text-[20px] rounded-lg hover:bg-yellow-500 font-medium">
             <Link to='/home'>
-              <h1 className="m-4">Ver mas cursos</h1>
+            <h1 className="m-4">{t("VER_MAS_CURSOS")}</h1>
             </Link>
           </div>
         </div>

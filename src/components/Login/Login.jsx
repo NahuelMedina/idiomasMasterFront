@@ -7,11 +7,13 @@ import { useEffect, useState } from "react";
 import { getmailUser } from "../Admin/userData";
 import Swal from "sweetalert2";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useTranslation } from "react-i18next";
 
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.userData);
+  const { t , i18n} = useTranslation()
 
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
@@ -56,7 +58,7 @@ export const Login = () => {
         dispatch(setUserdata(updatedUserData));
         Swal.fire({
           icon: 'success',
-          title: '¡Loggeado con Éxito!',
+          title: t("LOGUEADO"), 
           showConfirmButton: false,
           timer: 2200
         });;
@@ -65,8 +67,8 @@ export const Login = () => {
       console.error("Error al iniciar sesión:", error);
       Swal.fire({
         icon: 'error',
-        title: 'Error al intentar ingresar',
-        text: "Error al iniciar sesión El correo electrónico/contraseña que ingresó es incorrecto. Verifique sus credenciales o intente utilizar un método diferente para iniciar sesión."
+        title: t("ERROR_AL_INGRESAR"),
+        text: t("ERROR_AL_INICIAR_SESION")
       })
     }
   };
@@ -82,9 +84,9 @@ export const Login = () => {
           />
         </div>
         <div className="w-2/5 h-full">
-          <h2 className="absolute top-32 right-60 text-3xl font-bold text-[#FFFFFF]">
-            Iniciar Sesion
-          </h2>
+          <h1 className="absolute top-32 right-60 text-3xl font-bold text-[#FFFFFF]">
+          {t("INICIAR_SESION")}
+          </h1>
           <form
             onSubmit={handleSubmit}
             className="h-full w-full flex justify-center items-center flex-col bg-[#1E68AD] text-[#FFFFFF] text-lg pt-10 font-medium rounded-r-md m-0" // Añadir clase m-0 aquí
@@ -99,12 +101,12 @@ export const Login = () => {
                 id="email"
                 type="email"
               />
-              <label htmlFor="password">Contraseña</label>
+              <label htmlFor="password"><h1>{t("CONTRASENA")}</h1></label>
               <input
                 onChange={handleChange}
                 className="text-black rounded-md h-8 outline-none pl-1 focus:border-2 border-[#FF6B6C] w-60 mb-2" // Añadir margen inferior aquí
                 name="password"
-                placeholder="Contraseña..."
+                placeholder={t("CONTRASENA")}
                 id="password"
                 type="password"
               />
@@ -113,19 +115,19 @@ export const Login = () => {
               disabled={buttonDisabled()}
               className="mb-8 bg-[#FFFFFF] text-[#000000] w-40 h-11 rounded-lg cursor-pointer disabled:opacity-30 transition-colors hover:bg-[#FF6B6C] hover:text-[#FFFFFF]"
               type="submit"
-              value="Iniciar Sesion"
+              value={t("INICIAR_SESION")}
             />
             <LoginButton />
             <div>
-              <div className="mt-2">
+              <div className="mt-2 ">
                 <ul>
-                  <li>
-                    ¿No tienes cuenta?{" "}
+                  <li className="flex m-2">
+                  <h1>{t("NO_TIENES_CUENTA")}</h1>
                     <Link
-                      className="text-[#000000] font-semibold text-xl hover:text-[#FF6B6C] transition-colors"
+                      className="text-[#000000] ml-2 font-semibold text-l hover:text-[#FF6B6C] transition-colors"
                       to="/register"
                     >
-                      Registrate
+                      <h1>{t("REGISTRATE")}</h1>
                     </Link>
                   </li>
                 </ul>

@@ -21,8 +21,11 @@ import {
   GET_CART,
   ADD_CART,
   DELETE_CART,
+  SET_LANG,
 } from "./actiontypes";
 import axios from "axios";
+
+
 
 const URL = import.meta.env.VITE_URL_HOST;
 
@@ -81,7 +84,7 @@ export function search(value) {
           payload: [data, value],
         });
       } else {
-        alert("No se encontraron resultados");
+        
       }
     } catch (error) {
       alert(error);
@@ -246,7 +249,7 @@ export const setUserdata = (user) => {
     type: SET_USER_DATA,
     payload: user,
   };
-}
+};
 
 export function getCartDB(id) {
   return async function (dispatch) {
@@ -279,6 +282,18 @@ export function deleteCart(cart) {
       const { data } = await axios.put(`${URL}/deleteCartProduct`, cart);
       dispatch({
         type: DELETE_CART,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+export function setLanguage(data) {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: SET_LANG,
         payload: data,
       });
     } catch (error) {

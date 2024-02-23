@@ -22,15 +22,21 @@ import AdminUsers from "./components/Admin/adminUsers";
 import AdminNotifications from "./components/Admin/adminNotifications";
 import AdminSettings from "./components/Admin/adminSettings";
 import { useLocalStorage } from "./CustomHook/UseLocalStorage";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 function App() {
   const [userData, setUserData] = useLocalStorage("userData", {});
   const loginData = useSelector((state) => state.userData);
   const navigate = useNavigate();
   const [data, setData] = useState({});
-
+  const { t, i18n } = useTranslation()
+  useEffect(()=>{
+    const lng = navigator.language
+    i18n.changeLanguage(lng)
+  },[])
+  const lng = navigator.language
   useEffect(() => {
     setData(userData);
   }, []);
@@ -49,6 +55,7 @@ function App() {
 
   return (
     <>
+    <Suspense  fallback="loading">
       <AuthProvider>
         {Object.keys(data).length === 0 &&
         data.isAuthenticated === undefined ? (
@@ -114,6 +121,7 @@ function App() {
           ) : null}
         </Routes>
       </AuthProvider>
+      </Suspense>
     </>
   );
 }
