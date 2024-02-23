@@ -201,7 +201,7 @@ export const getmailUser = async ({ email, password }) => {
       return response;
     }
   } catch (error) {
-    throw new Error(error.message);
+    return error;
   }
 };
 

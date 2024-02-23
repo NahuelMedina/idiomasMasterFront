@@ -6,7 +6,7 @@ import { PiNotePencilBold } from "react-icons/pi";
 import Swal from "sweetalert2";
 const ProfileSection = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const [userData] = useLocalStorage("userData", {});
+  const [userData, setUserData] = useLocalStorage("userData", {});
   const [imagePreview, setImagePreview] = useState(null);
 
   const defaultAvatarUrl =
@@ -74,7 +74,7 @@ const ProfileSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await putUser({
+      const response = await putUser({
         id: editedData.id,
         name: editedData.name,
         lastname: editedData.lastname,
@@ -83,6 +83,17 @@ const ProfileSection = () => {
         password: editedData.password,
         age: editedData.age,
       });
+
+      console.log("hola respoesta----<",response)
+
+      if(response._id){
+console.log("SI QUEDAAA")
+        setUserData({
+          ...response,
+          isAuthenticated: true,
+        })
+      }
+
       Swal.fire({
         icon: "success",
         title: "¡Usuario Actualizado!",
