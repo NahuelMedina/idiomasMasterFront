@@ -15,7 +15,7 @@ export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.userData);
-  const { t , i18n} = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
@@ -58,7 +58,7 @@ export const Login = () => {
         dispatch(setUserdata(updatedUserData));
         Swal.fire({
           icon: 'success',
-          title: t("LOGUEADO"), 
+          title: t("LOGUEADO"),
           showConfirmButton: false,
           timer: 2200,
         });
@@ -103,7 +103,7 @@ export const Login = () => {
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="email"
-                    placeholder= {t("EMAIL")}
+                    placeholder={t("EMAIL")}
                     id="email"
                     type="email"
                   />
@@ -131,7 +131,7 @@ export const Login = () => {
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder= {t("CONTRASEÑA")}
+                    placeholder={t("CONTRASEÑA")}
                     name="password"
                     id="password"
                     type="password"
@@ -165,7 +165,7 @@ export const Login = () => {
           <div className=" w-[70%] h-[5%] flex items-center flex-col ">
             <ul>
               <li className="text-white flex" >
-              <h1>{t("NO_TIENES_CUENTA")}</h1>
+                <h1>{t("NO_TIENES_CUENTA")}</h1>
                 <Link
                   className="text-yellow-400 ml-2 font-bold text-l hover:text-yellow-600	"
                   to="/register"
