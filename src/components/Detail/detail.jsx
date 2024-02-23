@@ -11,10 +11,12 @@ import ReviewComponent from "../Detail_reviews/Detail_reviews";
 import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { useAuth0 } from "@auth0/auth0-react";
-const URL = import.meta.env.VITE_URL_HOST;
-const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 import Swal from "sweetalert2";
 import DetailReviews from "./detailReviews";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage"
+
+const URL = import.meta.env.VITE_URL_HOST;
+const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 
 export const Detail = () => {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -31,8 +33,8 @@ export const Detail = () => {
     JSON.parse(window.localStorage.getItem("fav"))
   );
   const { isAuthenticated } = useAuth0();
-
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
+  const [userData] = useLocalStorage("userData", {});
+  //const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
 
   const [reviews, setReviews] = useState(false)
 
@@ -150,7 +152,7 @@ export const Detail = () => {
 
   const handleReviews = () => {
 
-    if(reviews){
+    if (reviews) {
 
       setReviews(false)
     } else {
@@ -167,10 +169,10 @@ export const Detail = () => {
             {detail?.language}
           </p>
           <img
-              src={`/img/${detail.language}.png`}
-              alt={detail.lenguage}
-              className="h-[60px] w-[60px] m-[25px] "
-            />
+            src={`/img/${detail.language}.png`}
+            alt={detail.lenguage}
+            className="h-[60px] w-[60px] m-[25px] "
+          />
         </div>
         <div className="w-full h-[10%] bg-yellow-400 flex justify-center items-center">
           <p className="text-black text-[25px] font-normal text-start">
@@ -209,16 +211,16 @@ export const Detail = () => {
               <p className="ml-[30px] ">Finaliza el dia {fechaFinal}</p>
             </div>
             <div className="w-[100px] h-[100px] flex items-center justify-center absolute right-[1px]">
-          {isFav ? (
-            <button onClick={handleFavorite} className=" text-5xl ">
-              ❤️
-            </button>
-          ) : (
-            <button onClick={handleFavorite} className=" text-5xl ">
-              🤍
-            </button>
-          )}
-        </div>
+              {isFav ? (
+                <button onClick={handleFavorite} className=" text-5xl ">
+                  ❤️
+                </button>
+              ) : (
+                <button onClick={handleFavorite} className=" text-5xl ">
+                  🤍
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <div className="w-full h-[17%] bg-[#1d67ad] flex items-center justify-center">
@@ -253,24 +255,24 @@ export const Detail = () => {
             </div>
           )}
         </div>
-        
+
       </div>
       <div className="w-full min-h-[15%] flex items-center justify-center ">
-      <button
-    onClick={handleReviews} 
-    className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]">
-    {reviews ? 
-        ("Ocultar Comentarios") 
-        :
-        ("Mostrar Comentarios") 
-    }
-</button>
+        <button
+          onClick={handleReviews}
+          className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]">
+          {reviews ?
+            ("Ocultar Comentarios")
+            :
+            ("Mostrar Comentarios")
+          }
+        </button>
       </div>
       <div className="w-[80%] h-auto flex items-center justify-center ">
-        {reviews?
-      (<ReviewComponent/>)
-      :(null)  
-      }
+        {reviews ?
+          (<ReviewComponent />)
+          : (null)
+        }
       </div>
     </div>
   );
