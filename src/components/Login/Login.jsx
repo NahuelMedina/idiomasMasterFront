@@ -9,11 +9,13 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useTranslation } from "react-i18next";
 
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.userData);
+  const { t , i18n} = useTranslation()
 
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
@@ -35,7 +37,8 @@ export const Login = () => {
       }
     }
   };
-  console.log(userData);
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -55,8 +58,8 @@ export const Login = () => {
         setUserDataLocally(updatedUserData);
         dispatch(setUserdata(updatedUserData));
         Swal.fire({
-          icon: "success",
-          title: "¡Loggeado con Éxito!",
+          icon: 'success',
+          title: t("LOGUEADO"), 
           showConfirmButton: false,
           timer: 2200,
         });
@@ -64,10 +67,10 @@ export const Login = () => {
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       Swal.fire({
-        icon: "error",
-        title: "Error al intentar ingresar",
-        text: "Error al iniciar sesión El correo electrónico/contraseña que ingresó es incorrecto. Verifique sus credenciales o intente utilizar un método diferente para iniciar sesión.",
-      });
+        icon: 'error',
+        title: t("ERROR_AL_INGRESAR"),
+        text: t("ERROR_AL_INICIAR_SESION")
+      })
     }
   };
 
@@ -84,7 +87,7 @@ export const Login = () => {
       <div className="w-full h-full flex items-center justify-center bg-white">
         <div className="bg-gradient-to-r from-sky-600 to-sky-600 w-[80%] h-[80%] rounded-[20px] flex flex-col items-center shadow-lg shadow-black/50 animate-fade-left animate-ease-in-out">
           <div className=" w-[70%] h-[15%] flex items-center justify-center border-b-[1px] border-b-yellow-400">
-            <h1 className="text-[40px] text-yellow-400">Inicio de Sesion</h1>
+            <h1 className="text-[40px] text-yellow-400">{t("INICIAR_SESION")}</h1>
           </div>
           <form
             onSubmit={handleSubmit}
@@ -101,7 +104,7 @@ export const Login = () => {
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="email"
-                    placeholder="Ingresa tu Email"
+                    placeholder= {t("EMAIL")}
                     id="email"
                     type="email"
                   />
@@ -129,7 +132,7 @@ export const Login = () => {
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder="Ingresa tu Contraseña"
+                    placeholder= {t("CONTRASEÑA")}
                     name="password"
                     id="password"
                     type="password"
@@ -153,22 +156,22 @@ export const Login = () => {
                 disabled={buttonDisabled()}
                 className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded disabled:opacity-30 disabled:cursor-not-allowed"
                 type="submit"
-                value="Iniciar Sesion"
+                value={t("INICIAR_SESION")}
               />
             </div>
           </form>
           <div className=" w-[70%] h-[15%] flex items-center flex-col justify-evenly border-t-[1px] border-t-yellow-500">
             <LoginButton />
           </div>
-          <div className=" w-[70%] h-[5%] flex items-center flex-col">
+          <div className=" w-[70%] h-[5%] flex items-center flex-col ">
             <ul>
-              <li li className="text-white">
-                ¿No tienes cuenta?{" "}
+              <li className="text-white flex" >
+              <h1>{t("NO_TIENES_CUENTA")}</h1>
                 <Link
-                  className="text-yellow-400 font-bold text-xl hover:text-yellow-600	"
+                  className="text-yellow-400 ml-2 font-bold text-l hover:text-yellow-600	"
                   to="/register"
                 >
-                  Registrate
+                  <h1>{t("REGISTRATE")}</h1>
                 </Link>
               </li>
             </ul>

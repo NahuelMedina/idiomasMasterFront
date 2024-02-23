@@ -26,6 +26,8 @@ import {
 } from "./actiontypes";
 import axios from "axios";
 
+
+
 const URL = import.meta.env.VITE_URL_HOST;
 
 export const getAllCourses = () => async (dispatch) => {
@@ -269,7 +271,7 @@ export const setUserdata = (user) => {
     type: SET_USER_DATA,
     payload: user,
   };
-}
+};
 
 export function getCartDB(id) {
   return async function (dispatch) {

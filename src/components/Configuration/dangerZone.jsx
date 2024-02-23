@@ -58,7 +58,17 @@ export default function DangerZone() {
     }
   };
 
-  const isButtonEnabled = data.email.length > 5 && data.password.length > 5;
+
+  const buttonDisable = () => {
+    if (
+      data.email.length > 5 &&
+      data.password.length > 5
+    ) {
+      return false
+    } else {
+      return true
+    }
+  };
 
   return (
     <div className="flex flex-col w-full h-full items-center">
@@ -116,8 +126,9 @@ export default function DangerZone() {
         </div>
         <div className="w-full h-full bg-red-700 flex items-center justify-center text-[20px] rounded-b-[10px]">
           <button
-            className="w-[200px] h-[50px] bg-white rounded-[10px] hover:bg-yellow-400"
-            onClick={isButtonEnabled ? handleDelete : null}
+            className="w-[200px] h-[50px] bg-white rounded-[10px] hover:bg-yellow-400 disabled:opacity-30 disabled:cursor-not-allowed"
+            onClick={handleDelete}
+            disabled={buttonDisable()}
           >
             Desactivar Cuenta
           </button>
