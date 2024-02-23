@@ -16,10 +16,10 @@ import { useTranslation } from "react-i18next";
 export const SearchHome = () => {
 
 
-  const searchName = useSelector(state => state.coursesName);
+  //const searchName = useSelector(state => state.coursesName);
   // const searchLanguage = useSelector(state => state.courseLanguage);
 
-  const { t , i18n} = useTranslation()
+  const { t, i18n } = useTranslation()
   const searchName = useSelector(state => state.coursesName)
   const searchLanguage = useSelector(state => state.courseLanguage)
 
@@ -151,7 +151,7 @@ export const SearchHome = () => {
       <div className="flex flex-col items-start justify-start bg-white h-full w-[85%] relative">
         <div className='flex '>
           <div className=" w-[900px] border-b-[2px] border-[#848484] my-[10px] mx-[90px]">
-          <h1 className="text-[35px] text-[#1F1F1F] m-[2px]">{t("CURSOS_ENCONTRADOS")} {courses.length}</h1>
+            <h1 className="text-[35px] text-[#1F1F1F] m-[2px]">{t("CURSOS_ENCONTRADOS")} {courses.length}</h1>
           </div>
           {/* <div className="bg-[#FF6B6C] h-[40px] flex flex-row items-center justify-center my-[10px] text-black text-[20px] rounded-lg hover:bg-yellow-500 font-medium">
             <Link to='/home'>
@@ -163,9 +163,9 @@ export const SearchHome = () => {
           {courses &&
             courses.length > 0 &&
             renderCards.map((element, index) => (
-          
-                <Card course={element} />
-          
+
+              <Card course={element} />
+
             ))}
         </div>
 
