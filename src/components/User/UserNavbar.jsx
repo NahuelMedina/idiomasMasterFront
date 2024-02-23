@@ -16,10 +16,13 @@ export default function UserNavbar() {
     "https://www.pngitem.com/pimgs/m/508-5087236_tab-profile-f-user-icon-white-fill-hd.png";
 
   return (
-    <div className="flex h-[80px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#000000e1] border-[#ffffff] border-b-2 border-solid">
+    <div className="flex h-[70px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#000000e1] border-[#ffffff] border-b-2 border-solid">
       <div className="flex ml-2 items-center justify-around h-full gap-10">
-        <Link to={"/user/home"} className="h-full flex justify-center items-center">
-          <img className="w-16" src="public\img\logo4.png" alt="Logo" />
+        <Link
+          to={"/user/home"}
+          className="h-full flex justify-center items-center"
+        >
+          <img className="w-16" src="/img/logo4.png" alt="Logo" />
         </Link>
 
         <Link to={"/home"} className="h-full flex items-center">
@@ -33,8 +36,8 @@ export default function UserNavbar() {
           <img className="w-[38px]" src="public\img\cart.png" alt="" />
         </Link> */}
         <Link to="/cart">
-          <div className="flex items-center justify-evenly h-20 w-[50px] mx-5 transition-colors duration-300 ease-in-out border-b-4 border-black hover:border-white border-t-[4px]">
-            <img style={{ width: '38px' }} src="img\cart.png" alt="" />
+          <div className="flex items-center justify-evenly w-[50px]">
+            <img className="w-[38px]" src="/img/cart.png" alt="" />
           </div>
         </Link>
         <Link to="/favorite">

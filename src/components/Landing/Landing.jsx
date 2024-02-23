@@ -68,7 +68,7 @@ export const Landing = () => {
   return (
     <div className="w-full h-[150px] bg-black text-white">
       <div className="flex justify-end items-end w-full h-full bg-[#1E68AD]">
-        <div className="mr-5 mb-1">
+        <div className="mr-5 mb-3">
           <SearchBar></SearchBar>
         </div>
       </div>
