@@ -1,0 +1,82 @@
+{
+    "SOBRE_NOSOTROS": "About Us",
+    "CURSOS": "Courses",
+    "IDIOMA": "Language",
+    "INGRESAR": "Log in",
+
+    "BUSCA_Y_APRENDE_UN_IDIOMA_NUEVO": "Search and Learn a New Language",
+    "LO_SENTIMOS": "We're sorry!",
+    "NO_HAY_CURSOS": "There are no courses with that name. Please try again",
+    "HORA_DE_APRENDER": "Time to learn",
+    "SE_ENCONTRARON": "Courses were found with that name.",
+
+    "BUSCA_IDIOMA": "Find the ideal language for you",
+    "PRECIO": "Price",
+    "PRECIO_CURSO": "Course Price",
+    "MIN_A_MAX": "Min to Max",
+    "MAX_A_MIN": "Max to Min",
+    "NIVEL_CURSO": "Course Level",
+    "NIVEL_IDIOMA": "Language Level",
+    "PRINCIPIANTE": "Beginner",
+    "INTERMEDIO": "Intermediate",
+    "AVANZADO": "Advanced",
+    "CURSOS_ENCONTRADOS": "Courses Found",
+    "VER_MAS_CURSOS": "View More Courses",
+
+    "INGLES": "English",
+    "FRANCES": "French",
+    "ALEMAN": "German",
+    "ITALIANO": "Italian",
+    "HOLANDES": "Dutch",
+    "PORTUGUES": "Portuguese",
+
+    "HACER_LO_IMPOSIBLE_ES": "Making the impossible is",
+    "DIVERTIDO": "FUN",
+    "SUPERAR_DESAFIOS_ES": "Overcoming challenges is",
+    "EMOCIONANTE": "EXCITING",
+    "BUSCAR_NUEVAS_OPORTUNIDADES_ES": "Seeking new opportunities is",
+    "ENERGIZANTE": "ENERGIZING",
+    "EXPLORAR_HORIANTES_ES": "Exploring horizons is",
+    "INCREIBLE": "AMAZING",
+    "DESAFIAR_LIMITES_ES": "Challenging limits is",
+    "INSPIRADOR": "INSPIRING",
+
+
+    "PRESENCIAL_O_EN_LINEA": "In-person or Online",
+    "APRENDE_EN_TIEMPO_REAL": "Learn in real-time with expert instructors. Interact with other students and make the most of your online classes.",
+    "GRUPAL_O_CLASES_PRIVADAS": "Group or Private Classes",
+    "CLASES_PRIVADAS": "Collaborative group classes or customized private classes. Adapted to your needs and preferences.",
+    "DE_PRINCIPIANTE_A_AVANZADO": "From Beginner to Advanced",
+    "CURSOS_DISEÑADOS": "Courses designed to take your learning from beginner to advanced. Advance at your own pace and achieve your goals.",
+    "INCREIBLE_EXPERIENCIA": "Incredible experience! Thanks to this online course, I have been able to improve my proficiency in various languages. The instructors are very professional, and the lessons are interactive and enjoyable. I feel more confident communicating in different contexts, and I have expanded my job and travel opportunities. I highly recommend this course to all language enthusiasts who want to achieve fluency!",
+    "TRANSFORMADOR": "Transformative! This course has completely changed my life. I learned a new language, and now I can confidently communicate with native speakers. The lessons are flexible and adapt to my busy schedule, allowing me to study at my own pace. Thanks to this course, I have made new friends and have opened doors to new job and cultural opportunities. I cannot thank this program enough!",
+
+    "REGISTRATE": "Sign Up",
+    "NO_TIENES_CUENTA": "Don't have an account?",
+    "INICIAR_SESION": "Log in",
+    "LOGUEADO": "Logged in successfully!",
+    "ERROR_AL_INGRESAR": "Error entering",
+    "ERROR_AL_INICIAR_SESION": "Error signing in. The email/password you entered is incorrect. Please check your credentials or try using a different method to sign in.",
+
+
+    "REGISTRARSE": "Sign Up",
+    "NOMBRE": "Enter your Name",
+    "APELLIDO": "Enter your Last Name",
+    "CONTRASEÑA": "Enter your Password",
+    "EMAIL": "Enter your Email",
+    "EDAD": "Enter your Age",
+    "IMAGEN_URL": "Image URL",
+    "YA_TIENES_CUENTA": "Already have an account?",
+    "USUARIO_CREADO": "User Created Successfully!",
+    "ERROR_AL_CREAR_USUARIO": "Error Creating User",
+    "REGISTRO_DE_USUARIO": "User Registration",
+
+    "CERRAR_SESION": "Logout",
+    "CERRAR":"Close",
+    "ESTAS_SEGURO":"¿Are you sure?",
+    "QUIERES_CERRAR_SESION":"¿You want to logout?"
+
+
+
+
+}
