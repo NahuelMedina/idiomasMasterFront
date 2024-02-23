@@ -10,6 +10,8 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { Card } from "../Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, deleteCart, getCartDB } from "../../redux/action/actions";
+import { useTranslation } from "react-i18next";
+
 const URL = import.meta.env.VITE_URL_HOST;
 
 function HomeC() {
@@ -24,9 +26,9 @@ function HomeC() {
   const [level, setLevel] = useState("all");
   const [num, setNum] = useState("all");
   const [courses, setCourses] = useState([]);
-  const [userCart, setUserCart] = useState(
-    JSON.parse(window.localStorage.getItem("cart"))
-  );
+  const [userCart, setUserCart] =useState(JSON.parse(window.localStorage.getItem("cart")))
+  const { t , i18n} = useTranslation()
+
 
   // useEffect(()=>{
   //   dispatch(getCartDB(userData._id))
@@ -124,13 +126,13 @@ function HomeC() {
         <div className="w-full  text-center flex flex-col items-center justify-center">
           <FaLanguage className="text-[80px] text-yellow-400" />
           <p className="text-[25px] m-[10px] text-yellow-400">
-            Busca el idioma Ideal para ti
+          {t("BUSCA_IDIOMA")}
           </p>
         </div>
         <div className=" w-full h-full flex flex-col items-center justify-evenly ">
           <div className="bg-[#1e417a] w-full h-[50px] flex flex-row items-center justify-evenly">
             <RiMoneyDollarCircleLine className="text-[30px] text-white " />
-            <p className="text-[20px] text-white">Precio Curso</p>
+            <p className="text-[20px] text-white">{t("PRECIO")}</p>
           </div>
           <select
             className="h-9 w-[200px] border mt-1 rounded px-4 bg-gray-50"
@@ -139,13 +141,13 @@ function HomeC() {
             defaultValue="all"
             onChange={handleChangeNum}
           >
-            <option value="all">Precio del Curso</option>
-            <option value="A">Min a Max</option>
-            <option value="B">Max a Min</option>
+            <option value="all"><h1>{t("PRECIO_CURSO")}</h1></option>
+            <option value="A"><h1>{t("MIN_A_MAX")}</h1></option>
+            <option value="B"><h1>{t("MAX_A_MIN")}</h1></option>
           </select>
           <div className="bg-[#1e417a] w-full h-[50px]  flex flex-row items-center justify-evenly">
             <FaRankingStar className="text-[30px] text-white " />
-            <p className="text-[20px] text-white">Nivel Curso</p>
+            <p className="text-[20px] text-white">{t("NIVEL_CURSO")}</p>
           </div>
           <select
             className="h-9 w-[200px] border mt-1 rounded px-4 bg-gray-50"
@@ -154,14 +156,14 @@ function HomeC() {
             onChange={handleChangeLevel}
             defaultValue="all"
           >
-            <option value="all">Nivel de Idioma</option>
-            <option value="Principiante">Principiante</option>
-            <option value="Intermedio">Intermedio</option>
-            <option value="Avanzado">Avanzado</option>
+            <option value="all"><h1>{t("NIVEL_IDIOMA")}</h1></option>
+            <option value="Principiante"><h1>{t("PRINCIPIANTE")}</h1></option>
+            <option value="Intermedio"><h1>{t("INTERMEDIO")}</h1></option>
+            <option value="Avanzado"><h1>{t("AVANZADO")}</h1></option>
           </select>
           <div className="bg-[#1e417a] w-full h-[50px]  flex flex-row items-center justify-evenly">
             <TbMessageLanguage className="text-[30px] text-white" />
-            <p className="text-[20px] text-white">Idioma</p>
+            <p className="text-[20px] text-white">{t("IDIOMA")}</p>
           </div>
           <select
             className="h-9 w-[200px] border mt-1 rounded px-4 bg-gray-50"
@@ -170,20 +172,20 @@ function HomeC() {
             onChange={handleChangeLanguage}
             defaultValue="all"
           >
-            <option value="all">Idioma</option>
-            <option value="Ingles">Ingles</option>
-            <option value="Frances">Frances</option>
-            <option value="Aleman">Aleman</option>
-            <option value="Italiano">Italiano</option>
-            <option value="Holandes">Holandés</option>
-            <option value="Portugues">Portugues</option>
+          <option value="all"><h1>{t("IDIOMA")}</h1></option>
+          <option value="Ingles"><h1>{t("INGLES")}</h1></option>
+          <option value="Frances"><h1>{t("FRANCES")}</h1></option>
+          <option value="Aleman"><h1>{t("ALEMAN")}</h1></option>
+          <option value="Italiano"><h1>{t("ITALIANO")}</h1></option>
+          <option value="Holandes"><h1>{t("HOLANDES")}</h1></option>
+          <option value="Portugues"><h1>{t("PORTUGUES")}</h1></option>
           </select>
         </div>
       </div>
 
       <div className="flex flex-col items-start justify-star h-full w-full relative">
         <div className=" w-[600px] border-b-[2px] border-[#848484] my-[10px] mx-[90px]">
-          <h1 className="text-[35px] text-[#1F1F1F] m-[2px]">{`Cursos Encontrados: ${courses.length}`}</h1>
+        <h1 className="text-[35px] text-[#1F1F1F] m-[2px]">{t("CURSOS_ENCONTRADOS")}: {courses.length}</h1>
         </div>
         <div className="flex justify-evenly items-center h-[80%] w-full ">
           {courses &&

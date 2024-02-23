@@ -1,4 +1,9 @@
+import { useTranslation } from "react-i18next";
+ 
+
 export default function Landing_card({ img, title, description }) {
+  const { t , i18n} = useTranslation()
+
   return (
     <div className="relative h-[350px] m-1 shadow-lg shadow-black/50 rounded-[10px]">
       <img src={`${img}`} className="w-full h-full rounded-[10px] "></img>

@@ -44,7 +44,7 @@ let initialState = {
   postStatusFail: false,
   postError: null,
   currentCart: [],
-
+  language: '',
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -190,6 +190,7 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           currentCart: payload
         }
+     
      
     default:
       return state;
