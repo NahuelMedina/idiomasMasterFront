@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 export const SearchHome = () => {
 
 
-  const searchName = useSelector(state => state.coursesName);
+  // const searchName = useSelector(state => state.coursesName);
   // const searchLanguage = useSelector(state => state.courseLanguage);
 
   const { t , i18n} = useTranslation()

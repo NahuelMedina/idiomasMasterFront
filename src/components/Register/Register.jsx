@@ -107,12 +107,12 @@ useEffect(()=>{
 
   const buttonDisabled = () => {
     let btn = true;
-    if (Object.keys(errors).length === 0) {
-        btn = false;
+    if(Object.values(state).some(value => value.trim() === '')) btn = true
+    else{
+      btn = false
     }
     return btn;
 }
-
   return (
     <div className="w-full h-[90vh] mt-[80px] grid grid-cols-2">
       <div className="w-full h-full flex relative">
@@ -146,6 +146,7 @@ useEffect(()=>{
                     placeholder= {t("NOMBRE")}
                     id="name"
                     type="text"
+                    value={state.name}
                   />
                 </div>
               </div>
@@ -175,6 +176,7 @@ useEffect(()=>{
                     placeholder= {t("APELLIDO")}
                     id="lastname"
                     type="text"
+                    value={state.lastname}
                   />
                 </div>
               </div>
@@ -204,6 +206,7 @@ useEffect(()=>{
                     name="age"
                     id="age"
                     type="number"
+                    value={state.age}
                   />
                 </div>
               </div>
@@ -233,6 +236,7 @@ useEffect(()=>{
                     placeholder= {t("EMAIL")}
                     id="email"
                     type="email"
+                    value={state.email}
                   />
                 </div>
               </div>
@@ -262,6 +266,7 @@ useEffect(()=>{
                     name="password"
                     id="password"
                     type="password"
+                    value={state.password}
                   />
                 </div>
               </div>

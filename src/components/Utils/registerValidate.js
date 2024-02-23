@@ -22,9 +22,9 @@ const registerValidate = ({ name, lastname, email, age, img, password }) => {
   //   errors.image = "permite solo archivos con extensión jpg o jpeg.";
   
   //EMAIL
+  if (!email.length) { errors.email = "El email es obligatorio." };
   if (email.length > 30) { errors.email = "Email es mayor a 30 caracteres." };
   if (!/\S+@\S+\.\S+/.test(email)) errors.email = 'Email debe contener @ y .com'
-  if (!email.length) { errors.email = "El email es obligatorio." };
   // const existUser = await User.findOne({ email });
   // if (existUser) {return res.status(400).send("Email is already in use")}
   
