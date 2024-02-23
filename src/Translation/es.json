@@ -49,7 +49,6 @@
     "INCREIBLE_EXPERIENCIA": "¡Increíble experiencia! Gracias a este curso en línea, he podido mejorar mi dominio de varios idiomas. Los instructores son muy profesionales y las lecciones son interactivas y entretenidas. Me siento más seguro comunicándome en diferentes contextos y he ampliado mis oportunidades laborales y de viaje. ¡Recomiendo este curso a todos los amantes de los idiomas que deseen alcanzar la fluidez!",
     "TRANSFORMADOR":"¡Transformador! Este curso ha cambiado mi vida por completo. Aprendí un nuevo idioma y ahora puedo comunicarme con confianza con hablantes nativos. Las lecciones son flexibles y se adaptan a mi horario ocupado, lo que me permite estudiar a mi propio ritmo. Gracias a este curso, he hecho nuevos amigos y he abierto puertas a nuevas oportunidades laborales y culturales. ¡No puedo agradecer lo suficiente a este programa!",
 
-    "CONTRASENA": "Contraseña",
     "REGISTRATE": "Regístrate",
     "NO_TIENES_CUENTA": "¿No tienes cuenta?",
     "INICIAR_SESION": "Iniciar Sesion",
@@ -58,14 +57,16 @@
     "ERROR_AL_INICIAR_SESION":"Error al iniciar sesión El correo electrónico/contraseña que ingresó es incorrecto. Verifique sus credenciales o intente utilizar un método diferente para iniciar sesión.",
 
     "REGISTRARSE": "Registrarse",
-    "NOMBRE": "Nombre",
-    "APELLIDO": "Apellido",
-    "CONTRASEÑA": "Contraseña",
-    "EDAD": "Edad",
+    "NOMBRE": "Ingresa tu Nombre",
+    "APELLIDO": "Ingresa tu Apellido",
+    "CONTRASEÑA": "Ingresa tu Contraseña",
+    "EMAIL":"Ingresa tu Email",
+    "EDAD": "Ingresa tu Edad",
     "IMAGEN_URL": "Imagen URL",
     "YA_TIENES_CUENTA": "¿Ya tienes una cuenta?",
     "USUARIO_CREADO":"¡Usuario Creado Correctamente!",
     "ERROR_AL_CREAR_USUARIO":"Error al Crear Usuario",
+    "REGISTRO_DE_USUARIO": "Registro de Usuario",
 
     "CERRAR_SESION":"Cerrar sesión",
     "CERRAR":"Cancelar",

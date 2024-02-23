@@ -51,7 +51,6 @@
     "INCREIBLE_EXPERIENCIA": "Incredible experience! Thanks to this online course, I have been able to improve my proficiency in various languages. The instructors are very professional, and the lessons are interactive and enjoyable. I feel more confident communicating in different contexts, and I have expanded my job and travel opportunities. I highly recommend this course to all language enthusiasts who want to achieve fluency!",
     "TRANSFORMADOR": "Transformative! This course has completely changed my life. I learned a new language, and now I can confidently communicate with native speakers. The lessons are flexible and adapt to my busy schedule, allowing me to study at my own pace. Thanks to this course, I have made new friends and have opened doors to new job and cultural opportunities. I cannot thank this program enough!",
 
-    "CONTRASENA": "Password",
     "REGISTRATE": "Sign Up",
     "NO_TIENES_CUENTA": "Don't have an account?",
     "INICIAR_SESION": "Log in",
@@ -61,14 +60,16 @@
 
 
     "REGISTRARSE": "Sign Up",
-    "NOMBRE": "Name",
-    "APELLIDO": "Lastname",
-    "CONTRASEÑA": "Password",
-    "EDAD": "Age",
+    "NOMBRE": "Enter your Name",
+    "APELLIDO": "Enter your Last Name",
+    "CONTRASEÑA": "Enter your Password",
+    "EMAIL": "Enter your Email",
+    "EDAD": "Enter your Age",
     "IMAGEN_URL": "Image URL",
     "YA_TIENES_CUENTA": "Already have an account?",
     "USUARIO_CREADO": "User Created Successfully!",
     "ERROR_AL_CREAR_USUARIO": "Error Creating User",
+    "REGISTRO_DE_USUARIO": "User Registration",
 
     "CERRAR_SESION": "Logout",
     "CERRAR":"Close",

@@ -9,8 +9,7 @@ import LogoutButton from "../Login/LogOut";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useTranslation } from "react-i18next";
 import { MdGTranslate } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { setLanguage } from "../../redux/action/actions";
+import { useDispatch } from "react-redux";
 
 export const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth0();
@@ -19,7 +18,6 @@ export const Navbar = () => {
   const { t , i18n} = useTranslation()
   const [lang, setLang] =useLocalStorage("lang", "")
   const dispatch = useDispatch()
-  const language = useSelector(state => state.language)
 
 
  const handleLanguageChange = (e) => {
@@ -68,13 +66,13 @@ console.log((localStorage.getItem("lang")));
           onChange={handleLanguageChange} defaultValue={"es"}
         >
           <option value={lang}>
-            <h1><MdGTranslate className="inline-block mr-2 text-black" />{t("IDIOMA")}</h1>
+            {t("IDIOMA")}
           </option>
           <option value="es">
-            <MdGTranslate className="inline-block mr-2" /> ESP
+             ESP
           </option>
           <option value="en">
-            <MdGTranslate className="inline-block mr-2" /> ENG
+             ENG
           </option>
         </select>
 

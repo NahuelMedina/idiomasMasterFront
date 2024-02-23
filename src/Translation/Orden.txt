@@ -4,3 +4,4 @@
 4. Landing
 5. Login
 6. Register
+7. Logout

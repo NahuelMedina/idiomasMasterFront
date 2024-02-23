@@ -20,7 +20,6 @@ import {
   GET_CART,
   ADD_CART,
   DELETE_CART,
-  SET_LANG,
 
 } from "../action/actiontypes";
 
@@ -192,11 +191,6 @@ const reducer = (state = initialState, { type, payload }) => {
           currentCart: payload
         }
      
-      case SET_LANG:
-        return{
-          ...state,
-          language: payload
-        }
      
     default:
       return state;
