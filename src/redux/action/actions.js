@@ -26,6 +26,8 @@ import {
 } from "./actiontypes";
 import axios from "axios";
 
+
+
 const URL = import.meta.env.VITE_URL_HOST;
 
 export const getAllCourses = () => async (dispatch) => {
@@ -83,7 +85,7 @@ export function search(value) {
           payload: [data, value],
         });
       } else {
-        alert("No se encontraron resultados");
+        
       }
     } catch (error) {
       alert(error);
@@ -271,7 +273,7 @@ export const setUserdata = (user) => {
     type: SET_USER_DATA,
     payload: user,
   };
-}
+};
 
 export function getCartDB(id) {
   return async function (dispatch) {
