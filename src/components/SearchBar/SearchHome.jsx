@@ -15,6 +15,10 @@ import { useTranslation } from "react-i18next";
 
 export const SearchHome = () => {
 
+
+  const searchName = useSelector(state => state.coursesName);
+  // const searchLanguage = useSelector(state => state.courseLanguage);
+
   const { t , i18n} = useTranslation()
   const searchName = useSelector(state => state.coursesName)
   const searchLanguage = useSelector(state => state.courseLanguage)
@@ -30,31 +34,13 @@ export const SearchHome = () => {
 
 
   // Estados Locales 
+
   const [level, setLevel] = useState("all");
   const [num, setNum] = useState("all");
   const [courses, setCourses] = useState([]);
-
-  // Paginado
   const [pagePosition, setPagePosition] = useState(1);
-  const itemsOnPage = 3;
-  const nextPage = () => {
-    setPagePosition((prevPagePosition) => {
-      if (prevPagePosition < pageNum) {
-        return prevPagePosition + 1;
-      } else {
-        return prevPagePosition;
-      }
-    });
-  };
-  const prevPage = () => {
-    setPagePosition((prevPagePosition) => {
-      if (prevPagePosition > 1) {
-        return prevPagePosition - 1;
-      } else {
-        return prevPagePosition;
-      }
-    });
-  };
+  const itemsOnPage = 2;
+
   useEffect(() => {
     setPagePosition(1);
   }, [courses]);
@@ -66,45 +52,57 @@ export const SearchHome = () => {
   const renderCards = itemsArray[pagePosition - 1] || [];
 
   useEffect(() => {
-    setCourses(searchName)
-  }, [searchName])
+    setCourses(searchName);
+  }, [searchName]);
 
   useEffect(() => {
-
     const getAllCourse = async () => {
-      const response = await axios.get(
-        `http://localhost:3000/getCourseFilters?language=${language}&level=${level}`
-      );
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/getCourseFilters?language=${searchName[0].language}&level=${level}`
+        );
 
-      if (num === "A" || num === "all") {
-        const sortedData = sortByDescending(response.data);
+        let sortedData = response.data;
+        if (num === "A" || num === "all") {
+          sortedData = sortedData.sort((a, b) => b.price - a.price);
+        } else {
+          sortedData = sortedData.sort((a, b) => a.price - b.price);
+        }
 
         setCourses(sortedData);
-      } else {
-        const sortedData = sortByAscending(response.data);
-
-        setCourses(sortedData);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
       }
     };
 
     getAllCourse();
-  }, [language, level, num]);
+  }, [level, num]);
+
   const handleChangeLevel = (e) => {
     const value = e.target.value;
-
     setLevel(value);
   };
 
   const handleChangeNum = (e) => {
-    const value = e.currentTarget.value
-
+    const value = e.currentTarget.value;
     setNum(value);
   };
 
+  const nextPage = () => {
+    setPagePosition(prevPagePosition =>
+      prevPagePosition < pageNum ? prevPagePosition + 1 : prevPagePosition
+    );
+  };
+
+  const prevPage = () => {
+    setPagePosition(prevPagePosition =>
+      prevPagePosition > 1 ? prevPagePosition - 1 : prevPagePosition
+    );
+  };
 
   return (
-    <div className="bg-white text-white flex flex-row w-full h-full items-center justify-center  ">
-      <div className="h-full w-[15%] text-black justify-start bg-gradient-to-r bg-[#1E68AD] relative flex flex-col  items-center">
+    <div className="w-full h-[90vh] mt-[80px] flex flex-row">
+      <div className="h-full  min-w-[300px] text-black justify-start bg-gradient-to-r bg-[#1E68AD] relative flex flex-col items-center">
         <div className="w-full h-[200px] flex flex-col items-center justify-center">
           <FaLanguage className="text-[80px] text-yellow-400" />
           <h1 className="text-[25px] m-[10px] text-yellow-400">
@@ -123,9 +121,11 @@ export const SearchHome = () => {
             defaultValue="all"
             onChange={handleChangeNum}
           >
+
             <option value="all"><h1>{t("PRECIO_CURSO")}</h1></option>
-            <option value="A"><h1>{t("MIN_A_MAX")}</h1></option>
-            <option value="B"><h1>{t("MAX_A_MIN")}</h1></option>
+            <option value="B"><h1>{t("MIN_A_MAX")}</h1></option>
+            <option value="A"><h1>{t("MAX_A_MIN")}</h1></option>
+
           </select>
           <div className="bg-[#1e417a] w-full h-[50px]  flex flex-row items-center justify-evenly">
             <FaRankingStar className="text-[30px] text-white " />
@@ -153,19 +153,19 @@ export const SearchHome = () => {
           <div className=" w-[900px] border-b-[2px] border-[#848484] my-[10px] mx-[90px]">
           <h1 className="text-[35px] text-[#1F1F1F] m-[2px]">{t("CURSOS_ENCONTRADOS")} {courses.length}</h1>
           </div>
-          <div className="bg-[#FF6B6C] h-[40px] flex flex-row items-center justify-center my-[10px] text-black text-[20px] rounded-lg hover:bg-yellow-500 font-medium">
+          {/* <div className="bg-[#FF6B6C] h-[40px] flex flex-row items-center justify-center my-[10px] text-black text-[20px] rounded-lg hover:bg-yellow-500 font-medium">
             <Link to='/home'>
             <h1 className="m-4">{t("VER_MAS_CURSOS")}</h1>
             </Link>
-          </div>
+          </div> */}
         </div>
         <div className="flex justify-evenly items-center h-[75%] w-full">
           {courses &&
             courses.length > 0 &&
             renderCards.map((element, index) => (
-              <div key={index}>
+          
                 <Card course={element} />
-              </div>
+          
             ))}
         </div>
 
