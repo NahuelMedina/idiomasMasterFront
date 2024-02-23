@@ -7,6 +7,7 @@ import { FaCalendarDays } from "react-icons/fa6";
 import { GiDuration } from "react-icons/gi";
 import { FaHourglassStart } from "react-icons/fa";
 import { FaHourglassEnd } from "react-icons/fa";
+import ReviewComponent from "../Detail_reviews/Detail_reviews";
 import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -31,13 +32,10 @@ export const Detail = () => {
   );
   const { isAuthenticated } = useAuth0();
 
-  const [userData, setUserData] = useState(
-    JSON.parse(localStorage.getItem("userData"))
-  );
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
 
   const [reviews, setReviews] = useState(false)
 
-  //Carrito
 
   useEffect(() => {
     if (!cart || cart.length === 0) {
@@ -63,7 +61,7 @@ export const Detail = () => {
 
     const updatedCart = isCart
       ? currentCart.filter((c) => c._id !== detail._id) // Eliminar del carrito
-      : [...currentCart, detail]; // Agregar al carrito
+      : [...currentCart, detail];
 
     setCart(updatedCart);
     window.localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -91,8 +89,8 @@ export const Detail = () => {
     const currentfav = JSON.parse(window.localStorage.getItem("fav")) || [];
 
     const updatedfav = isFav
-      ? currentfav.filter((c) => c._id !== detail._id) // Eliminar del carrito
-      : [...currentfav, detail]; // Agregar al carrito
+      ? currentfav.filter((c) => c._id !== detail._id)
+      : [...currentfav, detail];
 
     setFav(updatedfav);
     window.localStorage.setItem("fav", JSON.stringify(updatedfav));
@@ -129,14 +127,14 @@ export const Detail = () => {
 
   const fechaIni = new Date(detail?.start_time);
   const añoI = fechaIni.getFullYear();
-  const mesI = ("0" + (fechaIni.getMonth() + 1)).slice(-2); // Sumar 1 al mes ya que en JavaScript los meses van de 0 a 11
+  const mesI = ("0" + (fechaIni.getMonth() + 1)).slice(-2);
   const diaI = ("0" + fechaIni.getDate()).slice(-2);
 
   const fechaInicial = `${añoI}-${mesI}-${diaI}`;
 
   const fechafin = new Date(detail?.finish_time);
   const añoF = fechafin.getFullYear();
-  const mesF = ("0" + (fechafin.getMonth() + 1)).slice(-2); // Sumar 1 al mes ya que en JavaScript los meses van de 0 a 11
+  const mesF = ("0" + (fechafin.getMonth() + 1)).slice(-2);
   const diaF = ("0" + fechafin.getDate()).slice(-2);
 
   const fechaFinal = `${añoF}-${mesF}-${diaF}`;
@@ -265,6 +263,9 @@ export const Detail = () => {
       :(null)  
       }
       </div>
+      <hr />
+      <br />
+        <ReviewComponent/>
     </div>
   );
 };
