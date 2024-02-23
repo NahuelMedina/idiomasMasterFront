@@ -44,6 +44,7 @@ useEffect(()=>{
     age: "",
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
   setLang(localStorage.getItem("lang"))
@@ -64,10 +65,9 @@ useEffect(()=>{
     
     setState({
       ...state,
-      [name]: value,
+      [name]: value
     });
   };
-
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -83,6 +83,7 @@ useEffect(()=>{
     }
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
@@ -93,8 +94,8 @@ useEffect(()=>{
         showConfirmButton: false,
         timer: 2300 
       });
-      setStatus(false);
-      navigate("/login");
+      setStatus(false)
+      navigate("/login")
     } else {
       Swal.fire({
         icon: 'error',
@@ -107,12 +108,10 @@ useEffect(()=>{
   const buttonDisabled = () => {
     let btn = true;
     if (Object.keys(errors).length === 0) {
-      btn = false;
+        btn = false;
     }
     return btn;
-  };
-  console.log(errors);
-  console.log(buttonDisabled());
+}
 
   return (
     <div className="w-full h-[90vh] mt-[80px] grid grid-cols-2">
