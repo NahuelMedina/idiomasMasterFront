@@ -4,6 +4,7 @@ import { GrSchedule } from "react-icons/gr";
 import { LuCalendarSearch } from "react-icons/lu";
 import { BsCalendar2DayFill } from "react-icons/bs";
 import { GrLanguage } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
 
 export default function UserPromoCard({
   id,
@@ -15,9 +16,21 @@ export default function UserPromoCard({
   image,
   name,
   rank
-}) {
+}) 
+
+{
+
+  const navigate = useNavigate()
+
+  const handleNavigate = () => {
+
+   navigate(`/detail/${id}`)}
+
+  
+
+
   return (
-    <div className="w-[98%] h-[500px] bg-white flex items-center justify-center">
+    <div className="w-[98%] h-[500px] bg-white flex items-center justify-center" onClick={handleNavigate}>
     <div className="w-[95%] h-[90%] border-[1px] border-gray-70 bg-white cursor-pointer rounded-[10px] shadow-md shadow-black/10 overflow-hidden hover:scale-105 transition-all duration-300 hover:shadow-black/20 relative group:">
       <div className="bg-[#1E68AD] flex items-center justify-center w-full h-[25%] relative">
         <h1 className="text-[25px]">{language}</h1>

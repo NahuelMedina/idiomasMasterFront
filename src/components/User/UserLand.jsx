@@ -102,7 +102,7 @@ export default function UserLanding() {
 
   const filterData = (data) => {
     const beginnerCourses = data.filter(
-      (element) => element.level === "Beginner"
+      (element) => element.level === "Principiante"
     );
     setBeginnerData(beginnerCourses);
 
@@ -110,7 +110,7 @@ export default function UserLanding() {
     setPopularData(popularCourses);
 
     const weekendCourses = data.filter(
-      (element) => element.schedule === "On Weekends"
+      (element) => element.schedule === "Fines de semana"
     );
     setWeekendData(weekendCourses);
   };

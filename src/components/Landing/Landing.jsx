@@ -50,17 +50,17 @@ export const Landing = () => {
     fetchUserData();
   }, [isAuthenticated, user, setUserDataLocally, dispatch]);
 
-  // useEffect(() => {
-  //   function set_landing() {
-  //     if (num < 4) {
-  //       setNum(num + 1);
-  //     } else if (num === 4) {
-  //       setNum(0);
-  //     }
-  //   }
+  useEffect(() => {
+    function set_landing() {
+      if (num < 4) {
+        setNum(num + 1);
+      } else if (num === 4) {
+        setNum(0);
+      }
+    }
 
-  //   setTimeout(set_landing, 5000);
-  // }, [num]);
+    setTimeout(set_landing, 5000);
+  }, [num]);
 
   return (
     <div className="w-full h-[150px] bg-black text-white">

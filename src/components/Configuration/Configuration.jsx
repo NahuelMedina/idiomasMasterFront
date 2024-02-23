@@ -5,6 +5,7 @@ import PrivacySection from "./PrivacySection";
 import NotificationSection from "./NotificationSection";
 import CourseSection from "./CourseSection";
 import ReviewSection from "./PrivacySection";
+import DangerZone from "./dangerZone";
 
 export const Configuration = () => {
   const [selectedSection, setSelectedSection] = useState("perfil");
@@ -13,7 +14,7 @@ export const Configuration = () => {
     perfil: true,
     pago: false,
     review: false,
-    notificaciones: false,
+    danger: false,
     cursos: false,
   });
 
@@ -22,7 +23,7 @@ export const Configuration = () => {
       perfil: false,
       pago: false,
       review: false,
-      notificaciones: false,
+      danger: false,
       cursos: false,
       [element]: true,
     };
@@ -82,23 +83,27 @@ export const Configuration = () => {
               Mis Reseñas
             </p>
           </div>
-          {/* <div
+          <div
             className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[2px]  border-t-[1px] border-b-[2px]   cursor-pointer ${
-              options.notificaciones
-                ? "bg-blue-500 text-white cursor-not-allowed border-blue-500 "
+              options.danger
+                ? "bg-red-500 text-white cursor-not-allowed border-red-500 "
                 : "bg-white"
             }`}
-            onClick={() => handleClick("notificaciones")}
+            onClick={() => handleClick("danger")}
           >
-            <p className="text-[18px] ml-[20px] ">Notificaciones</p>
-          </div> */}
+            <p className="text-[18px] ml-[20px] ">Zona Peligro</p>
+          </div>
         </div>
-        <div className="w-full border-[1px] border-blue-500 ">
+        <div className={`w-full border-[1px]  ${
+              options.danger
+                ? "border-red-500 "
+                : "border-blue-500"
+            }`}>
           {options.perfil ? <ProfileSection /> : null}
           {options.pago ? <PaymentSection /> : null}
           {options.review ? <ReviewSection /> : null}
-          {options.notificaciones ? <NotificationSection /> : null}
           {options.cursos ? <CourseSection /> : null}
+          {options.danger ? <DangerZone /> : null}
         </div>
       </div>
     </div>

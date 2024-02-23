@@ -1,12 +1,12 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import App from "./App.jsx";
 import { Auth0Provider } from '@auth0/auth0-react'
 import { store } from "./redux/store/store.js";
 
-createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <Auth0Provider domain="dev-63fpbu2e71qqv1pb.us.auth0.com" clientId="ykh1Z2g81sao2bGfSaTcp62cQCGnHSfe" redirect_uri={window.location.origin}>
@@ -15,5 +15,6 @@ createRoot(document.getElementById("root")).render(
         </Provider>
       </Auth0Provider>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
+
 );
