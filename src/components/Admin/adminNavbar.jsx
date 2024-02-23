@@ -15,9 +15,7 @@ import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 export default function AdminNavbar() {
   const [userData] = useLocalStorage("userData", {});
   const [options, setOptions] = useState(false)
-  
 
-  console.log(userData)
 
   const handleOptions = () => {
 
@@ -29,7 +27,7 @@ export default function AdminNavbar() {
   }
 
   return (
-    <div className="flex h-[80px] w-full justify-between items-center text-white bg-[#2d53d9] relative " >
+    <div className="flex h-[80px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#2d53d9] relative  " >
       <div className="flex h-full w-[320px] items-center justify-between ml-[30px]">
         <GrVmMaintenance className="text-[40px]" />
         <h1 className="text-[25px]">Idiomas Master Admin</h1>
@@ -60,7 +58,7 @@ export default function AdminNavbar() {
         </Link>
       </div>
       <div className="flex h-full w-[270px] items-center justify-between mr-[20px] cursor-pointer" onClick={handleOptions}>
-        <h1 className="text-[20px] transition-colors duration-300 ease-in-out">{userData && userData.email ? `${userData.email}` : null}</h1>
+        <h1 className="text-[18px] text-yellow-400 transition-colors duration-300 ease-in-out">{userData && userData.email ? `${userData.email}` : null}</h1>
         <RiUserSettingsFill className="text-[40px] transition-colors duration-300 ease-in-out " />
       </div>
       {options?
