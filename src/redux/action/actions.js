@@ -16,13 +16,17 @@ import {
   SET_USER_DATA,
   ALL_USERS,
   USER_COURSES,
-  POST_USER_SUCCESS,
-  POST_USER_FAIL,
   REVIEW_SENT_SUCCESS,
   REVIEW_SENT_ERROR,
   GET_CART,
   ADD_CART,
   DELETE_CART,
+  UPDATE_REVIEW_ERROR,
+  UPDATE_REVIEW_SUCCESS,
+  UPDATE_REVIEW_REQUEST,
+  DELETE_REVIEW_REQUEST,
+  DELETE_REVIEW_SUCCESS,
+  DELETE_REVIEW_FAILURE,
 } from "./actiontypes";
 import axios from "axios";
 
@@ -76,17 +80,15 @@ export function search(value) {
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`${URL}/getCourse/name?name=${value}`);
-      console.log(data);
+
       if (Array.isArray(data)) {
         dispatch({
           type: SEARCH,
           payload: [data, value],
         });
-      } else {
-        alert("No se encontraron resultados");
       }
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
   };
 }
@@ -116,7 +118,7 @@ export const postCourseData = (courseData) => async (dispatch) => {
 export const postUser = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/createUser`, userData);
-    alert("Usuario creado con Exito", response.data);
+    // alert("Usuario creado con Exito", response.data);
   } catch (error) {
     const message = error.response.data;
     alert(`${message}`);
@@ -199,6 +201,29 @@ export const updateUser = (changedFields) => async (dispatch) => {
   } catch (error) {
     console.error("Error al guardar cambios:", error);
   }
+};
+
+export const updateReview = (id, updatedBody) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_REVIEW_REQUEST });
+
+      console.log("ID recibido en la acción:", id);
+      console.log("Cuerpo actualizado recibido en la acción:", updatedBody);
+
+      const response = await axios.put(`${URL}/putReview/${id}`, {
+        body: updatedBody,
+      });
+
+      console.log("Respuesta del servidor:", response.data);
+
+      dispatch({ type: UPDATE_REVIEW_SUCCESS, payload: response.data });
+      console.log("Review updated:", response.data);
+    } catch (error) {
+      dispatch({ type: UPDATE_REVIEW_ERROR, payload: error.message });
+      console.error("Error updating review:", error);
+    }
+  };
 };
 
 export const filteredCourses = (data) => {
@@ -310,3 +335,18 @@ export function deleteCart(cart) {
     }
   };
 }
+
+// Acción para la eliminación de la revisión
+export const deleteReview = (reviewId) => {
+  return async (dispatch) => {
+    dispatch({ type: DELETE_REVIEW_REQUEST });
+
+    try {
+      await axios.delete(`${URL}/deleteReview/${reviewId}`);
+
+      dispatch({ type: DELETE_REVIEW_SUCCESS, payload: reviewId });
+    } catch (error) {
+      dispatch({ type: DELETE_REVIEW_FAILURE, payload: error.message });
+    }
+  };
+};

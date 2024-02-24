@@ -11,10 +11,12 @@ import ReviewComponent from "../Detail_reviews/Detail_reviews";
 import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { useAuth0 } from "@auth0/auth0-react";
-const URL = import.meta.env.VITE_URL_HOST;
-const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 import Swal from "sweetalert2";
 import DetailReviews from "./detailReviews";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+
+const URL = import.meta.env.VITE_URL_HOST;
+const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 
 export const Detail = () => {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -32,9 +34,8 @@ export const Detail = () => {
   );
   const { isAuthenticated } = useAuth0();
 
-  const [userData, setUserData] = useState(
-    JSON.parse(localStorage.getItem("userData"))
-  );
+  const [userData] = useLocalStorage("userData", {});
+  //const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData'))
 
   const [reviews, setReviews] = useState(false);
 
@@ -107,6 +108,14 @@ export const Detail = () => {
   }, []);
 
   const initCreatePreference = (p) => {
+    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
+      Swal.fire({
+        icon: "info",
+        title: "Necesitas registrarte para realizar la Compra!",
+        footer: '<a href="/register">Registrarse</a>',
+      });
+      return;
+    }
     dispatch(createPreference(p));
   };
 
@@ -228,7 +237,7 @@ export const Detail = () => {
                 onClick={handleCart}
                 className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
               >
-                <p className=" m-2 text-2xl  ">Eliminar del Carrito</p>
+                <p className=" m-2 text-2xl">Eliminar del Carrito</p>
               </button>
             </div>
           ) : (
@@ -237,13 +246,13 @@ export const Detail = () => {
                 onClick={handleCart}
                 className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
               >
-                <p className=" m-2 text-2xl  ">Agregar al Carrito</p>
+                <p className=" m-2 text-2xl">Agregar al Carrito</p>
               </button>
             </div>
           )}
         </div>
       </div>
-      <div className="w-full min-h-[15%] flex items-center justify-center ">
+      <div className="w-full min-h-[15%] flex items-center justify-center">
         <button
           onClick={handleReviews}
           className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
@@ -252,11 +261,10 @@ export const Detail = () => {
         </button>
       </div>
       <div className="w-[80%] h-auto flex items-center justify-center ">
-        {reviews ? <DetailReviews /> : null}
+        {reviews ? <DetailReviews /> : <ReviewComponent />}
       </div>
       <hr />
       <br />
-      <ReviewComponent />
     </div>
   );
 };

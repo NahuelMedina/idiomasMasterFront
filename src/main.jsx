@@ -1,17 +1,18 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import App from "./App.jsx";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { store } from "./redux/store/store.js";
+import i18n from "./i18n.js";
 
-createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <Auth0Provider
-        domain="dev-63fpbu2e71qqv1pb.us.auth0.com"
-        clientId="ykh1Z2g81sao2bGfSaTcp62cQCGnHSfe"
+        domain="idiomas-master.us.auth0.com"
+        clientId="QKuJSniRtysK5OlPJy3muRNgxlcujinH"
         redirect_uri={window.location.origin}
       >
         <Provider store={store}>

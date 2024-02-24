@@ -8,7 +8,7 @@ import { idProduct, putProduct } from "./userData";
 import { FaCircle } from "react-icons/fa";
 import { adminProduct } from "../../redux/action/actions";
 import { FaSearchPlus } from "react-icons/fa";
-
+import Swal from "sweetalert2";
 export default function AdminSettingProduct() {
   const initialCourseState = {
     language: "",
@@ -76,15 +76,29 @@ export default function AdminSettingProduct() {
   const handleFetch = async (event) => {
     event.preventDefault();
 
-    const response = await idProduct(searchTerm);
+    try {
+      const response = await idProduct(searchTerm);
 
-    if (response.data) {
-      setCourse(response.data);
-      setImagePreview(response.data.image);
-      c;
+      if (response.data) {
+        setCourse(response.data);
+        setImagePreview(response.data.image);
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El id no corresponde a ningún producto',
+        });
+      }
+
+      setSearchTerm("");
+    } catch (error) {
+      console.error('Error al procesar la solicitud:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'El id no corresponde a ningún producto',
+        text: 'Verifique el id proporcionado e intente nuevamente',
+      });
     }
-
-    setSearchTerm("");
   };
 
   const handleSearch = (event) => {
@@ -150,11 +164,20 @@ export default function AdminSettingProduct() {
           start_time: course.start_time,
           finish_time: course.finish_time,
         });
-        window.alert("El curso se ha actualizado exitosamente.");
+        Swal.fire({
+          icon: 'success',
+          title: '¡Curso modificado con éxito!',
+          showConfirmButton: false,
+          timer: 2000,
+        })
         resetForm();
         dispatch(adminProduct({}));
       } catch (error) {
-        console.error("Error al actualizar el curso:", error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error,
+        })
       }
     }
   };
@@ -483,7 +506,7 @@ export default function AdminSettingProduct() {
                 </div>
               </div>
               <div className="w-full h-[25%] bg-[#373a6c] pl-[20px] rounded-[10px]">
-       
+
                 <div className="w-full h-full flex items-center justify-center">
                   <button
                     type="submit"

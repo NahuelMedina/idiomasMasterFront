@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import ProfileSection from "./ProfileSection";
 import PaymentSection from "./PaymentSection";
-import PrivacySection from "./PrivacySection";
+import ReviewSection from "./ReviewSection";
 import NotificationSection from "./NotificationSection";
 import CourseSection from "./CourseSection";
-import ReviewSection from "./PrivacySection";
+import DangerZone from "./dangerZone";
+
 
 export const Configuration = () => {
   const [selectedSection, setSelectedSection] = useState("perfil");
@@ -13,7 +14,7 @@ export const Configuration = () => {
     perfil: true,
     pago: false,
     review: false,
-    notificaciones: false,
+    danger: false,
     cursos: false,
   });
 
@@ -22,7 +23,7 @@ export const Configuration = () => {
       perfil: false,
       pago: false,
       review: false,
-      notificaciones: false,
+      danger: false,
       cursos: false,
       [element]: true,
     };
@@ -41,21 +42,21 @@ export const Configuration = () => {
       <div className="h-[90%] w-[90%] flex flex-row min-w-[20%] ">
         <div className="flex-col-6 min-w-[20%] h-full pl-[15px] justify-end">
           <div
-            className={`flex items-center h-[10%] font-bold border-l-[1px]  border-t-[1px] border-b-[1px] cursor-pointer ${options.perfil
+            className={`flex items-center h-[10%] font-bold border-l-[1px]  border-t-[1px] border-b-[1px] cursor-pointer ${
+              options.perfil
                 ? "bg-blue-500 text-white cursor-not-allowed border-blue-500"
                 : "bg-white"
-              }`}
+            }`}
             onClick={() => handleClick("perfil")}
           >
-            <p className="text-[18px] ml-[20px] focus:text-white ">
-              Mi Perfil
-            </p>
+            <p className="text-[18px] ml-[20px] focus:text-white ">Mi Perfil</p>
           </div>
           <div
-            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px] border-b-[1px]   cursor-pointer ${options.cursos
+            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px] border-b-[1px]   cursor-pointer ${
+              options.cursos
                 ? "bg-blue-500 text-white cursor-not-allowed border-blue-500"
                 : "bg-white"
-              }`}
+            }`}
             onClick={() => handleClick("cursos")}
           >
             <p className="text-[18px] ml-[20px] focus:text-white ">
@@ -63,42 +64,48 @@ export const Configuration = () => {
             </p>
           </div>
           <div
-            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px]  border-b-[1px]   cursor-pointer ${options.pago
+            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px]  border-b-[1px]   cursor-pointer ${
+              options.pago
                 ? "bg-blue-500 text-white cursor-not-allowed border-blue-500"
                 : "bg-white"
-              }`}
+            }`}
             onClick={() => handleClick("pago")}
           >
             <p className="text-[18px] ml-[20px] focus:text-white ">Mis Pagos</p>
           </div>
           <div
-            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px] border-b-[1px]  cursor-pointer ${options.review
+            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px] border-b-[1px]  cursor-pointer ${
+              options.review
                 ? "bg-blue-500 text-white cursor-not-allowed border-blue-500 "
                 : "bg-white"
-              }`}
+            }`}
             onClick={() => handleClick("review")}
           >
             <p className="text-[18px] ml-[20px] focus:text-white ">
               Mis Reseñas
             </p>
           </div>
-          {/* <div
+          <div
             className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[2px]  border-t-[1px] border-b-[2px]   cursor-pointer ${
-              options.notificaciones
-                ? "bg-blue-500 text-white cursor-not-allowed border-blue-500 "
+              options.danger
+                ? "bg-red-500 text-white cursor-not-allowed border-red-500 "
                 : "bg-white"
             }`}
-            onClick={() => handleClick("notificaciones")}
+            onClick={() => handleClick("danger")}
           >
-            <p className="text-[18px] ml-[20px] ">Notificaciones</p>
-          </div> */}
+            <p className="text-[18px] ml-[20px] ">Zona Peligro</p>
+          </div>
         </div>
-        <div className="w-full border-[1px] border-blue-500 ">
+        <div className={`w-full border-[1px]  ${
+              options.danger
+                ? "border-red-500 "
+                : "border-blue-500"
+            }`}>
           {options.perfil ? <ProfileSection /> : null}
           {options.pago ? <PaymentSection /> : null}
           {options.review ? <ReviewSection /> : null}
-          {options.notificaciones ? <NotificationSection /> : null}
           {options.cursos ? <CourseSection /> : null}
+          {options.danger ? <DangerZone /> : null}
         </div>
       </div>
     </div>

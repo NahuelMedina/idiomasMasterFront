@@ -1,25 +1,88 @@
 import { useSelector, useDispatch } from "react-redux";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { useEffect, useState } from "react";
-import { landing_string } from "../Utils/landing_string";
 import Landing_card from "../Landing_card/Landing_card";
-import { card_landing_data } from "../Utils/landing_cards";
 import Landing_reviews from "../Landing_reviews/Landing_reviews";
-import card_landing_reviews from "../Utils/landing_reviews";
 import { postThirdPartyUser, setUserdata } from "../../redux/action/actions"; // Importa la acción adecuada
 import { useAuth0 } from "@auth0/auth0-react";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { getGoogleUser } from "../Admin/userData";
+import { useTranslation } from "react-i18next";
+
 import { useTypewriter } from "react-simple-typewriter";
 
 export const Landing = () => {
   const [num, setNum] = useState(1);
   const { isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
     password: "",
   });
+  const card_landing_data = [
+    {
+      img: "/img/landing_card01.png",
+      title: t("PRESENCIAL_O_EN_LINEA"),
+      description: t("APRENDE_EN_TIEMPO_REAL"),
+    },
+    {
+      img: "/img/landing_card02.png",
+      title: t("GRUPAL_O_CLASES_PRIVADAS"),
+      description: t("CURSOS_DISEÑADOS"),
+    },
+    {
+      img: "/img/landing_card03.png",
+      title: t("DE_PRINCIPIANTE_A_AVANZADO"),
+      description: t("CURSOS_DISEÑADOS"),
+    },
+  ];
+  const card_landing_reviews = [
+    {
+      img: "/img/student_02.png",
+      review: t("INCREIBLE_EXPERIENCIA"),
+      name: "Alejandra, Ramirez",
+      location: "Bogota, Colombia",
+    },
+    {
+      img: "/img/student_03.png",
+      review: t("TRANSFORMADOR"),
+      name: "Jorge, Calabria",
+      location: "Buenos Aires, Argentina",
+    },
+  ];
+  const landing_string = [
+    {
+      title: t("HACER_LO_IMPOSIBLE_ES"),
+      word: t("DIVERTIDO"),
+      color:
+        "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-700 shadow-text",
+    },
+    {
+      title: t("SUPERAR_DESAFIOS_ES"),
+      word: t("EMOCIONANTE"),
+      color:
+        "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-700",
+    },
+    {
+      title: t("BUSCAR_NUEVAS_OPORTUNIDADES_ES"),
+      word: t("ENERGIZANTE"),
+      color:
+        "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-green-700",
+    },
+    {
+      title: t("EXPLORAR_HORIANTES_ES"),
+      word: t("INCREIBLE"),
+      color:
+        "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-red-700",
+    },
+    {
+      title: t("DESAFIAR_LIMITES_ES"),
+      word: t("INSPIRADOR"),
+      color:
+        "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-orange-700",
+    },
+  ];
 
   const [typeEffect] = useTypewriter({
     words: [landing_string[num].word],
@@ -55,6 +118,7 @@ export const Landing = () => {
 
     fetchUserData();
   }, [isAuthenticated, user, setUserDataLocally, dispatch]);
+
   useEffect(() => {
     if (typeEffect.length === 0 && num === 4) {
       setNum(0);
@@ -64,17 +128,6 @@ export const Landing = () => {
     }
   }, [typeEffect]);
 
-  // useEffect(() => {
-  //   function set_landing() {
-  //     if (num === 4) {
-  //       setNum(0);
-  //     }
-  //     if (typeEffect.length === 0 && num === 0) {
-  //       setNum(num + 1);
-  //     }
-  //   }
-  //   set_landing();
-  // }, [num]);
   return (
     <div className="w-full h-[150px] bg-black text-white">
       <div className="flex justify-end items-end w-full h-full bg-[#1E68AD]">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IoLogIn } from "react-icons/io5";
 import { FaDiscourse } from "react-icons/fa";
@@ -7,11 +7,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { FaHeart } from "react-icons/fa";
 import LogoutButton from "../Login/LogOut";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+import { useTranslation } from "react-i18next";
 
 export default function UserNavbar() {
   const { user, isAuthenticated, logout } = useAuth0();
   const location = useLocation();
   const [userData] = useLocalStorage("userData", {});
+  const { t, i18n } = useTranslation();
+
   const defaultAvatarUrl =
     "https://www.pngitem.com/pimgs/m/508-5087236_tab-profile-f-user-icon-white-fill-hd.png";
 
@@ -26,7 +29,7 @@ export default function UserNavbar() {
         </Link>
 
         <Link to={"/home"} className="h-full flex items-center">
-          Cursos
+          <h1>{t("CURSOS")}</h1>
           <FaDiscourse className="text-[30px] ml-1" />
         </Link>
       </div>
