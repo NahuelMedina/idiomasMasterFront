@@ -126,7 +126,7 @@ export default function UserLanding() {
           <SearchBar></SearchBar>
         </div>
       </div>
-      <div id="landing_descripton" className="w-full h-[500px] relative flex flex-col items-center justify-evenly bg-white">
+      <div id="landing_descripton" className="w-full h-[530px] relative flex flex-col items-center justify-evenly bg-white">
         <UserDashboard userInfo={userInfo}/>
       </div>
      
