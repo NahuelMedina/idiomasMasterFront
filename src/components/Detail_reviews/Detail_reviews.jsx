@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import CreateReview from './Detail_create_review';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const ReviewComponent = () => {
   const [reviews, setReviews] = useState([]);
   const location = useLocation();
   const courseId = location.pathname.split('/').pop();
   const URL = import.meta.env.VITE_URL_HOST;
+  const { t , i18n} = useTranslation()
+
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -34,7 +37,7 @@ const ReviewComponent = () => {
       <hr style={{border:'1px solid white', width:'100%', borderRadius:'50px'}} />
       <br />
       <div className="bg-[#1E68AD] p-2 flex justify-ce items-start">
-        <h2 className="text-2xl text-white">COMENTARIOS DEL CURSO <b style={{fontSize:'22px', fontWeight:'100'}}>↓</b></h2>
+        <h2 className="text-2xl text-white">{t("COMENTARIOS DEL CURSO")} <b style={{fontSize:'22px', fontWeight:'100'}}>↓</b></h2>
       </div>
       {filteredReviews.map(review => (
         <div key={review._id} className='ml-4 mt-4 mb-8 border p-5 rounded-md bg-white text-black'>

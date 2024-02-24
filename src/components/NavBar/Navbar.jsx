@@ -8,8 +8,6 @@ import { FaHeart } from "react-icons/fa";
 import LogoutButton from "../Login/LogOut";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useTranslation } from "react-i18next";
-import { MdGTranslate } from "react-icons/md";
-import { useDispatch } from "react-redux";
 
 export const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth0();
@@ -17,7 +15,6 @@ export const Navbar = () => {
   const [userData] = useLocalStorage("userData", {});
   const { t , i18n} = useTranslation()
   const [lang, setLang] =useLocalStorage("lang", "")
-  const dispatch = useDispatch()
 
 
  const handleLanguageChange = (e) => {
@@ -27,12 +24,9 @@ export const Navbar = () => {
   };
   useEffect(() => {
     const storedLang = localStorage.getItem("lang");
-    if (storedLang === 'en') {
+    if (storedLang ) {
       i18n.changeLanguage(storedLang);
-      console.log('esta en ingles');
-    } else if(storedLang === 'es'){
-      i18n.changeLanguage(storedLang);
-    } else console.log("casi");
+    } 
   }, [i18n]); 
 
  
@@ -98,12 +92,12 @@ console.log((localStorage.getItem("lang")));
             <img className="w-16" src="img\logo4.png" alt="Logo" />
           </Link>
           <Link to="/about" className="h-full flex items-center">
-            Sobre Nosotros
+         {t("SOBRE_NOSOTROS")}
             <BsFillInfoSquareFill className="text-[30px] ml-1" />
           </Link>
 
           <Link to="/home" className="h-full flex items-center">
-            Cursos
+            {t("CURSOS")}
             <FaDiscourse className="text-[30px] ml-1" />
           </Link>
         </div>

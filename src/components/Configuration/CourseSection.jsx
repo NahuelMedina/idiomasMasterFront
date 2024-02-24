@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, getUserCourses } from '../../redux/action/actions';
+import { useTranslation } from "react-i18next";
 
 
 const CourseSection = () => {
@@ -14,7 +15,8 @@ const CourseSection = () => {
     const [userData, setUserData] = useState(null); 
     const [isUserLoaded, setIsUserLoaded] = useState(false);
     const [userLogin, setUserLogin] = useState(JSON.parse(localStorage.getItem('userData')))
-
+    const { t , i18n} = useTranslation()
+    
     useEffect(() => {
         dispatch(getAllUsers());
         setIsUserLoaded(false)
@@ -44,19 +46,19 @@ const CourseSection = () => {
 
 
 return (
-  <div className="flex flex-rows w-full h-full gap-8 items-center grid grid-cols-2 gap-[10px] grid-rows-auto overflow-hidden items-center justify-center p-[10px] overflow-y-scroll">
+  <div className="flex-rows w-full h-full  items-center grid grid-cols-2 gap-[10px] grid-rows-auto overflow-hidden  justify-center p-[10px] overflow-y-scroll">
   {
     userCourses && userCourses.map((c, index)=> (
     <div key={index}  className="flex item-center justify-center">
       <div className="bg-white shadow-lg border-[1px] border-gray-200 flex flex-col w-[90%]">
       <img src={c.image} alt={c.language} className="w-full h-32 object-cover" />
       <div className="p-4">
-        <h3 className="text-2xl font-semibold mb-2 text-gray-800">{c.language}</h3>
-        <p className="text-gray-600 mb-2">Nivel {c.level}</p>
-        <p className="text-gray-600 mb-2">Duración: {c.duration}</p>
-        <p className="text-gray-600 mb-2">Comienza el día: {c.start_time.split('T')[0]}</p>
-        <p className="text-gray-600 mb-2">Finaliza el día: {c.finish_time.split('T')[0]}</p>
-        <p className="text-gray-600 mb-2">{c.schedule}</p>
+        <h3 className="text-2xl font-semibold mb-2 text-gray-800">{t(`LANGUAGE_${c.language.toUpperCase()}`)}</h3>
+        <p className="text-gray-600 mb-2">{t("NIVEL")}{" "}{t(`NIVEL_${c.level.toUpperCase()}`)}</p>
+        <p className="text-gray-600 mb-2"> {t("DURACION_DE")}{":"}{t(`DURACION_${c.duration.toUpperCase()}`)}</p>
+        <p className="text-gray-600 mb-2">{t("EMPIEZA EL DIA")}{c.start_time.split('T')[0]}</p>
+        <p className="text-gray-600 mb-2">{t("FECHA FINALIZACION")}{":"}{c.finish_time.split('T')[0]}</p>
+        <p className="text-gray-600 mb-2">{t("HORARIOS")}{":"}{t(`SCHEDULE_${c.schedule.toUpperCase()}`)}</p>
         <div className="flex items-center justify-between mt-4">
           <p className="text-2xl font-semibold">${c.price}</p>
         </div>

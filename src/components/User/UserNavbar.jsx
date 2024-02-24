@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IoLogIn } from "react-icons/io5";
 import { FaDiscourse } from "react-icons/fa";
@@ -8,7 +8,7 @@ import { FaHeart } from "react-icons/fa";
 import LogoutButton from "../Login/LogOut";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useTranslation } from "react-i18next";
-
+import { TiShoppingCart } from "react-icons/ti";
 
 export default function UserNavbar() {
   const { user, isAuthenticated, logout } = useAuth0();
@@ -17,6 +17,21 @@ export default function UserNavbar() {
   const { t , i18n} = useTranslation()
   const defaultAvatarUrl =
     "https://www.pngitem.com/pimgs/m/508-5087236_tab-profile-f-user-icon-white-fill-hd.png";
+  const [lang, setLang] =useLocalStorage("lang", "")
+
+    
+ const handleLanguageChange = (e) => {
+  const selectedLang = e.target.value;
+  i18n.changeLanguage(selectedLang);
+  localStorage.setItem("lang", selectedLang); 
+};
+useEffect(() => {
+  const storedLang = localStorage.getItem("lang");
+  if (storedLang ) {
+    i18n.changeLanguage(storedLang);
+  } 
+}, [i18n]); 
+
 
   return (
     <div className="flex h-[80px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#000000e1] border-[#ffffff] border-b-2 border-solid">
@@ -30,6 +45,25 @@ export default function UserNavbar() {
           <FaDiscourse className="text-[30px] ml-1" />
         </Link>
       </div>
+      <div className="flex ml-2 items-center gap-10 justify-around">
+        <select
+          className="appearance-none bg-white border-2 border-gray-300 rounded-lg py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
+          onChange={handleLanguageChange} defaultValue={lang}
+        >
+          <option value={lang}>
+            {t("IDIOMA")}
+          </option>
+          <option value="es">
+             ESP
+          </option>
+          <option value="en">
+             ENG
+          </option>
+        </select>
+
+          {/* <button onClick={()=> i18n.changeLanguage("es")} className="flex"><MdGTranslate />ESP</button>
+          <button onClick={()=> i18n.changeLanguage("en")}  className="flex"><MdGTranslate />ENG</button> */}
+        </div>
 
       <div className="flex items-center justify-around h-full w-[40%]">
         {/* <Link to="/cart">
@@ -37,7 +71,8 @@ export default function UserNavbar() {
         </Link> */}
         <Link to="/cart">
           <div className="flex items-center justify-evenly h-20 w-[50px] mx-5 ">
-            <img style={{ width: '38px' }} src="img\cart.png" alt="" />
+            {/* <img style={{ width: '38px' }} src="img\cart.png" alt="" /> */}
+            <TiShoppingCart className="text-[30px]"/>
           </div>
         </Link>
         <Link to="/favorite">

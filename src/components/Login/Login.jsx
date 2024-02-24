@@ -103,7 +103,7 @@ export const Login = () => {
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="email"
-                    placeholder= {t("EMAIL")}
+                    placeholder= {t("INGRESA EMAIL")}
                     id="email"
                     type="email"
                   />
@@ -131,7 +131,7 @@ export const Login = () => {
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder= {t("CONTRASEÑA")}
+                    placeholder= {t("INGRESA CONTRASEÑA")}
                     name="password"
                     id="password"
                     type="password"

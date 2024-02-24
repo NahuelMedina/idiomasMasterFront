@@ -4,6 +4,8 @@ import { postReview } from '../../redux/action/actions';
 import { useDispatch } from 'react-redux';
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useLocation } from 'react-router-dom'; 
+import { useTranslation } from "react-i18next";
+
 
 const Create_review = () => {
     const [userData] = useLocalStorage("userData", {});
@@ -13,6 +15,8 @@ const Create_review = () => {
     const dispatch = useDispatch();
     const location = useLocation(); 
     const courseId = location.pathname.split('/').pop();
+    const { t , i18n} = useTranslation()
+
 
     const handleStarClick = (value) => {
         setRating(value); 
@@ -45,7 +49,7 @@ const Create_review = () => {
     return (
         <div className="w-full mb-4 mt-4">
             <div className="bg-[#1E68AD] p-2 flex justify-ce items-start">
-                <h2 className="text-2xl text-white">DEJA UN COMENTARIO</h2>
+                <h2 className="text-2xl text-white">{t("DEJA UN COMENTARIO")}</h2>
             </div>
             <div className='ml-4'>
             <div className="flex items-center">
@@ -81,7 +85,7 @@ const Create_review = () => {
             <form className="max-w-2xl bg-white rounded-lg border border-gray-700 p-2 mx-auto mt-4" onSubmit={handleSubmit}>
                 <div className="px-3 mb-2 mt-2 w-full h-full">
                     <textarea  
-                        placeholder="Escribe aquí tu reseña."
+                        placeholder= {t("ESCRIBE AQUÍ TU RESEÑA.")}
                         style={{width:'500px'}}
                         className="w-500 bg-gray-100 rounded border border-gray-300 leading-normal resize-none h-20 py-2 px-3 font-small placeholder-gray-500 focus:outline-none focus:bg-grayv text-black"
                         value={comment}
@@ -89,7 +93,7 @@ const Create_review = () => {
                         ></textarea>
                 </div>
                 <div className="flex justify-end px-4">
-                    <input type="submit" className="px-2.5 py-1.5 rounded-md text-white text-sm bg-[#1E68AD] hover:bg-black" value="Enviar comentario" />
+                    <input type="submit" className="px-2.5 py-1.5 rounded-md text-white text-sm bg-[#1E68AD] hover:bg-black" value= {t("ENVIAR COMENTARIO")} />
                 </div>
             </form>
                         </div>

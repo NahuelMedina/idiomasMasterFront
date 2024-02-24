@@ -8,12 +8,15 @@ import React from "react";
 import Slider from "react-slick";
 import { productData } from "../Admin/userData";
 import UserPromoCard from "./UserPromoCard";
+import { useTranslation } from "react-i18next";
 
 export default function UserLanding() {
   const [userData, setUserData] = useState([]);
   const [beginnerData, setBeginnerData] = useState([]);
   const [popularData, setPopularData] = useState([]);
   const [weekendData, setWeekendData] = useState([]);
+  const { t , i18n} = useTranslation()
+
 
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -102,7 +105,7 @@ export default function UserLanding() {
 
   const filterData = (data) => {
     const beginnerCourses = data.filter(
-      (element) => element.level === "Beginner"
+      (element) => element.level === "Principiante"
     );
     setBeginnerData(beginnerCourses);
 
@@ -110,7 +113,7 @@ export default function UserLanding() {
     setPopularData(popularCourses);
 
     const weekendCourses = data.filter(
-      (element) => element.schedule === "On Weekends"
+      (element) => element.schedule === "Fines de semana"
     );
     setWeekendData(weekendCourses);
   };
@@ -128,7 +131,7 @@ export default function UserLanding() {
       >
         <div className="w-[90%] h-[50px">
           <h1 className="text-black text-[30px] border-b-[1px] border-black">
-            Mis Cursos
+            {t("MIS CURSOS")}
           </h1>
         </div>
         <div className="w-[90%] h-[90%] bg-white">
@@ -159,7 +162,7 @@ export default function UserLanding() {
       >
         <div className="w-[90%] h-[50px]">
           <h1 className="text-black text-[30px] border-b-[1px] border-black">
-            Mas Populares
+            {t("MAS POPULARES")}
           </h1>
         </div>
         <div className="w-[90%] h-[90%] bg-white">
@@ -192,7 +195,7 @@ export default function UserLanding() {
       >
         <div className="w-[90%] h-[50px]">
           <h1 className="text-black text-[30px] border-b-[1px] border-black">
-            Comienza hoy una nueva Aventura
+            {t("COMIENZA HOY UNA NUEVA AVENTURA")}
           </h1>
         </div>
         <div className="w-[90%] h-[90%] bg-white">
@@ -225,7 +228,7 @@ export default function UserLanding() {
       >
         <div className="w-[90%] h-[50px]">
           <h1 className="text-black text-[30px] border-b-[1px] border-black">
-            Cursos de Fin de Semana
+            {t("CURSOS DE FIN DE SEMANA")}
           </h1>
         </div>
         <div className="w-[90%] h-[90%] bg-white">

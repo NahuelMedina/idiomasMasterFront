@@ -143,7 +143,7 @@ useEffect(()=>{
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="name"
-                    placeholder= {t("NOMBRE")}
+                    placeholder= {t("INGRESA NOMBRE")}
                     id="name"
                     type="text"
                   />
@@ -172,7 +172,7 @@ useEffect(()=>{
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="lastname"
-                    placeholder= {t("APELLIDO")}
+                    placeholder= {t("INGRESA APELLIDO")}
                     id="lastname"
                     type="text"
                   />
@@ -200,7 +200,7 @@ useEffect(()=>{
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder={t("EDAD")}
+                    placeholder={t("INGRESA EDAD")}
                     name="age"
                     id="age"
                     type="number"
@@ -230,7 +230,7 @@ useEffect(()=>{
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="email"
-                    placeholder= {t("EMAIL")}
+                    placeholder= {t("INGRESA EMAIL")}
                     id="email"
                     type="email"
                   />
@@ -258,7 +258,7 @@ useEffect(()=>{
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder={t("CONTRASEÑA")}
+                    placeholder={t("INGRESA CONTRASEÑA")}
                     name="password"
                     id="password"
                     type="password"

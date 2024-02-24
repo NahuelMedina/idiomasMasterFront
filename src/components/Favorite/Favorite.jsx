@@ -3,12 +3,15 @@ import { Card } from '../Card/Card'
 import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const Favorite = () => {
 
     const [favCourse, setFavCourse] =useState([])
     const [renderCards, setRenderCards] = useState([]);
     const [pageNum, setPageNum] = useState(0);
+    const { t , i18n} = useTranslation()
+
 
     const getFav = ()=>{
         return JSON.parse(localStorage.getItem('fav'))
@@ -86,7 +89,7 @@ const Favorite = () => {
         favCourse &&
         favCourse.length > 0 ? (
           <div  className="bg-[#FF6B6C] h-[40px] w-[230px] bottom-8 left-6 absolute  flex flex-row items-center justify-center overflow-y-hidden overflow-x-hidden  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-        <button onClick={handleEliminate}>Eliminar Todos</button>
+        <button onClick={handleEliminate}>{t("ELIMINAR TODOS")}</button>
       </div>
         ) : (
           <Link></Link>
@@ -94,11 +97,11 @@ const Favorite = () => {
       }
       <div  className="bg-[#FF6B6C] h-[40px] w-[230px] bottom-6 right-8 absolute  flex flex-row items-center justify-center overflow-y-hidden overflow-x-hidden  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
        <Link to='/home'> 
-       <button >Ver mas cursos</button>
+       <button >{t("VER MAS CURSOS")}</button>
        </Link>
       </div> 
         { favCourse !== null && favCourse.length > 0 ?(<div className=" w-[900px] border-b-[2px] border-[#848484] mt-[5px] mx-[90px]">
-              <h1 className="text-[25px] text-[#1F1F1F] m-[2px]">{`Cursos Favoritos: ${favCourse.length}`}</h1>
+              <h1 className="text-[25px] text-[#1F1F1F] m-[2px]">{t(`${"CURSOS FAVORITOS"}: ${favCourse.length}`)}</h1>
             </div>):(
               <Link></Link>
             )}
@@ -138,7 +141,7 @@ const Favorite = () => {
               </div>
             ) : (
               <div className='flex justify-center my-[100px] text-3xl font-bold'>
-                <h1 >No hay cursos favoritos</h1>
+                <h1 >{t("NO HAY CURSOS FAVORITOS")}</h1>
               </div>
             )
           }

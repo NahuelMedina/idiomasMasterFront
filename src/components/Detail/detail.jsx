@@ -15,6 +15,8 @@ const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 import Swal from "sweetalert2";
 import DetailReviews from "./detailReviews";
+import { useTranslation } from "react-i18next";
+
 
 export const Detail = () => {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -31,10 +33,10 @@ export const Detail = () => {
     JSON.parse(window.localStorage.getItem("fav"))
   );
   const { isAuthenticated } = useAuth0();
-
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
-
   const [reviews, setReviews] = useState(false)
+  const { t , i18n} = useTranslation()
+
 
 
   useEffect(() => {
@@ -51,8 +53,8 @@ export const Detail = () => {
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
-        title: "Necesitas registrarte para agregar al Carrito!",
-        footer: '<a href="/register">Registrarse</a>',
+        title: t("NECESITAS_REGISTRARTE_CARRITO"),
+        footer: `<a href="/register">${t("REGISTRARSE")}</a>`,
       });
       return;
     }
@@ -80,8 +82,8 @@ export const Detail = () => {
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
-        title: "Necesitas registrarte para agregar a Favoritos!",
-        footer: '<a href="/register">Registrarse</a>',
+        title: t("NECESITAS_REGISTRARTE_FAVORITO"),
+        footer: `<a href="/register">${t("REGISTRARSE")}</a>`,
       });
       return;
     }
@@ -152,10 +154,10 @@ export const Detail = () => {
 
   return (
     <div className="h-[90vh] mt-[10vh] w-full flex flex-col pt-[30px] items-center ">
-      <div className="flex flex-col min-h-[80%] w-[90%] bg-white border-[1px] border-gray-300 relative bg-white shadow-lg ">
+      <div className="flex flex-col min-h-[80%] w-[90%] bg-white border-[1px] border-gray-300 relative shadow-lg ">
         <div className="w-full h-[17%] bg-[#1d67ad] flex items-center justify-center ">
           <p className="font-medium   text-white uppercase text-6xl animate-fade-right animate-ease-in-out">
-            {detail?.language}
+          {t(`LANGUAGE_${detail?.language?.toUpperCase()}`)}
           </p>
           <img
               src={`/img/${detail.language}.png`}
@@ -165,7 +167,7 @@ export const Detail = () => {
         </div>
         <div className="w-full h-[10%] bg-yellow-400 flex justify-center items-center">
           <p className="text-black text-[25px] font-normal text-start">
-            Comienza con tan solo ${detail?.price}
+            {t("COMIENZA_CON")} ${detail?.price}
           </p>
         </div>
         <div className="w-full h-[56%] bg-white grid grid-cols-2 items-center justify-center">
@@ -181,23 +183,23 @@ export const Detail = () => {
           <div className="bg-white w-full- h-full grid grid-rows-5 overflow-hidden">
             <div className="text-black flex items-center  font-normal  text-2xl">
               <SiLevelsdotfyi className="ml-[100px] " />
-              <p className="ml-[30px] ">Nivel {detail?.level}</p>
+              <p className="ml-[30px] ">{t("NIVEL")}{" "}{t(`NIVEL_${detail?.level?.toUpperCase()}`)}</p>
             </div>
             <div className="text-black flex items-center  font-normal  text-2xl">
               <FaCalendarDays className="ml-[100px] " />
-              <p className="ml-[30px] ">{detail?.schedule}</p>
+              <p className="ml-[30px] ">{t(`SCHEDULE_${detail?.schedule?.toUpperCase()}`)}</p>
             </div>
             <div className="text-black flex items-center  font-normal  text-2xl">
               <GiDuration className="ml-[100px] " />
-              <p className="ml-[30px] ">Duracion de {detail?.duration}</p>
+              <p className="ml-[30px] ">{t("DURACION_DE")}{t(`DURACION_${detail?.duration?.toUpperCase()}`)}</p>
             </div>
             <div className="text-black flex items-center  font-normal  text-2xl">
               <FaHourglassStart className="ml-[100px] " />
-              <p className="ml-[30px] ">Empieza el dia {fechaInicial}</p>
+              <p className="ml-[30px] ">{t("EMPIEZA EL DIA")} {fechaInicial}</p>
             </div>
             <div className="text-black flex items-center  font-normal  text-2xl">
               <FaHourglassEnd className="ml-[100px] " />
-              <p className="ml-[30px] ">Finaliza el dia {fechaFinal}</p>
+              <p className="ml-[30px] ">{t("FINALIZA EL DIA")}{fechaFinal}</p>
             </div>
             <div className="w-[100px] h-[100px] flex items-center justify-center absolute right-[1px]">
           {isFav ? (
@@ -215,9 +217,9 @@ export const Detail = () => {
         <div className="w-full h-[17%] bg-[#1d67ad] flex items-center justify-center">
           <button
             onClick={() => initCreatePreference(detail)}
-            className="w-[270px] h-[70px] mr-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
+            className="w-[270px] h-[70px] mr-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-[10px]"
           >
-            <p className=" m-2 text-2xl  "> Comprar ahora</p>{" "}
+            <p className=" m-2 text-2xl  "> {t("COMPRAR AHORA")}</p>{" "}
             {preferenceId && (
               <Wallet
                 initialization={{ preferenceId, redirectMode: "modal" }}
@@ -228,18 +230,18 @@ export const Detail = () => {
             <div className="flex">
               <button
                 onClick={handleCart}
-                className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
+                className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4  rounded-[10px]"
               >
-                <p className=" m-2 text-2xl  ">Eliminar del Carrito</p>
+                <p className=" m-0 text-2xl  ">{t("ELIMINAR DEL CARRITO")}</p>
               </button>
             </div>
           ) : (
             <div className="flex">
               <button
                 onClick={handleCart}
-                className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
+                className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-[10px]"
               >
-                <p className=" m-2 text-2xl  ">Agregar al Carrito</p>
+                <p className=" m-2 text-2xl  ">{t("AGREGAR AL CARRITO")}</p>
               </button>
             </div>
           )}
@@ -249,11 +251,11 @@ export const Detail = () => {
       <div className="w-full min-h-[15%] flex items-center justify-center ">
       <button
     onClick={handleReviews} 
-    className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]">
+    className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-[10px]">
     {reviews ? 
-        ("Ocultar Comentarios") 
+        (t("MOSTRAR COMENTARIOS")) 
         :
-        ("Mostrar Comentarios") 
+        (t("OCULTAR COMENTARIOS")) 
     }
 </button>
       </div>
