@@ -32,10 +32,11 @@ export const Detail = () => {
   );
   const { isAuthenticated } = useAuth0();
 
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem("userData"))
+  );
 
-  const [reviews, setReviews] = useState(false)
-
+  const [reviews, setReviews] = useState(false);
 
   useEffect(() => {
     if (!cart || cart.length === 0) {
@@ -140,15 +141,12 @@ export const Detail = () => {
   const fechaFinal = `${añoF}-${mesF}-${diaF}`;
 
   const handleReviews = () => {
-
-    if(reviews){
-
-      setReviews(false)
+    if (reviews) {
+      setReviews(false);
     } else {
-
-      setReviews(true)
+      setReviews(true);
     }
-  }
+  };
 
   return (
     <div className="h-[90vh] mt-[10vh] w-full flex flex-col pt-[30px] items-center ">
@@ -158,10 +156,10 @@ export const Detail = () => {
             {detail?.language}
           </p>
           <img
-              src={`/img/${detail.language}.png`}
-              alt={detail.lenguage}
-              className="h-[60px] w-[60px] m-[25px] "
-            />
+            src={`/img/${detail.language}.png`}
+            alt={detail.lenguage}
+            className="h-[60px] w-[60px] m-[25px] "
+          />
         </div>
         <div className="w-full h-[10%] bg-yellow-400 flex justify-center items-center">
           <p className="text-black text-[25px] font-normal text-start">
@@ -200,16 +198,16 @@ export const Detail = () => {
               <p className="ml-[30px] ">Finaliza el dia {fechaFinal}</p>
             </div>
             <div className="w-[100px] h-[100px] flex items-center justify-center absolute right-[1px]">
-          {isFav ? (
-            <button onClick={handleFavorite} className=" text-5xl ">
-              ❤️
-            </button>
-          ) : (
-            <button onClick={handleFavorite} className=" text-5xl ">
-              🤍
-            </button>
-          )}
-        </div>
+              {isFav ? (
+                <button onClick={handleFavorite} className=" text-5xl ">
+                  ❤️
+                </button>
+              ) : (
+                <button onClick={handleFavorite} className=" text-5xl ">
+                  🤍
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <div className="w-full h-[17%] bg-[#1d67ad] flex items-center justify-center">
@@ -230,7 +228,7 @@ export const Detail = () => {
                 onClick={handleCart}
                 className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
               >
-                <p className=" m-2 text-2xl  ">Eliminar del Carrito</p>
+                <p className=" m-2 text-2xl">Eliminar del Carrito</p>
               </button>
             </div>
           ) : (
@@ -239,33 +237,25 @@ export const Detail = () => {
                 onClick={handleCart}
                 className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
               >
-                <p className=" m-2 text-2xl  ">Agregar al Carrito</p>
+                <p className=" m-2 text-2xl">Agregar al Carrito</p>
               </button>
             </div>
           )}
         </div>
-        
       </div>
-      <div className="w-full min-h-[15%] flex items-center justify-center ">
-      <button
-    onClick={handleReviews} 
-    className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]">
-    {reviews ? 
-        ("Ocultar Comentarios") 
-        :
-        ("Mostrar Comentarios") 
-    }
-</button>
+      <div className="w-full min-h-[15%] flex items-center justify-center">
+        <button
+          onClick={handleReviews}
+          className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
+        >
+          {reviews ? "Ocultar Comentarios" : "Mostrar Comentarios"}
+        </button>
       </div>
       <div className="w-[80%] h-auto flex items-center justify-center ">
-        {reviews?
-      (<DetailReviews/>)
-      :(null)  
-      }
+        {reviews ? <DetailReviews /> : <ReviewComponent />}
       </div>
       <hr />
       <br />
-        <ReviewComponent/>
     </div>
   );
 };
