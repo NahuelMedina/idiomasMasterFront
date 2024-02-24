@@ -16,13 +16,17 @@ import {
   SET_USER_DATA,
   ALL_USERS,
   USER_COURSES,
-  POST_USER_SUCCESS,
-  POST_USER_FAIL,
   REVIEW_SENT_SUCCESS,
   REVIEW_SENT_ERROR,
   GET_CART,
   ADD_CART,
-  DELETE_CART
+  DELETE_CART,
+  UPDATE_REVIEW_ERROR,
+  UPDATE_REVIEW_SUCCESS,
+  UPDATE_REVIEW_REQUEST,
+  DELETE_REVIEW_REQUEST,
+  DELETE_REVIEW_SUCCESS,
+  DELETE_REVIEW_FAILURE,
 } from "./actiontypes";
 import axios from "axios";
 
@@ -143,14 +147,14 @@ export const postThirdPartyUser = (user) => async (dispatch) => {
 export const postReview = (formData) => {
   return async (dispatch) => {
     try {
-      console.log('ESTO RECIBE ACTION FORMDATA:', formData);
+      console.log("ESTO RECIBE ACTION FORMDATA:", formData);
       const response = await axios.post(`${URL}/createReview`, formData);
-      console.log('Reseña guardada exitosamente:', response.data);
-      
+      console.log("Reseña guardada exitosamente:", response.data);
+
       dispatch(reviewPostSuccess(response.data));
     } catch (error) {
-      console.error('Error al guardar la reseña:', error);
-      
+      console.error("Error al guardar la reseña:", error);
+
       dispatch(reviewPostError(error));
     }
   };
@@ -158,12 +162,12 @@ export const postReview = (formData) => {
 
 const reviewPostSuccess = (data) => ({
   type: REVIEW_SENT_SUCCESS,
-  payload: data 
+  payload: data,
 });
 
 const reviewPostError = (error) => ({
   type: REVIEW_SENT_ERROR,
-  payload: error
+  payload: error,
 });
 
 export const getUser = (userData) => async (dispatch) => {
@@ -199,6 +203,29 @@ export const updateUser = (changedFields) => async (dispatch) => {
   } catch (error) {
     console.error("Error al guardar cambios:", error);
   }
+};
+
+export const updateReview = (id, updatedBody) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_REVIEW_REQUEST });
+
+      console.log("ID recibido en la acción:", id);
+      console.log("Cuerpo actualizado recibido en la acción:", updatedBody);
+
+      const response = await axios.put(`${URL}/putReview/${id}`, {
+        body: updatedBody,
+      });
+
+      console.log("Respuesta del servidor:", response.data);
+
+      dispatch({ type: UPDATE_REVIEW_SUCCESS, payload: response.data });
+      console.log("Review updated:", response.data);
+    } catch (error) {
+      dispatch({ type: UPDATE_REVIEW_ERROR, payload: error.message });
+      console.error("Error updating review:", error);
+    }
+  };
 };
 
 export const filteredCourses = (data) => {
@@ -294,8 +321,7 @@ export function addCart(cart) {
         type: ADD_CART,
         payload: data,
       });
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 }
 export function deleteCart(cart) {
@@ -311,3 +337,18 @@ export function deleteCart(cart) {
     }
   };
 }
+
+// Acción para la eliminación de la revisión
+export const deleteReview = (reviewId) => {
+  return async (dispatch) => {
+    dispatch({ type: DELETE_REVIEW_REQUEST });
+
+    try {
+      await axios.delete(`${URL}/deleteReview/${reviewId}`);
+
+      dispatch({ type: DELETE_REVIEW_SUCCESS, payload: reviewId });
+    } catch (error) {
+      dispatch({ type: DELETE_REVIEW_FAILURE, payload: error.message });
+    }
+  };
+};

@@ -33,11 +33,11 @@ export const Detail = () => {
     JSON.parse(window.localStorage.getItem("fav"))
   );
   const { isAuthenticated } = useAuth0();
+  
   const [userData] = useLocalStorage("userData", {});
-  //const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
+  //const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData'))
 
-  const [reviews, setReviews] = useState(false)
-
+  const [reviews, setReviews] = useState(false);
 
   useEffect(() => {
     if (!cart || cart.length === 0) {
@@ -156,10 +156,9 @@ export const Detail = () => {
 
       setReviews(false)
     } else {
-
-      setReviews(true)
+      setReviews(true);
     }
-  }
+  };
 
   return (
     <div className="h-[90vh] mt-[10vh] w-full flex flex-col pt-[30px] items-center ">
@@ -241,7 +240,7 @@ export const Detail = () => {
                 onClick={handleCart}
                 className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
               >
-                <p className=" m-2 text-2xl  ">Eliminar del Carrito</p>
+                <p className=" m-2 text-2xl">Eliminar del Carrito</p>
               </button>
             </div>
           ) : (
@@ -250,30 +249,25 @@ export const Detail = () => {
                 onClick={handleCart}
                 className="w-[270px] h-[70px] ml-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
               >
-                <p className=" m-2 text-2xl  ">Agregar al Carrito</p>
+                <p className=" m-2 text-2xl">Agregar al Carrito</p>
               </button>
             </div>
           )}
         </div>
-
       </div>
-      <div className="w-full min-h-[15%] flex items-center justify-center ">
+      <div className="w-full min-h-[15%] flex items-center justify-center">
         <button
           onClick={handleReviews}
-          className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]">
-          {reviews ?
-            ("Ocultar Comentarios")
-            :
-            ("Mostrar Comentarios")
-          }
+          className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
+        >
+          {reviews ? "Ocultar Comentarios" : "Mostrar Comentarios"}
         </button>
       </div>
       <div className="w-[80%] h-auto flex items-center justify-center ">
-        {reviews ?
-          (<ReviewComponent />)
-          : (null)
-        }
+        {reviews ? <DetailReviews /> : <ReviewComponent />}
       </div>
+      <hr />
+      <br />
     </div>
   );
 };

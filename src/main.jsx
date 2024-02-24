@@ -10,7 +10,7 @@ import i18n from "./i18n.js";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Auth0Provider domain="dev-63fpbu2e71qqv1pb.us.auth0.com" clientId="ykh1Z2g81sao2bGfSaTcp62cQCGnHSfe" redirect_uri={window.location.origin}>
+      <Auth0Provider domain="idiomas-master.us.auth0.com" clientId="QKuJSniRtysK5OlPJy3muRNgxlcujinH" redirect_uri={window.location.origin}>
         <Provider store={store}>
           <App />
         </Provider>
