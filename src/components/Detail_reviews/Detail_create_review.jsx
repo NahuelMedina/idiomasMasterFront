@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useLocation } from "react-router-dom";
 
-const Create_review = ({ onReviewPosted }) => {
+const Create_review = () => {
   const [userData] = useLocalStorage("userData", {});
   const { user } = useAuth0();
   const [rating, setRating] = useState(0);
