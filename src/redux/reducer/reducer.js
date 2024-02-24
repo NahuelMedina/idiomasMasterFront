@@ -16,7 +16,11 @@ import {
   ALL_USERS,
   USER_COURSES,
   POST_USER_SUCCESS,
-  POST_USER_FAIL
+  POST_USER_FAIL,
+  GET_CART,
+  ADD_CART,
+  DELETE_CART,
+
 } from "../action/actiontypes";
 
 let initialState = {
@@ -36,8 +40,11 @@ let initialState = {
   adminReview: null,
   allUsers: [],
   userCourses: [],
-  postStatus: null,
+  postStatus: false,
+  postStatusFail: false,
   postError: null,
+  currentCart: [],
+
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -163,9 +170,27 @@ const reducer = (state = initialState, { type, payload }) => {
           case POST_USER_FAIL:
             return{
               ...state,
+              postStatusFail: false,
               postStatus: false,
               postError: payload
             }
+
+      case GET_CART:
+        return{
+          ...state,
+          currentCart: payload
+        }
+      case ADD_CART:
+        return{
+          ...state,
+          currentCart: payload
+        }
+      case DELETE_CART:
+        return{
+          ...state,
+          currentCart: payload
+        }
+     
     default:
       return state;
   }

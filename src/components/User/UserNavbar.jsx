@@ -16,13 +16,13 @@ export default function UserNavbar() {
     "https://www.pngitem.com/pimgs/m/508-5087236_tab-profile-f-user-icon-white-fill-hd.png";
 
   return (
-    <div className="flex h-[70px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#000000e1] border-[#ffffff] border-b-2 border-solid">
+    <div className="flex h-[70px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#000000d2] backdrop-blur-sm border-[#ffffff] border-b-2 border-solid">
       <div className="flex ml-2 items-center justify-around h-full gap-10">
         <Link
           to={"/user/home"}
           className="h-full flex justify-center items-center"
         >
-          <img className="w-16" src="/img/logo4.png" alt="Logo" />
+          <img className="w-16" src="img\logo4.png" alt="Logo" />
         </Link>
 
         <Link to={"/home"} className="h-full flex items-center">

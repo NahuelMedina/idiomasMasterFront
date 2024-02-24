@@ -7,7 +7,7 @@ export default function UserPaymentCard ({date, amount, status}){
             <h1 className="text-yellow-500 text-[15px]">{date.split("T")[0]} </h1>
             </div>
             <div className="h-full w-[30%] flex items-center justify-evenly">
-            <h1 className="text-white text-[15px]">$ {amount}</h1>
+            <h1 className="text-white text-[15px]">$ {Math.floor(amount * 0.00026)}</h1>
             </div>
             <div className="h-full w-[30%] flex items-center justify-evenly">
             <h1 className="text-white text-[15px]">{status}</h1>

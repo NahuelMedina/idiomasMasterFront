@@ -18,6 +18,11 @@ import {
   USER_COURSES,
   POST_USER_SUCCESS,
   POST_USER_FAIL,
+  REVIEW_SENT_SUCCESS,
+  REVIEW_SENT_ERROR,
+  GET_CART,
+  ADD_CART,
+  DELETE_CART,
 } from "./actiontypes";
 import axios from "axios";
 
@@ -67,27 +72,25 @@ export const orderPrice = (orden) => {
     payload: orden,
   };
 };
-//
 export function search(value) {
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`${URL}/getCourse/name?name=${value}`);
       console.log(data);
-      if (Array.isArray(data) && data.length > 0) {
+      if (Array.isArray(data)) {
         dispatch({
           type: SEARCH,
           payload: [data, value],
         });
       } else {
-        throw new Error("No se encontraron cursos");
+        alert("No se encontraron resultados");
       }
     } catch (error) {
-      console.error("Error al buscar cursos:", error);
-      throw error; // Re-lanzamos el error para que se maneje en el componente que llama a esta función
+      alert(error);
     }
   };
 }
-//
+
 export const postCourseRequest = () => ({
   type: POST_COURSE_REQUEST,
 });
@@ -113,19 +116,10 @@ export const postCourseData = (courseData) => async (dispatch) => {
 export const postUser = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/createUser`, userData);
-    dispatch({
-      type: POST_USER_SUCCESS,
-      payload: response,
-    });
-    //alert("Usuario creado con Exito", response.data);
+    alert("Usuario creado con Exito", response.data);
   } catch (error) {
     const message = error.response.data;
-    dispatch({
-      type: POST_USER_FAIL,
-      payload: message,
-    });
-
-    //alert(`${message}`);
+    alert(`${message}`);
   }
 };
 
@@ -139,13 +133,38 @@ export const postThirdPartyUser = (user) => async (dispatch) => {
     };
     console.log("ESTO ES USERDATA EN THIRPARTY", userData);
     const response = await axios.post(`${URL}/createUser`, userData);
-
     alert("Usuario creado con éxito", response.data);
   } catch (error) {
     const message = error.response.data;
     alert(`${message}`);
   }
 };
+
+export const postReview = (formData) => {
+  return async (dispatch) => {
+    try {
+      console.log("ESTO RECIBE ACTION FORMDATA:", formData);
+      const response = await axios.post(`${URL}/createReview`, formData);
+      console.log("Reseña guardada exitosamente:", response.data);
+
+      dispatch(reviewPostSuccess(response.data));
+    } catch (error) {
+      console.error("Error al guardar la reseña:", error);
+
+      dispatch(reviewPostError(error));
+    }
+  };
+};
+
+const reviewPostSuccess = (data) => ({
+  type: REVIEW_SENT_SUCCESS,
+  payload: data,
+});
+
+const reviewPostError = (error) => ({
+  type: REVIEW_SENT_ERROR,
+  payload: error,
+});
 
 export const getUser = (userData) => async (dispatch) => {
   try {
@@ -159,8 +178,7 @@ export const getUser = (userData) => async (dispatch) => {
       payload: response.data,
     });
 
-    //alert("Se ha conectado");
-
+    alert("Se ha conectado");
   } catch (error) {
     console.error("Error al obtener usuario:", error);
 
@@ -178,11 +196,8 @@ export const updateUser = (changedFields) => async (dispatch) => {
     console.log(changedFields, "ESTO ENVIA LA ACTION UPDATEUSER");
     const response = await axios.put(`${URL}/putUser`, changedFields);
     console.log("Respuesta del servidor al guardar cambios:", response.data);
-    // Dispara una acción para actualizar los datos en el store local de Redux
-    // Aquí podrías dispatchear otra acción si necesitas actualizar otros datos en el store
   } catch (error) {
     console.error("Error al guardar cambios:", error);
-    // Podrías dispatchear otra acción para manejar el error si es necesario
   }
 };
 
@@ -252,9 +267,46 @@ export const createPreference = async (product) => {
 };
 
 export const setUserdata = (user) => {
-
   return {
     type: SET_USER_DATA,
     payload: user,
+  };
+};
+
+export function getCartDB(id) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`${URL}/getCart/${id}`);
+      dispatch({
+        type: GET_CART,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+export function addCart(cart) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.put(`${URL}/addCartProduct`, cart);
+      dispatch({
+        type: ADD_CART,
+        payload: data,
+      });
+    } catch (error) {}
+  };
+}
+export function deleteCart(cart) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.put(`${URL}/deleteCartProduct`, cart);
+      dispatch({
+        type: DELETE_CART,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error);
+    }
   };
 }

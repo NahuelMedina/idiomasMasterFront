@@ -26,25 +26,25 @@ export default function AdminUserAll({ setSettings, setInfo }) {
           <h1>Num</h1>
         </div>
         <div className="h-full w-[22%]  bg-[#151139]  flex items-center justify-center text-white">
-          <h1>User Id</h1>
+          <h1>Id Usuario</h1>
         </div>
         <div className="h-full w-[10%]  bg-[#151139] flex items-center justify-center text-white ">
-          <h1>Name</h1>
+          <h1>Nombre</h1>
         </div>
         <div className="h-full w-[15%]  bg-[#151139]  flex items-center justify-center text-white">
-          <h1>Lastname</h1>
+          <h1>Apellido</h1>
         </div>
         <div className="h-full w-[12%] bg-[#151139]  flex items-center justify-center text-white">
-          <h1>Type</h1>
+          <h1>Tipo</h1>
         </div>
         <div className="h-full w-[12%] bg-[#151139] flex items-center justify-center text-white">
-          <h1>Status</h1>
+          <h1>Estado</h1>
         </div>
         <div className="h-full w-[12%]  bg-[#3b3194]  flex items-center justify-center text-white">
-          <h1>Update</h1>
+          <h1>Actualizar</h1>
         </div>
         <div className="h-full w-[12%]  bg-[#3b3194]  flex items-center justify-center text-white">
-          <h1>Info</h1>
+          <h1>Informacion</h1>
         </div>
       </div>
       <div className="bg-[#282a54] w-full h-[96%] max-h-[637px] overflow-y-scroll ">

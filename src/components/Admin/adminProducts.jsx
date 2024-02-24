@@ -43,7 +43,7 @@ export default function AdminProducts() {
       <div className="h-[85%] w-[85%] flex flex-col">
         <div className="w-full h-[8%] flex items-center pl-[40px] justify-between">
           <div className="h-full w-[20%]">
-            <h1 className="text-gray-800 text-[30px]">Products</h1>
+            <h1 className="text-gray-800 text-[30px]">Productos</h1>
           </div>
           <div className="bg-[#151139] w-[500px] h-full flex flex-row">
             <div
@@ -57,7 +57,7 @@ export default function AdminProducts() {
                   options.main ? "text-white" : "text-black"
                 }`}
               >
-                Your Products
+                Mis Productos
               </h1>
             </div>
 
@@ -72,7 +72,7 @@ export default function AdminProducts() {
                   options.add ? "text-white" : "text-black"
                 }`}
               >
-                Add Product
+                Nuevo Producto
               </h1>
             </div>
             <div
@@ -86,7 +86,7 @@ export default function AdminProducts() {
                   options.setting ? "text-white" : "text-black"
                 }`}
               >
-                Settings Product
+                Config Producto
               </h1>
             </div>
           </div>

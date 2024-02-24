@@ -10,9 +10,10 @@ import { postThirdPartyUser, setUserdata } from "../../redux/action/actions"; //
 import { useAuth0 } from "@auth0/auth0-react";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { getGoogleUser } from "../Admin/userData";
+import { useTypewriter } from "react-simple-typewriter";
 
 export const Landing = () => {
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState(1);
   const { isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
@@ -20,19 +21,21 @@ export const Landing = () => {
     password: "",
   });
 
+  const [typeEffect] = useTypewriter({
+    words: [landing_string[num].word],
+    loop: {},
+  });
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         if (isAuthenticated && user && user.email) {
-          console.log(user.email);
-          console.log(user);
           const response = await getGoogleUser({
             email: user.email,
             name: user.given_name,
             lastname: user.family_name,
             image: user.picture,
           });
-          console.log(response);
 
           if (response && response.data) {
             const updatedUserData = {
@@ -52,19 +55,26 @@ export const Landing = () => {
 
     fetchUserData();
   }, [isAuthenticated, user, setUserDataLocally, dispatch]);
+  useEffect(() => {
+    if (typeEffect.length === 0 && num === 4) {
+      setNum(0);
+    }
+    if (typeEffect.length === 0 && num <= 3) {
+      setNum(num + 1);
+    }
+  }, [typeEffect]);
 
   // useEffect(() => {
   //   function set_landing() {
-  //     if (num < 4) {
-  //       setNum(num + 1);
-  //     } else if (num === 4) {
+  //     if (num === 4) {
   //       setNum(0);
   //     }
+  //     if (typeEffect.length === 0 && num === 0) {
+  //       setNum(num + 1);
+  //     }
   //   }
-
-  //   setTimeout(set_landing, 5000);
+  //   set_landing();
   // }, [num]);
-
   return (
     <div className="w-full h-[150px] bg-black text-white">
       <div className="flex justify-end items-end w-full h-full bg-[#1E68AD]">
@@ -73,13 +83,14 @@ export const Landing = () => {
         </div>
       </div>
 
-      <div className="flex flex-row justify-end items-center w-full h-[600px] relative bg-white">
-        <div className=" flex w-full h-full absolute   bg-gradient-to-r from-black via-white/10 to-white/0">
-          <div className="h-full items-center ml-[20px] justify-center flex flex-col">
-            <p className="text-[40px] text-white border-b-4 border-white">{`${landing_string[num].title}`}</p>
+      <div className="flex  col justify-end items-center w-full h-[600px] relative bg-white">
+        <div className=" flex w-full h-full absolute  bg-gradient-to-r from-black via-white/10 to-white/0 ">
+          <div className="h-full w-full items-start pl-[30px] justify-center flex flex-col">
+            <p className="text-[40px] text-white font-semibold border-b-4 border-white">{`${landing_string[num].title}`}</p>
             <p className={`${landing_string[num].color} `}>
-              {" "}
-              {`${landing_string[num].word}`}
+              <div className="h-[200px]">
+                <span className={landing_string[num].color}>{typeEffect}</span>
+              </div>
             </p>
           </div>
         </div>

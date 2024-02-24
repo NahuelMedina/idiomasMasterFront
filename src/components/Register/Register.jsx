@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import registerValidate from "../Utils/registerValidate";
 import { useDispatch, useSelector } from "react-redux";
 import { postUser } from "../../redux/action/actions";
 import Swal from "sweetalert2";
 import "./ColoredToast.css";
+import { MdEmail } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+import { FaUserTag } from "react-icons/fa";
+import { FaUserClock } from "react-icons/fa6";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const postStatus = useSelector((state) => state.postStatus);
+  const postStatusFail = useSelector((state) => state.postStatusFail);
   const postError = useSelector((state) => state.postError);
   const [status, setStatus] = useState(postStatus);
+
   const [state, setState] = useState({
     name: "",
     lastname: "",
@@ -21,18 +28,31 @@ const Register = () => {
     age: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+    age: "",
+  });
+
   const handleChange = (e) => {
-    e.preventDefault();
     const { name, value } = e.target;
+
+    setErrors(
+      registerValidate({
+        ...state,
+        [name]: value,
+      })
+    );
 
     setState({
       ...state,
       [name]: value,
     });
-
-    setErrors(registerValidate({ ...state, [name]: value }));
   };
+
+  console.log(errors);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -45,17 +65,6 @@ const Register = () => {
           img: reader.result,
         }));
       };
-    }
-  };
-
-  const buttonDisabled = () => {
-    let buttonAux = false;
-
-    for (const error in errors) {
-      if (errors[error]) {
-        buttonAux = true;
-        return buttonAux;
-      }
     }
   };
 
@@ -80,103 +89,201 @@ const Register = () => {
     }
   };
 
+  const buttonDisabled = () => {
+    let btn = true;
+    if (Object.keys(errors).length === 0) {
+      btn = false;
+    }
+    return btn;
+  };
+  console.log(errors);
+  console.log(buttonDisabled());
+
   return (
-    <div className="w-full h-screen mt-[80px] bg-[#FFFFFF] text-[#000000] flex justify-center items-center animate-fade animate-once animate-ease-in">
-      <div className="flex m-5 h-[95%]">
-        <div className=" w-3/5 h-full">
-          <img
-            className="h-full object-cover rounded-l-md"
-            src="img\image-register.jpg"
-            alt=""
-          />
-        </div>
-        <div className="w-2/5 h-full flex-col flex justify-center items-center">
+    <div className="w-full h-[90vh] mt-[80px] grid grid-cols-2">
+      <div className="w-full h-full flex relative">
+        <img
+          className="h-full object-cover rounded-l-md animate-fade-right animate-ease-in-out"
+          src="img\image-register.jpg"
+          alt=""
+        />
+        <div className="absolute w-full h-full bg-black/50 animate-fade-right animate-ease-in-out"></div>
+      </div>
+      <div className="w-full h-full flex items-center justify-center bg-white">
+        <div className="bg-gradient-to-r from-sky-600 to-sky-600 w-[80%] h-[95%] rounded-[20px] flex flex-col items-center shadow-lg shadow-black/50 animate-fade-left animate-ease-in-out">
+          <div className=" w-[70%] h-[10%] flex items-center justify-center border-b-[1px] border-b-yellow-400">
+            <h1 className="text-[40px] text-yellow-400">Registro de Usuario</h1>
+          </div>
           <form
             onSubmit={handleSubmit}
-            className="h-full w-full font-medium flex justify-center items-center flex-col text-[#FFFFFF] bg-[#1E68AD] rounded-r-md"
+            className=" w-[80%] h-[90%] grid grid-rows-6 py-[10px]"
           >
-            <img className="w-[20%]" src="/public/img/logo4.png" alt="" />
-            <h2 className=" text-3xl font-bold text-[#FFFFFF]">Registrarse</h2>
-            <div className="flex w-full h-2/4 gap-1 justify-center items-center ">
-              <div className="flex flex-col w-2/4 gap-[5px] p-5">
-                <label htmlFor="name">Nombre</label>
-                <input
-                  className="text-black rounded-sm h-[40px] pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
-                  name="name"
-                  placeholder="Nombre..."
-                  id="name"
-                  type="text"
-                />
-                <span style={{ color: "red" }}>{errors.name}</span>
-                <label htmlFor="lastname">Apellido</label>
-                <input
-                  className="text-black rounded-sm h-[40px] pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
-                  name="lastname"
-                  placeholder="Apellido..."
-                  id="lastname"
-                  type="text"
-                />
-                <span style={{ color: "red" }}>{errors.lastname}</span>
-                <label htmlFor="password">Contraseña</label>
-                <input
-                  className="text-black rounded-sm h-[40px] pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
-                  placeholder="Contraseña..."
-                  name="password"
-                  id="password"
-                  type="password"
-                />
-                <span style={{ color: "red" }}>{errors.password}</span>
+            <div className=" w-full h-full">
+              <div className=" w-full h-[70%] flex flex-col items-center justify-center">
+                <div className="h-[80%] w-[90%] rounded-[10px] bg-purple-500 flex flex-row overflow-hidden ">
+                  <div className="w-[20%] h-full bg-sky-900 flex items-center justify-center">
+                    <FaUser className="text-[36px] text-white" />
+                  </div>
+
+                  <input
+                    className="text-black w-[80%] h-full pl-[20px] text-[20px]"
+                    onChange={handleChange}
+                    name="name"
+                    placeholder="Ingresa tu Nombre"
+                    id="name"
+                    type="text"
+                  />
+                </div>
               </div>
-              <div className="flex flex-col w-2/4 gap-[6px] p-5">
-                <label htmlFor="email">Email</label>
-                <input
-                  className="text-black rounded-sm h-[40px] pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
-                  name="email"
-                  placeholder="Email..."
-                  id="email"
-                  type="email"
-                />
-                <span style={{ color: "red" }}>{errors.email}</span>
-                <label htmlFor="age">Edad</label>
-                <input
-                  className="text-black rounded-sm h-[40px] pl-1 remove-arrow  focus:border-2 border-[#FF6B6C]"
-                  onChange={handleChange}
-                  placeholder="Edad..."
-                  name="age"
-                  id="age"
-                  type="number"
-                />
-                <span style={{ color: "red" }}>{errors.age}</span>
-                <label htmlFor="img">Imagen URL</label>
-                <input
-                  className="text-black rounded-sm h-[40px] pl-1 focus:border-2 border-[#FF6B6C]"
-                  onChange={handleImageChange}
-                  name="img"
-                  id="img"
-                  type="file"
-                  accept="image/*"
-                />
+              <div className=" w-full h-[30%] flex items-center justify-center">
+                <span
+                  style={{
+                    color: "rgb(255,255,255)",
+                    fontSize: "15px",
+                    lineheight: ".75rem",
+                  }}
+                >
+                  {errors.name}
+                </span>
               </div>
             </div>
-            <input
-              disabled={buttonDisabled()}
-              className=" relative bg-[#FFFFFF] text-[#000000] w-[300px] h-[40px] rounded-sm cursor-pointer hover:bg-[#FF6B6C] transition-colors hover:text-[#FFFFFF]  disabled:opacity-30	"
-              type="submit"
-              value="Registrarse"
-            />
-            <div>
-              <div className="mt-[40px]">
-                ¿Ya tienes una cuenta?{" "}
-                <Link
-                  className="text-[#000000] font-bold text-xl hover:text-[#FF6B6C] transition-colors	"
-                  to="/login"
+            <div className=" w-full h-full">
+              <div className=" w-full h-[70%] flex flex-col items-center justify-center">
+                <div className="h-[80%] w-[90%] rounded-[10px] bg-purple-500 flex flex-row overflow-hidden">
+                  <div className="w-[20%] h-full bg-sky-900 flex items-center justify-center">
+                    <FaUserTag className="text-[40px] text-white" />
+                  </div>
+
+                  <input
+                    className="text-black w-[80%] h-full pl-[20px] text-[20px]"
+                    onChange={handleChange}
+                    name="lastname"
+                    placeholder="Ingresa tu Apellido"
+                    id="lastname"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div className=" w-full h-[30%] flex items-center justify-center">
+                <span
+                  style={{
+                    color: "rgb(255,255,255)",
+                    fontSize: "15px",
+                    lineheight: ".75rem",
+                  }}
                 >
-                  Iniciar Sesión
-                </Link>
+                  {errors.lastname}
+                </span>
+              </div>
+            </div>
+            <div className=" w-full h-full">
+              <div className=" w-full h-[70%] flex flex-col items-center justify-center">
+                <div className="h-[80%] w-[90%] rounded-[10px] bg-purple-500 flex flex-row overflow-hidden">
+                  <div className="w-[20%] h-full bg-sky-900 flex items-center justify-center">
+                    <FaUserClock className="text-[40px] text-white" />
+                  </div>
+
+                  <input
+                    className="text-black w-[80%] h-full pl-[20px] text-[20px]"
+                    onChange={handleChange}
+                    placeholder="Ingresa tu Edad"
+                    name="age"
+                    id="age"
+                    type="number"
+                  />
+                </div>
+              </div>
+              <div className=" w-full h-[30%] flex items-center justify-center">
+                <span
+                  style={{
+                    color: "rgb(255,255,255)",
+                    fontSize: "15px",
+                    lineheight: ".75rem",
+                  }}
+                >
+                  {errors.age}
+                </span>
+              </div>
+            </div>
+            <div className=" w-full h-full">
+              <div className=" w-full h-[70%] flex flex-col items-center justify-center">
+                <div className="h-[80%] w-[90%] rounded-[10px] bg-purple-500 flex flex-row overflow-hidden">
+                  <div className="w-[20%] h-full bg-sky-900 flex items-center justify-center">
+                    <MdEmail className="text-[40px] text-white" />
+                  </div>
+
+                  <input
+                    className="text-black w-[80%] h-full pl-[20px] text-[20px]"
+                    onChange={handleChange}
+                    name="email"
+                    placeholder="Ingresa tu Email"
+                    id="email"
+                    type="email"
+                  />
+                </div>
+              </div>
+              <div className=" w-full h-[30%] flex items-center justify-center">
+                <span
+                  style={{
+                    color: "rgb(255,255,255)",
+                    fontSize: "15px",
+                    lineheight: ".75rem",
+                  }}
+                >
+                  {errors.email}
+                </span>
+              </div>
+            </div>
+            <div className=" w-full h-full">
+              <div className=" w-full h-[70%] flex flex-col items-center justify-center">
+                <div className="h-[80%] w-[90%] rounded-[10px] bg-purple-500 flex flex-row overflow-hidden">
+                  <div className="w-[20%] h-full bg-sky-900 flex items-center justify-center">
+                    <RiLockPasswordLine className="text-[40px] text-white" />
+                  </div>
+
+                  <input
+                    className="text-black w-[80%] h-full pl-[20px] text-[20px]"
+                    onChange={handleChange}
+                    placeholder="Ingresa tu Contraseña"
+                    name="password"
+                    id="password"
+                    type="password"
+                  />
+                </div>
+              </div>
+              <div className=" w-full h-[30%] flex items-center justify-center">
+                <span
+                  style={{
+                    color: "rgb(255,255,255)",
+                    fontSize: "15px",
+                    lineheight: ".75rem",
+                  }}
+                >
+                  {errors.password}
+                </span>
+              </div>
+            </div>
+            <div className=" w-full h-full grid grid-rows-2">
+              <div className="w-full h-full flex items-center justify-center">
+                <input
+                  disabled={buttonDisabled()}
+                  className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded disabled:opacity-30 disabled:cursor-not-allowed"
+                  type="submit"
+                  value="Registrarse"
+                />
+              </div>
+              <div className="w-full h-full flex items-center justify-center">
+                <ul>
+                  <li className="text-white">
+                    ¿Ya tienes una cuenta?{" "}
+                    <Link
+                      className="text-yellow-400 font-bold text-xl hover:text-yellow-600	"
+                      to="/login"
+                    >
+                      Iniciar Sesión
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </div>
           </form>

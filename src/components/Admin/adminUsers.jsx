@@ -57,7 +57,7 @@ export default function AdminUsers() {
       <div className="h-[85%] w-[85%] flex flex-col">
         <div className="w-full h-[8%] flex items-center pl-[40px] justify-between">
           <div className="h-full w-[20%]">
-            <h1 className="text-gray-800 text-[30px]">Users</h1>
+            <h1 className="text-gray-800 text-[30px]">Usuarios</h1>
           </div>
           <div className="bg-[#151139] w-[500px] h-full flex flex-row">
             <div
@@ -71,7 +71,7 @@ export default function AdminUsers() {
                   options.main ? "text-white" : "text-black"
                 }`}
               >
-                Your Users
+                Mis Usuarios
               </h1>
             </div>
 
@@ -86,7 +86,7 @@ export default function AdminUsers() {
                   options.setting ? "text-white" : "text-black"
                 }`}
               >
-                Manage User
+                Config Usuarios
               </h1>
             </div>
             <div
@@ -100,7 +100,7 @@ export default function AdminUsers() {
                   options.info ? "text-white" : "text-black"
                 }`}
               >
-                User Info
+                Info Usuario
               </h1>
             </div>
           </div>
