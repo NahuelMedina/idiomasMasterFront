@@ -224,7 +224,7 @@ const ShopCart = () => {
 
   return (
     <div className="w-full h-[90vh] mt-[80px] flex flex-row bg-white">
-      <div className="h-full w-[70%] bg-red-200">
+      <div className="h-full w-[70%]">
         <div className=" w-full h-full bg-white flex flex-col ">
           <div className="w-full h-[90%] pt-[20px]">
             {cartCourse &&
@@ -266,7 +266,7 @@ const ShopCart = () => {
           </div>
         </div>
       </div>
-      <div className="h-full w-[30%]">
+      <div className="h-[90%] w-[30%]">
         <div className="w-full h-full bg-white ">
           {cartCourse !== null && cartCourse.length > 0 ? (
             <div className="bg-white w-[94%] border-[1px] border-gray-300 shadow-lg mt-[20px]">

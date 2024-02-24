@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import validation from "../CourseForm/validation";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { postCourseData } from "../../redux/action/actions";
-
+import Swal from "sweetalert2";
 export default function AdminAddProduct() {
   const initialCourseState = {
     language: "",
@@ -19,7 +19,7 @@ export default function AdminAddProduct() {
     status: true,
   };
 
- 
+
 
   const [course, setCourse] = useState(initialCourseState);
   const dispatch = useDispatch();
@@ -78,7 +78,12 @@ export default function AdminAddProduct() {
     setErrors(errors);
     if (Object.keys(errors).length === 0) {
       dispatch(postCourseData(course));
-      window.alert("El curso se ha creado exitosamente.");
+      Swal.fire({
+        icon: "success",
+        title: "¡Creado con éxito!",
+        showConfirmButton: false,
+        timer: 2200,
+      });
       resetForm(); // Restablecer el formulario después de enviar los datos
     }
   };
@@ -340,7 +345,7 @@ export default function AdminAddProduct() {
             </div>
           </div>
           <div className="w-full h-[25%] bg-[#373a6c] pl-[20px] rounded-[10px]">
-           
+
             <div className="w-full h-full flex items-center justify-center">
               <button
                 type="submit"
