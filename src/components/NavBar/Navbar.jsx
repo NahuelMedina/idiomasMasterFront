@@ -36,7 +36,7 @@ console.log((localStorage.getItem("lang")));
 
   if (!isAuthenticated && !Object.keys(userData).length) {
     return (
-      <div className="flex h-[80px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#000000e1] border-[#ffffff] border-b-2 border-solid">
+      <div className="flex h-[70px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#000000d2] backdrop-blur-sm border-[#ffffff] border-b-2 border-solid">
         <div className="flex ml-2 items-center gap-10 justify-around">
           <Link to="/" className="h-full flex justify-center items-center">
             <img className="w-16" src="img\logo4.png" alt="Logo" />

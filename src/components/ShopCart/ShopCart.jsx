@@ -15,6 +15,7 @@ import {
 } from "../../redux/action/actions";
 import { FaCartShopping } from "react-icons/fa6";
 import { CiReceipt } from "react-icons/ci";
+import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 const URL = import.meta.env.VITE_URL_HOST;
 
@@ -32,7 +33,7 @@ const ShopCart = () => {
   const [userData, setUserData] = useState(
     JSON.parse(localStorage.getItem("userData"))
   );
-  console.log(currentCart.courses);
+  console.log(currentCart);
   const [isInCart, setIsInCart] = useState(false);
   const { t , i18n} = useTranslation()
 
@@ -86,43 +87,36 @@ const ShopCart = () => {
   const initCreatePreferenceCart = (p) => {
     dispatch(createPreference(p));
   };
-  const createPayment = () => {
+  const createPayment = async () => {
     try {
       const paymentId = location.search.split("&")[2].split("=")[1];
-      axios
-        .post(`${URL}/createPayment`, {
-          data: paymentId,
-        })
-        .then(function (response) {
-          // Manejar la respuesta del servidor
-          if (response.status === 200) {
-            // Mostrar alerta de éxito
-            Swal.fire({
-              icon: "success",
-              title: t("PAGO CONFIRMADO"),
-              text: t("EL PAGO SE HA CONFIRMADO CORRECTAMENTE."),
-            });
-          } else {
-            // Mostrar alerta de error
-            Swal.fire({
-              icon: "error",
-              title: t("ERROR AL CONFIRMAR EL PAGO"),
-              text: t("HUBO UN PROBLEMA AL PROCESAR EL PAGO."),
-            });
-          }
-        })
-        .catch(function (error) {
-          // Manejar errores de conexión u otros errores inesperados
-          console.error("Error al realizar la solicitud:", error);
-          // Mostrar alerta de error genérico
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: t("HUBO UN PROBLEMA AL REALIZAR LA SOLICITUD"),
-          });
+      const res = await axios.post(`${URL}/createPayment`, {
+        data: paymentId,
+      });
+      // Manejar la respuesta del servidor
+      if (res.status === 200) {
+        // Mostrar alerta de éxito
+        Swal.fire({
+          icon: "success",
+          title: t("PAGO CONFIRMADO"),
+          text: t("EL PAGO SE HA CONFIRMADO CORRECTAMENTE."),
         });
+      } else {
+        // Mostrar alerta de error
+        Swal.fire({
+          icon: "error",
+          title: t("ERROR AL CONFIRMAR EL PAGO"),
+          text: t("HUBO UN PROBLEMA AL PROCESAR EL PAGO."),
+        });
+      }
     } catch (error) {
-      console.log(error.message);
+      console.error("Error al realizar la solicitud:", error);
+      // Mostrar alerta de error genérico
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: t("HUBO UN PROBLEMA AL REALIZAR LA SOLICITUD"),
+      });
     }
   };
 
@@ -327,7 +321,7 @@ const ShopCart = () => {
                     onClick={() =>
                       initCreatePreferenceCart({
                         price: total,
-                        coursesCart: cartCourse,
+                        cart_id: currentCart._id,
                       })
                     }
                   >
