@@ -20,14 +20,12 @@ export default function UserPromoCard({
 }) 
 
 {
-
+  const { t , i18n} = useTranslation()
   const navigate = useNavigate()
 
   const handleNavigate = () => {
-
    navigate(`/detail/${id}`)}
 
-   const { t , i18n} = useTranslation()
 
 
   return (

@@ -13,12 +13,13 @@ export default function UserCourseCard({
 }) {
 
   const navigate = useNavigate()
-
+  const { t , i18n} = useTranslation()
+  
   const handleNavigate = () => {
 
    navigate(`/detail/${id}`)}
 
-  const { t , i18n} = useTranslation()
+ 
 
   return (
     <div className="w-[98%] h-[330px] bg-white flex items-center justify-center " onClick={handleNavigate}>

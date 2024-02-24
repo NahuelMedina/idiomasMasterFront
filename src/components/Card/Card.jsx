@@ -240,7 +240,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
             </h1>
             <TbListDetails className=" text-[35px] cursor:pointer " />
           </Link>
-          <div className="w-full h-full px-[15px] flex items-center text-white justify-center items-center bg-sky-700 hover:bg-red-500 cursor:pointer">
+          <div className="w-full h-full px-[15px] flex items-center text-white justify-center bg-sky-700 hover:bg-red-500 cursor:pointer">
             {isCart ? (
               <div className="flex cursor:pointer items-center justify-center">
                 <h1

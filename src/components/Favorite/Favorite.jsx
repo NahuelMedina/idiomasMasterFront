@@ -117,13 +117,13 @@ const Favorite = () => {
                 )}
               </div>
               <div className="w-[50%] h-full flex flex-row items-center justify-evenly">
-                <div className="bg-sky-700 h-[50px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium hover:bg-yellow-500 hover:text-black font-medium cursor:pointer">
+                <div className="bg-sky-700 h-[50px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg\ hover:bg-yellow-500 hover:text-black font-medium cursor:pointer">
                   <Link to="/home">
                     <button>Ver mas cursos</button>
                   </Link>
                 </div>
                 {favCourse && favCourse.length > 0 ? (
-                  <div className="bg-sky-700 h-[50px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium hover:bg-yellow-500 hover:text-black font-medium cursor:pointer">
+                  <div className="bg-sky-700 h-[50px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg\ hover:bg-yellow-500 hover:text-black font-medium cursor:pointer">
                     <button onClick={handleEliminate}>Eliminar Todos</button>
                   </div>
                 ) : (

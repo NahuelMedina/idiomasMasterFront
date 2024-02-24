@@ -144,7 +144,8 @@ const ReviewComponent = () => {
       <br />
       <div className="bg-[#1E68AD] p-2 flex items-start">
         <h2 className="text-2xl text-white">
-          {t("COMENTARIOS DEL CURSO) <b style={{ fontSize: "22px", fontWeight: "100" }}>↓</b>
+          {t("COMENTARIOS DEL CURSO")}
+          <b style={{ fontSize: "22px", fontWeight: "100" }}>↓</b>
         </h2>
       </div>
       <div>
