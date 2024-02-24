@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import registerValidate from "../Utils/registerValidate";
+import registerValidateEng from "../Utils/registerValidateEng";
 import { useDispatch, useSelector } from "react-redux";
 import { postUser } from "../../redux/action/actions";
 import Swal from "sweetalert2";
@@ -10,6 +11,8 @@ import { FaUser } from "react-icons/fa";
 import { FaUserTag } from "react-icons/fa";
 import { FaUserClock } from "react-icons/fa6";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { useTranslation } from "react-i18next";
+
 
 const Register = () => {
   const navigate = useNavigate();
@@ -18,7 +21,12 @@ const Register = () => {
   const postStatusFail = useSelector((state) => state.postStatusFail);
   const postError = useSelector((state) => state.postError);
   const [status, setStatus] = useState(postStatus);
+  const [lang , setLang] = useState('')
+  const { t , i18n} = useTranslation()
 
+useEffect(()=>{
+  setLang(localStorage.getItem("lang"))
+},[])
   const [state, setState] = useState({
     name: "",
     lastname: "",
@@ -36,23 +44,30 @@ const Register = () => {
     age: "",
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setErrors(
+  setLang(localStorage.getItem("lang"))
+    if(lang === "en"){
+      setErrors(registerValidateEng({
+        ...state,
+        [name]: value
+      }));
+    }
+    if(lang === "es"){
+      setErrors(
       registerValidate({
         ...state,
         [name]: value,
       })
     );
-
+    }
+    
     setState({
       ...state,
-      [name]: value,
+      [name]: value
     });
   };
-
-  console.log(errors);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -68,37 +83,36 @@ const Register = () => {
     }
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postUser(state));
     if (postError === null) {
       Swal.fire({
-        icon: "success",
-        title: "¡Usuario Creado Correctamente!",
+        icon: 'success',
+        title: t("USUARIO_CREADO"),
         showConfirmButton: false,
-        timer: 2300, // La alerta se cerrará automáticamente después de 1.5 segundos
+        timer: 2300 
       });
-      setStatus(false);
-      navigate("/login");
+      setStatus(false)
+      navigate("/login")
     } else {
       Swal.fire({
-        icon: "error",
-        title: "Error al Crear Usuario",
-        text: `${postError}`, // Puedes mostrar el mensaje de error específico si lo proporciona la función de registro
+        icon: 'error',
+        title: t("ERROR_AL_CREAR_USUARIO"),
+        text: `${postError}` // Puedes mostrar el mensaje de error específico si lo proporciona la función de registro
       });
     }
   };
 
   const buttonDisabled = () => {
     let btn = true;
-    if (Object.keys(errors).length === 0) {
-      btn = false;
+    if(Object.values(state).some(value => value.trim() === '')) btn = true
+    else{
+      btn = false
     }
     return btn;
-  };
-  console.log(errors);
-  console.log(buttonDisabled());
-
+}
   return (
     <div className="w-full h-[90vh] mt-[80px] grid grid-cols-2">
       <div className="w-full h-full flex relative">
@@ -112,7 +126,7 @@ const Register = () => {
       <div className="w-full h-full flex items-center justify-center bg-white">
         <div className="bg-gradient-to-r from-sky-600 to-sky-600 w-[80%] h-[95%] rounded-[20px] flex flex-col items-center shadow-lg shadow-black/50 animate-fade-left animate-ease-in-out">
           <div className=" w-[70%] h-[10%] flex items-center justify-center border-b-[1px] border-b-yellow-400">
-            <h1 className="text-[40px] text-yellow-400">Registro de Usuario</h1>
+            <h1 className="text-[40px] text-yellow-400">{t("REGISTRO_DE_USUARIO")}</h1>
           </div>
           <form
             onSubmit={handleSubmit}
@@ -129,9 +143,10 @@ const Register = () => {
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="name"
-                    placeholder="Ingresa tu Nombre"
+                    placeholder= {t("NOMBRE")}
                     id="name"
                     type="text"
+                    value={state.name}
                   />
                 </div>
               </div>
@@ -158,9 +173,10 @@ const Register = () => {
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="lastname"
-                    placeholder="Ingresa tu Apellido"
+                    placeholder= {t("APELLIDO")}
                     id="lastname"
                     type="text"
+                    value={state.lastname}
                   />
                 </div>
               </div>
@@ -186,10 +202,11 @@ const Register = () => {
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder="Ingresa tu Edad"
+                    placeholder={t("EDAD")}
                     name="age"
                     id="age"
                     type="number"
+                    value={state.age}
                   />
                 </div>
               </div>
@@ -216,9 +233,10 @@ const Register = () => {
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="email"
-                    placeholder="Ingresa tu Email"
+                    placeholder= {t("EMAIL")}
                     id="email"
                     type="email"
+                    value={state.email}
                   />
                 </div>
               </div>
@@ -244,10 +262,11 @@ const Register = () => {
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder="Ingresa tu Contraseña"
+                    placeholder={t("CONTRASEÑA")}
                     name="password"
                     id="password"
                     type="password"
+                    value={state.password}
                   />
                 </div>
               </div>
@@ -269,18 +288,18 @@ const Register = () => {
                   disabled={buttonDisabled()}
                   className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded disabled:opacity-30 disabled:cursor-not-allowed"
                   type="submit"
-                  value="Registrarse"
+                  value={t("REGISTRARSE")}
                 />
               </div>
               <div className="w-full h-full flex items-center justify-center">
                 <ul>
-                  <li className="text-white">
-                    ¿Ya tienes una cuenta?{" "}
+                  <li className="flex m-2">
+                    <h1>{t("YA_TIENES_CUENTA")}</h1>
                     <Link
-                      className="text-yellow-400 font-bold text-xl hover:text-yellow-600	"
+                      className="text-yellow-400 ml-2 font-bold text-l hover:text-yellow-600	"
                       to="/login"
                     >
-                      Iniciar Sesión
+                      <h1>{t("INICIAR_SESION")}</h1>
                     </Link>
                   </li>
                 </ul>

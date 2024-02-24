@@ -30,6 +30,8 @@ import {
 } from "./actiontypes";
 import axios from "axios";
 
+
+
 const URL = import.meta.env.VITE_URL_HOST;
 
 export const getAllCourses = () => async (dispatch) => {
@@ -80,17 +82,15 @@ export function search(value) {
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`${URL}/getCourse/name?name=${value}`);
-      console.log(data);
+      
       if (Array.isArray(data)) {
         dispatch({
           type: SEARCH,
           payload: [data, value],
         });
-      } else {
-        alert("No se encontraron resultados");
-      }
+      } 
     } catch (error) {
-      alert(error);
+      console.log(error)
     }
   };
 }
@@ -120,7 +120,7 @@ export const postCourseData = (courseData) => async (dispatch) => {
 export const postUser = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/createUser`, userData);
-    alert("Usuario creado con Exito", response.data);
+    // alert("Usuario creado con Exito", response.data);
   } catch (error) {
     const message = error.response.data;
     alert(`${message}`);
