@@ -11,6 +11,10 @@ import ReviewComponent from "../Detail_reviews/Detail_reviews";
 import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
+import DetailReviews from "./detailReviews";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage"
+
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 import Swal from "sweetalert2";
@@ -33,9 +37,9 @@ export const Detail = () => {
     JSON.parse(window.localStorage.getItem("fav"))
   );
   const { isAuthenticated } = useAuth0();
-  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
-  const [reviews, setReviews] = useState(false)
-  const { t , i18n} = useTranslation()
+    const [userData] = useLocalStorage("userData", {});
+  //const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData'))
+  const [reviews, setReviews] = useState(false);  const { t , i18n} = useTranslation()
 
 
 
@@ -108,6 +112,15 @@ export const Detail = () => {
   }, []);
 
   const initCreatePreference = (p) => {
+
+    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
+      Swal.fire({
+        icon: "info",
+        title: "Necesitas registrarte para realizar la Compra!",
+        footer: '<a href="/register">Registrarse</a>',
+      });
+      return;
+    }
     dispatch(createPreference(p));
   };
 
@@ -143,14 +156,13 @@ export const Detail = () => {
 
   const handleReviews = () => {
 
-    if(reviews){
+    if (reviews) {
 
       setReviews(false)
     } else {
-
-      setReviews(true)
+      setReviews(true);
     }
-  }
+  };
 
   return (
     <div className="h-[90vh] mt-[10vh] w-full flex flex-col pt-[30px] items-center ">
@@ -160,10 +172,10 @@ export const Detail = () => {
           {t(`LANGUAGE_${detail?.language?.toUpperCase()}`)}
           </p>
           <img
-              src={`/img/${detail.language}.png`}
-              alt={detail.lenguage}
-              className="h-[60px] w-[60px] m-[25px] "
-            />
+            src={`/img/${detail.language}.png`}
+            alt={detail.lenguage}
+            className="h-[60px] w-[60px] m-[25px] "
+          />
         </div>
         <div className="w-full h-[10%] bg-yellow-400 flex justify-center items-center">
           <p className="text-black text-[25px] font-normal text-start">
@@ -202,16 +214,16 @@ export const Detail = () => {
               <p className="ml-[30px] ">{t("FINALIZA EL DIA")}{fechaFinal}</p>
             </div>
             <div className="w-[100px] h-[100px] flex items-center justify-center absolute right-[1px]">
-          {isFav ? (
-            <button onClick={handleFavorite} className=" text-5xl ">
-              ❤️
-            </button>
-          ) : (
-            <button onClick={handleFavorite} className=" text-5xl ">
-              🤍
-            </button>
-          )}
-        </div>
+              {isFav ? (
+                <button onClick={handleFavorite} className=" text-5xl ">
+                  ❤️
+                </button>
+              ) : (
+                <button onClick={handleFavorite} className=" text-5xl ">
+                  🤍
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <div className="w-full h-[17%] bg-[#1d67ad] flex items-center justify-center">
@@ -246,7 +258,6 @@ export const Detail = () => {
             </div>
           )}
         </div>
-        
       </div>
       <div className="w-full min-h-[15%] flex items-center justify-center ">
       <button
@@ -260,14 +271,10 @@ export const Detail = () => {
 </button>
       </div>
       <div className="w-[80%] h-auto flex items-center justify-center ">
-        {reviews?
-      (<DetailReviews/>)
-      :(null)  
-      }
+        {reviews ? <DetailReviews /> : <ReviewComponent />}
       </div>
       <hr />
       <br />
-        <ReviewComponent/>
     </div>
   );
 };

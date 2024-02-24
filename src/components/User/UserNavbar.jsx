@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState }, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IoLogIn } from "react-icons/io5";
 import { FaDiscourse } from "react-icons/fa";
@@ -15,6 +15,7 @@ export default function UserNavbar() {
   const location = useLocation();
   const [userData] = useLocalStorage("userData", {});
   const { t , i18n} = useTranslation()
+  
   const defaultAvatarUrl =
     "https://www.pngitem.com/pimgs/m/508-5087236_tab-profile-f-user-icon-white-fill-hd.png";
   const [lang, setLang] =useLocalStorage("lang", "")
@@ -31,6 +32,7 @@ useEffect(() => {
     i18n.changeLanguage(storedLang);
   } 
 }, [i18n]); 
+
 
 
   return (

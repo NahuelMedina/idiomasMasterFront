@@ -15,7 +15,7 @@ export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.userData);
-  const { t , i18n} = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
@@ -37,7 +37,8 @@ export const Login = () => {
       }
     }
   };
-  console.log(userData);
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -46,7 +47,7 @@ export const Login = () => {
         email: userData.email,
         password: userData.password,
       });
-      console.log("Response from server:", response.data);
+      console.log("Response from server:", response);
 
       if (response.status === 200) {
         const updatedUserData = {
@@ -58,13 +59,33 @@ export const Login = () => {
         dispatch(setUserdata(updatedUserData));
         Swal.fire({
           icon: 'success',
-          title: t("LOGUEADO"), 
+          title: t("LOGUEADO"),
           showConfirmButton: false,
           timer: 2200,
         });
+      }else{
+
+        console.log(response.response.status)
+
+        if(response.response.status === 405){
+
+          Swal.fire({
+            icon: 'error',
+            title: t("Usuario Desactivado"),
+            text: t(`El usuario se encuentra desactivado`)
+          })
+        } else{
+
+          Swal.fire({
+            icon: 'error',
+            title: t("ERROR_AL_INGRESAR"),
+            text: t("ERROR_AL_INICIAR_SESION")
+          })
+        }
+        
       }
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
+   
       Swal.fire({
         icon: 'error',
         title: t("ERROR_AL_INGRESAR"),
@@ -165,7 +186,7 @@ export const Login = () => {
           <div className=" w-[70%] h-[5%] flex items-center flex-col ">
             <ul>
               <li className="text-white flex" >
-              <h1>{t("NO_TIENES_CUENTA")}</h1>
+                <h1>{t("NO_TIENES_CUENTA")}</h1>
                 <Link
                   className="text-yellow-400 ml-2 font-bold text-l hover:text-yellow-600	"
                   to="/register"
