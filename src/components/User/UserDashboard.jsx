@@ -37,8 +37,8 @@ export default function UserDashboard({ userInfo }) {
   }, [userInfo]);
 
   return (
-    <div className="w-full h-full px-[40px] flex flex-row">
-      <div className="h-full w-[40%] flex flex-col items-center justify-center">
+    <div className="w-[90%] h-full px-[40px] flex flex-row border-[1px] border-gray-100 my-[20px] rounded-[10px] shadow-lg shadow-black/10 bg-gradient-to-r from-gray-200 via-white to-gray-200">
+      <div className="h-full w-[50%] flex flex-col items-center justify-center">
         <div className="w-full h-[15%] flex items-center justify-center">
           <h1 className="text-[40px] text-black">
             {`Hola, ${userData.name} ${userData.lastname} 👋!`}
@@ -58,7 +58,7 @@ export default function UserDashboard({ userInfo }) {
         </div>
         {userInfo && userInfo.length > 0 ? (
           <>
-            <div className="w-full h-[400px] grid grid-rows-6 gap-[6px] p-[10px] rounded-[10px] border-gray-200 shadow-md shadow-black/10 bg-gradient-to-r from-sky-400 to-sky-600">
+            <div className="w-full h-[370px] grid grid-rows-6 gap-[6px] p-[10px] rounded-[10px] border-gray-200 shadow-md shadow-black/10 bg-gradient-to-r from-yellow-400 to-orange-400">
               {Object.entries(idiomas).map(([idioma, nivel], index) => (
                 <UserDashboardCard
                   key={index}
@@ -71,10 +71,10 @@ export default function UserDashboard({ userInfo }) {
           </>
         ) : (
           <>
-          <div className="w-full h-[400px] flex flex-col items-center justify-evenly p-[10px] rounded-[10px] border-gray-200 shadow-md shadow-black/10 bg-gradient-to-r from-sky-400 to-sky-600">
-          <FaMagnifyingGlassPlus className="text-[90px]" />
-            <h1 className="text-[50px]"> Aun No tienes Cursos</h1>
-            <h1 className="text-[50px]">Explora nuestros Cursos</h1>
+          <div className="w-full h-[400px] flex flex-col items-center justify-evenly p-[10px] rounded-[10px] border-gray-200 shadow-md shadow-black/10 bg-gradient-to-r from-yellow-400 to-orange-400">
+          <FaMagnifyingGlassPlus className="text-[90px] text-black" />
+            <h1 className="text-[50px] text-black"> Aun No tienes Cursos</h1>
+            <h1 className="text-[50px] text-black">Explora nuestros Cursos</h1>
 
           </div>
           </>

@@ -1,7 +1,52 @@
+import Slider from "react-slick";
+import AboutCard from "./AboutCard";
+
 export const About = () => {
+
+  const settings = {
+    dots: true,
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "80px",
+    slidesToShow: 3,
+    speed: 500
+  };
+
+  const userinfo = [{name:"Antonio"}, {name:"Antonio"}, {name:"Antonio"}, {name:"Antonio"}, {name:"Antonio"}, {name:"Antonio"}]
+
+
   return (
-    <div className="w-screen h-screen mt-[80px] flex animate-fade animate-once animate-ease-in">
-      <div className="w-3/5	">
+    <div className="w-full h-[110vh] mt-[80px] flex flex-col items-center justify-center">
+      <div className="w-full h-[40%] flex  flex-col items-center justify-center">
+        <div className="w-full h-[40%] flex justify-center">
+        <h1 className="text-[60px] font-bold bg-gradient-to-r from-blue-700 to-pink-600 text-transparent bg-clip-text">Nuestro Proyecto</h1>
+        </div>
+        <div className="w-[70%] h-[70%] flex items-center justify-center ">
+          <h1 className="text-[20px]">
+            El interés de la población hispana por el crecimiento personal
+            continuo y por su formación profesional crea la necesidad de nuevos
+            aprendizajes que les permitan conectarse con el mundo. Por ello,
+            seis estudiantes de SOY HENRY crearon en su proyecto final una
+            plataforma donde se ofrecen diversos cursos de idiomas que se
+            acomodan a las necesidades e intereses de sus usuarios.
+          </h1>
+        </div>
+      </div>
+      <div className="w-[1300px] h-[1000px] flex flex-col">
+      <div className="w-full h-[150px] flex items-center justify-center">
+        <h1 className="text-[60px] font-bold bg-gradient-to-r from-red-500 to-amber-500 text-transparent bg-clip-text">Nuestro Equipo</h1>
+        </div>
+      <Slider {...settings}>
+      {userinfo.map((element) => (
+                  <AboutCard
+                   
+                  />
+                ))} 
+      </Slider>
+      </div>
+
+      {/* <div className="w-3/5	">
         <img
           className="w-full h-full object-cover"
           src="img\image-about.jpg"
@@ -39,7 +84,7 @@ export const About = () => {
             </div>
           </p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
