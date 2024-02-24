@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { SearchBar } from "../SearchBar/SearchBar";
-import { userCourses } from "./userData";
+import { userCourses } from "../Admin/userData";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import UserCourseCard from "./UserCourseCard";
@@ -8,12 +8,15 @@ import React from "react";
 import Slider from "react-slick";
 import { productData } from "../Admin/userData";
 import UserPromoCard from "./UserPromoCard";
+import UserDashboard from "./UserDashboard";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 
 export default function UserLanding() {
-  const [userData, setUserData] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
   const [beginnerData, setBeginnerData] = useState([]);
   const [popularData, setPopularData] = useState([]);
   const [weekendData, setWeekendData] = useState([]);
+  const [userData, setUserData] = useLocalStorage("userData", {});
 
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -72,10 +75,11 @@ export default function UserLanding() {
   useEffect(() => {
     const userFetch = async () => {
       try {
-        const response = await userCourses();
+        const response = await userCourses(userData._id);
+        console.log(response)
 
         if (response) {
-          setUserData(response);
+          setUserInfo(response.data);
         }
       } catch (error) {
         return error.message;
@@ -116,142 +120,117 @@ export default function UserLanding() {
   };
 
   return (
-    <div className=" w-full h-full mt-[80px] bg-white text-white">
+    <div className="w-full h-full mt-[80px] bg-white text-white">
       <div className="flex justify-end items-center w-full h-[80px] bg-[#1E68AD]">
         <div className="mr-10">
           <SearchBar></SearchBar>
         </div>
       </div>
-      <div
-        id="landing_descripton"
-        className="w-full h-[420px] relative flex flex-col items-center justify-evenly bg-white"
-      >
-        <div className="w-[90%] h-[50px">
-          <h1 className="text-black text-[30px] border-b-[1px] border-black">
-            Mis Cursos
-          </h1>
-        </div>
-        <div className="w-[90%] h-[90%] bg-white">
-          <Slider
-            {...settings}
-            className="w-[full] h-[90%] flex items-center justify-center bg-white"
-          >
-            {userData &&
-              userData.length > 0 &&
-              userData.map((element) => (
-                <UserCourseCard
-                  key={element._id}
-                  id={element._id}
-                  language={element.language}
-                  level={element.level}
-                  schedule={element.schedule}
-                  start_time={element.start_time}
-                  duration={element.duration}
-                />
-              ))}
-          </Slider>
-        </div>
+      <div id="landing_descripton" className="w-full h-[500px] relative flex flex-col items-center justify-evenly bg-white">
+        <UserDashboard userInfo={userInfo}/>
       </div>
-
-      <div
-        id="landing_descripton"
-        className="w-full h-[620px] relative flex flex-col items-center justify-evenly bg-white"
-      >
+     
+        {userInfo && userInfo.length > 0 && (
+          <>
+           <div id="landing_descripton" className="w-full h-[420px] relative flex flex-col items-center justify-evenly bg-white">
+            <div className="w-[90%] h-[50px]">
+              <h1 className="text-black text-[30px] border-b-[1px] border-black">
+                Mis Cursos
+              </h1>
+            </div>
+            <div className="w-[90%] h-[90%] bg-white">
+              <Slider {...settings} className="w-[full] h-[90%] flex items-center justify-center bg-white">
+                {userInfo.map((element) => (
+                  <UserCourseCard
+                    key={element._id}
+                    id={element._id}
+                    language={element.language}
+                    level={element.level}
+                    schedule={element.schedule}
+                    start_time={element.start_time}
+                    duration={element.duration}
+                  />
+                ))}
+              </Slider>
+            </div>
+            </div>
+          </>
+        )}
+      
+      <div id="landing_descripton" className="w-full h-[620px] relative flex flex-col items-center justify-evenly bg-white">
         <div className="w-[90%] h-[50px]">
           <h1 className="text-black text-[30px] border-b-[1px] border-black">
             Mas Populares
           </h1>
         </div>
         <div className="w-[90%] h-[90%] bg-white">
-          <Slider
-            {...settings}
-            className="w-full h-[90%] flex items-center justify-center"
-          >
-            {popularData &&
-              popularData.length > 0 &&
-              popularData.map((element) => (
-                <UserPromoCard
-                  key={element._id}
-                  id={element._id}
-                  language={element.language}
-                  level={element.level}
-                  schedule={element.schedule}
-                  start_time={element.start_time}
-                  duration={element.duration}
-                  image={element.image}
-                  name={"Popular"}
-                />
-              ))}
+          <Slider {...settings} className="w-full h-[90%] flex items-center justify-center">
+            {popularData && popularData.length > 0 && popularData.map((element) => (
+              <UserPromoCard
+                key={element._id}
+                id={element._id}
+                language={element.language}
+                level={element.level}
+                schedule={element.schedule}
+                start_time={element.start_time}
+                duration={element.duration}
+                image={element.image}
+                name={"Popular"}
+              />
+            ))}
           </Slider>
         </div>
       </div>
-
-      <div
-        id="landing_descripton"
-        className="w-full h-[620px] relative flex flex-col items-center justify-evenly bg-white"
-      >
+      <div id="landing_descripton" className="w-full h-[620px] relative flex flex-col items-center justify-evenly bg-white">
         <div className="w-[90%] h-[50px]">
           <h1 className="text-black text-[30px] border-b-[1px] border-black">
             Comienza hoy una nueva Aventura
           </h1>
         </div>
         <div className="w-[90%] h-[90%] bg-white">
-          <Slider
-            {...settings}
-            className="w-full h-[90%] flex items-center justify-center"
-          >
-            {beginnerData &&
-              beginnerData.length > 0 &&
-              beginnerData.map((element) => (
-                <UserPromoCard
-                  key={element._id}
-                  id={element._id}
-                  language={element.language}
-                  level={element.level}
-                  schedule={element.schedule}
-                  start_time={element.start_time}
-                  duration={element.duration}
-                  image={element.image}
-                  name={"Begginer"}
-                />
-              ))}
+          <Slider {...settings} className="w-full h-[90%] flex items-center justify-center">
+            {beginnerData && beginnerData.length > 0 && beginnerData.map((element) => (
+              <UserPromoCard
+                key={element._id}
+                id={element._id}
+                language={element.language}
+                level={element.level}
+                schedule={element.schedule}
+                start_time={element.start_time}
+                duration={element.duration}
+                image={element.image}
+                name={"Begginer"}
+              />
+            ))}
           </Slider>
         </div>
       </div>
-
-      <div
-        id="landing_descripton"
-        className="w-full h-[620px] relative flex flex-col items-center justify-evenly bg-white"
-      >
+      <div id="landing_descripton" className="w-full h-[620px] relative flex flex-col items-center justify-evenly bg-white">
         <div className="w-[90%] h-[50px]">
           <h1 className="text-black text-[30px] border-b-[1px] border-black">
             Cursos de Fin de Semana
           </h1>
         </div>
         <div className="w-[90%] h-[90%] bg-white">
-          <Slider
-            {...settings}
-            className="w-full h-[90%] flex items-center justify-center"
-          >
-            {weekendData &&
-              weekendData.length > 0 &&
-              weekendData.map((element) => (
-                <UserPromoCard
-                  key={element._id}
-                  id={element._id}
-                  language={element.language}
-                  level={element.level}
-                  schedule={element.schedule}
-                  start_time={element.start_time}
-                  duration={element.duration}
-                  image={element.image}
-                  rank={element.rank}
-                  name={"Weekend"}
-                />
-              ))}
+          <Slider {...settings} className="w-full h-[90%] flex items-center justify-center">
+            {weekendData && weekendData.length > 0 && weekendData.map((element) => (
+              <UserPromoCard
+                key={element._id}
+                id={element._id}
+                language={element.language}
+                level={element.level}
+                schedule={element.schedule}
+                start_time={element.start_time}
+                duration={element.duration}
+                image={element.image}
+                rank={element.rank}
+                name={"Weekend"}
+              />
+            ))}
           </Slider>
         </div>
       </div>
     </div>
   );
+  
 }

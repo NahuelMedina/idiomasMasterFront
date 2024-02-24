@@ -20,6 +20,7 @@ export const SearchHome = () => {
   // const searchLanguage = useSelector(state => state.courseLanguage);
 
   const { t, i18n } = useTranslation()
+
   const searchName = useSelector(state => state.coursesName)
   const searchLanguage = useSelector(state => state.courseLanguage)
 

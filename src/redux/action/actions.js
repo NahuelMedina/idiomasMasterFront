@@ -85,7 +85,6 @@ export function search(value) {
           payload: [data, value],
         });
       } 
-
     } catch (error) {
       console.log(error)
     }

@@ -37,7 +37,8 @@ export const Login = () => {
       }
     }
   };
-  console.log(userData);
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -46,7 +47,7 @@ export const Login = () => {
         email: userData.email,
         password: userData.password,
       });
-      console.log("Response from server:", response.data);
+      console.log("Response from server:", response);
 
       if (response.status === 200) {
         const updatedUserData = {
@@ -62,9 +63,29 @@ export const Login = () => {
           showConfirmButton: false,
           timer: 2200,
         });
+      }else{
+
+        console.log(response.response.status)
+
+        if(response.response.status === 405){
+
+          Swal.fire({
+            icon: 'error',
+            title: t("Usuario Desactivado"),
+            text: t(`El usuario se encuentra desactivado`)
+          })
+        } else{
+
+          Swal.fire({
+            icon: 'error',
+            title: t("ERROR_AL_INGRESAR"),
+            text: t("ERROR_AL_INICIAR_SESION")
+          })
+        }
+        
       }
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
+   
       Swal.fire({
         icon: 'error',
         title: t("ERROR_AL_INGRESAR"),
