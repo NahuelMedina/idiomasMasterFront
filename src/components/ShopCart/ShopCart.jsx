@@ -15,6 +15,7 @@ import {
 } from "../../redux/action/actions";
 import { FaCartShopping } from "react-icons/fa6";
 import { CiReceipt } from "react-icons/ci";
+import Swal from "sweetalert2";
 
 const URL = import.meta.env.VITE_URL_HOST;
 const ShopCart = () => {
@@ -31,7 +32,7 @@ const ShopCart = () => {
   const [userData, setUserData] = useState(
     JSON.parse(localStorage.getItem("userData"))
   );
-  console.log(currentCart.courses);
+  console.log(currentCart);
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
@@ -83,43 +84,36 @@ const ShopCart = () => {
   const initCreatePreferenceCart = (p) => {
     dispatch(createPreference(p));
   };
-  const createPayment = () => {
+  const createPayment = async () => {
     try {
       const paymentId = location.search.split("&")[2].split("=")[1];
-      axios
-        .post(`${URL}/createPayment`, {
-          data: paymentId,
-        })
-        .then(function (response) {
-          // Manejar la respuesta del servidor
-          if (response.status === 200) {
-            // Mostrar alerta de éxito
-            Swal.fire({
-              icon: "success",
-              title: "Pago confirmado",
-              text: "El pago se ha confirmado correctamente.",
-            });
-          } else {
-            // Mostrar alerta de error
-            Swal.fire({
-              icon: "error",
-              title: "Error al confirmar el pago",
-              text: "Hubo un problema al procesar el pago. Por favor, inténtalo de nuevo más tarde.",
-            });
-          }
-        })
-        .catch(function (error) {
-          // Manejar errores de conexión u otros errores inesperados
-          console.error("Error al realizar la solicitud:", error);
-          // Mostrar alerta de error genérico
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "Hubo un problema al realizar la solicitud. Por favor, inténtalo de nuevo más tarde.",
-          });
+      const res = await axios.post(`${URL}/createPayment`, {
+        data: paymentId,
+      });
+      // Manejar la respuesta del servidor
+      if (res.status === 200) {
+        // Mostrar alerta de éxito
+        Swal.fire({
+          icon: "success",
+          title: "Pago confirmado",
+          text: "El pago se ha confirmado correctamente.",
         });
+      } else {
+        // Mostrar alerta de error
+        Swal.fire({
+          icon: "error",
+          title: "Error al confirmar el pago",
+          text: "Hubo un problema al procesar el pago. Por favor, inténtalo de nuevo más tarde.",
+        });
+      }
     } catch (error) {
-      console.log(error.message);
+      console.error("Error al realizar la solicitud:", error);
+      // Mostrar alerta de error genérico
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un problema al realizar la solicitud. Por favor, inténtalo de nuevo más tarde.",
+      });
     }
   };
 
@@ -324,7 +318,7 @@ const ShopCart = () => {
                     onClick={() =>
                       initCreatePreferenceCart({
                         price: total,
-                        coursesCart: cartCourse,
+                        cart_id: currentCart._id,
                       })
                     }
                   >
