@@ -9,75 +9,86 @@ import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { getGoogleUser } from "../Admin/userData";
 import { useTranslation } from "react-i18next";
 
+import { useTypewriter } from "react-simple-typewriter";
 
 export const Landing = () => {
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState(1);
   const { isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
-  const { t , i18n} = useTranslation()
+  const { t, i18n } = useTranslation();
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
     email: "",
     password: "",
   });
-const card_landing_data = [
-  {
-    img: "/img/landing_card01.png",
-    title: t("PRESENCIAL_O_EN_LINEA"),
-    description: t("APRENDE_EN_TIEMPO_REAL")
-  },
-  {
-    img: "/img/landing_card02.png",
-    title: t("GRUPAL_O_CLASES_PRIVADAS"),
-    description:t("CURSOS_DISEÑADOS")
-  },
-  {
-    img: "/img/landing_card03.png",
-    title: t("DE_PRINCIPIANTE_A_AVANZADO"),
-    description: t("CURSOS_DISEÑADOS")
-  },
-];
-const card_landing_reviews = [
-  {
+  const card_landing_data = [
+    {
+      img: "/img/landing_card01.png",
+      title: t("PRESENCIAL_O_EN_LINEA"),
+      description: t("APRENDE_EN_TIEMPO_REAL"),
+    },
+    {
+      img: "/img/landing_card02.png",
+      title: t("GRUPAL_O_CLASES_PRIVADAS"),
+      description: t("CURSOS_DISEÑADOS"),
+    },
+    {
+      img: "/img/landing_card03.png",
+      title: t("DE_PRINCIPIANTE_A_AVANZADO"),
+      description: t("CURSOS_DISEÑADOS"),
+    },
+  ];
+  const card_landing_reviews = [
+    {
       img: "/img/student_02.png",
       review: t("INCREIBLE_EXPERIENCIA"),
-      name:"Alejandra, Ramirez",
-      location: "Bogota, Colombia"
+      name: "Alejandra, Ramirez",
+      location: "Bogota, Colombia",
     },
     {
       img: "/img/student_03.png",
       review: t("TRANSFORMADOR"),
-      name:"Jorge, Calabria",
-      location: "Buenos Aires, Argentina"
+      name: "Jorge, Calabria",
+      location: "Buenos Aires, Argentina",
     },
-    
-];
-const landing_string = [
-  {
-    title: t("HACER_LO_IMPOSIBLE_ES"),
-    word: t("DIVERTIDO"),
-    color: "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-700 shadow-text"     
-  },
-  {
+  ];
+  const landing_string = [
+    {
+      title: t("HACER_LO_IMPOSIBLE_ES"),
+      word: t("DIVERTIDO"),
+      color:
+        "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-700 shadow-text",
+    },
+    {
       title: t("SUPERAR_DESAFIOS_ES"),
       word: t("EMOCIONANTE"),
-      color: "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-700"
-  },
-  {
+      color:
+        "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-700",
+    },
+    {
       title: t("BUSCAR_NUEVAS_OPORTUNIDADES_ES"),
       word: t("ENERGIZANTE"),
-      color: "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-green-700"
-  },
-  {
+      color:
+        "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-green-700",
+    },
+    {
       title: t("EXPLORAR_HORIANTES_ES"),
       word: t("INCREIBLE"),
-      color: "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-red-700"
-  },
-  {
+      color:
+        "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-red-700",
+    },
+    {
       title: t("DESAFIAR_LIMITES_ES"),
       word: t("INSPIRADOR"),
-      color: "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-orange-700"
-  },
-];
+      color:
+        "text-[120px] font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-orange-700",
+    },
+  ];
+
+  const [typeEffect] = useTypewriter({
+    words: [landing_string[num].word],
+    loop: {},
+  });
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -109,32 +120,30 @@ const landing_string = [
   }, [isAuthenticated, user, setUserDataLocally, dispatch]);
 
   useEffect(() => {
-    function set_landing() {
-      if (num < 4) {
-        setNum(num + 1);
-      } else if (num === 4) {
-        setNum(0);
-      }
+    if (typeEffect.length === 0 && num === 4) {
+      setNum(0);
     }
-
-    setTimeout(set_landing, 5000);
-  }, [num]);
+    if (typeEffect.length === 0 && num <= 3) {
+      setNum(num + 1);
+    }
+  }, [typeEffect]);
 
   return (
     <div className="w-full h-[150px] bg-black text-white">
       <div className="flex justify-end items-end w-full h-full bg-[#1E68AD]">
-        <div className="mr-5 mb-1">
+        <div className="mr-5 mb-3">
           <SearchBar></SearchBar>
         </div>
       </div>
 
-      <div className="flex flex-row justify-end items-center w-full h-[600px] relative bg-white">
-        <div className=" flex w-full h-full absolute   bg-gradient-to-r from-black via-white/10 to-white/0">
-          <div className="h-full items-center ml-[20px] justify-center flex flex-col">
-            <p className="text-[40px] text-white border-b-4 border-white">{`${landing_string[num].title}`}</p>
+      <div className="flex  col justify-end items-center w-full h-[600px] relative bg-white">
+        <div className=" flex w-full h-full absolute  bg-gradient-to-r from-black via-white/10 to-white/0 ">
+          <div className="h-full w-full items-start pl-[30px] justify-center flex flex-col">
+            <p className="text-[40px] text-white font-semibold border-b-4 border-white">{`${landing_string[num].title}`}</p>
             <p className={`${landing_string[num].color} `}>
-              {" "}
-              {`${landing_string[num].word}`}
+              <div className="h-[200px]">
+                <span className={landing_string[num].color}>{typeEffect}</span>
+              </div>
             </p>
           </div>
         </div>

@@ -13,7 +13,7 @@ import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import DetailReviews from "./detailReviews";
-import { useLocalStorage } from "../../CustomHook/UseLocalStorage"
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
@@ -33,7 +33,7 @@ export const Detail = () => {
     JSON.parse(window.localStorage.getItem("fav"))
   );
   const { isAuthenticated } = useAuth0();
-  
+
   const [userData] = useLocalStorage("userData", {});
   //const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData'))
 
@@ -99,16 +99,15 @@ export const Detail = () => {
   };
 
   //Mercado Pago
-  initMercadoPago(PUBLIC_KEY, {
-    locale: "es-MX",
-  });
+  // initMercadoPago(PUBLIC_KEY, {
+  //   locale: "es-MX",
+  // });
 
   useEffect((event) => {
     dispatch(getCoursesDetail(params.id));
   }, []);
 
   const initCreatePreference = (p) => {
-
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
@@ -151,10 +150,8 @@ export const Detail = () => {
   const fechaFinal = `${añoF}-${mesF}-${diaF}`;
 
   const handleReviews = () => {
-
     if (reviews) {
-
-      setReviews(false)
+      setReviews(false);
     } else {
       setReviews(true);
     }
@@ -162,7 +159,7 @@ export const Detail = () => {
 
   return (
     <div className="h-[90vh] mt-[10vh] w-full flex flex-col pt-[30px] items-center ">
-      <div className="flex flex-col min-h-[80%] w-[90%] bg-white border-[1px] border-gray-300 relative bg-white shadow-lg ">
+      <div className="flex flex-col min-h-[80%] w-[90%] bg-white border-[1px] border-gray-300 relative  shadow-lg ">
         <div className="w-full h-[17%] bg-[#1d67ad] flex items-center justify-center ">
           <p className="font-medium   text-white uppercase text-6xl animate-fade-right animate-ease-in-out">
             {detail?.language}
