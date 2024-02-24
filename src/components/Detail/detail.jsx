@@ -261,7 +261,7 @@ export const Detail = () => {
         </button>
       </div>
       <div className="w-[80%] h-auto flex items-center justify-center ">
-        {reviews ? <DetailReviews /> : <ReviewComponent />}
+        {reviews ? <ReviewComponent /> : null}
       </div>
       <hr />
       <br />
