@@ -13,7 +13,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Auth0Provider
         domain="idiomas-master.us.auth0.com"
         clientId="QKuJSniRtysK5OlPJy3muRNgxlcujinH"
-        authorizationParams={{ redirect_uri: window.location.origin }}
+        authorizationParams={{
+          redirect_uri: window.location.origin
+        }}
       >
         <Provider store={store}>
           <App />

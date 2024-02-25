@@ -258,14 +258,14 @@ export const Detail = () => {
     onClick={handleReviews} 
     className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-[10px]">
     {reviews ? 
-        (t("MOSTRAR RESEÑAS")) 
-        :
         (t("OCULTAR RESEÑAS")) 
+        :
+        (t("MOSTRAR RESEÑAS")) 
     }
 </button>
       </div>
       <div className="w-[80%] h-auto flex items-center justify-center ">
-        {reviews ? <DetailReviews /> : <ReviewComponent />}
+        {reviews ? <ReviewComponent /> : null}
       </div>
       <hr />
       <br />

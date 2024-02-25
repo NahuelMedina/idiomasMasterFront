@@ -120,7 +120,7 @@ const Register = () => {
       <div className="w-full h-full flex relative">
         <img
           className="h-full object-cover rounded-l-md animate-fade-right animate-ease-in-out"
-          src="img\image-register.jpg"
+          src="img\bg-002.png"
           alt=""
         />
         <div className="absolute w-full h-full bg-black/50 animate-fade-right animate-ease-in-out"></div>
