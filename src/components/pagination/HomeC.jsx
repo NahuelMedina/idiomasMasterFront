@@ -244,7 +244,7 @@ function HomeC() {
               <div className="flex items-center text-3xl font-bold text-black w-full h-[80%] flex-col justify-evenly">
                 <FaBookAtlas className="text-[150px] ml-[50px] text-gray-600" />
                 <h1 className="text-[60px] text-gray-600 ml-[50px]">
-                  No se han encontrado Cursos
+                  {t("NO SE HAN ENCONTRADO CURSOS")}
                 </h1>
               </div>
             </div>

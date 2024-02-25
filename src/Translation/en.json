@@ -27,13 +27,13 @@
     "AVANZADO": "Advanced",
     "CURSOS_ENCONTRADOS": "Courses Found",
     "VER_MAS_CURSOS": "View More Courses",
-
     "INGLES": "English",
     "FRANCES": "French",
     "ALEMAN": "German",
     "ITALIANO": "Italian",
     "HOLANDES": "Dutch",
     "PORTUGUES": "Portuguese",
+    "NO SE HAN ENCONTRADO CURSOS":"No courses found",
 
     "HACER_LO_IMPOSIBLE_ES": "Making the impossible is",
     "DIVERTIDO": "FUN",
@@ -188,7 +188,7 @@
     "INGRESA TUS DATOS PARA DESATIVAR TU CUENTA": "Enter your details to desactivate your account",
     "DESACTIVAR CUENTA": "Desactivate Account",
 
-    "VER COMENTARIOS": "View Course",
+    "VER CURSO": "View Course",
     "NO SE ENCONTRARON RESEÑAS":"No reviews found",
 
     "HOLA": "Hi",

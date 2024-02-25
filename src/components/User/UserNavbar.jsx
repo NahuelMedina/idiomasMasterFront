@@ -58,7 +58,7 @@ useEffect(() => {
          {t("ESPAÑOL")}
           </option>
           <option value="en">
-             {t("ENGLISH")}
+          {t("ENGLISH")}
           </option>
           <option value="it">
           {t("ITALIAN")}
