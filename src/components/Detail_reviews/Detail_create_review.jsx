@@ -3,16 +3,20 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { postReview } from "../../redux/action/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom'; 
+import { useTranslation } from "react-i18next";
+
 
 const Create_review = () => {
-  const [userData] = useLocalStorage("userData", {});
-  const { user } = useAuth0();
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const courseId = location.pathname.split("/").pop();
+    const [userData] = useLocalStorage("userData", {});
+    const { user } = useAuth0();
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState('');
+    const dispatch = useDispatch();
+    const location = useLocation(); 
+    const courseId = location.pathname.split('/').pop();
+    const { t , i18n} = useTranslation()
+
 
   const handleStarClick = (value) => {
     setRating(value);
@@ -52,7 +56,7 @@ const Create_review = () => {
     <div className="w-full mb-4">
       <div className="bg-[#1E68AD] flex items-start">
         <hr />
-        <h2 className="text-2xl text-white mb-4">¡CUÉNTANOS TU EXPERIENCIA!</h2>
+        <h2 className="text-2xl text-white mb-4">{t("¡CUÉNTANOS TU EXPERIENCIA!")}</h2>
       </div>
 
       <br />
@@ -78,7 +82,7 @@ const Create_review = () => {
             className="flex justify-self relative"
             style={{ top: "-2px", marginRight: "6px", fontSize: "18px" }}
           >
-            Valoración:{" "}
+            {t("VALORACIÓN")}{" : "}
           </span>
           {[...Array(5)].map((_, index) => (
             <svg
@@ -127,7 +131,7 @@ const Create_review = () => {
         >
           <div className="px-3 mb-2 mt-2 w-full h-full">
             <textarea
-              placeholder="Escribe aquí tu comentario."
+              placeholder= {t("ESCRIBE AQUÍ TU RESEÑA.")}
               style={{ width: "500px" }}
               className="w-500 bg-gray-100 rounded border border-gray-300 leading-normal resize-none h-30 py-2 px-3 font-small placeholder-gray-500 focus:outline-none focus:bg-grayv text-black"
               value={comment}
@@ -138,7 +142,7 @@ const Create_review = () => {
             <input
               type="submit"
               className="px-2.5 py-1.5 rounded-md text-white text-sm bg-[#1E68AD] hover:bg-black"
-              value="Enviar comentario"
+              value= {t("ENVIAR RESEÑAS")}
             />
           </div>
         </form>

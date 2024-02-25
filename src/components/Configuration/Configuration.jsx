@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import ProfileSection from "./ProfileSection";
 import PaymentSection from "./PaymentSection";
 import ReviewSection from "./ReviewSection";
-import NotificationSection from "./NotificationSection";
 import CourseSection from "./CourseSection";
 import DangerZone from "./dangerZone";
 
+import { t } from "i18next";
 
 export const Configuration = () => {
   const [selectedSection, setSelectedSection] = useState("perfil");
@@ -36,7 +36,7 @@ export const Configuration = () => {
     <div className=" w-full h-[80vh] mt-[80px] flex flex-col items-center">
       <div className="flex items-center w-[80%] h-[10%]  ">
         <h2 className="pl-3 mb-4 text-[30px] font-semibold">
-          Configuracion Cuenta
+          {t("CONFIGURACION CUENTA")}
         </h2>
       </div>
       <div className="h-[90%] w-[90%] flex flex-row min-w-[20%] ">
@@ -49,7 +49,9 @@ export const Configuration = () => {
             }`}
             onClick={() => handleClick("perfil")}
           >
-            <p className="text-[18px] ml-[20px] focus:text-white ">Mi Perfil</p>
+            <p className="text-[18px] ml-[20px] focus:text-white ">
+              {t("MI PERFIL")}
+            </p>
           </div>
           <div
             className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px] border-b-[1px]   cursor-pointer ${
@@ -60,7 +62,7 @@ export const Configuration = () => {
             onClick={() => handleClick("cursos")}
           >
             <p className="text-[18px] ml-[20px] focus:text-white ">
-              Mis Cursos
+              {t("MIS CURSOS")}
             </p>
           </div>
           <div
@@ -71,7 +73,7 @@ export const Configuration = () => {
             }`}
             onClick={() => handleClick("pago")}
           >
-            <p className="text-[18px] ml-[20px] focus:text-white ">Mis Pagos</p>
+            <p className="text-[18px] ml-[20px] focus:text-white ">{t("MIS PAGOS")}</p>
           </div>
           <div
             className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px] border-b-[1px]  cursor-pointer ${
@@ -82,7 +84,7 @@ export const Configuration = () => {
             onClick={() => handleClick("review")}
           >
             <p className="text-[18px] ml-[20px] focus:text-white ">
-              Mis Reseñas
+              {t("MIS RESEÑAS")}
             </p>
           </div>
           <div
@@ -93,7 +95,7 @@ export const Configuration = () => {
             }`}
             onClick={() => handleClick("danger")}
           >
-            <p className="text-[18px] ml-[20px] ">Zona Peligro</p>
+            <p className="text-[18px] ml-[20px] ">{t("ZONA PELIGRO")}</p>
           </div>
         </div>
         <div className={`w-full border-[1px]  ${

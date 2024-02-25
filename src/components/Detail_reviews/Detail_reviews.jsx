@@ -7,6 +7,7 @@ import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useLocation } from "react-router-dom";
 import Create_review from "./Detail_create_review";
 import { updateReview, deleteReview } from "../../redux/action/actions";
+import { useTranslation } from "react-i18next";
 
 const ReviewComponent = () => {
   const [reviews, setReviews] = useState([]);
@@ -22,6 +23,8 @@ const ReviewComponent = () => {
   const dispatch = useDispatch();
   const reviewRefs = useRef({});
   const comentariosRef = useRef(null);
+  const { t , i18n} = useTranslation()
+
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -141,7 +144,7 @@ const ReviewComponent = () => {
       <br />
       <div className="bg-[#1E68AD] p-2 flex items-start">
         <h2 className="text-2xl text-white">
-          COMENTARIOS DEL CURSO{" "}
+          {t("RESEÑAS DEL CURSO")}
           <b style={{ fontSize: "22px", fontWeight: "100" }}>↓</b>
         </h2>
       </div>
@@ -176,7 +179,7 @@ const ReviewComponent = () => {
                     {showOptions[review._id] && (
                       <div className="absolute right-0 mt-2 w-[120px] bg-white border rounded-lg shadow-lg">
                         <button
-                          className="flex block px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold items-center"
+                          className="flex px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold items-center"
                           onClick={() => handleEdit(review._id)}
                         >
                           <img
@@ -184,10 +187,10 @@ const ReviewComponent = () => {
                             src="https://res.cloudinary.com/dswgspnzw/image/upload/v1708732421/idiomasMaster/n6za1kvelpdac4v7mfln.png"
                             alt=""
                           />
-                          Editar
+                          {t("EDITAR")}
                         </button>
                         <button
-                          className="flex block px-[11px] py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold"
+                          className="flex  px-[11px] py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold"
                           onClick={() => handleDelete(review._id)}
                         >
                           <img
@@ -195,7 +198,7 @@ const ReviewComponent = () => {
                             src="https://res.cloudinary.com/dswgspnzw/image/upload/v1708736501/idiomasMaster/egjes7mxjbpbfwz3enbj.png"
                             alt=""
                           />
-                          Eliminar
+                          {t("ELIMINAR")}
                         </button>
                       </div>
                     )}
@@ -260,7 +263,7 @@ const ReviewComponent = () => {
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full mr-2"
                         onClick={() => handleSave(review._id)}
                       >
-                        Guardar
+                        {t("GUARDAR")}
                       </button>
                       <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full"
@@ -275,7 +278,7 @@ const ReviewComponent = () => {
                           }));
                         }}
                       >
-                        Cancelar
+                        {t("CERRAR")}
                       </button>
                     </>
                   ) : (

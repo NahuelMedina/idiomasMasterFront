@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 export default function UserDashboardCard({ index, idioma, nivel }) {
+  const { t , i18n} = useTranslation()
+
     let level = "";
     let contenidoCondicional;
   
@@ -31,8 +35,8 @@ export default function UserDashboardCard({ index, idioma, nivel }) {
     return (
       <div className="w-[90%] h-full border-[1px] border-gray-100 ml-[30px] flex flex-row rounded-[50px] shadow-md shadow-black/10 bg-white">
         <div className="h-full w-[30%] flex flex-col items-center justify-evenly">
-          <h1 className="text-[22px] text-black">{idioma}</h1>
-          <h1 className="text-[17px] text-gray-600">{level}</h1>
+          <h1 className="text-[22px] text-black">{t(`LANGUAGE_${idioma.toUpperCase()}`)}</h1>
+          <h1 className="text-[17px] text-gray-600">{t(`NIVEL_${level.toUpperCase()}`)}</h1>
         </div>
         {contenidoCondicional}
       </div>

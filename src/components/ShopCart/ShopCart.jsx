@@ -16,8 +16,9 @@ import {
 import { FaCartShopping } from "react-icons/fa6";
 import { CiReceipt } from "react-icons/ci";
 import Swal from "sweetalert2";
-
+import { useTranslation } from "react-i18next";
 const URL = import.meta.env.VITE_URL_HOST;
+
 const ShopCart = () => {
   const [cartCourse, setCartCourse] = useState(
     JSON.parse(localStorage.getItem("cart"))
@@ -34,6 +35,8 @@ const ShopCart = () => {
   );
   console.log(currentCart);
   const [isInCart, setIsInCart] = useState(false);
+  const { t , i18n} = useTranslation()
+
 
   useEffect(() => {
     if (isInCart === false) {
@@ -95,15 +98,15 @@ const ShopCart = () => {
         // Mostrar alerta de éxito
         Swal.fire({
           icon: "success",
-          title: "Pago confirmado",
-          text: "El pago se ha confirmado correctamente.",
+          title: t("PAGO CONFIRMADO"),
+          text: t("EL PAGO SE HA CONFIRMADO CORRECTAMENTE."),
         });
       } else {
         // Mostrar alerta de error
         Swal.fire({
           icon: "error",
-          title: "Error al confirmar el pago",
-          text: "Hubo un problema al procesar el pago. Por favor, inténtalo de nuevo más tarde.",
+          title: t("ERROR AL CONFIRMAR EL PAGO"),
+          text: t("HUBO UN PROBLEMA AL PROCESAR EL PAGO."),
         });
       }
     } catch (error) {
@@ -112,7 +115,7 @@ const ShopCart = () => {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Hubo un problema al realizar la solicitud. Por favor, inténtalo de nuevo más tarde.",
+        text: t("HUBO UN PROBLEMA AL REALIZAR LA SOLICITUD"),
       });
     }
   };
@@ -200,7 +203,7 @@ const ShopCart = () => {
       <div className="w-full h-[90vh] mt-[80px] flex flex-col">
         <div className="flex justify-center items-center text-3xl font-bold text-black w-full h-[80%]">
           <h1 className="text-[60px] text-gray-600 ml-[50px]">
-            No hay cursos en el carrito
+            {t("NO HAY CURSOS EN EL CARRITO")}
           </h1>
           <FaCartShopping className="text-[150px] ml-[50px] text-gray-600" />
         </div>
@@ -209,7 +212,7 @@ const ShopCart = () => {
             to="/home"
             className="bg-sky-700 h-[70px] w-[400px] m-6  flex flex-row items-center justify-center overflow-y-hidden overflow-x-hidden  text-white text-[30px] rounded-lg hover:bg-yellow-500 hover:text-black font-medium cursor:pointer"
           >
-            <p>Explora mas Cursos</p>
+            <p>{t("EXPLORA MAS CURSOS")}</p>
           </Link>
         </div>
       </div>
@@ -267,7 +270,7 @@ const ShopCart = () => {
               <div className="w-full h-[50px] bg-gray-100 flex flex-row items-center">
                 <CiReceipt className="text-[40px]" />
                 <p className="text-lg text-black font-semibold bg-gray-100 py-2 px-4">
-                  Cursos elegidos: {cartCourse.length}
+                  {t("CURSOS ELEGIDOS")}{":"}{cartCourse.length}
                 </p>
               </div>
 
@@ -297,7 +300,7 @@ const ShopCart = () => {
                     </div>
 
                     <p className="text-lg text-gray-800 font-semibold mx-2">
-                      {c.language}, {c.level}
+                    {t(`LANGUAGE_${c?.language?.toUpperCase()}`)}, {t(`NIVEL_${c?.level?.toUpperCase()}`)}
                     </p>
                   </div>
                   <p className="text-lg text-gray-800 font-semibold">
@@ -307,14 +310,14 @@ const ShopCart = () => {
               ))}
               <div className="flex items-center justify-end px-4 py-2 border-b border-gray-400">
                 <p className="text-xl text-gray-800 font-semibold">
-                  Total: ${total}
+                  {t("TOTAL")}{": "}${total}
                 </p>
               </div>
 
               <div className="w-full h-[200px] bg-gray-100  flex items-center justify-center">
                 <div className="bottom-[180px] right-[70px]">
                   <button
-                    className="bg-sky-700 h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium hover:bg-yellow-500 hover:text-black font-medium cursor:pointer"
+                    className="bg-sky-700 h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium  hover:text-black  cursor:pointer"
                     onClick={() =>
                       initCreatePreferenceCart({
                         price: total,
@@ -322,21 +325,21 @@ const ShopCart = () => {
                       })
                     }
                   >
-                    Realizar Compra
+                    {t("REALIZAR COMPRA")}
                   </button>
 
                   <button
-                    className="bg-sky-700 h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium hover:bg-yellow-500 hover:text-black font-medium cursor:pointer"
+                    className="bg-sky-700 h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium  hover:text-black  cursor:pointer"
                     onClick={handleEliminate}
                   >
-                    Vaciar carrito
+                    {t("VACIAR CARRITO")}
                   </button>
 
                   <Link
                     to="/home"
-                    className="bg-sky-700 h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium hover:bg-yellow-500 hover:text-black font-medium cursor:pointer"
+                    className="bg-sky-700 h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium  hover:text-black  cursor:pointer"
                   >
-                    <button>Ver mas cursos</button>
+                    <button>{t("VER MAS CURSOS")}</button>
                   </Link>
                 </div>
               </div>
@@ -345,142 +348,7 @@ const ShopCart = () => {
             <Link></Link>
           )}
         </div>
-        {/* <div className="w-full h-[40%] bg-blue-700">
-
-        <div className="bottom-[180px] right-[70px]">
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <button
-            onClick={() =>
-              initCreatePreferenceCart({
-                price: total,
-                coursesCart: cartCourse,
-              })
-            }
-          >
-            Comprar todos
-          </button>
-        </div>
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <button onClick={handleEliminate}>Vaciar carrito</button>
-        </div>
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <Link to="/home">
-            <button>Ver mas cursos</button>
-          </Link>
-        </div>
       </div>
-
-
-        </div> */}
-      </div>
-
-      {/* <div className="bottom-[180px] right-[70px] absolute h-24 p-3 bg-red-200">
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <button
-            onClick={() =>
-              initCreatePreferenceCart({
-                price: total,
-                coursesCart: cartCourse,
-              })
-            }
-          >
-            Comprar todos
-          </button>
-        </div>
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <button onClick={handleEliminate}>Vaciar carrito</button>
-        </div>
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <Link to="/home">
-            <button>Ver mas cursos</button>
-          </Link>
-        </div>
-      </div> */}
-      {/* {cartCourse !== null && cartCourse.length > 0 ? (
-        <div className="bg-gray-200 w-[400px] border border-gray-400 absolute top-24 right-5 rounded-lg shadow-lg">
-          <p className="text-lg text-gray-800 font-semibold bg-gray-300 py-2 px-4">
-            Cursos elegidos: {cartCourse.length}
-          </p>
-          <div className="border-b border-gray-400"></div>
-          {cartCourse.map((c, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between px-4 py-2 border-b border-gray-400"
-            >
-              <div className="flex items-center">
-                <p className="text-lg text-gray-600 font-semibold mr-2">
-                  {c.items || 1}
-                </p>
-                <button
-                  onClick={() => handleMinusOne(c._id)}
-                  className="p-2 focus:outline-none text-1xl text-black rounded-full"
-                >
-                  <FaMinus />
-                </button>
-                <p className="text-lg text-gray-800 font-semibold mx-2">
-                  {c.language}
-                </p>
-                <button
-                  onClick={() => handlePlusOne(c._id)}
-                  className="p-2 focus:outline-none text-1xl text-black rounded-full"
-                >
-                  <FaPlus />
-                </button>
-              </div>
-              <p className="text-lg text-gray-800 font-semibold">
-                ${c.price * (c.items || 1)}
-              </p>
-            </div>
-          ))}
-          <div className="flex items-center justify-end px-4 py-2 border-b border-gray-400">
-            <p className="text-xl text-gray-800 font-semibold">
-              Total: ${total}
-            </p>
-          </div>
-        </div>
-      ) : (
-        <Link></Link>
-      )} */}
-      {/* <div className=" ">
-        <div className=" w-[100%] ">
-          {cartCourse &&
-            cartCourse.length > 0 &&
-            renderCards.map((element, index) => (
-              <Card
-                key={element._id}
-                course={element}
-                removeFromCart={removeFromCart}
-              />
-            ))}
-        </div>
-        <div className=" ">
-          {cartCourse && cartCourse.length > 0 ? (
-            <div className="h-[30px] items-center justify-center flex flex-row">
-              <IoIosArrowDropleft
-                className={`text-[50px] ${
-                  pagePosition === 1 ? "cursor-not-allowed" : "cursor-pointer"
-                } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
-                onClick={prevPage}
-                disabled={pagePosition === 1}
-              />
-              <div className="w-[50px] flex items-center justify-center">
-                <p className="text-[30px] text-black">{`${pagePosition}`}</p>
-              </div>
-              <IoIosArrowDropright
-                className={`text-[50px] ${
-                  pagePosition === pageNum
-                    ? "cursor-not-allowed"
-                    : "cursor-pointer"
-                } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
-                onClick={nextPage}
-                disabled={pagePosition === pageNum}
-              />
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </div>
-      </div> */}
     </div>
   );
 };

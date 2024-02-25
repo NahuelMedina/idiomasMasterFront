@@ -10,6 +10,7 @@ import { productData } from "../Admin/userData";
 import UserPromoCard from "./UserPromoCard";
 import UserDashboard from "./UserDashboard";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+import { useTranslation } from "react-i18next";
 
 export default function UserLanding() {
   const [userInfo, setUserInfo] = useState([]);
@@ -17,6 +18,8 @@ export default function UserLanding() {
   const [popularData, setPopularData] = useState([]);
   const [weekendData, setWeekendData] = useState([]);
   const [userData, setUserData] = useLocalStorage("userData", {});
+  const { t , i18n} = useTranslation()
+
 
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -135,7 +138,7 @@ export default function UserLanding() {
            <div id="landing_descripton" className="w-full h-[420px] relative flex flex-col items-center justify-evenly bg-white">
             <div className="w-[90%] h-[50px]">
               <h1 className="text-black text-[30px] border-b-[1px] border-black">
-                Mis Cursos
+                {t("MIS CURSOS")}
               </h1>
             </div>
             <div className="w-[90%] h-[90%] bg-white">
@@ -160,7 +163,7 @@ export default function UserLanding() {
       <div id="landing_descripton" className="w-full h-[620px] relative flex flex-col items-center justify-evenly bg-white">
         <div className="w-[90%] h-[50px]">
           <h1 className="text-black text-[30px] border-b-[1px] border-black">
-            Mas Populares
+            {t("MAS POPULARES")}
           </h1>
         </div>
         <div className="w-[90%] h-[90%] bg-white">
@@ -184,7 +187,7 @@ export default function UserLanding() {
       <div id="landing_descripton" className="w-full h-[620px] relative flex flex-col items-center justify-evenly bg-white">
         <div className="w-[90%] h-[50px]">
           <h1 className="text-black text-[30px] border-b-[1px] border-black">
-            Comienza hoy una nueva Aventura
+            {t("COMIENZA HOY UNA NUEVA AVENTURA")}
           </h1>
         </div>
         <div className="w-[90%] h-[90%] bg-white">
@@ -208,7 +211,7 @@ export default function UserLanding() {
       <div id="landing_descripton" className="w-full h-[620px] relative flex flex-col items-center justify-evenly bg-white">
         <div className="w-[90%] h-[50px]">
           <h1 className="text-black text-[30px] border-b-[1px] border-black">
-            Cursos de Fin de Semana
+            {t("CURSOS DE FIN DE SEMANA")}
           </h1>
         </div>
         <div className="w-[90%] h-[90%] bg-white">
