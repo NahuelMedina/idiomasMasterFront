@@ -144,7 +144,7 @@ const ReviewComponent = () => {
       <br />
       <div className="bg-[#1E68AD] p-2 flex items-start">
         <h2 className="text-2xl text-white">
-          {t("COMENTARIOS DEL CURSO")}
+          {t("RESEÑAS DEL CURSO")}
           <b style={{ fontSize: "22px", fontWeight: "100" }}>↓</b>
         </h2>
       </div>
@@ -187,7 +187,7 @@ const ReviewComponent = () => {
                             src="https://res.cloudinary.com/dswgspnzw/image/upload/v1708732421/idiomasMaster/n6za1kvelpdac4v7mfln.png"
                             alt=""
                           />
-                          Editar
+                          {t("EDITAR")}
                         </button>
                         <button
                           className="flex  px-[11px] py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold"
@@ -198,7 +198,7 @@ const ReviewComponent = () => {
                             src="https://res.cloudinary.com/dswgspnzw/image/upload/v1708736501/idiomasMaster/egjes7mxjbpbfwz3enbj.png"
                             alt=""
                           />
-                          Eliminar
+                          {t("ELIMINAR")}
                         </button>
                       </div>
                     )}
@@ -263,7 +263,7 @@ const ReviewComponent = () => {
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full mr-2"
                         onClick={() => handleSave(review._id)}
                       >
-                        Guardar
+                        {t("GUARDAR")}
                       </button>
                       <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full"
@@ -278,7 +278,7 @@ const ReviewComponent = () => {
                           }));
                         }}
                       >
-                        Cancelar
+                        {t("CERRAR")}
                       </button>
                     </>
                   ) : (

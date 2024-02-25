@@ -17,3 +17,6 @@
 17. Configuracion 
 18. profile section
 19. Payment section y payment card
+20. Danger zone 
+21 Review section
+22 userDashboard y userDashboard card

@@ -3,6 +3,11 @@
     "CURSOS": "Courses",
     "IDIOMA": "Language",
     "INGRESAR": "Log in",
+    "ESPAÑOL": "SPANISH",
+    "ENGLISH":"ENGLISH",
+    "ITALIAN": "ITALIAN",
+    "FRENCH": "FRENCH",
+
 
     "BUSCA_Y_APRENDE_UN_IDIOMA_NUEVO": "Search and Learn a New Language",
     "LO_SENTIMOS": "We're sorry!",
@@ -78,6 +83,9 @@
 
     "EL_INTERES": "The interest of the Hispanic population in continuous personal growth and professional development creates the need for new learning opportunities that allow them to connect with the world. Therefore, 6 students from SOY HENRY created a platform in their final project where various language courses are offered, accommodating the needs and interests of their users.",
     "EQUIPO_DE_TRABAJO": "Team",
+    "NUESTRO PROYECTO": "Our Project",
+    "NUESTRO EQUIPO": "Our Team",
+
     "NECESITAS_REGISTRARTE_CARRITO": "You need to sing up to add to Cart!",
     "NECESITAS_REGISTRARTE_FAVORITO": "You need to sing up to add to Favorites!",
     "COMIENZA_CON": "Start with just",
@@ -103,17 +111,20 @@
     "DURACION_4 MESES": "4 Months",
     "EMPIEZA EL DIA": "Starts on ",
     "FINALIZA EL DIA": "Ends on ",
-    "COMPRAR AHORA": "BUY NOW",
-    "AGREGAR AL CARRITO": "ADD TO CART",
-    "ELIMINAR DEL CARRITO": "REMOVE FROM CART",
-    "OCULTAR COMENTARIOS": "HIDE COMMENTS",
-    "MOSTRAR COMENTARIOS": "SHOW COMMENTS",
+    "COMPRAR AHORA": "Buy Now",
+    "AGREGAR AL CARRITO": "Add to Cart",
+    "ELIMINAR DEL CARRITO": "Remove from Cart",
+    "OCULTAR RESEÑAS": "Hide Review",
+    "MOSTRAR RESEÑAS": "Show Review",
 
     "COMENTARIOS DEL CURSO": "COURSE REVIEWS",
+    "EDITAR":"Edit",
+    "ELIMINAR":"Delete",
 
-    "DEJA UN COMENTARIO": "LEAVE A REVIEW",
-    "ESCRIBE AQUÍ TU RESEÑA.": "WRITE YOUR REVIEW HERE.",
-    "ENVIAR COMENTARIO": "SUBMIT REVIEW",
+    "VALORACIÓN": "Rating",
+    "¡CUÉNTANOS TU EXPERIENCIA!": "TELL US ABOUT YOUR EXPERIENCE!",
+    "ESCRIBE AQUÍ TU RESEÑA.": "Write your review here.",
+    "ENVIAR COMENTARIO": "Submit Review",
 
     "MIS CURSOS": "My Courses",
     "MAS POPULARES": "Most Popular",
@@ -141,11 +152,13 @@
     "ERROR AL CONFIRMAR EL PAGO": "Error Confirming Payment",
     "HUBO UN PROBLEMA AL PROCESAR EL PAGO.": "There was a problem processing the payment. Please try again later.",
     "HUBO UN PROBLEMA AL REALIZAR LA SOLICITUD": "There was a problem making the request. Please try again later.",
+    "TOTAL":"Total",
 
     "CONFIGURACION CUENTA": "Account Settings",
     "MI PERFIL": "My Profile",
     "MIS PAGOS": "My Payments",
     "MIS RESEÑAS": "My Reviews",
+    "ZONA PELIGRO":"Danger Zone",
 
     "USUARIO ACTUALIZADO": "User Updated!",
     "ERROR AL MODIFICAR USUARIO": "Error Modifying User",
@@ -167,6 +180,20 @@
     "STATUS_PENDING": "Pending",   
     "STATUS_APPROVED":"Approved",
     "STATUS_CANCELLED":"Cancelled",
-    "STATUS_REJECTED":"Rejected"
+    "STATUS_REJECTED":"Rejected",
+    "NUMERO DE PAGO": "Payment Number",
+    "TOTAL PAGO": "Total Payment",
+
+    "EN ESTA SECCIÓN, PODRÁS DESACTIVAR TU CUENTA": "In this section, you can desactivate your account. We will continue to keep your data in case you decide to come back to us. We are committed to the responsible and ethical handling of information.",
+    "INGRESA TUS DATOS PARA DESATIVAR TU CUENTA": "Enter your details to desactivate your account",
+    "DESACTIVAR CUENTA": "Desactivate Account",
+
+    "VER COMENTARIOS": "View Course",
+    "NO SE ENCONTRARON RESEÑAS":"No reviews found",
+
+    "HOLA": "Hi",
+    "TU PROGRESO": "Your Progress",
+    "EXPLORA NUESTROS CURSOS": "Explore Our Courses",
+    "AUN NO TIENES CURSOS": "You don't have any courses yet"
 
 }

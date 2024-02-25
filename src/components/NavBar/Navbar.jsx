@@ -54,24 +54,24 @@ console.log((localStorage.getItem("lang")));
             <FaDiscourse className="text-[30px] ml-1" />
           </Link>
         </div>
-        <div className="flex ml-2 items-center gap-10 justify-around">
+        <div className="flex ml-2 items-center gap-10 justify-around ">
         <select
-          className="appearance-none bg-white border-2 border-gray-300 rounded-lg py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
-          onChange={handleLanguageChange} defaultValue={"es"}
+          className="appearance-none text-white bg-[#2D2D2D] font-semibold backdrop-blur-sm  border-2 border-gray-300 rounded-lg py-2 px-4  leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
+          onChange={handleLanguageChange} defaultValue={lang} 
         >
-          <option value={lang}>
-            {t("IDIOMA")}
-          </option>
           <option value="es">
-             ESP
+         {t("ESPAÑOL")}
           </option>
           <option value="en">
-             ENG
+             {t("ENGLISH")}
+          </option>
+          <option value="it">
+          {t("ITALIAN")}
+          </option>
+          <option value="fr">
+          {t("FRENCH")}
           </option>
         </select>
-
-          {/* <button onClick={()=> i18n.changeLanguage("es")} className="flex"><MdGTranslate />ESP</button>
-          <button onClick={()=> i18n.changeLanguage("en")}  className="flex"><MdGTranslate />ENG</button> */}
         </div>
         <div>
           <Link

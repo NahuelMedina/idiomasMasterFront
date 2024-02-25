@@ -12,15 +12,11 @@ import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
-import DetailReviews from "./detailReviews";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
-
+import { useTranslation } from "react-i18next";
+import DetailReviews from "./detailReviews";
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
-import Swal from "sweetalert2";
-import DetailReviews from "./detailReviews";
-import { useTranslation } from "react-i18next";
-
 
 export const Detail = () => {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -262,9 +258,9 @@ export const Detail = () => {
     onClick={handleReviews} 
     className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-[10px]">
     {reviews ? 
-        (t("MOSTRAR COMENTARIOS")) 
+        (t("MOSTRAR RESEÑAS")) 
         :
-        (t("OCULTAR COMENTARIOS")) 
+        (t("OCULTAR RESEÑAS")) 
     }
 </button>
       </div>

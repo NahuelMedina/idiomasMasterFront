@@ -3,6 +3,10 @@
     "CURSOS": "Cursos",
     "IDIOMA": "Idioma",
     "INGRESAR": "Ingresar",
+    "ESPAÑOL": "ESPAÑOL",
+    "ENGLISH":"INGLES",
+    "ITALIAN": "ITALIANO",
+    "FRENCH": "FRANCES",
 
     "BUSCA_Y_APRENDE_UN_IDIOMA_NUEVO": "Busca y Aprende un idioma Nuevo",
     "LO_SENTIMOS":"Lo sentimos!",
@@ -75,6 +79,8 @@
 
     "EL_INTERES": "El interés de la población hispana por el crecimiento personal continuo y por su formación profesional, crea la necesidad de nuevos aprendizajes que le permitan conectarse con el mundo, por ello 6 estudiantes de SOY HENRY, crearon en su proyecto final una plataforma donde se ofrecen diversos cursos de idiomas, que se acomodan a las necesidades e intereses de sus usuarios.",
     "EQUIPO_DE_TRABAJO":"Equipo de trabajo",
+    "NUESTRO PROYECTO":"Nuestro Proyecto",
+    "NUESTRO EQUIPO":"Nuestro Equipo",
 
     "NECESITAS_REGISTRARTE_CARRITO":"Necesitas registrarte para agregar al Carrito!",
     "NECESITAS_REGISTRARTE_FAVORITO":"Necesitas registrarte para agregar a Favoritos!",
@@ -104,14 +110,17 @@
     "COMPRAR AHORA": "Comprar ahora",
     "AGREGAR AL CARRITO":"Agregar al Carrito",
     "ELIMINAR DEL CARRITO":"Eliminar del Carrito",
-    "OCULTAR COMENTARIOS":"Ocultar Comentarios",
-    "MOSTRAR COMENTARIOS": "Mostrar Comentarios",
+    "OCULTAR RESEÑAS":"Ocultar Reseñas",
+    "MOSTRAR RESEÑAS": "Mostrar Reseñas",
 
-    "COMENTARIOS DEL CURSO": "COMENTARIOS DEL CURSO",
+    "RESEÑAS DEL CURSO": "RESEÑAS DEL CURSO",
+    "EDITAR":"Editar",
+    "ELIMINAR":"Eliminar",
 
-    "DEJA UN COMENTARIO": "DEJA UN COMENTARIO",
+    "VALORACIÓN":"Valoración",
+    "¡CUÉNTANOS TU EXPERIENCIA!":"¡CUÉNTANOS TU EXPERIENCIA!",
     "ESCRIBE AQUÍ TU RESEÑA.":"Escribe aquí tu reseña.",
-    "ENVIAR COMENTARIO":"Enviar comentario",
+    "ENVIAR RESEÑAS":"Enviar Reseñas",
 
     "MIS CURSOS":"Mis Cursos",
     "MAS POPULARES":"Mas Populares",
@@ -140,11 +149,13 @@
     "ERROR AL CONFIRMAR EL PAGO":"Error al confirmar el pago",
     "HUBO UN PROBLEMA AL PROCESAR EL PAGO.":"Hubo un problema al procesar el pago. Por favor, inténtalo de nuevo más tarde.",
     "HUBO UN PROBLEMA AL REALIZAR LA SOLICITUD":"Hubo un problema al realizar la solicitud. Por favor, inténtalo de nuevo más tarde.",
+    "TOTAL":"Total",
 
     "CONFIGURACION CUENTA":"Configuracion Cuenta",
     "MI PERFIL":"Mi Perfil",
     "MIS PAGOS":"Mis Pagos",
     "MIS RESEÑAS":"Mis Reseñas",
+    "ZONA PELIGRO":"Zona Peligro",
 
     "USUARIO ACTUALIZADO": "¡Usuario Actualizado!",
     "ERROR AL MODIFICAR USUARIO":"Error al modificar usuario",
@@ -166,7 +177,22 @@
     "STATUS_PENDING": "Pendiente",   
     "STATUS_APPROVED":"Aprobado",
     "STATUS_CANCELLED":"Cancelado",
-    "STATUS_REJECTED":"Rechazado"
+    "STATUS_REJECTED":"Rechazado",
+    "NUMERO DE PAGO":"Numero de Pago",
+    "TOTAL PAGO":"Total Pago",
+
+    "EN ESTA SECCIÓN, PODRÁS DESACTIVAR TU CUENTA":" En esta sección, podrás desactivar tu cuenta. Continuaremos guardando tus datos en caso de que desees volver a nosotros. Estamos comprometidos con el manejo responsable y ético de la información.",
+    "INGRESA TUS DATOS PARA DESATIVAR TU CUENTA":"Ingresa tus Datos para Desativar tu Cuenta",
+    "DESACTIVAR CUENTA":"Desactivar Cuenta",
+
+    "VER CURSO":"Ver Curso",
+    "NO SE ENCONTRARON RESEÑAS":"No se encontraron reseñas",
+
+    "HOLA":"Hola",
+    "TU PROGRESO":"Tu Progreso",
+    "EXPLORA NUESTROS CURSOS":"Explora nuestros Cursos",
+    "AUN NO TIENES CURSOS":"Aun no tienes Cursos"
+
 
 
 }

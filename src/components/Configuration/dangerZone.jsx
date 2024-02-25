@@ -7,11 +7,13 @@ import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { t } from "i18next";
 
 export default function DangerZone() {
   const { logout } = useAuth0();
   const [userData, setUserDataLocally] = useLocalStorage("userData");
   const navigate = useNavigate();
+  
 
   const [data, setData] = useState({
     email: "",
@@ -73,20 +75,18 @@ export default function DangerZone() {
   return (
     <div className="flex flex-col w-full h-full items-center">
       <div className="w-full h-[20%] flex flex-row items-center justify-center">
-        <h1 className="text-[50px] text-gray-700"> Zona de Peligro</h1>
+        <h1 className="text-[50px] text-gray-700"> {t("ZONA PELIGRO")}</h1>
         <CgDanger className="text-[70px] ml-[20px] text-gray-700" />
       </div>
       <div className="w-[95%] h-[20%] bg-sky-700 flex flex-row items-center justify-center px-[20px]">
         <h1 className="text-[20px] text-white">
           {" "}
-          En esta sección, podrás desactivar tu cuenta. Continuaremos guardando
-          tus datos en caso de que desees volver a nosotros. Estamos
-          comprometidos con el manejo responsable y ético de la información.
+          {t("EN ESTA SECCIÓN, PODRÁS DESACTIVAR TU CUENTA")}
         </h1>
       </div>
       <div className="w-[60%] h-[55%] grid grid-rows-4">
         <div className="w-full h-full bg-white flex items-center justify-center text-[20px] border-b-[2px] border-red-700 text-gray-700 ">
-          Ingresa tus Datos para Desativar tu Cuenta
+         <h1>{t("INGRESA TUS DATOS PARA DESATIVAR TU CUENTA")}</h1>
         </div>
         <div className="w-full h-full bg-white flex items-center justify-center text-[20px]">
           <div className=" w-full h-[70%] flex flex-col items-center justify-center">
@@ -99,7 +99,7 @@ export default function DangerZone() {
                 className="text-black w-[80%] h-full pl-[20px] text-[20px]  overflow-hidden"
                 onChange={handleChange}
                 name="email"
-                placeholder="Ingresa tu Email"
+                placeholder= {t("INGRESA EMAIL")}
                 id="email"
                 type="email"
               />
@@ -116,7 +116,7 @@ export default function DangerZone() {
               <input
                 className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                 onChange={handleChange}
-                placeholder="Ingresa tu Contraseña"
+                placeholder={t("INGRESA CONTRASEÑA")}
                 name="password"
                 id="password"
                 type="password"
@@ -130,7 +130,7 @@ export default function DangerZone() {
             onClick={handleDelete}
             disabled={buttonDisable()}
           >
-            Desactivar Cuenta
+            {t("DESACTIVAR CUENTA")}
           </button>
         </div>
       </div>

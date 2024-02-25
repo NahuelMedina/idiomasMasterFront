@@ -3,6 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import en from './Translation/en.json'
 import es from './Translation/es.json'
+import it from './Translation/it.json'
+import fr from './Translation/fr.json'
 
 
 i18n
@@ -28,6 +30,12 @@ i18n
       },
       es: {
         translation:es
+      },
+      it: {
+        translation:it
+      },
+      fr: {
+        translation: fr
       },
     }
   });

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ProfileSection from "./ProfileSection";
 import PaymentSection from "./PaymentSection";
 import ReviewSection from "./ReviewSection";
-import NotificationSection from "./NotificationSection";
 import CourseSection from "./CourseSection";
 import DangerZone from "./dangerZone";
 
@@ -96,7 +95,7 @@ export const Configuration = () => {
             }`}
             onClick={() => handleClick("danger")}
           >
-            <p className="text-[18px] ml-[20px] ">Zona Peligro</p>
+            <p className="text-[18px] ml-[20px] ">{t("ZONA PELIGRO")}</p>
           </div>
         </div>
         <div className={`w-full border-[1px]  ${

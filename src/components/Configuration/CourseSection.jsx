@@ -70,14 +70,14 @@ const CourseSection = () => {
                   {t(`LANGUAGE_${c.language.toUpperCase()}`)}
                 </h3>
                 <p className="text-gray-600 mb-2">{t("NIVEL")}{" "}{t(`NIVEL_${c.level.toUpperCase()}`)}</p>
-                <p className="text-gray-600 mb-2"> {t("DURACION_DE")}{":"}{t(`DURACION_${c.duration.toUpperCase()}`)}</p>
+                <p className="text-gray-600 mb-2"> {t("DURACION_DE")}{" : "}{t(`DURACION_${c.duration.toUpperCase()}`)}</p>
                 <p className="text-gray-600 mb-2">
                   {t("EMPIEZA EL DIA")}{c.start_time.split("T")[0]}
                 </p>
                 <p className="text-gray-600 mb-2">
-                  {t("FECHA FINALIZACION")}{":"}{c.finish_time.split("T")[0]}
+                  {t("FECHA FINALIZACION")}{" : "}{c.finish_time.split("T")[0]}
                 </p>
-                <p className="text-gray-600 mb-2">{t("HORARIOS")}{":"}{t(`SCHEDULE_${c.schedule.toUpperCase()}`)}</p>
+                <p className="text-gray-600 mb-2">{t("HORARIOS")}{" : "}{t(`SCHEDULE_${c.schedule.toUpperCase()}`)}</p>
                 <div className="flex items-center flex-row justify-between mt-4">
                   <div>
                     <p className="text-2xl font-semibold">${c.price}</p>

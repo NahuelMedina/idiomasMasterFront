@@ -310,7 +310,7 @@ const ShopCart = () => {
               ))}
               <div className="flex items-center justify-end px-4 py-2 border-b border-gray-400">
                 <p className="text-xl text-gray-800 font-semibold">
-                  Total: ${total}
+                  {t("TOTAL")}{": "}${total}
                 </p>
               </div>
 
@@ -348,142 +348,7 @@ const ShopCart = () => {
             <Link></Link>
           )}
         </div>
-        {/* <div className="w-full h-[40%] bg-blue-700">
-
-        <div className="bottom-[180px] right-[70px]">
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <button
-            onClick={() =>
-              initCreatePreferenceCart({
-                price: total,
-                coursesCart: cartCourse,
-              })
-            }
-          >
-            Comprar todos
-          </button>
-        </div>
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <button onClick={handleEliminate}>Vaciar carrito</button>
-        </div>
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <Link to="/home">
-            <button>Ver mas cursos</button>
-          </Link>
-        </div>
       </div>
-
-
-        </div> */}
-      </div>
-
-      {/* <div className="bottom-[180px] right-[70px] absolute h-24 p-3 bg-red-200">
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <button
-            onClick={() =>
-              initCreatePreferenceCart({
-                price: total,
-                coursesCart: cartCourse,
-              })
-            }
-          >
-            Comprar todos
-          </button>
-        </div>
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <button onClick={handleEliminate}>Vaciar carrito</button>
-        </div>
-        <div className="bg-[#FF6B6C] h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-black text-[20px] rounded-lg hover:bg-red-500 font-medium">
-          <Link to="/home">
-            <button>Ver mas cursos</button>
-          </Link>
-        </div>
-      </div> */}
-      {/* {cartCourse !== null && cartCourse.length > 0 ? (
-        <div className="bg-gray-200 w-[400px] border border-gray-400 absolute top-24 right-5 rounded-lg shadow-lg">
-          <p className="text-lg text-gray-800 font-semibold bg-gray-300 py-2 px-4">
-            Cursos elegidos: {cartCourse.length}
-          </p>
-          <div className="border-b border-gray-400"></div>
-          {cartCourse.map((c, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between px-4 py-2 border-b border-gray-400"
-            >
-              <div className="flex items-center">
-                <p className="text-lg text-gray-600 font-semibold mr-2">
-                  {c.items || 1}
-                </p>
-                <button
-                  onClick={() => handleMinusOne(c._id)}
-                  className="p-2 focus:outline-none text-1xl text-black rounded-full"
-                >
-                  <FaMinus />
-                </button>
-                <p className="text-lg text-gray-800 font-semibold mx-2">
-                  {c.language}
-                </p>
-                <button
-                  onClick={() => handlePlusOne(c._id)}
-                  className="p-2 focus:outline-none text-1xl text-black rounded-full"
-                >
-                  <FaPlus />
-                </button>
-              </div>
-              <p className="text-lg text-gray-800 font-semibold">
-                ${c.price * (c.items || 1)}
-              </p>
-            </div>
-          ))}
-          <div className="flex items-center justify-end px-4 py-2 border-b border-gray-400">
-            <p className="text-xl text-gray-800 font-semibold">
-              Total: ${total}
-            </p>
-          </div>
-        </div>
-      ) : (
-        <Link></Link>
-      )} */}
-      {/* <div className=" ">
-        <div className=" w-[100%] ">
-          {cartCourse &&
-            cartCourse.length > 0 &&
-            renderCards.map((element, index) => (
-              <Card
-                key={element._id}
-                course={element}
-                removeFromCart={removeFromCart}
-              />
-            ))}
-        </div>
-        <div className=" ">
-          {cartCourse && cartCourse.length > 0 ? (
-            <div className="h-[30px] items-center justify-center flex flex-row">
-              <IoIosArrowDropleft
-                className={`text-[50px] ${
-                  pagePosition === 1 ? "cursor-not-allowed" : "cursor-pointer"
-                } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
-                onClick={prevPage}
-                disabled={pagePosition === 1}
-              />
-              <div className="w-[50px] flex items-center justify-center">
-                <p className="text-[30px] text-black">{`${pagePosition}`}</p>
-              </div>
-              <IoIosArrowDropright
-                className={`text-[50px] ${
-                  pagePosition === pageNum
-                    ? "cursor-not-allowed"
-                    : "cursor-pointer"
-                } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
-                onClick={nextPage}
-                disabled={pagePosition === pageNum}
-              />
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </div>
-      </div> */}
     </div>
   );
 };
