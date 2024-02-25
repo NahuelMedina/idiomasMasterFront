@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { userPayments } from "../Admin/userData";
 import PaymentCard from "./paymentCard";
+import { useTranslation } from "react-i18next";
 
 const PaymentSection = () => {
   const [userData] = useLocalStorage("userData", {});
   const [userPayment, setUserPayment] = useState([]);
+  const { t , i18n} = useTranslation()
 
   useEffect(() => {
     const fecthPayment = async () => {
@@ -21,7 +23,7 @@ const PaymentSection = () => {
 
 
   return (
-    <div className="flex flex-rows w-full h-full gap-8 items-center grid grid-cols-1 gap-[10px] grid-rows-auto overflow-hidden items-center justify-center p-[10px] overflow-y-scroll">
+    <div className=" flex-rows w-full h-full  grid grid-cols-1 gap-[10px] grid-rows-auto overflow-hidden items-center justify-center p-[10px] overflow-y-scroll">
       {userPayment &&
         userPayment.map((c, index) => (
           <div key={index} className="flex item-center justify-center">

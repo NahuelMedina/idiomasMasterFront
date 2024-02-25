@@ -4,11 +4,14 @@ import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDropright } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { MdOutlineFavorite } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 const Favorite = () => {
   const [favCourse, setFavCourse] = useState([]);
   const [renderCards, setRenderCards] = useState([]);
   const [pageNum, setPageNum] = useState(0);
+    const { t , i18n} = useTranslation()
+
 
   const getFav = () => {
     return JSON.parse(localStorage.getItem("fav"));
@@ -86,7 +89,7 @@ const Favorite = () => {
           <div className="w-full h-[85vh] mt-[80px] flex flex-col">
             <div className="flex justify-center items-center text-3xl font-bold text-black w-full h-[80%]">
               <h1 className="text-[60px] text-gray-600 ml-[50px]">
-                No hay cursos en Favoritos
+                {t("NO HAY CURSOS FAVORITOS")}
               </h1>
               <MdOutlineFavorite className="text-[150px] ml-[50px] text-gray-600" />
             </div>
@@ -95,7 +98,7 @@ const Favorite = () => {
                 to="/home"
                 className="bg-sky-700 h-[70px] w-[400px] m-6  flex flex-row items-center justify-center overflow-y-hidden overflow-x-hidden  text-white text-[30px] rounded-lg hover:bg-yellow-500 hover:text-black font-medium cursor:pointer"
               >
-                <p>Explora mas Cursos</p>
+                <p>{t("EXPLORA MAS CURSOS")}</p>
               </Link>
             </div>
           </div>
@@ -107,21 +110,21 @@ const Favorite = () => {
               <div className="w-[50%] h-full  flex items-center justify-evenly">
                 {favCourse !== null && favCourse.length > 0 ? (
                   <div className=" w-[900px] border-b-[2px] border-[#848484] mt-[5px] mx-[90px]">
-                    <h1 className="text-[25px] text-[#1F1F1F] m-[2px]">{`Cursos Favoritos: ${favCourse.length}`}</h1>
+                    <h1 className="text-[25px] text-[#1F1F1F] m-[2px]">{`${t("CURSOS FAVORITOS")}: ${favCourse.length}`}</h1>
                   </div>
                 ) : (
                   <Link></Link>
                 )}
               </div>
               <div className="w-[50%] h-full flex flex-row items-center justify-evenly">
-                <div className="bg-sky-700 h-[50px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium hover:bg-yellow-500 hover:text-black font-medium cursor:pointer">
+                <div className="bg-sky-700 h-[50px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg\ hover:bg-yellow-500 hover:text-black font-medium cursor:pointer">
                   <Link to="/home">
-                    <button>Ver mas cursos</button>
+                    <button>{t("VER MAS CURSOS")}</button>
                   </Link>
                 </div>
                 {favCourse && favCourse.length > 0 ? (
-                  <div className="bg-sky-700 h-[50px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium hover:bg-yellow-500 hover:text-black font-medium cursor:pointer">
-                    <button onClick={handleEliminate}>Eliminar Todos</button>
+                  <div className="bg-sky-700 h-[50px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg\ hover:bg-yellow-500 hover:text-black font-medium cursor:pointer">
+                    <button onClick={handleEliminate}>{t("ELIMINAR TODOS")}</button>
                   </div>
                 ) : (
                   <Link></Link>

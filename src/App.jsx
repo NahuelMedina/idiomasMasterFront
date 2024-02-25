@@ -35,12 +35,13 @@ function App() {
 
   const [lastLocation, setLastLocation] = useState("");
 
-  const { t, i18n } = useTranslation();
-  useEffect(() => {
-    const lng = navigator.language;
-    i18n.changeLanguage(lng);
-  }, []);
-  const lng = navigator.language;
+
+  const { t, i18n } = useTranslation()
+  useEffect(()=>{
+    const lng = navigator.language
+    i18n.changeLanguage(lng)
+  },[])
+  const lng = navigator.language
 
   useEffect(() => {
     setData(userData);
@@ -78,72 +79,73 @@ function App() {
 
   return (
     <>
-      <Suspense fallback="loading">
-        <AuthProvider>
+    <Suspense  fallback="loading">
+      <AuthProvider>
+        {Object.keys(data).length === 0 &&
+        data.isAuthenticated === undefined ? (
+          <Navbar />
+        ) : null}
+
+        {Object.keys(data).length &&
+        data.isAuthenticated &&
+        data.profile === "user" ? (
+          <UserNavbar />
+        ) : null}
+
+        {Object.keys(data).length &&
+        data.isAuthenticated &&
+        data.profile === "admin" ? (
+          <AdminNavbar />
+        ) : null}
+        <Routes>
+          <Route path="/home" element={<HomeC />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/search" element={<SearchHome />} />
+          <Route path="/redirect" element={<Redirect/>}/>
+
           {Object.keys(data).length === 0 &&
           data.isAuthenticated === undefined ? (
-            <Navbar />
+            <>
+              <Route path="/" element={<Landing />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+            </>
           ) : null}
 
           {Object.keys(data).length &&
           data.isAuthenticated &&
           data.profile === "user" ? (
-            <UserNavbar />
+            <>
+              <Route path="/configuracion" element={<Configuration />} />
+              <Route path="/user/home" element={<UserLanding />} />
+              <Route path="/favorite" element={<Favorite />} />
+              <Route path="/cart" element={<ShopCart />} />
+            </>
           ) : null}
 
           {Object.keys(data).length &&
           data.isAuthenticated &&
           data.profile === "admin" ? (
-            <AdminNavbar />
+            <>
+              <Route path="/admindashboard" element={<AdminHome />} />
+              <Route
+                path="/admindashboard/products"
+                element={<AdminProducts />}
+              />
+              <Route path="/admindashboard/users" element={<AdminUsers />} />
+              <Route
+                path="/admindashboard/notifications"
+                element={<AdminNotifications />}
+              />
+              <Route
+                path="/admindashboard/settings"
+                element={<AdminSettings />}
+              />
+            </>
           ) : null}
-          <Routes>
-            {Object.keys(data).length === 0 &&
-            data.isAuthenticated === undefined ? (
-              <>
-                <Route path="/" element={<Landing />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/home" element={<HomeC />} />
-                <Route path="/detail/:id" element={<Detail />} />
-                <Route path="/search" element={<SearchHome />} />
-                <Route path="/redirect" element={<Redirect/>} />
-              </>
-            ) : null}
-
-            {Object.keys(data).length &&
-            data.isAuthenticated &&
-            data.profile === "user" ? (
-              <>
-                <Route path="/configuracion" element={<Configuration />} />
-                <Route path="/user/home" element={<UserLanding />} />
-                <Route path="/favorite" element={<Favorite />} />
-                <Route path="/cart" element={<ShopCart />} />
-              </>
-            ) : null}
-
-            {Object.keys(data).length &&
-            data.isAuthenticated &&
-            data.profile === "admin" ? (
-              <>
-                <Route path="/admindashboard" element={<AdminHome />} />
-                <Route
-                  path="/admindashboard/products"
-                  element={<AdminProducts />}
-                />
-                <Route path="/admindashboard/users" element={<AdminUsers />} />
-                <Route
-                  path="/admindashboard/notifications"
-                  element={<AdminNotifications />}
-                />
-                <Route
-                  path="/admindashboard/settings"
-                  element={<AdminSettings />}
-                />
-              </>
-            ) : null}
-          </Routes>
-        </AuthProvider>
+        </Routes>
+      </AuthProvider>
       </Suspense>
     </>
   );

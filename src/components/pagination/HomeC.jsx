@@ -154,15 +154,9 @@ function HomeC() {
             defaultValue="all"
             onChange={handleChangeNum}
           >
-            <option value="all">
-              <h1>{t("PRECIO_CURSO")}</h1>
-            </option>
-            <option value="B">
-              <h1>{t("MIN_A_MAX")}</h1>
-            </option>
-            <option value="A">
-              <h1>{t("MAX_A_MIN")}</h1>
-            </option>
+            <option value="all">{t("PRECIO_CURSO")}</option>
+            <option value="A">{t("MIN_A_MAX")}</option>
+            <option value="B">{t("MAX_A_MIN")}</option>
           </select>
           <div className="bg-[#1e417a] w-full h-[50px]  flex flex-row items-center justify-evenly">
             <FaRankingStar className="text-[30px] text-white " />
@@ -175,18 +169,11 @@ function HomeC() {
             onChange={handleChangeLevel}
             defaultValue="all"
           >
-            <option value="all">
-              <h1>{t("NIVEL_IDIOMA")}</h1>
-            </option>
-            <option value="Principiante">
-              <h1>{t("PRINCIPIANTE")}</h1>
-            </option>
-            <option value="Intermedio">
-              <h1>{t("INTERMEDIO")}</h1>
-            </option>
-            <option value="Avanzado">
-              <h1>{t("AVANZADO")}</h1>
-            </option>
+          <option value="all">{t("NIVEL_IDIOMA")}</option>
+          <option value="Principiante">{t("PRINCIPIANTE")}</option>
+          <option value="Intermedio">{t("INTERMEDIO")}</option>
+          <option value="Avanzado">{t("AVANZADO")}</option>
+
           </select>
           <div className="bg-[#1e417a] w-full h-[50px]  flex flex-row items-center justify-evenly">
             <TbMessageLanguage className="text-[30px] text-white" />
@@ -199,27 +186,14 @@ function HomeC() {
             onChange={handleChangeLanguage}
             defaultValue="all"
           >
-            <option value="all">
-              <h1>{t("IDIOMA")}</h1>
-            </option>
-            <option value="Ingles">
-              <h1>{t("INGLES")}</h1>
-            </option>
-            <option value="Frances">
-              <h1>{t("FRANCES")}</h1>
-            </option>
-            <option value="Aleman">
-              <h1>{t("ALEMAN")}</h1>
-            </option>
-            <option value="Italiano">
-              <h1>{t("ITALIANO")}</h1>
-            </option>
-            <option value="Holandes">
-              <h1>{t("HOLANDES")}</h1>
-            </option>
-            <option value="Portugues">
-              <h1>{t("PORTUGUES")}</h1>
-            </option>
+          <option value="all">{t("IDIOMA")}</option>
+          <option value="Ingles">{t("INGLES")}</option>
+          <option value="Frances">{t("FRANCES")}</option>
+          <option value="Aleman">{t("ALEMAN")}</option>
+          <option value="Italiano">{t("ITALIANO")}</option>
+          <option value="Holandes">{t("HOLANDES")}</option>
+          <option value="Portugues">{t("PORTUGUES")}</option>
+
           </select>
         </div>
       </div>
@@ -267,10 +241,10 @@ function HomeC() {
         ) : (
           <>
             <div className="flex justify-evenly items-center h-[80%] w-full">
-              <div className="flex justify-center items-center text-3xl font-bold text-black w-full h-[80%] flex-col justify-evenly">
+              <div className="flex items-center text-3xl font-bold text-black w-full h-[80%] flex-col justify-evenly">
                 <FaBookAtlas className="text-[150px] ml-[50px] text-gray-600" />
                 <h1 className="text-[60px] text-gray-600 ml-[50px]">
-                  No se han encontrado Cursos
+                  {t("NO SE HAN ENCONTRADO CURSOS")}
                 </h1>
               </div>
             </div>

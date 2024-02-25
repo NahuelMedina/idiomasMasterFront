@@ -145,7 +145,7 @@ const Register = () => {
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="name"
-                    placeholder={t("NOMBRE")}
+                    placeholder= {t("INGRESA NOMBRE")}
                     id="name"
                     type="text"
                     value={state.name}
@@ -175,7 +175,7 @@ const Register = () => {
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="lastname"
-                    placeholder={t("APELLIDO")}
+                    placeholder= {t("INGRESA APELLIDO")}
                     id="lastname"
                     type="text"
                     value={state.lastname}
@@ -203,7 +203,7 @@ const Register = () => {
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder={t("EDAD")}
+                    placeholder={t("INGRESA EDAD")}
                     name="age"
                     id="age"
                     type="number"
@@ -234,7 +234,7 @@ const Register = () => {
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="email"
-                    placeholder={t("EMAIL")}
+                    placeholder= {t("INGRESA EMAIL")}
                     id="email"
                     type="email"
                     value={state.email}
@@ -263,7 +263,7 @@ const Register = () => {
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder={t("CONTRASEÑA")}
+                    placeholder={t("INGRESA CONTRASEÑA")}
                     name="password"
                     id="password"
                     type="password"
