@@ -166,16 +166,6 @@ const ReviewComponent = () => {
           }}
         />
         <br />
-        <div className="bg-[#1E68AD] p-2 flex justify-between">
-          <h2 className="text-2xl text-white">
-            {t("RESEÑAS DEL CURSO")}
-            <b style={{ fontSize: "22px", fontWeight: "100" }}>↓</b>
-          </h2>
-          <div className="flex flex-row text-2xl text-white ml-[100px]">
-            <h1>Rating: {roundedAverageRating}</h1>
-            <MdOutlineStarPurple500 className="text-[30px] text-yellow-500 ml-[10px]" />
-          </div>
-        </div>
         <div>
           {reviews
             .slice()
