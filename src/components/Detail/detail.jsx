@@ -15,6 +15,8 @@ import Swal from "sweetalert2";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useTranslation } from "react-i18next";
 import DetailReviews from "./detailReviews";
+import { IoMdStar } from "react-icons/io";
+import { IoMdStarOutline } from "react-icons/io";
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 
@@ -38,7 +40,7 @@ export const Detail = () => {
   const [reviews, setReviews] = useState(false);
   const { t , i18n} = useTranslation()
 
-
+console.log(detail);
 
   useEffect(() => {
     if (!cart || cart.length === 0) {
@@ -158,6 +160,17 @@ export const Detail = () => {
     }
   };
 
+  const fullStars = () =>{
+    const star = [];
+    for(let i=1; i <= 5; i++){
+      i <= detail?.rank ?
+      star.push(<span><IoMdStar className=" text-yellow-500 "/></span>) :
+      star.push(<span><IoMdStarOutline /></span>)
+    }
+    return star;
+
+  }
+
   return (
     <div className="h-[90vh] mt-[10vh] w-full flex flex-col pt-[30px] items-center ">
       <div className="flex flex-col min-h-[80%] w-[90%] bg-white border-[1px] border-gray-300 relative shadow-lg ">
@@ -170,6 +183,10 @@ export const Detail = () => {
             alt={detail.lenguage}
             className="h-[60px] w-[60px] m-[25px] "
           />
+          <div className="absolute right-5 top-5 flex flex-col items-center mr-5 ">
+          <h1 className="text-4xl font-bold text-white flex items-center">{detail?.rank}</h1> 
+          <h1 className=" flex font-2xl">{fullStars()}</h1>
+          </div>
         </div>
         <div className="w-full h-[10%] bg-yellow-400 flex justify-center items-center">
           <p className="text-black text-[25px] font-normal text-start">
