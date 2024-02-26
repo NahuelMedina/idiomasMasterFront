@@ -7,6 +7,7 @@ import { adminProduct, adminReview } from "../../redux/action/actions";
 import { RiFileUserLine } from "react-icons/ri";
 import { idReview, idUser, putReview, putUser } from "./userData";
 import { FaSearchPlus } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 export default function AdminManageReview() {
   const initialUserState = {
@@ -72,32 +73,47 @@ export default function AdminManageReview() {
   const handleFetch = async (event) => {
     event.preventDefault();
 
-    const response = await idReview(searchTerm);
+    try {
+      const response = await idReview(searchTerm);
 
-    if (response.data) {
-      const { _id, rating, body, view, reply, student_review, course_review } =
-        response.data;
+      if (response.data) {
+        const {
+          _id,
+          rating,
+          body,
+          view,
+          reply,
+          student_review,
+          course_review,
+        } = response.data;
 
-      setReview({
-        _id,
-        rating,
-        body,
-        view,
-        reply,
-        student_review,
-        course_review,
-      });
+        setReview({
+          _id,
+          rating,
+          body,
+          view,
+          reply,
+          student_review,
+          course_review,
+        });
 
-      if (!view) {
-        try {
-          await putReview({ view: true, reviewId: _id });
-        } catch (error) {
-          console.error("Error updating review:", error);
+        if (!view) {
+          try {
+            await putReview({ view: true, reviewId: _id });
+          } catch (error) {
+            console.error("Error updating review:", error);
+          }
         }
       }
-    }
 
-    setSearchTerm("");
+      setSearchTerm("");
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "El id no corresponde a ningún producto",
+        text: "Verifique el id proporcionado e intente nuevamente",
+      });
+    }
   };
 
   const handleSearch = (event) => {
@@ -131,7 +147,11 @@ export default function AdminManageReview() {
         reviewId: review._id,
         reply: review.reply,
       });
-      window.alert("El Usuario se ha actualizado exitosamente.");
+      Swal.fire({
+        icon: 'success',
+        title: 'Respuesta Enviada',
+        text: 'La respuesta ha sido enviada Exitosamente',
+      });
       resetForm();
       dispatch(adminReview({}));
     } catch (error) {
@@ -152,7 +172,9 @@ export default function AdminManageReview() {
   return (
     <div className="w-full h-full flex flex-col border-[#151139] border-[1px] ">
       <div className="w-full h-[40px] bg-[#151139] flex flex-row items-center">
-        <p className="text-white ml-6 text-[20px]">Busca & Responde una Reseña</p>
+        <p className="text-white ml-6 text-[20px]">
+          Busca & Responde una Reseña
+        </p>
       </div>
       <div className="w-full h-[20%] bg-[#151139] flex flex-row ">
         <div className="h-full w-[40%] ">
@@ -205,13 +227,17 @@ export default function AdminManageReview() {
                 </div>
               </div>
               <div className="w-full h-[80%] p-[20px]">
-                <h1 className="text-yellow-500 text-[18px]">Reseña del Usuario:</h1>
+                <h1 className="text-yellow-500 text-[18px]">
+                  Reseña del Usuario:
+                </h1>
                 <h1 className="text-white text-[18px]">{review.body}</h1>
               </div>
             </div>
             <div className="bg-[#373a6b] w-full h-full rounded-[10px]">
               <div className="w-full h-[5%] pl-[20px] mt-[5px]">
-                <h1 className="text-yellow-500 text-[18px]">Enviar una Respuesta</h1>
+                <h1 className="text-yellow-500 text-[18px]">
+                  Enviar una Respuesta
+                </h1>
               </div>
               <div className="w-full h-[65%] p-[20px]">
                 <textarea
@@ -236,9 +262,7 @@ export default function AdminManageReview() {
       ) : (
         <>
           <div className="w-full h-full rounded-[10px] items-center justify-center flex">
-            <h1 className="text-yellow-500 text-[40px]">
-              Busca una Reseña
-            </h1>
+            <h1 className="text-yellow-500 text-[40px]">Busca una Reseña</h1>
             <FaSearchPlus className="text-white text-[40px] ml-[30px]" />
           </div>
         </>
