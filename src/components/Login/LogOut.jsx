@@ -26,14 +26,14 @@ const LogoutButton = () => {
       cancelButtonText: t("CERRAR"),
     }).then((result) => {
       if (result.isConfirmed) {
-        setUserDataLocally({});
         logout({ logoutParams: { returnTo: window.location.origin } }).then(() => {
-          navigate("/")
+          setUserDataLocally({});
 
         });
       }
     });
   };
+  
 
 
   return (

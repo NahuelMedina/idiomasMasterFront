@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import { IoSearchCircle } from "react-icons/io5";
 import { FaCircle } from "react-icons/fa";
-import { adminProduct, adminReview } from "../../redux/action/actions";
+import { adminProduct, adminReview, deleteReview } from "../../redux/action/actions";
 import { RiFileUserLine } from "react-icons/ri";
 import { idReview, idUser, putReview, putUser } from "./userData";
 import { FaSearchPlus } from "react-icons/fa";
@@ -140,7 +140,6 @@ export default function AdminManageReview() {
   }, [review.student_review]);
 
   const handleSubmit = async (e) => {
-    console.log("Hola");
     e.preventDefault();
     try {
       await putReview({
@@ -167,6 +166,20 @@ export default function AdminManageReview() {
       ...prevUser,
       [name]: newValue,
     }));
+  };
+
+  const handleDelete = async (id) => {
+    if (
+      window.confirm("¿Estás seguro de que deseas eliminar este comentario?")
+    ) {
+      try {
+        dispatch(deleteReview(id));
+        dispatch(adminReview({}));
+        alert("Comentario eliminado correctamente");
+      } catch (error) {
+        console.error("Error deleting review:", error);
+      }
+    }
   };
 
   return (
