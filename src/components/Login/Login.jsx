@@ -99,7 +99,7 @@ export const Login = () => {
       <div className="w-full h-full flex relative">
         <img
           className="h-full object-cover rounded-l-md animate-fade-right animate-ease-in-out"
-          src="img\image-login.jpg"
+          src="img\bg-001.png"
           alt=""
         />
         <div className="absolute w-full h-full bg-black/50 animate-fade-right animate-ease-in-out"></div>
@@ -124,7 +124,7 @@ export const Login = () => {
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="email"
-                    placeholder={t("EMAIL")}
+                    placeholder= {t("INGRESA EMAIL")}
                     id="email"
                     type="email"
                   />
@@ -152,7 +152,7 @@ export const Login = () => {
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder={t("CONTRASEÑA")}
+                    placeholder= {t("INGRESA CONTRASEÑA")}
                     name="password"
                     id="password"
                     type="password"

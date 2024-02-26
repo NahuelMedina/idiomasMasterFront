@@ -15,8 +15,10 @@ import { addCart, deleteCart, getCartDB } from "../../redux/action/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { TiDelete } from "react-icons/ti";
+import { useTranslation } from "react-i18next";
 
 export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
+
   const dispatch = useDispatch();
   const location = useLocation();
   const currentCart = useSelector((state) => state.currentCart);
@@ -33,6 +35,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
     CourseId: "",
     CartId: "",
   });
+  const { t , i18n} = useTranslation()
 
   // Sector Carrito
   useEffect(() => {
@@ -51,8 +54,8 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
-        title: "Necesitas registrarte para agregar al Carrito!",
-        footer: '<a href="/register">Registrarse</a>',
+        title: t("NECESITAS_REGISTRARTE_CARRITO"),
+        footer: `<a href="/register">${t("REGISTRARSE")}</a>`,
       });
       return;
     }
@@ -91,8 +94,8 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
-        title: "Necesitas registrarte para agregar a Favoritos!",
-        footer: '<a href="/register">Registrarse</a>',
+        title: t("NECESITAS_REGISTRARTE_FAVORITO"),
+        footer: `<a href="/register">${t("REGISTRARSE")}</a>`,
       });
       return;
     }
@@ -167,29 +170,29 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
               </div>
             )} */}
 
-            <h2 className="text-black text-[30px] ">{course.language}</h2>
+            <h2 className="text-black text-[30px] ">{t(`LANGUAGE_${course.language.toUpperCase()}`)}</h2>
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
-            <h2 className="text-black text-[17px]">Nivel: {course.level}</h2>
+            <h2 className="text-black text-[17px]">{t("NIVEL")}{":"}{t(`NIVEL_${course.level.toUpperCase()}`)}</h2>
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
             <h2 className="text-black text-[17px]">
-              Horarios: {course.schedule}
+              {t("HORARIOS")}{":"}{t(`SCHEDULE_${course.schedule.toUpperCase()}`)}
             </h2>
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
             <h2 className="text-black text-[17px]">
-              Duracion: {course.duration}
+            {t("DURACION_DE")}{":"}{t(`DURACION_${course.duration.toUpperCase()}`)}
             </h2>
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
             <h2 className="text-black  text-[17px]">
-              Fecha Inicio: {course.start_time.split("T")[0]}
+              {t("FECHA INICIO")}{":"}{course.start_time.split("T")[0]}
             </h2>
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
             <h2 className="text-black  text-[17px]">
-              Fecha Finalizacion: {course.finish_time.split("T")[0]}
+              {t("FECHA FINALIZACION")}{":"}{course.finish_time.split("T")[0]}
             </h2>
           </div>
         </div>
@@ -233,18 +236,18 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
             className="bg-yellow-400 w-full px-[15px] text-black h-full  flex flex-row items-center  justify-evenly hover:bg-yellow-500 cursor:pointer hover:text-black"
           >
             <h1 className=" text-[15px] cursor:pointer">
-              Detalle del producto
+              {t("DETALLE DEL PRODUCTO")}
             </h1>
             <TbListDetails className=" text-[35px] cursor:pointer " />
           </Link>
-          <div className="w-full h-full px-[15px] flex items-center text-white justify-center items-center bg-sky-700 hover:bg-red-500 cursor:pointer">
+          <div className="w-full h-full px-[15px] flex items-center text-white justify-center bg-sky-700 hover:bg-red-500 cursor:pointer">
             {isCart ? (
-              <div className="flex cursor:pointer flex items-center justify-center">
+              <div className="flex cursor:pointer items-center justify-center">
                 <h1
                   onClick={handleCart}
-                  className="text-[15px] cursor:pointer "
+                  className="text-[15px] cursor:pointer mr-2 "
                 >
-                  Eliminar del carrito
+                  {t("ELIMINAR DEL CARRITO CARD")}
                 </h1>
                 <FaRegTrashCan className="text-[30px] cursor:pointer" />
               </div>
@@ -254,7 +257,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
                   onClick={handleCart}
                   className="text-[15px] cursor:pointer"
                 >
-                  Agregar al carrito
+                  {t("AGREGAR AL CARRITO CARD")}
                 </button>
                 <FaCartShopping className="text-[25px] cursor:pointer" />
               </div>
@@ -349,20 +352,20 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
               </button>
             </div>
           )}
-          <p className="text-white text-[30px] ">{course.language}</p>
+          <p className="text-white text-[30px] ">{t(`LANGUAGE_${course.language.toUpperCase()}`)}</p>
         </div>
         <div className=" w-full h-[50px]  flex flex-row items-center justify-start">
           <FaRankingStar className="text-[40px] text-yellow-400 m-[50px] " />
-          <p className="text-white text-[20px]">{course.level}</p>
+          <p className="text-white text-[20px]">{t(`NIVEL_${course.level.toUpperCase()}`)}</p>
         </div>
         <div className=" w-full h-[50px]  flex flex-row items-center justify-start">
           <GrSchedule className="text-[40px] text-yellow-400 m-[50px] " />
 
-          <p className="text-white text-[20px]">{course.schedule}</p>
+          <p className="text-white text-[20px]">{t(`SCHEDULE_${course.schedule.toUpperCase()}`)}</p>
         </div>
         <div className=" w-full h-[50px]  flex flex-row items-center justify-start">
           <LuCalendarSearch className="text-[40px] text-yellow-400 m-[50px] " />
-          <p className="text-white text-[20px]">{course.duration}</p>
+          <p className="text-white text-[20px]">{t(`DURACION_${course.duration.toUpperCase()}`)}</p>
         </div>
       </div>
       <div className="bg-sky-700 h-[15%] w-full text-xl  grid grid-cols-2 items-center justify-center">
@@ -372,7 +375,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
             className="bg-white w-[80%] h-[70%] rounded-[10px] flex flex-row items-center justify-center hover:bg-yellow-500"
           >
             <button className="text-black flex  items-center justify-center h-[30px]">
-              <FaShoppingBasket className="mr-1" /> Obtener Ahora
+              <FaShoppingBasket className="mr-1" /> {t("OBTENER AHORA")}
             </button>
           </Link>
         </div>
@@ -384,7 +387,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
                 className="text-black w-full h-[30px] flex items-center justify-center cursor:pointer "
               >
                 <RxCross2 className=" mr-1" />
-                Eliminar del carrito
+                {t("ELIMINAR DEL CARRITO CARD")}
               </button>
             </div>
           ) : (
@@ -394,7 +397,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
                 className="text-black w-full flex items-center justify-center h-[30px] cursor:pointer"
               >
                 <FaCartShopping className=" mr-1" />
-                Agregar al carrito
+                {t("AGREGAR AL CARRITO CARD")}
               </button>
             </div>
           )}

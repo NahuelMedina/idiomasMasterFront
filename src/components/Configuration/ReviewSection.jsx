@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { MdOutlineRateReview } from "react-icons/md";
 
 const ReviewSection = () => {
   const [userReviews, setUserReviews] = useState([]);
@@ -9,6 +11,7 @@ const ReviewSection = () => {
   const [courses, setCourses] = useState({});
   const URL = import.meta.env.VITE_URL_HOST;
   const [userData] = useLocalStorage("userData", {});
+  const { t , i18n} = useTranslation()
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -47,8 +50,8 @@ const ReviewSection = () => {
 
   return (
     <div className="h-full flex flex-col items-center justify-center">
-      <h2 className="text-3xl text-center font-bold bg-blue-500 text-white py-2 w-full">
-        Mis reseñas
+      <h2 className="text-3xl text-center font-bold bg-blue-500 text-white py-2  absolute top-[152px] w-[1313px]">
+      {t("MIS RESEÑAS")}
       </h2>
       <div
         className="w-full overflow-auto"
@@ -120,16 +123,16 @@ const ReviewSection = () => {
                     <div className="flex flex-col flex-grow">
                       <div className="flex-col">
                         <p className="text-[14px] ml-4 font-semibold text-[#3B82F6]">
-                          {courses[review.course_review].language}
+                        {t(`LANGUAGE_${courses[review.course_review].language.toUpperCase()}`)}
                         </p>
                         <p className="text-[14px] ml-4 font-semibold">
-                          {courses[review.course_review].level}
+                        {t(`NIVEL_${courses[review.course_review].level.toUpperCase()}`)}
                         </p>
                         <p className="text-[14px] ml-4 font-semibold">
-                          {courses[review.course_review].duration}
+                        {t(`DURACION_${courses[review.course_review].duration.toUpperCase()}`)}
                         </p>
                         <p className="text-[14px] ml-4 font-semibold">
-                          {courses[review.course_review].schedule}
+                        {t(`SCHEDULE_${courses[review.course_review].schedule.toUpperCase()}`)}
                         </p>
                         <p className="text-[14px] ml-4 font-semibold">
                           ${courses[review.course_review].price}
@@ -143,7 +146,8 @@ const ReviewSection = () => {
                       className="absolute bottom-4 right-4"
                     >
                       <button className="px-4 py-1 bg-[#3B82F6] text-white rounded hover:bg-blue-900">
-                        Ver comentarios
+                        {t("VER CURSO")}
+                        
                       </button>
                     </Link>
                   </div>
@@ -152,7 +156,7 @@ const ReviewSection = () => {
             ))}
           </ul>
         ) : (
-          <p className="text-lg">No reviews found.</p>
+          <p className="text-[60px] text-gray-600 ml-[50px] font-semibold flex">{t("NO SE ENCONTRARON RESEÑAS")}  <MdOutlineRateReview className="ml-4 mt-4" /></p>
         )}
       </div>
     </div>

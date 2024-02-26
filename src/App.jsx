@@ -25,6 +25,7 @@ import { useLocalStorage } from "./CustomHook/UseLocalStorage";
 import { Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import Redirect from "./components/Register/redirect";
 
 function App() {
   const [userData, setUserData] = useLocalStorage("userData", {});
@@ -67,7 +68,7 @@ function App() {
       } else {
         navigate(data.profile === "admin" ? "/admindashboard" : "/user/home");
       }
-    }
+    } 
   }, [data]);
 
   useEffect(() => {
@@ -100,6 +101,7 @@ function App() {
           <Route path="/home" element={<HomeC />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/search" element={<SearchHome />} />
+          <Route path="/redirect" element={<Redirect/>}/>
 
           {Object.keys(data).length === 0 &&
           data.isAuthenticated === undefined ? (

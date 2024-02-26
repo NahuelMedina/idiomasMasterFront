@@ -4,10 +4,13 @@ import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { idUser, putUser } from "../Admin/userData";
 import { PiNotePencilBold } from "react-icons/pi";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
+
 const ProfileSection = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [userData, setUserData] = useLocalStorage("userData", {});
   const [imagePreview, setImagePreview] = useState(null);
+  const { t , i18n} = useTranslation()
 
   const defaultAvatarUrl =
     "https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=";
@@ -95,17 +98,17 @@ console.log("SI QUEDAAA")
       }
 
       Swal.fire({
-        icon: "success",
-        title: "¡Usuario Actualizado!",
+        icon: 'success',
+        title: t("USUARIO ACTUALIZADO"),
         showConfirmButton: false,
         timer: 2300, // La alerta se cerrará automáticamente después de 1.5 segundos
       });
     } catch (error) {
       console.error("Error al actualizar el curso:", error.message);
       Swal.fire({
-        icon: "error",
-        title: "Error al modificar usuario",
-        text: error.message, // Puedes mostrar el mensaje de error específico si lo proporciona la función de registro
+        icon: 'error',
+        title: t("ERROR AL MODIFICAR USUARIO"),
+        text: error.message // Puedes mostrar el mensaje de error específico si lo proporciona la función de registro
       });
     }
   };
@@ -117,10 +120,10 @@ console.log("SI QUEDAAA")
   return (
     (isAuthenticated || Object.keys(userData).length > 0) && (
       <div className="flex flex-rows w-full h-full gap-8 items-center">
-        <div className=" w-[60%] h-[90%] grid grid-rows-5 overflow-hidden flex items-center justify-center">
+        <div className=" w-[60%] h-[90%] grid grid-rows-5 overflow-hidden items-center justify-center">
           <div className="h-[80%] w-full bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
             <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
-              <h1 className="text-[18px] ml-[50px] text-white">Nombre</h1>
+              <h1 className="text-[18px] ml-[50px] text-white">{t("NOMBRE")}</h1>
             </div>
             <div className="w-[70%] h-[full] flex items-center justify-evenly">
               <input
@@ -131,7 +134,7 @@ console.log("SI QUEDAAA")
                   user?.sub.includes("google") &&
                   "opacity-50 cursor-not-allowed"
                 }`}
-                placeholder="Ingresa Nombre"
+                placeholder= {t("INGRESA NOMBRE")}
                 value={editedData.name}
                 onChange={handleInputChange}
                 required
@@ -145,7 +148,7 @@ console.log("SI QUEDAAA")
                   user?.sub.includes("google") &&
                   "opacity-50 cursor-not-allowed"
                 }`}
-                placeholder="Ingresa Apellido"
+                placeholder={t("INGRESA APELLIDO")}
                 value={editedData.lastname}
                 onChange={handleInputChange}
                 required
@@ -155,7 +158,7 @@ console.log("SI QUEDAAA")
           </div>
           <div className="h-[80%] w-full bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
             <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
-              <h1 className="text-[18px] ml-[50px] text-white">Email</h1>
+              <h1 className="text-[18px] ml-[50px] text-white">{t("EMAIL")}</h1>
             </div>
             <div className="w-[70%] h-[full] flex items-center justify-evenly">
               <input
@@ -166,7 +169,7 @@ console.log("SI QUEDAAA")
                   user?.sub.includes("google") &&
                   "opacity-50 cursor-not-allowed"
                 }`}
-                placeholder="Ingresa tu Email para Modificarlo"
+                placeholder= {t("INGRESA TU EMAIL PARA MODIFICARLO")}
                 value={editedData.email}
                 onChange={handleInputChange}
                 required
@@ -176,7 +179,7 @@ console.log("SI QUEDAAA")
           </div>
           <div className="h-[80%] w-full bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
             <div className="w-[30%] h-[full] bg-[#2d53d9] flex items-center ">
-              <h1 className="text-[18px] ml-[50px] text-white">Contraseña</h1>
+              <h1 className="text-[18px] ml-[50px] text-white">{t("CONTRASEÑA")}</h1>
             </div>
             <div className="w-[70%] h-[full] flex items-center justify-evenly">
               <input
@@ -187,7 +190,7 @@ console.log("SI QUEDAAA")
                   user?.sub.includes("google") &&
                   "opacity-50 cursor-not-allowed"
                 }`}
-                placeholder="Ingresa tu Nueva Contraseña"
+                placeholder={t("INGRESA TU NUEVA CONTRASEÑA")}
                 value={editedData.password}
                 onChange={handleInputChange}
                 required
@@ -197,7 +200,7 @@ console.log("SI QUEDAAA")
           </div>
           <div className="h-[80%] w-[60%] bg-white flex flex-row rounded-[10px] overflow-hidden border-[1px] border-[#2d53d9]">
             <div className="w-[52%] h-[full] bg-[#2d53d9] flex items-center ">
-              <h1 className="text-[18px] ml-[50px] text-white">Edad</h1>
+              <h1 className="text-[18px] ml-[50px] text-white">{t("EDAD")}</h1>
             </div>
             <div className="w-[50%] h-[full] flex items-center justify-evenly">
               <input
@@ -205,7 +208,7 @@ console.log("SI QUEDAAA")
                 id="age"
                 name="age"
                 className="h-10 w-[90%] border-[2px] border-[#2d53d9] mt-1 rounded px-4 bg-white"
-                placeholder="Ingresa tu Nueva Contraseña"
+                placeholder= {t("INGRESA TU NUEVA EDAD")}
                 value={editedData.age}
                 onChange={handleInputChange}
                 required
@@ -217,9 +220,9 @@ console.log("SI QUEDAAA")
             disabled={buttonDisable()}
               type="submit"
               onClick={handleSubmit}
-              className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px] disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-[10px] disabled:opacity-30 disabled:cursor-not-allowed"
             >
-              Guardar
+              {t("GUARDAR")}
             </button>
           </div>
         </div>
@@ -244,9 +247,9 @@ console.log("SI QUEDAAA")
               {!user?.sub.includes("google") && (
                 <label
                   htmlFor="file-input"
-                  className="w-[150px] h-[50px] border-2 border-black/30 hover:bg-yellow-400 text-black font-bold rounded rounded-[10px] cursor-pointer flex items-center justify-center"
+                  className="w-[150px] h-[50px] border-2 border-black/30 hover:bg-yellow-400 text-black font-bold  rounded-[10px] cursor-pointer flex items-center justify-center"
                 >
-                  Cambiar foto
+                  {t("CAMBIAR FOTO")}
                 </label>
               )}
             </div>

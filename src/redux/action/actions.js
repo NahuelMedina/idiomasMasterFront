@@ -27,10 +27,9 @@ import {
   DELETE_REVIEW_REQUEST,
   DELETE_REVIEW_SUCCESS,
   DELETE_REVIEW_FAILURE,
+  ADMINREVIEW,
 } from "./actiontypes";
 import axios from "axios";
-
-
 
 const URL = import.meta.env.VITE_URL_HOST;
 
@@ -82,15 +81,15 @@ export function search(value) {
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`${URL}/getCourse/name?name=${value}`);
-      
+
       if (Array.isArray(data)) {
         dispatch({
           type: SEARCH,
           payload: [data, value],
         });
-      } 
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 }

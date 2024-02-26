@@ -8,8 +8,6 @@ import { FaHeart } from "react-icons/fa";
 import LogoutButton from "../Login/LogOut";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useTranslation } from "react-i18next";
-import { MdGTranslate } from "react-icons/md";
-import { useDispatch } from "react-redux";
 
 export const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth0();
@@ -17,7 +15,6 @@ export const Navbar = () => {
   const [userData] = useLocalStorage("userData", {});
   const { t , i18n} = useTranslation()
   const [lang, setLang] =useLocalStorage("lang", "")
-  const dispatch = useDispatch()
 
 
  const handleLanguageChange = (e) => {
@@ -27,12 +24,9 @@ export const Navbar = () => {
   };
   useEffect(() => {
     const storedLang = localStorage.getItem("lang");
-    if (storedLang === 'en') {
+    if (storedLang ) {
       i18n.changeLanguage(storedLang);
-      console.log('esta en ingles');
-    } else if(storedLang === 'es'){
-      i18n.changeLanguage(storedLang);
-    } else console.log("casi");
+    } 
   }, [i18n]); 
 
  
@@ -42,7 +36,7 @@ console.log((localStorage.getItem("lang")));
 
   if (!isAuthenticated && !Object.keys(userData).length) {
     return (
-      <div className="flex h-[80px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#000000e1] border-[#ffffff] border-b-2 border-solid">
+      <div className="flex h-[70px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#000000d2] backdrop-blur-sm border-[#ffffff] border-b-2 border-solid">
         <div className="flex ml-2 items-center gap-10 justify-around">
           <Link to="/" className="h-full flex justify-center items-center">
             <img className="w-16" src="img\logo4.png" alt="Logo" />
@@ -60,24 +54,24 @@ console.log((localStorage.getItem("lang")));
             <FaDiscourse className="text-[30px] ml-1" />
           </Link>
         </div>
-        <div className="flex ml-2 items-center gap-10 justify-around">
+        <div className="flex ml-2 items-center gap-10 justify-around ">
         <select
-          className="appearance-none bg-white border-2 border-gray-300 rounded-lg py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
-          onChange={handleLanguageChange} defaultValue={"es"}
+          className="appearance-none text-white bg-[#2D2D2D] font-semibold backdrop-blur-sm  border-2 border-gray-300 rounded-lg py-2 px-4  leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
+          onChange={handleLanguageChange} defaultValue={lang} 
         >
-          <option value={lang}>
-            {t("IDIOMA")}
-          </option>
           <option value="es">
-             ESP
+         {t("ESPAÑOL")}
           </option>
           <option value="en">
-             ENG
+             {t("ENGLISH")}
+          </option>
+          <option value="it">
+          {t("ITALIAN")}
+          </option>
+          <option value="fr">
+          {t("FRENCH")}
           </option>
         </select>
-
-          {/* <button onClick={()=> i18n.changeLanguage("es")} className="flex"><MdGTranslate />ESP</button>
-          <button onClick={()=> i18n.changeLanguage("en")}  className="flex"><MdGTranslate />ENG</button> */}
         </div>
         <div>
           <Link
@@ -98,12 +92,12 @@ console.log((localStorage.getItem("lang")));
             <img className="w-16" src="img\logo4.png" alt="Logo" />
           </Link>
           <Link to="/about" className="h-full flex items-center">
-            Sobre Nosotros
+         {t("SOBRE_NOSOTROS")}
             <BsFillInfoSquareFill className="text-[30px] ml-1" />
           </Link>
 
           <Link to="/home" className="h-full flex items-center">
-            Cursos
+            {t("CURSOS")}
             <FaDiscourse className="text-[30px] ml-1" />
           </Link>
         </div>

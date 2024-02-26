@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import registerValidate from "../Utils/registerValidate";
-import registerValidateEng from "../Utils/registerValidateEng";
+// import registerValidateEng from "../Utils/registerValidateEng";
 import { useDispatch, useSelector } from "react-redux";
 import { postUser } from "../../redux/action/actions";
 import Swal from "sweetalert2";
@@ -21,17 +21,16 @@ const Register = () => {
   const postStatusFail = useSelector((state) => state.postStatusFail);
   const postError = useSelector((state) => state.postError);
   const [status, setStatus] = useState(postStatus);
-  const [lang , setLang] = useState('')
-  const { t , i18n} = useTranslation()
+  const [lang, setLang] = useState('')
+  const { t, i18n } = useTranslation()
 
-useEffect(()=>{
-  setLang(localStorage.getItem("lang"))
-},[])
+  useEffect(() => {
+    setLang(localStorage.getItem("lang"))
+  }, [])
   const [state, setState] = useState({
     name: "",
     lastname: "",
     email: "",
-    img: "",
     password: "",
     age: "",
   });
@@ -47,27 +46,21 @@ useEffect(()=>{
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  setLang(localStorage.getItem("lang"))
-    if(lang === "en"){
-      setErrors(registerValidateEng({
-        ...state,
-        [name]: value
-      }));
-    }
-    if(lang === "es"){
-      setErrors(
-      registerValidate({
-        ...state,
-        [name]: value,
-      })
-    );
-    }
-    
-    setState({
-      ...state,
-      [name]: value
-    });
+    setLang(localStorage.getItem("lang"))
+    // if (lang === "en") {
+    //   const newErrors = registerValidateEng({ ...state, [name]: value });
+    //   setErrors({ ...errors, [name]: newErrors[name] });
+    // }
+    // if (lang === "es") {
+    const newErrors = registerValidate({ ...state, [name]: value });
+      setErrors({ ...errors, [name]: newErrors[name] });
+    // }
+
+    setState({ ...state, [name]: value });
   };
+
+  
+
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -92,7 +85,7 @@ useEffect(()=>{
         icon: 'success',
         title: t("USUARIO_CREADO"),
         showConfirmButton: false,
-        timer: 2300 
+        timer: 2300
       });
       setStatus(false)
       navigate("/login")
@@ -105,20 +98,29 @@ useEffect(()=>{
     }
   };
 
+  useEffect(()=>{
+    buttonDisabled(errors)
+  })
+
   const buttonDisabled = () => {
     let btn = true;
-    if(Object.values(state).some(value => value.trim() === '')) btn = true
-    else{
+    if (Object.values(state).some(value => value.trim() === '')) btn = true
+    else {
       btn = false
     }
     return btn;
-}
+
+  }
+  console.log(state);
+  console.log(buttonDisabled());
+  console.log(errors);
+
   return (
     <div className="w-full h-[90vh] mt-[80px] grid grid-cols-2">
       <div className="w-full h-full flex relative">
         <img
           className="h-full object-cover rounded-l-md animate-fade-right animate-ease-in-out"
-          src="img\image-register.jpg"
+          src="img\bg-002.png"
           alt=""
         />
         <div className="absolute w-full h-full bg-black/50 animate-fade-right animate-ease-in-out"></div>
@@ -143,7 +145,7 @@ useEffect(()=>{
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="name"
-                    placeholder= {t("NOMBRE")}
+                    placeholder= {t("INGRESA NOMBRE")}
                     id="name"
                     type="text"
                     value={state.name}
@@ -158,7 +160,7 @@ useEffect(()=>{
                     lineheight: ".75rem",
                   }}
                 >
-                  {errors.name}
+                  {t(errors.name)}
                 </span>
               </div>
             </div>
@@ -173,7 +175,7 @@ useEffect(()=>{
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="lastname"
-                    placeholder= {t("APELLIDO")}
+                    placeholder= {t("INGRESA APELLIDO")}
                     id="lastname"
                     type="text"
                     value={state.lastname}
@@ -187,8 +189,7 @@ useEffect(()=>{
                     fontSize: "15px",
                     lineheight: ".75rem",
                   }}
-                >
-                  {errors.lastname}
+                >{errors.lastname}
                 </span>
               </div>
             </div>
@@ -202,7 +203,7 @@ useEffect(()=>{
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder={t("EDAD")}
+                    placeholder={t("INGRESA EDAD")}
                     name="age"
                     id="age"
                     type="number"
@@ -233,7 +234,7 @@ useEffect(()=>{
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
                     name="email"
-                    placeholder= {t("EMAIL")}
+                    placeholder= {t("INGRESA EMAIL")}
                     id="email"
                     type="email"
                     value={state.email}
@@ -262,7 +263,7 @@ useEffect(()=>{
                   <input
                     className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                     onChange={handleChange}
-                    placeholder={t("CONTRASEÑA")}
+                    placeholder={t("INGRESA CONTRASEÑA")}
                     name="password"
                     id="password"
                     type="password"
