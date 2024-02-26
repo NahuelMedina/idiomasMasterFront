@@ -6,7 +6,7 @@ import axios from "axios";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useLocation, useParams } from "react-router-dom";
 import Create_review from "./Detail_create_review";
-import { updateReview, deleteReview } from "../../redux/action/actions";
+import { updateReview, deleteReview, getCourseReview } from "../../redux/action/actions";
 
 import { MdOutlineStarPurple500 } from "react-icons/md";
 
@@ -36,6 +36,7 @@ const ReviewComponent = () => {
     const fetchReviews = async () => {
       try {
         const response = await axios.get(`${URL}/getCourseReviews/${id}`);
+        dispatch(getCourseReview(response))
         setReviews(response.data);
       } catch (error) {
         console.error("Error fetching reviews:", error);
@@ -44,7 +45,6 @@ const ReviewComponent = () => {
 
     fetchReviews();
   }, [URL]);
-
   const updateReviews = (newReview) => {
     setReviews([newReview, ...reviews]);
   };
@@ -171,10 +171,7 @@ const ReviewComponent = () => {
             {t("RESEÑAS DEL CURSO")}
             <b style={{ fontSize: "22px", fontWeight: "100" }}>↓</b>
           </h2>
-          <div className="flex flex-row text-2xl text-white ml-[100px]">
-            <h1>Rating: {roundedAverageRating}</h1>
-            <MdOutlineStarPurple500 className="text-[30px] text-yellow-500 ml-[10px]" />
-          </div>
+       
         </div>
         <div>
           {reviews
@@ -207,7 +204,7 @@ const ReviewComponent = () => {
                         {showOptions[review._id] && (
                           <div className="absolute right-0 mt-2 w-[120px] bg-white border rounded-lg shadow-lg">
                             <button
-                              className="flex block px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold items-center"
+                              className="flex  px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold items-center"
                               onClick={() => handleEdit(review._id)}
                             >
                               <img
@@ -218,7 +215,7 @@ const ReviewComponent = () => {
                               Editar
                             </button>
                             <button
-                              className="flex block px-[11px] py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold"
+                              className="flex  px-[11px] py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold"
                               onClick={() => handleDelete(review._id)}
                             >
                               <img

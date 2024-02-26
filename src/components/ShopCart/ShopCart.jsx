@@ -18,11 +18,10 @@ import { CiReceipt } from "react-icons/ci";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 const URL = import.meta.env.VITE_URL_HOST;
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 
 const ShopCart = () => {
-  const [cartCourse, setCartCourse] = useState(
-    JSON.parse(localStorage.getItem("cart"))
-  );
+  const [cartCourse, setCartCourse] = useLocalStorage("cart", [])
   const [renderCards, setRenderCards] = useState([]);
   const [pageNum, setPageNum] = useState(0);
   const [total, setTotal] = useState(0);
@@ -33,17 +32,16 @@ const ShopCart = () => {
   const [userData, setUserData] = useState(
     JSON.parse(localStorage.getItem("userData"))
   );
-  console.log(currentCart);
   const [isInCart, setIsInCart] = useState(false);
   const { t , i18n} = useTranslation()
 
-
+console.log(cartCourse);
   useEffect(() => {
     if (isInCart === false) {
       dispatch(getCartDB(userData._id));
       dispatch(
         addCart({
-          CoursesArray: JSON.parse(localStorage.getItem("cart")),
+          CoursesArray: localStorage.getItem("cart"),
           CartId: currentCart?._id,
         })
       );
@@ -180,6 +178,16 @@ const ShopCart = () => {
   // Mas y Menos uno
 
   const handleMinusOne = (id) => {
+    if(items === 1){
+      const eliminateItemCart = JSON.parse(window.localStorage.getItem("cart"));
+      const filteredCart = eliminateItemCart.filter(
+        (c) => c._id !== id
+      );
+      setCartCourse(filteredCart)
+      setIsInCart(false)
+     // localStorage.setItem("cart", JSON.stringify(filteredCart))
+      return;
+    }
     setCartCourse((prevCart) =>
       prevCart.map((course) =>
         course._id === id
@@ -187,6 +195,7 @@ const ShopCart = () => {
           : course
       )
     );
+    
   };
   const handlePlusOne = (id) => {
     setCartCourse((prevCart) =>
@@ -275,7 +284,7 @@ const ShopCart = () => {
               </div>
 
               <div className="border-b border-gray-400"></div>
-              {cartCourse.map((c, index) => (
+              {cartCourse && cartCourse.map((c, index) => (
                 <div
                   key={index}
                   className="flex items-center justify-between px-4 py-2 border-b border-gray-400"

@@ -47,7 +47,6 @@ function App() {
     setData(userData);
   }, []);
 
-  console.log(data);
 
   useEffect(() => {
     if (loginData.isAuthenticated && Object.keys(data).length === 0) {

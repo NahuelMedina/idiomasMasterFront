@@ -28,6 +28,7 @@ import {
   DELETE_REVIEW_SUCCESS,
   DELETE_REVIEW_FAILURE,
   ADMINREVIEW,
+  GET_COURSE_REVIEW,
 } from "./actiontypes";
 import axios from "axios";
 
@@ -351,3 +352,16 @@ export const deleteReview = (reviewId) => {
     }
   };
 };
+export function getCourseReview(data){
+return async (dispatch)=>{
+  try {
+    dispatch({
+      type: GET_COURSE_REVIEW,
+      payload: data
+    })
+  } catch (error) {
+    
+  }
+}
+
+}

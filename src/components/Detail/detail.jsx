@@ -39,8 +39,23 @@ export const Detail = () => {
   //const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData'))
   const [reviews, setReviews] = useState(false);
   const { t , i18n} = useTranslation()
+  const courseReview = useSelector(state => state.courseReview)
+  const [reviewsLength, setReviewsLength] = useState(0);
 
 console.log(detail);
+
+useEffect(() => {
+  const fetchReviews = async () => {
+    try {
+      const response = await axios.get(`${URL}/getCourseReviews/${detail._id}`);
+      setReviewsLength(response.data.length);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    }
+  };
+
+  fetchReviews();
+}, [URL]);
 
   useEffect(() => {
     if (!cart || cart.length === 0) {
@@ -186,6 +201,7 @@ console.log(detail);
           <div className="absolute right-5 top-5 flex flex-col items-center mr-5 ">
           <h1 className="text-4xl font-bold text-white flex items-center">{detail?.rank}</h1> 
           <h1 className=" flex font-2xl">{fullStars()}</h1>
+          <h1>{reviewsLength}{" "}{t("OPINIONES")}</h1>
           </div>
         </div>
         <div className="w-full h-[10%] bg-yellow-400 flex justify-center items-center">
@@ -275,9 +291,9 @@ console.log(detail);
     onClick={handleReviews} 
     className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-[10px]">
     {reviews ? 
-        (t("OCULTAR RESEÑAS")) 
+        (t("OCULTAR RESEÑAS"))
         :
-        (t("MOSTRAR RESEÑAS")) 
+         (t("MOSTRAR RESEÑAS")) 
     }
 </button>
       </div>

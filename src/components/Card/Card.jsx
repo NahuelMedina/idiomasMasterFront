@@ -140,36 +140,6 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
               alt={course.lenguage}
               className="h-[30px] w-[30px] m-[10px] "
             />
-            {/* {location.pathname !== "/favorite" && (
-              <div className="">
-                {isFav ? (
-                  <button
-                    onClick={handleFavorite}
-                    className=" absolute top-2 right-[250px] text-2xl "
-                  >
-                    ❤️
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleFavorite}
-                    className=" absolute top-1 right-[250px] text-2xl "
-                  >
-                    🤍
-                  </button>
-                )}
-              </div>
-            )}
-            {location.pathname === "/favorite" && (
-              <div>
-                <button
-                  onClick={handleRemoveFromFavorites}
-                  className=" absolute top-2 right-2 text-3xl "
-                >
-                  <RxCrossCircled className="bg-white rounded-[15px]" />
-                </button>
-              </div>
-            )} */}
-
             <h2 className="text-black text-[30px] ">{t(`LANGUAGE_${course.language.toUpperCase()}`)}</h2>
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
@@ -242,19 +212,17 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
           </Link>
           <div className="w-full h-full px-[15px] flex items-center text-white justify-center bg-sky-700 hover:bg-red-500 cursor:pointer">
             {isCart ? (
-              <div className="flex cursor:pointer items-center justify-center">
-                <h1
-                  onClick={handleCart}
-                  className="text-[15px] cursor:pointer mr-2 "
+              <div className="flex items-center justify-center w-full h-full cursor-pointer"  onClick={handleCart}>
+                <button
+                  className="text-[15px] mr-2"
                 >
                   {t("ELIMINAR DEL CARRITO CARD")}
-                </h1>
-                <FaRegTrashCan className="text-[30px] cursor:pointer" />
+                </button>
+                <FaRegTrashCan className="text-[30px] " />
               </div>
             ) : (
-              <div className=" flex items-center justify-center">
+              <div className=" flex items-center justify-center" onClick={handleCart}>
                 <button
-                  onClick={handleCart}
                   className="text-[15px] cursor:pointer"
                 >
                   {t("AGREGAR AL CARRITO CARD")}
@@ -264,42 +232,6 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
             )}
           </div>
         </div>
-        {/* <div className="grid grid-rows-0 gap-0 w-[350px] h-[240px] border-t border-black ">
-          <div className="bg-[#FF6B6C] w-full  h-[120px] flex flex-row items-center justify-center   border-x border-black ">
-            <Link
-              to={`/detail/${course._id}`}
-              className="bg-[#FF6B6C] w-full  h-[120px]  flex flex-row items-center justify-center hover:bg-yellow-500"
-            >
-              <TbListDetails className="text-[25px] m-[15px]  h-[120px] " />
-              <button className="text-black text-[25px]">
-                Detalle del producto
-              </button>
-            </Link>
-          </div>
-          <div className="bg-[#FF6B6C] h-[120px] w-full flex flex-row items-center justify-center border-x border-t border-black  hover:bg-yellow-500">
-            {isCart ? (
-              <div className="flex">
-                <RxCross2 className="text-[35px] m-[15px] " />
-                <button
-                  onClick={handleCart}
-                  className="text-black text-[25px] w-full  "
-                >
-                  Eliminar del carrito
-                </button>
-              </div>
-            ) : (
-              <div className="flex">
-                <FaCartShopping className="text-[25px] m-[15px] " />
-                <button
-                  onClick={handleCart}
-                  className="text-black text-[25px] "
-                >
-                  Agregar al carrito
-                </button>
-              </div>
-            )}
-          </div>
-        </div> */}
       </div>
     );
   }
@@ -379,27 +311,23 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
             </button>
           </Link>
         </div>
-        <div className="bg-white w-[90%] h-[70%] rounded-[10px] flex flex-row items-center justify-center hover:bg-yellow-500 cursor:pointer">
+        <div className="bg-white w-[90%] h-[70%] rounded-[10px] flex flex-row items-center justify-center hover:bg-yellow-500 ">
           {isCart ? (
-            <div className="flex cursor:pointer">
               <button
+                className="text-black w-full h-full flex items-center justify-center cursor:pointer "
                 onClick={handleCart}
-                className="text-black w-full h-[30px] flex items-center justify-center cursor:pointer "
               >
                 <RxCross2 className=" mr-1" />
                 {t("ELIMINAR DEL CARRITO CARD")}
               </button>
-            </div>
           ) : (
-            <div className="flex  w-full">
               <button
+                className="text-black w-full flex items-center justify-center h-full cursor:pointer"
                 onClick={handleCart}
-                className="text-black w-full flex items-center justify-center h-[30px] cursor:pointer"
               >
                 <FaCartShopping className=" mr-1" />
                 {t("AGREGAR AL CARRITO CARD")}
               </button>
-            </div>
           )}
         </div>
       </div>
