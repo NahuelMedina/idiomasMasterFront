@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import { IoSearchCircle } from "react-icons/io5";
 import { FaCircle } from "react-icons/fa";
+
 import { adminProduct, adminReview } from "../../redux/action/actions";
 import { FaTrashCan } from "react-icons/fa6";
 import {
@@ -12,6 +13,7 @@ import {
   putReview,
   putUser,
 } from "./userData";
+
 import { FaSearchPlus } from "react-icons/fa";
 import Swal from "sweetalert2";
 
@@ -174,6 +176,7 @@ export default function AdminManageReview() {
     }));
   };
 
+
   const handleDeleteAsync = async () => {
     try {
       const response = await deleteUserReview({ id: review._id });
@@ -207,6 +210,7 @@ export default function AdminManageReview() {
       }
     });
   };
+
 
   return (
     <div className="w-full h-full flex flex-col border-[#151139] border-[1px] ">

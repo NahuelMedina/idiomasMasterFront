@@ -36,7 +36,6 @@ export default function Error404() {
   );
 
 
-
   useEffect(() => {
     if (!userData.isAuthenticated && !userData.email) {
       if (
