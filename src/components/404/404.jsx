@@ -35,7 +35,7 @@ export default function Error404() {
     </div>
   );
 
-  let redirect = (<Redirect/>)
+
 
   useEffect(() => {
     if (!userData.isAuthenticated && !userData.email) {

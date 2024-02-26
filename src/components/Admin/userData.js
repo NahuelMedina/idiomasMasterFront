@@ -238,3 +238,18 @@ export const deleteUser = async ({ email, id, password }) => {
   }
 };
 
+
+export const deleteUserReview = async ({id}) => {
+
+  try {
+    const response = await axios.delete(`${URL}/deleteReview/${id}`);
+
+    if (response.data) {
+        return response.data; 
+      }
+  } catch (error) {
+    return(error)
+  }
+};
+
+
