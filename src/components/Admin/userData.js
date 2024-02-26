@@ -176,10 +176,9 @@ export const idReview = async (id) => {
 
 export const putReview = async ({ reply, view, reviewId }) => {
   try {
-    const response = await axios.put(`${URL}/putReview`, {
+    const response = await axios.put(`${URL}/putReview/${reviewId}`, {
       reply,
-      view,
-      reviewId,
+      view
     });
 
     if (response) {

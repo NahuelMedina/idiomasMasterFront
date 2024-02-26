@@ -7,6 +7,7 @@ import { adminProduct } from "../../redux/action/actions";
 import { RiFileUserLine } from "react-icons/ri";
 import { idUser, putUser } from "./userData";
 import { FaSearchPlus } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 export default function AdminSettingUser() {
   const initialUserState = {
@@ -48,31 +49,43 @@ export default function AdminSettingUser() {
     setUser(initialUserState);
     setErrors({});
     setSuccessMessage("");
-
   };
 
   const handleFetch = async (event) => {
     event.preventDefault();
 
-    const response = await idUser(searchTerm);
+    try {
+      const response = await idUser(searchTerm);
 
-    if (response.data) {
-
-        const { _id, name, lastname, email, status, img, profile, age } = response.data;
+      if (response.data) {
+        const { _id, name, lastname, email, status, img, profile, age } =
+          response.data;
 
         setUser({
-            _id,
-            name,
-            lastname,
-            email,
-            status,
-            profile,
-            age,
-            img,
-          });
+          _id,
+          name,
+          lastname,
+          email,
+          status,
+          profile,
+          age,
+          img,
+        });
+        setSearchTerm("");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "El id no corresponde a ningún producto",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "El id no corresponde a ningún usuario",
+      });
     }
-
-    setSearchTerm("");
   };
 
   const handleSearch = (event) => {
@@ -90,35 +103,34 @@ export default function AdminSettingUser() {
     }));
   };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-      try {
-        await putUser({
-          profile: user.profile,
-          id: user._id,
-          name: user.name,
-          lastname: user.lastname,
-          email: user.email,
-          status: user.status,
-          img: user.img,
-          password: user.password,
-          age: user.age,
-        });
-        window.alert("El Usuario se ha actualizado exitosamente.");
-        resetForm();
-        dispatch(adminProduct({}));
-      } catch (error) {
-        console.error("Error al actualizar el curso:", error.message);
-      }
-
+    try {
+      await putUser({
+        profile: user.profile,
+        id: user._id,
+        name: user.name,
+        lastname: user.lastname,
+        email: user.email,
+        status: user.status,
+        img: user.img,
+        password: user.password,
+        age: user.age,
+      });
+      window.alert("El Usuario se ha actualizado exitosamente.");
+      resetForm();
+      dispatch(adminProduct({}));
+    } catch (error) {
+      console.error("Error al actualizar el curso:", error.message);
+    }
   };
 
   return (
     <div className="w-full h-full flex flex-col border-[#151139] border-[1px] overflow-croll">
       <div className="w-full h-[40px] bg-[#151139]  flex flex-row items-center">
-        <p className=" text-white ml-6 text-[20px]">Busca & Actualiza Usuario</p>
+        <p className=" text-white ml-6 text-[20px]">
+          Busca & Actualiza Usuario
+        </p>
       </div>
       <div className="w-full h-[20%] bg-[#151139]  flex flex-row ">
         <div className="h-full w-[40%] ">
@@ -171,173 +183,170 @@ export default function AdminSettingUser() {
           </div>
         )}
       </div>
-      {user._id && user._id.length ?(
+      {user._id && user._id.length ? (
         <>
-         <form
-        onSubmit={handleSubmit}
-        className="bg-[#282a54] w-full h-[96%] grid grid-cols-3 gap-[5px] p-[5px]"
-      >
-        <div className="bg-[#282a54] w-full h-full grid grid-rows-3 gap-[5px] rounded-[10px]">
-          <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
-            <div className="w-full h-[25%] flex items-center">
-              <label htmlFor="language" className="text-white text-[18px]">
-                Nombre
-              </label>
-            </div>
-            <div className="w-full h-[50%] flex items-center">
-              <input
-                id="name"
-                name="name"
-                value={user.name}
-                onChange={handleChange}
-                required
-                className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
-              ></input>
-            </div>
-          </div>
-          <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
-            <div className="w-full h-[25%] flex items-center">
-              <label htmlFor="language" className="text-white text-[18px]">
-                Email
-              </label>
-            </div>
-            <div className="w-full h-[50%] flex items-center">
-              <input
-                id="email"
-                name="email"
-                value={user.email}
-                onChange={handleChange}
-                required
-                className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
-              ></input>
-            </div>
-          </div>
-          <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
-            <div className="w-full h-[25%] flex items-center">
-              <label htmlFor="language" className="text-white text-[18px]">
-               Tipo
-              </label>
-            </div>
-            <div className="w-full h-[50%] flex items-center">
-              <select
-                id="profile"
-                name="profile"
-                value={user.profile}
-                onChange={handleChange}
-                required
-                className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
-              >
-                <option value="">Seleccione un Perfil</option>
-                <option value="user">Usuario</option>
-                <option value="admin">Administrador</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div className="bg-[#282a54] w-full h-full grid grid-rows-3 gap-[5px] rounded-[10px]">
-          <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
-            <div className="w-full h-[25%] flex items-center">
-              <label htmlFor="language" className="text-white text-[18px]">
-                Apellido
-              </label>
-            </div>
-            <div className="w-full h-[50%] flex items-center">
-              <input
-                id="lastname"
-                name="lastname"
-                value={user.lastname}
-                onChange={handleChange}
-                required
-                className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
-              ></input>
-            </div>
-          </div>
-          <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
-            <div className="w-full h-[25%] flex items-center">
-              <label htmlFor="language" className="text-white text-[18px]">
-                Contraseña
-              </label>
-            </div>
-            <div className="w-full h-[50%] flex items-center">
-              <input
-                id="password"
-                name="password"
-                value={user.password}
-                onChange={handleChange}
-                placeholder="Nueva Contraseña"
-                className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
-              ></input>
-            </div>
-          </div>
-          <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
-            <div className="w-full h-[25%] flex items-center">
-              <label htmlFor="language" className="text-white text-[18px]">
-                Edad
-              </label>
-            </div>
-            <div className="w-full h-[50%] flex items-center">
-              <input
-                id="age"
-                name="age"
-                value={user.age}
-                onChange={handleChange}
-                required
-                className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
-              ></input>
-            </div>
-          </div>
-        </div>
-        <div className="bg-[#282a54] w-full h-full flex flex-col gap-[5px] rounded-[10px]">
-          <div className="w-full h-[75%] bg-[#373a6c] pl-[20px] rounded-[10px]">
-            <div className="w-full h-[10%] flex items-center">
-              <label htmlFor="duration" className="text-white text-[18px]">
-                Imagen
-              </label>
-            </div>
-            {user.img ? (
-              <div className="w-full h-[60%] flex items-center justify-center overflow-hidden ">
-                <img
-                  src={user.img}
-                  alt="Preview"
-                  className="max-h-[250px] max-w-full"
-                />
+          <form
+            onSubmit={handleSubmit}
+            className="bg-[#282a54] w-full h-[96%] grid grid-cols-3 gap-[5px] p-[5px]"
+          >
+            <div className="bg-[#282a54] w-full h-full grid grid-rows-3 gap-[5px] rounded-[10px]">
+              <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
+                <div className="w-full h-[25%] flex items-center">
+                  <label htmlFor="language" className="text-white text-[18px]">
+                    Nombre
+                  </label>
+                </div>
+                <div className="w-full h-[50%] flex items-center">
+                  <input
+                    id="name"
+                    name="name"
+                    value={user.name}
+                    onChange={handleChange}
+                    required
+                    className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
+                  ></input>
+                </div>
               </div>
-            ) : (
-              <div className="w-full h-[70%] flex items-center justify-center overflow-hidden ">
-                <RiFileUserLine className="w-full h-full flex items-center justify-center overflow-hidden text-white " />
+              <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
+                <div className="w-full h-[25%] flex items-center">
+                  <label htmlFor="language" className="text-white text-[18px]">
+                    Email
+                  </label>
+                </div>
+                <div className="w-full h-[50%] flex items-center">
+                  <input
+                    id="email"
+                    name="email"
+                    value={user.email}
+                    onChange={handleChange}
+                    required
+                    className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
+                  ></input>
+                </div>
               </div>
-            )}
-          </div>
-          <div className="w-full h-[25%] bg-[#373a6c] pl-[20px] rounded-[10px]">
-            <div className="w-full h-[25%] flex items-center justify-center">
-              <label
-                htmlFor="duration"
-                className="text-white text-[20px]"
-              ></label>
+              <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
+                <div className="w-full h-[25%] flex items-center">
+                  <label htmlFor="language" className="text-white text-[18px]">
+                    Tipo
+                  </label>
+                </div>
+                <div className="w-full h-[50%] flex items-center">
+                  <select
+                    id="profile"
+                    name="profile"
+                    value={user.profile}
+                    onChange={handleChange}
+                    required
+                    className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
+                  >
+                    <option value="">Seleccione un Perfil</option>
+                    <option value="user">Usuario</option>
+                    <option value="admin">Administrador</option>
+                  </select>
+                </div>
+              </div>
             </div>
-            <div className="w-full h-[75%] flex items-center justify-center">
-              <button
-                type="submit"
-                className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded"
-              >
-                Actualizar Usuario
-              </button>
+            <div className="bg-[#282a54] w-full h-full grid grid-rows-3 gap-[5px] rounded-[10px]">
+              <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
+                <div className="w-full h-[25%] flex items-center">
+                  <label htmlFor="language" className="text-white text-[18px]">
+                    Apellido
+                  </label>
+                </div>
+                <div className="w-full h-[50%] flex items-center">
+                  <input
+                    id="lastname"
+                    name="lastname"
+                    value={user.lastname}
+                    onChange={handleChange}
+                    required
+                    className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
+                  ></input>
+                </div>
+              </div>
+              <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
+                <div className="w-full h-[25%] flex items-center">
+                  <label htmlFor="language" className="text-white text-[18px]">
+                    Contraseña
+                  </label>
+                </div>
+                <div className="w-full h-[50%] flex items-center">
+                  <input
+                    id="password"
+                    name="password"
+                    value={user.password}
+                    onChange={handleChange}
+                    placeholder="Nueva Contraseña"
+                    className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
+                  ></input>
+                </div>
+              </div>
+              <div className="w-full h-full pl-[20px] rounded-[10px] bg-[#373a6c]">
+                <div className="w-full h-[25%] flex items-center">
+                  <label htmlFor="language" className="text-white text-[18px]">
+                    Edad
+                  </label>
+                </div>
+                <div className="w-full h-[50%] flex items-center">
+                  <input
+                    id="age"
+                    name="age"
+                    value={user.age}
+                    onChange={handleChange}
+                    required
+                    className="h-10 w-[90%] border mt-1 rounded px-4 bg-gray-50"
+                  ></input>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </form>
+            <div className="bg-[#282a54] w-full h-full flex flex-col gap-[5px] rounded-[10px]">
+              <div className="w-full h-[75%] bg-[#373a6c] pl-[20px] rounded-[10px]">
+                <div className="w-full h-[10%] flex items-center">
+                  <label htmlFor="duration" className="text-white text-[18px]">
+                    Imagen
+                  </label>
+                </div>
+                {user.img ? (
+                  <div className="w-full h-[60%] flex items-center justify-center overflow-hidden ">
+                    <img
+                      src={user.img}
+                      alt="Preview"
+                      className="max-h-[250px] max-w-full"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-full h-[70%] flex items-center justify-center overflow-hidden ">
+                    <RiFileUserLine className="w-full h-full flex items-center justify-center overflow-hidden text-white " />
+                  </div>
+                )}
+              </div>
+              <div className="w-full h-[25%] bg-[#373a6c] pl-[20px] rounded-[10px]">
+                <div className="w-full h-[25%] flex items-center justify-center">
+                  <label
+                    htmlFor="duration"
+                    className="text-white text-[20px]"
+                  ></label>
+                </div>
+                <div className="w-full h-[75%] flex items-center justify-center">
+                  <button
+                    type="submit"
+                    className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded"
+                  >
+                    Actualizar Usuario
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
         </>
-        ):(
-
-          <>
-              <div className=" w-full h-full rounded-[10px] items-center justify-center flex">
-           <h1 className="text-yellow-500 text-[40px]">Busca un Usuario</h1>
-           <FaSearchPlus className="text-white text-[40px] ml-[30px]" />
+      ) : (
+        <>
+          <div className=" w-full h-full rounded-[10px] items-center justify-center flex">
+            <h1 className="text-yellow-500 text-[40px]">Busca un Usuario</h1>
+            <FaSearchPlus className="text-white text-[40px] ml-[30px]" />
           </div>
-          </>
-  
-        )}
-     
+        </>
+      )}
     </div>
   );
 }

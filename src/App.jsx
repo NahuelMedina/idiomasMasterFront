@@ -67,7 +67,7 @@ function App() {
       } else {
         navigate(data.profile === "admin" ? "/admindashboard" : "/user/home");
       }
-    }
+    } 
   }, [data]);
 
   useEffect(() => {
