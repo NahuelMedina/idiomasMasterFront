@@ -3,9 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import { IoSearchCircle } from "react-icons/io5";
 import { FaCircle } from "react-icons/fa";
-import { adminProduct, adminReview, deleteReview } from "../../redux/action/actions";
-import { RiFileUserLine } from "react-icons/ri";
-import { idReview, idUser, putReview, putUser } from "./userData";
+
+import { adminProduct, adminReview } from "../../redux/action/actions";
+import { FaTrashCan } from "react-icons/fa6";
+import {
+  deleteUserReview,
+  idReview,
+  idUser,
+  putReview,
+  putUser,
+} from "./userData";
+
 import { FaSearchPlus } from "react-icons/fa";
 import Swal from "sweetalert2";
 
@@ -147,9 +155,9 @@ export default function AdminManageReview() {
         reply: review.reply,
       });
       Swal.fire({
-        icon: 'success',
-        title: 'Respuesta Enviada',
-        text: 'La respuesta ha sido enviada Exitosamente',
+        icon: "success",
+        title: "Respuesta Enviada",
+        text: "La respuesta ha sido enviada Exitosamente",
       });
       resetForm();
       dispatch(adminReview({}));
@@ -168,19 +176,41 @@ export default function AdminManageReview() {
     }));
   };
 
-  const handleDelete = async (id) => {
-    if (
-      window.confirm("¿Estás seguro de que deseas eliminar este comentario?")
-    ) {
-      try {
-        dispatch(deleteReview(id));
+
+  const handleDeleteAsync = async () => {
+    try {
+      const response = await deleteUserReview({ id: review._id });
+      if (response) {
+        Swal.fire({
+          title: "Borrado!",
+          text: "El comentario ha sido borrado.",
+          icon: "success",
+        });
+
+        resetForm();
         dispatch(adminReview({}));
-        alert("Comentario eliminado correctamente");
-      } catch (error) {
-        console.error("Error deleting review:", error);
       }
+    } catch (error) {
+      console.log(error.message);
     }
   };
+
+  const handleDel = async () => {
+    Swal.fire({
+      title: "Estas Seguro?",
+      text: "Quieres Eliminar la Review del Usuario",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, Elimala!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDeleteAsync();
+      }
+    });
+  };
+
 
   return (
     <div className="w-full h-full flex flex-col border-[#151139] border-[1px] ">
@@ -221,7 +251,7 @@ export default function AdminManageReview() {
 
       {review._id && review._id.length ? (
         <>
-          <form className="bg-[#282a54] w-full h-[96%] grid grid-rows-2 gap-[5px] p-[5px]">
+          <div className="bg-[#282a54] w-full h-[96%] grid grid-rows-2 gap-[5px] p-[5px]">
             <div className="bg-[#373a6b] w-full h-full rounded-[10px]">
               <div className="w-full h-[20%] flex items-center justify-evenly ">
                 <div className="h-full w-[30%] flex flex-row items-center justify-evenly">
@@ -239,11 +269,17 @@ export default function AdminManageReview() {
                   <h1 className="text-white">{review.course_review}</h1>
                 </div>
               </div>
-              <div className="w-full h-[80%] p-[20px]">
+              <div className="w-full h-[80%] p-[20px] relative">
                 <h1 className="text-yellow-500 text-[18px]">
                   Reseña del Usuario:
                 </h1>
                 <h1 className="text-white text-[18px]">{review.body}</h1>
+                <button
+                  onClick={handleDel}
+                  className="w-[50px] h-[50px] bg-red-600 flex items-center justify-center rounded-[5px] absolute right-4 bottom-4 z-20"
+                >
+                  <FaTrashCan className="text-white text-[30px]" />
+                </button>
               </div>
             </div>
             <div className="bg-[#373a6b] w-full h-full rounded-[10px]">
@@ -262,7 +298,6 @@ export default function AdminManageReview() {
               </div>
               <div className="w-full h-[20%] flex items-center justify-center">
                 <button
-                  type="submit"
                   className="w-[250px] h-[50px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded"
                   onClick={handleSubmit}
                 >
@@ -270,7 +305,7 @@ export default function AdminManageReview() {
                 </button>
               </div>
             </div>
-          </form>
+          </div>
         </>
       ) : (
         <>

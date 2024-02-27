@@ -4,6 +4,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, getUserCourses } from "../../redux/action/actions";
 import { RiShareLine } from "react-icons/ri";
+import { SiShopee } from "react-icons/si";
 import {
   EmailShareButton,
   EmailIcon,
@@ -55,8 +56,21 @@ const CourseSection = () => {
   
 
   return (
-    <div className="flex-rows w-full h-full  items-center grid grid-cols-2 gap-[10px] grid-rows-auto overflow-hidden  justify-center p-[10px] overflow-y-scroll">
-      {userCourses &&
+    <div className="flex-rows w-full h-full  items-center grid grid-cols-2 gap-[10px] grid-rows-auto overflow-hidden  justify-center p-[10px] overflow-y-scroll relative">
+      
+      {userCourses && userCourses.length === 0 ? (
+        <>
+          <div className="flex flex-col items-center justify-center absolute w-full">
+          <SiShopee className="text-[80px] text-gray-600 ml-[50px] font-semibold flex" />
+            <p className="text-[60px] text-gray-600 ml-[50px] font-semibold flex">
+              Aun no tienes Pagos Realizados
+            </p>
+            
+          </div>
+        </>
+      ) : (
+        <>
+          {userCourses &&
         userCourses.map((c, index) => (
           <div key={index} className="flex item-center justify-center">
             <div className="bg-white shadow-lg border-[1px] border-gray-200 flex flex-col w-[90%]">
@@ -112,6 +126,11 @@ const CourseSection = () => {
             </div>
           </div>
         ))}
+        </>
+      )}
+      
+      
+     
     </div>
   );
 };

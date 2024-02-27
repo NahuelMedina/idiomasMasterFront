@@ -27,7 +27,7 @@ export default function AdminNavbar() {
   }
 
   return (
-    <div className="flex h-[80px] fixed z-20  top-0 w-full items-center justify-between text-white bg-[#2d53d9] relative  " >
+    <div className="flex h-[80px] z-20  top-0 w-full items-center justify-between text-white bg-[#2d53d9] relative  " >
       <div className="flex h-full w-[320px] items-center ml-[30px]">
         <GrVmMaintenance className="text-[40px]" />
         <h1 className="text-[25px] ml-[25px]">Idiomas Master</h1>
