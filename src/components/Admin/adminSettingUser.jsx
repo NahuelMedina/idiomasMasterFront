@@ -72,6 +72,7 @@ export default function AdminSettingUser() {
           img,
         });
         setSearchTerm("");
+
       } else {
         Swal.fire({
           icon: "error",
@@ -117,7 +118,11 @@ export default function AdminSettingUser() {
         password: user.password,
         age: user.age,
       });
-      window.alert("El Usuario se ha actualizado exitosamente.");
+      Swal.fire({
+        icon: "success",
+        title: "Usuario modificado con éxito",
+
+      });
       resetForm();
       dispatch(adminProduct({}));
     } catch (error) {

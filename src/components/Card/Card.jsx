@@ -35,7 +35,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
     CourseId: "",
     CartId: "",
   });
-  const { t , i18n} = useTranslation()
+  const { t, i18n } = useTranslation()
 
   // Sector Carrito
   useEffect(() => {
@@ -182,7 +182,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
             <h2 className="text-black text-[17px]">
-            {t("DURACION_DE")}{":"}{t(`DURACION_${course.duration.toUpperCase()}`)}
+              {t("DURACION_DE")}{":"}{t(`DURACION_${course.duration.toUpperCase()}`)}
             </h2>
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
@@ -381,24 +381,18 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
         </div>
         <div className="bg-white w-[90%] h-[70%] rounded-[10px] flex flex-row items-center justify-center hover:bg-yellow-500 cursor:pointer">
           {isCart ? (
-            <div className="flex cursor:pointer">
-              <button
-                onClick={handleCart}
-                className="text-black w-full h-[30px] flex items-center justify-center cursor:pointer "
-              >
-                <RxCross2 className=" mr-1" />
+            <div className="flex cursor:pointer" onClick={handleCart}>
+              <div className="text-black flex items-center justify-center p-2 w-[300px]">
+                <RxCross2 className="mr-1" />
                 {t("ELIMINAR DEL CARRITO CARD")}
-              </button>
+              </div>
             </div>
           ) : (
-            <div className="flex  w-full">
-              <button
-                onClick={handleCart}
-                className="text-black w-full flex items-center justify-center h-[30px] cursor:pointer"
-              >
-                <FaCartShopping className=" mr-1" />
+            <div className="flex w-full cursor:pointer" onClick={handleCart}>
+              <div className="text-black flex items-center justify-center p-2 w-[300px]" >
+                <FaCartShopping className="mr-1" />
                 {t("AGREGAR AL CARRITO CARD")}
-              </button>
+              </div>
             </div>
           )}
         </div>

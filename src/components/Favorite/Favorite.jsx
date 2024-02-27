@@ -10,7 +10,7 @@ const Favorite = () => {
   const [favCourse, setFavCourse] = useState([]);
   const [renderCards, setRenderCards] = useState([]);
   const [pageNum, setPageNum] = useState(0);
-    const { t , i18n} = useTranslation()
+  const { t, i18n } = useTranslation()
 
 
   const getFav = () => {
@@ -67,7 +67,15 @@ const Favorite = () => {
     setRenderCards(renderCard);
     setPageNum(pageNums);
   }, [favCourse, itemsOnPage, pagePosition]);
-
+  const [cartCourse, setCartCourse] = useState(
+    JSON.parse(window.localStorage.getItem("cart"))
+  );
+  const [isInCart, setIsInCart] = useState(false);
+  const removeFromCart = (id) => {
+    const updatedCart = cartCourse.filter((course) => course._id !== id);
+    setCartCourse(updatedCart);
+    setIsInCart(false);
+  };
   const removeFromFavorites = (id) => {
     const updatedFavorites = favCourse.filter((course) => course._id !== id);
     setFavCourse(updatedFavorites);
@@ -139,6 +147,7 @@ const Favorite = () => {
                     course={element}
                     key={element._id}
                     removeFromFavorites={removeFromFavorites}
+                    removeFromCart={removeFromCart}
                   />
                 ))}
             </div>
@@ -147,9 +156,8 @@ const Favorite = () => {
           <div className="w-full h-[10%] ">
             <div className="h-[70px] items-center justify-center flex flex-row w-full">
               <IoIosArrowDropleft
-                className={`text-[50px] m-[30px] ${
-                  pagePosition === 1 ? "cursor-not-allowed" : "cursor-pointer"
-                } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
+                className={`text-[50px] m-[30px] ${pagePosition === 1 ? "cursor-not-allowed" : "cursor-pointer"
+                  } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
                 onClick={prevPage}
                 disabled={pagePosition === 1}
               />
@@ -157,11 +165,10 @@ const Favorite = () => {
                 <h1 className="text-[30px] m-[30px] text-black">{`${pagePosition}`}</h1>
               </div>
               <IoIosArrowDropright
-                className={`text-[50px] m-[30px] ${
-                  pagePosition === pageNum
-                    ? "cursor-not-allowed"
-                    : "cursor-pointer"
-                } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
+                className={`text-[50px] m-[30px] ${pagePosition === pageNum
+                  ? "cursor-not-allowed"
+                  : "cursor-pointer"
+                  } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
                 onClick={nextPage}
                 disabled={pagePosition === pageNum}
               />
