@@ -55,8 +55,9 @@ export const Navbar = () => {
         <select
           className="ml-[15px] appearance-none text-white bg-[#2D2D2D] font-semibold backdrop-blur-sm  border-2 border-gray-300 rounded-lg py-2 px-4  leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
           onChange={handleLanguageChange}
-          defaultValue={lang}
+          defaultValue="idioma"
         >
+          <option value="idioma">{t("IDIOMA")}</option>
           <option value="es">{t("ESPAÑOL")}</option>
           <option value="en">{t("ENGLISH")}</option>
           <option value="it">{t("ITALIAN")}</option>
