@@ -116,7 +116,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
 
   if (location.pathname === "/cart") {
     return (
-      <div className="overflow-hidden flex h-[220px] w-[90%] m-5 text-black  shadow-lg shadow-black/50 transform transition-transform mt-[50px]">
+      <div className="overflow-hidden flex h-[220px] w-[90%] m-5 text-black  shadow-lg shadow-black/50 transform transition-transform mt-[40px]">
         <div className="h-full w-[35%] bg-[#151139] overflow-hidden items-center justify-center flex ">
           <img
             src={course.image}
