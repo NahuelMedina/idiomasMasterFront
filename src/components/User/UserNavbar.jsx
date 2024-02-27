@@ -47,7 +47,6 @@ export default function UserNavbar() {
       setNumber(0);
     }
 
-    console.log("Hola");
   }, [currentCart]);
 
   return (

@@ -7,11 +7,7 @@ import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addCart,
-  createPreference,
-  deleteCart,
-  getCartDB,
+import {  addCart,  closeCart,  createPreference,  deleteCart,  getCartDB,
 } from "../../redux/action/actions";
 import { FaCartShopping } from "react-icons/fa6";
 import { CiReceipt } from "react-icons/ci";
@@ -31,7 +27,6 @@ const ShopCart = () => {
   const [userData, setUserData] = useState(
     JSON.parse(localStorage.getItem("userData"))
   );
-  console.log(currentCart);
   const [isInCart, setIsInCart] = useState(false);
   const { t , i18n} = useTranslation()
 
@@ -71,7 +66,24 @@ const ShopCart = () => {
     setCartCourse(updatedCart);
     setIsInCart(false);
   };
-
+///// temporal function 
+  const handleClose =async ()=>{
+    //dispatch(closeCart())
+    try {
+    const res = await axios.put(`${URL}/closeCart/${currentCart._id}`);
+    console.log(res);
+    if (res.status === 200) {
+      currentCart.courses.map( async(course) => {
+        await axios.put(`${URL}/addUserCourse`, {userId: userData._id , courseId: course._id})
+      })
+      handleEliminate()
+    }
+    } catch (error) {
+      alert("no se pudo cerrar el carrito")
+    }
+    
+  }
+console.log(currentCart);
   // Mercado pago
   const initCreatePreferenceCart = (p) => {
     dispatch(createPreference(p));
@@ -84,6 +96,7 @@ const ShopCart = () => {
       });
       // Manejar la respuesta del servidor
       if (res.status === 200) {
+        handleClose()
         // Mostrar alerta de éxito
         Swal.fire({
           icon: "success",
@@ -255,6 +268,7 @@ const ShopCart = () => {
                       initCreatePreferenceCart({
                         price: total,
                         cart_id: currentCart._id,
+                        user: userData,
                       })
                     }
                   >
@@ -274,6 +288,7 @@ const ShopCart = () => {
                   >
                     <button>{t("VER MAS CURSOS")}</button>
                   </Link>
+                  <button onClick={handleClose}>APRETA ACA</button>
                 </div>
               </div>
             </div>
