@@ -17,15 +17,12 @@ import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import DetailReviews from "./detailReviews";
-import { IoMdStar } from "react-icons/io";
-import { IoMdStarOutline } from "react-icons/io";
-import { IoMdStar } from "react-icons/io";
-import { IoMdStarOutline } from "react-icons/io";
+import { IoMdStar, IoMdStarOutline } from "react-icons/io"; // Combine IoMdStar and IoMdStarOutline into one import
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
-import { useTranslation } from "react-i18next";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next"; // Remove duplicate import of useTranslation
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
+
 
 export const Detail = () => {
   const [preferenceId, setPreferenceId] = useState(null);
