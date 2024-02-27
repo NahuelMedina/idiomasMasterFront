@@ -6,12 +6,21 @@ import { Link } from "react-router-dom";
 import { MdOutlineFavorite } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+
 const Favorite = () => {
   const [favCourse, setFavCourse] = useState([]);
   const [renderCards, setRenderCards] = useState([]);
   const [pageNum, setPageNum] = useState(0);
+  const [cartCourse, setCartCourse] = useLocalStorage("cart", [])
+  const [isInCart, setIsInCart] = useState(false);
+
   const { t, i18n } = useTranslation()
 
+  const removeFromCart = (id) => {
+    const updatedCart = cartCourse.filter((course) => course._id !== id);
+    setCartCourse(updatedCart);
+    setIsInCart(false);
+  };
 
   const getFav = () => {
     return JSON.parse(localStorage.getItem("fav"));
@@ -67,14 +76,9 @@ const Favorite = () => {
     setRenderCards(renderCard);
     setPageNum(pageNums);
   }, [favCourse, itemsOnPage, pagePosition]);
-  const [cartCourse, setCartCourse] = useLocalStorage("cart", [])
-  const [isInCart, setIsInCart] = useState(false);
+  // const [cartCourse, setCartCourse] = useLocalStorage("cart", [])
+  // const [isInCart, setIsInCart] = useState(false);
 
-  const removeFromCart = (id) => {
-    const updatedCart = cartCourse.filter((course) => course._id !== id);
-    setCartCourse(updatedCart);
-    setIsInCart(false);
-  };
   const removeFromFavorites = (id) => {
     const updatedFavorites = favCourse.filter((course) => course._id !== id);
     setFavCourse(updatedFavorites);

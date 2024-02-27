@@ -42,8 +42,6 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   }, [course, cart]);
 
   const handleCart = () => {
-
-
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
@@ -52,27 +50,29 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
       });
       return;
     }
+  
     dispatch(getCartDB(userData._id));
-    dispatch(getCartDB(userData._id));
-
     setIsCart(!isCart);
-    if (!isCart) {
-      const itemCart = JSON.parse(window.localStorage.getItem("cart"));
-      if (itemCart !== null) {
-        itemCart.push(course);
-        setCart(itemCart);
-      } else {
-        setCart([course]);
-      }
-    } else {
+    
+    const itemCart = JSON.parse(window.localStorage.getItem("cart")) || [];
+    
+    if (!isCart && !itemCart.some(item => item._id === course._id)) {
+      // Agregar al carrito
+      const updatedCart = [...itemCart, course];
+      setCart(updatedCart);
+      window.localStorage.setItem("cart", JSON.stringify(updatedCart));
+    } else if (isCart) {
+      // Eliminar del carrito
+      console.log("Holaaaa")
       removeFromCart(course._id);
-      const eliminateItemCart = JSON.parse(window.localStorage.getItem("cart"));
-      const filteredCart = eliminateItemCart.filter(
-        (c) => c._id !== course._id
-      );
+      const filteredCart = itemCart.filter((c) => c._id !== course._id);
       setCart(filteredCart);
+      window.localStorage.setItem("cart", JSON.stringify(filteredCart));
     }
   };
+
+
+  
   // Sector Favoritos
   useEffect(() => {
     if (!fav && fav.length === 0) {
