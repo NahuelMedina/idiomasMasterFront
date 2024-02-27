@@ -44,5 +44,4 @@ const validation = (course) => {
   
     return errors;
   };
-  
   export default validation
