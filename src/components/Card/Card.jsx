@@ -73,7 +73,6 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
       setCart(filteredCart);
     }
   };
-console.log(contextData);
   // Sector Favoritos
   useEffect(() => {
     if (!fav && fav.length === 0) {

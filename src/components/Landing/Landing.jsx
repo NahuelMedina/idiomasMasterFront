@@ -10,6 +10,7 @@ import { getGoogleUser } from "../Admin/userData";
 import { useTranslation } from "react-i18next";
 
 import { useTypewriter } from "react-simple-typewriter";
+import { useNavigate } from "react-router-dom";
 
 export const Landing = () => {
   const [num, setNum] = useState(1);
@@ -17,8 +18,8 @@ export const Landing = () => {
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
   const [userData, setUserDataLocally] = useLocalStorage("userData", {
-    email: "",
-    password: "",
+    // email: "",
+    // password: "",
   });
   const card_landing_data = [
     {
@@ -88,6 +89,10 @@ export const Landing = () => {
     words: [landing_string[num].word],
     loop: {},
   });
+
+  const navigate = useNavigate();
+
+
 
   useEffect(() => {
     const fetchUserData = async () => {

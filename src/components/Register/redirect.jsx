@@ -7,12 +7,10 @@ export default function Redirect() {
   const [userData, setUserData] = useLocalStorage("userData", {});
 
   useEffect(() => {
-    
     if (userData.isAuthenticated) {
-
       navigate(userData.profile === "admin" ? "/admindashboard" : "/user/home");
 
-      return
+      return;
     }
 
     navigate("/");
