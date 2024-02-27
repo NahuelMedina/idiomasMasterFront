@@ -63,7 +63,7 @@ const CourseSection = () => {
           <div className="flex flex-col items-center justify-center absolute w-full">
           <SiShopee className="text-[80px] text-gray-600 ml-[50px] font-semibold flex" />
             <p className="text-[60px] text-gray-600 ml-[50px] font-semibold flex">
-            {t("AUN NO TIENES PAGOS REALIZADOS")}
+            {t("AUN NO TIENES CURSOS REALIZADOS")}
             </p>
             
           </div>

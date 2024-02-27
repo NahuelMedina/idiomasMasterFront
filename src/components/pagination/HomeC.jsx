@@ -210,7 +210,7 @@ function HomeC() {
                 <Card
                   key={element._id}
                   course={element}
-                  removeFromCart={removeFromCart}
+                  removeFromCart={removeFromCart} 
                 />
               ))}
             </div>
