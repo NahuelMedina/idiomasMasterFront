@@ -76,7 +76,7 @@ export const Detail = () => {
     setIsCart(isCourseCart);
   }, [detail, cart]);
 
-  const handleCart = () => {
+const handleCart = () => {
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
@@ -98,7 +98,7 @@ export const Detail = () => {
 
     setCart(updatedCart);
     window.localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
+  };  
 
   //Favoritos
   useEffect(() => {

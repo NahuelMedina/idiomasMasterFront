@@ -108,6 +108,10 @@ const ShopCart = () => {
           title: t("PAGO CONFIRMADO"),
           text: t("EL PAGO SE HA CONFIRMADO CORRECTAMENTE."),
         });
+
+        dispatch(getCartDB(userData._id))
+        handleEliminate();
+
       } else {
         // Mostrar alerta de error
         Swal.fire({
