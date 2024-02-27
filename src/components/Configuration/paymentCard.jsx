@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { idProduct } from "../Admin/userData";
 import { useTranslation } from "react-i18next";
 
+const URL = import.meta.env.VITE_URL_HOST;
+
 export default function PaymentCard({ id, amount, date, course, status }) {
   const [courses, setCourse] = useState({});
   const { t , i18n} = useTranslation()
@@ -17,6 +19,25 @@ export default function PaymentCard({ id, amount, date, course, status }) {
 
     fetchCourse();
   }, [course]);
+
+  useEffect(() => {
+    if (Object.keys(courses).length === 0) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`${URL}/getCart/${id}`);
+          if (!response.ok) {
+            console.log("Error en la llamada");
+          }
+          const data = await response.json();
+          setCourse(data);
+        } catch (error) {
+          console.log("Mensaje de Error", error.message);
+        }
+      };
+      fetchData();
+    }
+  }, [courses, id]);
+  
 
   return (
     <div className="bg-white shadow-lg border-[1px] border-gray-200 flex flex-col items-center justify-evenly h-[200px] w-full">
