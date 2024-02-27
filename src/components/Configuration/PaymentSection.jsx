@@ -29,7 +29,7 @@ const PaymentSection = () => {
           <div className="flex flex-col items-center justify-center">
           <MdPayments className="text-[80px] text-gray-600 ml-[50px] font-semibold flex" />
             <p className="text-[60px] text-gray-600 ml-[50px] font-semibold flex">
-              Aun no tienes Pagos Realizados
+              {t("AUN NO TIENES PAGOS REALIZADOS")}
             </p>
             
           </div>
