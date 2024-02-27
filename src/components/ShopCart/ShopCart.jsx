@@ -18,10 +18,11 @@ import { CiReceipt } from "react-icons/ci";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 const URL = import.meta.env.VITE_URL_HOST;
-import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 
 const ShopCart = () => {
-  const [cartCourse, setCartCourse] = useLocalStorage("cart", "")
+  const [cartCourse, setCartCourse] = useState(
+    JSON.parse(localStorage.getItem("cart"))
+  );
   const [total, setTotal] = useState(0);
   const [items, setItems] = useState(1);
   const currentCart = useSelector((state) => state.currentCart);
@@ -30,9 +31,10 @@ const ShopCart = () => {
   const [userData, setUserData] = useState(
     JSON.parse(localStorage.getItem("userData"))
   );
+  console.log(currentCart);
   const [isInCart, setIsInCart] = useState(false);
   const { t , i18n} = useTranslation()
-  console.log(currentCart.courses)
+
 
   useEffect(() => {
     if (isInCart === false) {
@@ -61,8 +63,6 @@ const ShopCart = () => {
   const handleEliminate = () => {
     localStorage.removeItem("cart");
     setCartCourse([]);
-    setRenderCards();
-    setPageNum();
     setIsInCart(false);
   };
 
@@ -99,7 +99,7 @@ const ShopCart = () => {
         });
       }
     } catch (error) {
-      console.log(currentCart.courses).error("Error al realizar la solicitud:", error);
+      console.error("Error al realizar la solicitud:", error);
       // Mostrar alerta de error genérico
       Swal.fire({
         icon: "error",
@@ -113,27 +113,38 @@ const ShopCart = () => {
     createPayment();
     location.key = "";
   }
- 
+  // const createPayment = () => {
+  //   try {
+  //     const paymentId = location.search.split("&")[2].split("=")[1];
+  //     axios.post(`${URL}/createPayment`, {
+  //       data: paymentId,
+  //     });
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+  // if (location.key === "default") {
+  //   createPayment();
+  //   location.key = "";
+  // }
+
+
+
   // Mas y Menos uno
 
   const handleMinusOne = (id) => {
-    if(items === 1){
-      const eliminateItemCart = JSON.parse(window.localStorage.getItem("cart"));
-      const filteredCart = eliminateItemCart.filter(
-        (c) => c._id !== id
-      );
-      setCartCourse(filteredCart)
-      setIsInCart(false)
-     // localStorage.setItem("cart", JSON.stringify(filteredCart))
-      return;
-    }
-    setCartCourse((prevCart) =>
+    if(items >= 2){
+      setCartCourse((prevCart) =>
       prevCart.map((course) =>
         course._id === id
           ? { ...course, items: Math.max(1, (course.items || 1) - 1) }
           : course
       )
     );
+    } 
+    if(items === 1){
+      removeFromCart(id)
+    }
     
   };
   const handlePlusOne = (id) => {
@@ -145,6 +156,7 @@ const ShopCart = () => {
       )
     );
   };
+
   if (cartCourse === null || !cartCourse.length > 0) {
     return (
       <div className="w-full h-[90vh] mt-[80px] flex flex-col">
@@ -169,8 +181,8 @@ const ShopCart = () => {
   return (
     <div className="w-full h-[90vh] mt-[80px] flex flex-row bg-white">
       <div className="h-full w-[70%]">
-        <div className=" w-full h-full bg-white flex flex-col ">
-          <div className="w-full h-[100%] overflow-y-auto">
+        <div className=" w-full h-full bg-white flex flex-col overflow-y-auto ">
+          <div className="w-full h-[90%] pt-[20px]">
             {cartCourse &&
               cartCourse.length > 0 &&
               cartCourse.map((element, index) => (
@@ -183,10 +195,10 @@ const ShopCart = () => {
           </div>
         </div>
       </div>
-      <div className=" w-[30%]">
+      <div className="h-[90%] w-[30%]">
         <div className="w-full bg-white ">
           {cartCourse !== null && cartCourse.length > 0 ? (
-            <div className="bg-white w-[94%] h-[90%] border-[1px] border-gray-300 shadow-lg mt-[10px]">
+            <div className="bg-white w-[94%] border-[1px] border-gray-300 shadow-lg mt-[20px]">
               <div className="w-full h-[50px] bg-gray-100 flex flex-row items-center">
                 <CiReceipt className="text-[40px]" />
                 <p className="text-lg text-black font-semibold bg-gray-100 py-2 px-4">
@@ -194,15 +206,15 @@ const ShopCart = () => {
                 </p>
               </div>
 
-              <div className="border-b border-gray-400 "></div>
-              <div className="overflow-y-scroll h-[500px]">
-              {cartCourse && cartCourse.map((c, index) => (
+              <div className="border-b border-gray-400"></div>
+              <div className="overflow-y-auto h-[470px]">
+              {cartCourse.map((c, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between px-4 py-2 border-b border-gray-400  "
+                  className="flex items-center justify-between px-4 py-2 border-b border-gray-400 "
                 >
-                  <div className="flex items-center justify-start  w-[80%] ">
-                    <div className="w-[30%] flex flex-row items-center justify-evenly">
+                  <div className="flex items-center justify-start   w-[80%]">
+                    <div className=" w-[30%] flex flex-row items-center justify-evenly">
                       <button
                         onClick={() => handleMinusOne(c._id)}
                         className="p-2 focus:outline-none text-1xl text-black rounded-full"
@@ -228,7 +240,7 @@ const ShopCart = () => {
                     ${c.price * (c.items || 1)}
                   </p>
                 </div>
-              ))}</div>
+              ))} </div>
               <div className="flex items-center justify-end px-4 py-2 border-b border-gray-400">
                 <p className="text-xl text-gray-800 font-semibold">
                   {t("TOTAL")}{": "}${total}

@@ -12,11 +12,11 @@ import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
-import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
-import { useTranslation } from "react-i18next";
 import DetailReviews from "./detailReviews";
 import { IoMdStar } from "react-icons/io";
 import { IoMdStarOutline } from "react-icons/io";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+import { useTranslation } from "react-i18next";
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 
@@ -35,8 +35,10 @@ export const Detail = () => {
     JSON.parse(window.localStorage.getItem("fav"))
   );
   const { isAuthenticated } = useAuth0();
-    const [userData] = useLocalStorage("userData", {});
+
+  const [userData] = useLocalStorage("userData", {});
   //const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData'))
+
   const [reviews, setReviews] = useState(false);
   const { t , i18n} = useTranslation()
   const courseReview = useSelector(state => state.courseReview)
@@ -159,7 +161,7 @@ useEffect(() => {
   const diaI = ("0" + fechaIni.getDate()).slice(-2);
 
   const fechaInicial = `${añoI}-${mesI}-${diaI}`;
-
+  console.log(detail);
   const fechafin = new Date(detail?.finish_time);
   const añoF = fechafin.getFullYear();
   const mesF = ("0" + (fechafin.getMonth() + 1)).slice(-2);
@@ -198,10 +200,10 @@ useEffect(() => {
             alt={detail.lenguage}
             className="h-[60px] w-[60px] m-[25px] "
           />
-          <div className="absolute right-5 top-5 flex flex-col items-center mr-5 ">
-          <h1 className="text-4xl font-bold text-white flex items-center">{detail?.rank}</h1> 
-          <h1 className=" flex font-2xl">{fullStars()}</h1>
-          <h1>{reviewsLength}{" "}{t("OPINIONES")}</h1>
+          <div className="absolute right-5 top-1 text-center">
+            <h1 className="font-bold text-6xl text-white">{detail?.rank}</h1>
+            <h1 className="flex">{fullStars()}</h1>
+            <h1 className="text-xs text-white">{reviewsLength} {t("OPINIONES")}</h1>
           </div>
         </div>
         <div className="w-full h-[10%] bg-yellow-400 flex justify-center items-center">
@@ -290,15 +292,12 @@ useEffect(() => {
       <button
     onClick={handleReviews} 
     className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-[10px]">
-    {reviews ? 
-        (t("OCULTAR RESEÑAS"))
-        :
-         (t("MOSTRAR RESEÑAS")) 
+    {reviews ? (t("MOSTRAR RESEÑAS")) : (t("OCULTAR RESEÑAS")) 
     }
 </button>
       </div>
       <div className="w-[80%] h-auto flex items-center justify-center ">
-        {reviews ? <ReviewComponent /> : null}
+        {reviews ? <DetailReviews /> : <ReviewComponent />}
       </div>
       <hr />
       <br />
