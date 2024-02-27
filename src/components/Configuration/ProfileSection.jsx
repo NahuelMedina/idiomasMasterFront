@@ -22,12 +22,32 @@ const ProfileSection = () => {
       editedData.lastname === userData.lastname &&
       editedData.email === userData.email &&
       parseInt(editedData.age) === userData.age &&
+      !userData.img &&
+      !editedData.img &&
+      editedData.password.length < 7
+    ) {
+      return true;
+    } else if (
+      editedData.name === userData.name &&
+      editedData.lastname === userData.lastname &&
+      editedData.email === userData.email &&
+      parseInt(editedData.age) === userData.age &&
+      !userData.img &&
+      editedData.img
+    ) {
+      return false;
+    } else if (
+      editedData.name === userData.name &&
+      editedData.lastname === userData.lastname &&
+      editedData.email === userData.email &&
+      parseInt(editedData.age) === userData.age &&
+      userData.img &&
       userData.img === imagePreview &&
       editedData.password.length < 7
     ) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   };
 

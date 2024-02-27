@@ -142,7 +142,7 @@ export default function UserLanding() {
               </h1>
             </div>
             <div className="w-[90%] h-[90%] bg-white">
-              <Slider {...settings} className="w-[full] h-[90%] flex items-center justify-center bg-white">
+              <Slider {...settings} className="w-[full] h-[90%] flex flex-col items-center justify-center bg-white">
                 {userInfo.map((element) => (
                   <UserCourseCard
                     key={element._id}
