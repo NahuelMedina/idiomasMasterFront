@@ -32,7 +32,6 @@ const ShopCart = () => {
   const [userData, setUserData] = useState(
     JSON.parse(localStorage.getItem("userData"))
   );
-  console.log(currentCart);
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
@@ -319,6 +318,7 @@ const ShopCart = () => {
                       initCreatePreferenceCart({
                         price: total,
                         cart_id: currentCart._id,
+                        user: userData,
                       })
                     }
                   >

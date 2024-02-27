@@ -141,7 +141,7 @@ export const Detail = () => {
   const diaI = ("0" + fechaIni.getDate()).slice(-2);
 
   const fechaInicial = `${añoI}-${mesI}-${diaI}`;
-
+  console.log(detail);
   const fechafin = new Date(detail?.finish_time);
   const añoF = fechafin.getFullYear();
   const mesF = ("0" + (fechafin.getMonth() + 1)).slice(-2);
@@ -221,15 +221,19 @@ export const Detail = () => {
         </div>
         <div className="w-full h-[17%] bg-[#1d67ad] flex items-center justify-center">
           <button
-            onClick={() => initCreatePreference(detail)}
+            onClick={() =>
+              initCreatePreference({
+                detail_product: {
+                  product_id: detail._id,
+                  name: detail.language + " " + detail.level,
+                  price: detail.price,
+                },
+                user: userData,
+              })
+            }
             className="w-[270px] h-[70px] mr-[40px] bg-white hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded rounded-[10px]"
           >
             <p className=" m-2 text-2xl  "> Comprar ahora</p>{" "}
-            {preferenceId && (
-              <Wallet
-                initialization={{ preferenceId, redirectMode: "modal" }}
-              />
-            )}
           </button>
           {isCart ? (
             <div className="flex">
