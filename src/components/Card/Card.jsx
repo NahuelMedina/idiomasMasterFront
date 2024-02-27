@@ -28,13 +28,6 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const [cart, setCart] = useLocalStorage("cart", "");
   const { isAuthenticated } = useAuth0();
   const [userData] = useLocalStorage("userData", {})
-  // const [userData, setUserData] = useState(
-  //   JSON.parse(localStorage.getItem("userData"))
-  // );
-  const [cartState, setCartState] = useState({
-    CourseId: "",
-    CartId: "",
-  });
   const { t , i18n} = useTranslation()
 
   // Sector Carrito
@@ -80,7 +73,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
       setCart(filteredCart);
     }
   };
-
+console.log(contextData);
   // Sector Favoritos
   useEffect(() => {
     if (!fav && fav.length === 0) {

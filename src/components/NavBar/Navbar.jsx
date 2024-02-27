@@ -14,7 +14,6 @@ export const Navbar = () => {
   const location = useLocation();
   const [userData] = useLocalStorage("userData", {});
   const { t , i18n} = useTranslation()
-  const [lang, setLang] =useLocalStorage("lang", "")
 
 
  const handleLanguageChange = (e) => {
@@ -57,8 +56,11 @@ console.log((localStorage.getItem("lang")));
         <div className="flex ml-2 items-center gap-10 justify-around ">
         <select
           className="appearance-none text-white bg-[#2D2D2D] font-semibold backdrop-blur-sm  border-2 border-gray-300 rounded-lg py-2 px-4  leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
-          onChange={handleLanguageChange} defaultValue={lang} 
+          onChange={handleLanguageChange} defaultValue='idioma' 
         >
+          <option value='idioma'>
+            {t("IDIOMA")}
+          </option>
           <option value="es">
          {t("ESPAÑOL")}
           </option>

@@ -21,9 +21,7 @@ const URL = import.meta.env.VITE_URL_HOST;
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 
 const ShopCart = () => {
-  const [cartCourse, setCartCourse] = useLocalStorage("cart", [])
-  const [renderCards, setRenderCards] = useState([]);
-  const [pageNum, setPageNum] = useState(0);
+  const [cartCourse, setCartCourse] = useLocalStorage("cart", "")
   const [total, setTotal] = useState(0);
   const [items, setItems] = useState(1);
   const currentCart = useSelector((state) => state.currentCart);
@@ -34,14 +32,14 @@ const ShopCart = () => {
   );
   const [isInCart, setIsInCart] = useState(false);
   const { t , i18n} = useTranslation()
+  console.log(currentCart.courses)
 
-console.log(cartCourse);
   useEffect(() => {
     if (isInCart === false) {
       dispatch(getCartDB(userData._id));
       dispatch(
         addCart({
-          CoursesArray: localStorage.getItem("cart"),
+          CoursesArray: JSON.parse(localStorage.getItem("cart")),
           CartId: currentCart?._id,
         })
       );
@@ -72,13 +70,6 @@ console.log(cartCourse);
     const updatedCart = cartCourse.filter((course) => course._id !== id);
     setCartCourse(updatedCart);
     setIsInCart(false);
-    const pageNums = Math.ceil(updatedCart.length / itemsOnPage);
-    setPageNum(pageNums);
-    const itemsArray = Array.from({ length: pageNums }, (_, index) =>
-      updatedCart.slice(index * itemsOnPage, (index + 1) * itemsOnPage)
-    );
-    const renderCard = itemsArray[pagePosition - 1] || [];
-    setRenderCards(renderCard);
   };
 
   // Mercado pago
@@ -108,7 +99,7 @@ console.log(cartCourse);
         });
       }
     } catch (error) {
-      console.error("Error al realizar la solicitud:", error);
+      console.log(currentCart.courses).error("Error al realizar la solicitud:", error);
       // Mostrar alerta de error genérico
       Swal.fire({
         icon: "error",
@@ -122,59 +113,7 @@ console.log(cartCourse);
     createPayment();
     location.key = "";
   }
-  // const createPayment = () => {
-  //   try {
-  //     const paymentId = location.search.split("&")[2].split("=")[1];
-  //     axios.post(`${URL}/createPayment`, {
-  //       data: paymentId,
-  //     });
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
-  // if (location.key === "default") {
-  //   createPayment();
-  //   location.key = "";
-  // }
-
-  // Paginado
-  const [pagePosition, setPagePosition] = useState(1);
-  const itemsOnPage = 2;
-  const nextPage = () => {
-    setPagePosition((prevPagePosition) => {
-      if (prevPagePosition < pageNum) {
-        return prevPagePosition + 1;
-      } else {
-        return prevPagePosition;
-      }
-    });
-  };
-  const prevPage = () => {
-    setPagePosition((prevPagePosition) => {
-      if (prevPagePosition > 1) {
-        return prevPagePosition - 1;
-      } else {
-        return prevPagePosition;
-      }
-    });
-  };
-  useEffect(() => {
-    setPagePosition(1);
-  }, [cartCourse]);
-
-  useEffect(() => {
-    if (cartCourse === null) {
-      return;
-    }
-    const pageNums = Math.ceil(cartCourse.length / itemsOnPage);
-    const itemsArray = Array.from({ length: pageNums }, (_, index) =>
-      cartCourse.slice(index * itemsOnPage, (index + 1) * itemsOnPage)
-    );
-    const renderCard = itemsArray[pagePosition - 1] || [];
-    setRenderCards(renderCard);
-    setPageNum(pageNums);
-  }, [cartCourse, itemsOnPage, pagePosition]);
-
+ 
   // Mas y Menos uno
 
   const handleMinusOne = (id) => {
@@ -206,7 +145,6 @@ console.log(cartCourse);
       )
     );
   };
-
   if (cartCourse === null || !cartCourse.length > 0) {
     return (
       <div className="w-full h-[90vh] mt-[80px] flex flex-col">
@@ -232,10 +170,10 @@ console.log(cartCourse);
     <div className="w-full h-[90vh] mt-[80px] flex flex-row bg-white">
       <div className="h-full w-[70%]">
         <div className=" w-full h-full bg-white flex flex-col ">
-          <div className="w-full h-[90%] pt-[20px]">
+          <div className="w-full h-[100%] overflow-y-auto">
             {cartCourse &&
               cartCourse.length > 0 &&
-              renderCards.map((element, index) => (
+              cartCourse.map((element, index) => (
                 <Card
                   key={element._id}
                   course={element}
@@ -243,39 +181,12 @@ console.log(cartCourse);
                 />
               ))}
           </div>
-          <div className="h-[70px]  items-center justify-evenly flex flex-row w-full">
-            {cartCourse && cartCourse.length > 0 ? (
-              <div className="h-[30px] items-center justify-center flex flex-row">
-                <IoIosArrowDropleft
-                  className={`text-[50px] ${
-                    pagePosition === 1 ? "cursor-not-allowed" : "cursor-pointer"
-                  } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
-                  onClick={prevPage}
-                  disabled={pagePosition === 1}
-                />
-                <div className="w-[50px] flex items-center justify-center">
-                  <p className="text-[30px] text-black">{`${pagePosition}`}</p>
-                </div>
-                <IoIosArrowDropright
-                  className={`text-[50px] ${
-                    pagePosition === pageNum
-                      ? "cursor-not-allowed"
-                      : "cursor-pointer"
-                  } text-black hover:text-[#1E68AD] transition-transform transform-gp active:scale-95`}
-                  onClick={nextPage}
-                  disabled={pagePosition === pageNum}
-                />
-              </div>
-            ) : (
-              <div></div>
-            )}
-          </div>
         </div>
       </div>
-      <div className="h-[90%] w-[30%]">
-        <div className="w-full h-full bg-white ">
+      <div className=" w-[30%]">
+        <div className="w-full bg-white ">
           {cartCourse !== null && cartCourse.length > 0 ? (
-            <div className="bg-white w-[94%] border-[1px] border-gray-300 shadow-lg mt-[20px]">
+            <div className="bg-white w-[94%] h-[90%] border-[1px] border-gray-300 shadow-lg mt-[10px]">
               <div className="w-full h-[50px] bg-gray-100 flex flex-row items-center">
                 <CiReceipt className="text-[40px]" />
                 <p className="text-lg text-black font-semibold bg-gray-100 py-2 px-4">
@@ -283,14 +194,15 @@ console.log(cartCourse);
                 </p>
               </div>
 
-              <div className="border-b border-gray-400"></div>
+              <div className="border-b border-gray-400 "></div>
+              <div className="overflow-y-scroll h-[500px]">
               {cartCourse && cartCourse.map((c, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between px-4 py-2 border-b border-gray-400"
+                  className="flex items-center justify-between px-4 py-2 border-b border-gray-400  "
                 >
-                  <div className="flex items-center justify-start  h-full w-[80%]">
-                    <div className="h-full w-[30%] flex flex-row items-center justify-evenly">
+                  <div className="flex items-center justify-start  w-[80%] ">
+                    <div className="w-[30%] flex flex-row items-center justify-evenly">
                       <button
                         onClick={() => handleMinusOne(c._id)}
                         className="p-2 focus:outline-none text-1xl text-black rounded-full"
@@ -316,7 +228,7 @@ console.log(cartCourse);
                     ${c.price * (c.items || 1)}
                   </p>
                 </div>
-              ))}
+              ))}</div>
               <div className="flex items-center justify-end px-4 py-2 border-b border-gray-400">
                 <p className="text-xl text-gray-800 font-semibold">
                   {t("TOTAL")}{": "}${total}
