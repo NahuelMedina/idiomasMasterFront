@@ -5,7 +5,7 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { MdOutlineFavorite } from "react-icons/md";
 import { useTranslation } from "react-i18next";
-
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 const Favorite = () => {
   const [favCourse, setFavCourse] = useState([]);
   const [renderCards, setRenderCards] = useState([]);
@@ -67,10 +67,9 @@ const Favorite = () => {
     setRenderCards(renderCard);
     setPageNum(pageNums);
   }, [favCourse, itemsOnPage, pagePosition]);
-  const [cartCourse, setCartCourse] = useState(
-    JSON.parse(window.localStorage.getItem("cart"))
-  );
+  const [cartCourse, setCartCourse] = useLocalStorage("cart", [])
   const [isInCart, setIsInCart] = useState(false);
+
   const removeFromCart = (id) => {
     const updatedCart = cartCourse.filter((course) => course._id !== id);
     setCartCourse(updatedCart);
