@@ -22,7 +22,7 @@ export default function UserCourseCard({
  
 
   return (
-    <div className="w-[98%] h-[330px] bg-white flex items-center justify-center " onClick={handleNavigate}>
+    <div className="w-[98%] h-[360px] bg-white flex items-center justify-center " onClick={handleNavigate}>
       <div className="w-[95%] h-[90%] border-[1px] border-gray-70 bg-white cursor-pointer shadow-md shadow-black/10 grid grid-rows-5  overflow-hidden hover:scale-105 transition-all duration-300 hover:shadow-black/20">
         <div className="bg-[#1E68AD] flex items-center justify-center">
           <h1 className="text-[25px]">{t(`LANGUAGE_${language.toUpperCase()}`)}</h1>
