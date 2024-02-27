@@ -196,6 +196,20 @@
     "HOLA": "Hi",
     "TU PROGRESO": "Your Progress",
     "EXPLORA NUESTROS CURSOS": "Explore Our Courses",
-    "AUN NO TIENES CURSOS": "You don't have any courses yet"
+    "AUN NO TIENES CURSOS": "You don't have any courses yet",
+
+    "INGRESE PRIMER LETRA EN MAYUSCULA Y SIN ESPACIOS.": "Enter first letter in uppercase and without spaces.",
+    "NOMBRE MAYOR A 20 CARACATERES.": "Name longer than 20 characters.",
+    "NO PUEDE CONTENER NUMEROS": "Cannot contain numbers",
+    "EL NOMBRE ES OBLIGATORIO.": "Name is mandatory.",
+    "APELLIDO MAYOR A 20 CARACTERES.": "Last name longer than 20 characters.",
+    "EL APELLIDO ES OBLIGATORIO.": "Last name is mandatory.",
+    "EMAIL ES MAYOR A 30 CARACTERES.": "Email is longer than 30 characters.",
+    "LA EDAD ES OBLIGATORIA.": "Age is mandatory.",
+    "LA EDAD DEBE SER MENOR A 90 AÑOS.": "Age must be less than 90 years.",
+    "LA EDAD DEBE SER MAYOR A 18 AÑOS.": "Age must be greater than 18 years.",
+    "LA CONTRASEÑA DEBE TENER AL MENOS 8 CARACTERES.": "Password must be at least 8 characters long.",
+    "DEBE CONTENER CONTRASEÑA.": "Must contain password.",
+    "EL PASSWORD DEBE CONTENER AA2*": "The password must contain AA2*"
 
 }

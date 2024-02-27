@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import registerValidate from "../Utils/registerValidate";
-// import registerValidateEng from "../Utils/registerValidateEng";
+//import registerValidate from "../Utils/registerValidate";
 import { useDispatch, useSelector } from "react-redux";
 import { postUser } from "../../redux/action/actions";
 import Swal from "sweetalert2";
@@ -42,6 +41,48 @@ const Register = () => {
     password: "",
     age: "",
   });
+ const registerValidate = ({ name, lastname, email, age, img, password }) => {
+    const errors = {};
+    const regexImg = new RegExp("[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$");
+    const regexNameAndLast = new RegExp("^(?!.* (?: |$))[A-Z][a-z ]+$");
+  
+    //NAME
+    if (!regexNameAndLast.test(name)) { errors.name = t("INGRESE PRIMER LETRA EN MAYUSCULA Y SIN ESPACIOS.") };
+    if (name.length > 20) { errors.name = t("NOMBRE MAYOR A 20 CARACATERES.") };
+    if (!/^[^\d]*$/.test(name)) { errors.name = t("NO PUEDE CONTENER NUMEROS" )}
+    if (!name.length) { errors.name = t("EL NOMBRE ES OBLIGATORIO.") };
+    
+    //LASTNAME
+    if (!regexNameAndLast.test(lastname)) { errors.lastname = t("INGRESE PRIMER LETRA EN MAYUSCULA Y SIN ESPACIOS.") };
+    if (lastname.length > 20) { errors.lastname = t("APELLIDO MAYOR A 20 CARACTERES.") };
+    if (!/^[^\d]*$/.test(lastname)) { errors.lastname = t("NO PUEDE CONTENER NUMEROS" ) }
+    if (!lastname.length) { errors.lastname = t("EL APELLIDO ES OBLIGATORIO.") };
+    
+    //IMAGE
+    // if (!regexImg.test(img))
+    //   errors.image = "permite solo archivos con extensión jpg o jpeg.";
+    
+    //EMAIL
+    if (email.length > 30) { errors.email = t("EMAIL ES MAYOR A 30 CARACTERES.") };
+    if (!/\S+@\S+\.\S+/.test(email)) errors.email = t('EMAIL DEBE CONTENER @ Y .COM')
+    if (!email.length) { errors.email = t("EL EMAIL ES OBLIGATORIO.") };
+    // const existUser = await User.findOne({ email });
+    // if (existUser) {return res.status(400).send("Email is already in use")}
+  
+    //AGE
+    if (!age.length) { errors.age = t("LA EDAD ES OBLIGATORIA.") };
+    if (Number(age) > 90) { errors.age = t("LA EDAD DEBE SER MENOR A 90 AÑOS.") };
+    if (Number(age) < 18 ) { errors.age = t("LA EDAD DEBE SER MAYOR A 18 AÑOS.") };
+  
+    //PASSWORD
+    if (password.length < 8) { errors.password = t("LA CONTRASEÑA DEBE TENER AL MENOS 8 CARACTERES.") };
+    if (!password.length) errors.password = t("DEBE CONTENER CONTRASEÑA.");
+    if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/.test(password)) errors.password = t('EL PASSWORD DEBE CONTENER Aa2*')
+  
+    return errors;
+ }
+  
+  
 
 
   const handleChange = (e) => {

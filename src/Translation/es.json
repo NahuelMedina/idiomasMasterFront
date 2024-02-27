@@ -194,8 +194,20 @@
     "HOLA":"Hola",
     "TU PROGRESO":"Tu Progreso",
     "EXPLORA NUESTROS CURSOS":"Explora nuestros Cursos",
-    "AUN NO TIENES CURSOS":"Aun no tienes Cursos"
+    "AUN NO TIENES CURSOS":"Aun no tienes Cursos",
 
-
+    "INGRESE PRIMER LETRA EN MAYUSCULA Y SIN ESPACIOS.":"Ingrese primer letra en mayuscula y sin espacios.",
+    "NOMBRE MAYOR A 20 CARACATERES.":"Nombre mayor a 20 caracateres.",
+    "NO PUEDE CONTENER NUMEROS" :"No puede contener numeros",
+    "EL NOMBRE ES OBLIGATORIO.":"El nombre es obligatorio.",
+    "APELLIDO MAYOR A 20 CARACTERES.":"Apellido mayor a 20 caracteres.",
+    "EL APELLIDO ES OBLIGATORIO.":"El apellido es obligatorio.",
+    "EMAIL ES MAYOR A 30 CARACTERES.": "email es mayor a 30 caracteres.",
+    "LA EDAD ES OBLIGATORIA.": "la edad es obligatoria.",
+    "LA EDAD DEBE SER MENOR A 90 AÑOS.": "la edad debe ser menor a 90 años.",
+    "LA EDAD DEBE SER MAYOR A 18 AÑOS.": "la edad debe ser mayor a 18 años.",
+    "LA CONTRASEÑA DEBE TENER AL MENOS 8 CARACTERES.": "la contraseña debe tener al menos 8 caracteres.",
+    "DEBE CONTENER CONTRASEÑA.": "debe contener contraseña.",
+    "EL PASSWORD DEBE CONTENER AA2*": "el password debe contener aa2*"
 
 }

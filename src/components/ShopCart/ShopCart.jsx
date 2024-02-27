@@ -288,7 +288,6 @@ console.log(currentCart);
                   >
                     <button>{t("VER MAS CURSOS")}</button>
                   </Link>
-                  <button onClick={handleClose}>APRETA ACA</button>
                 </div>
               </div>
             </div>
