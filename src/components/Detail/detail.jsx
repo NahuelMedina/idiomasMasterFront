@@ -19,7 +19,10 @@ import Swal from "sweetalert2";
 import DetailReviews from "./detailReviews";
 import { IoMdStar } from "react-icons/io";
 import { IoMdStarOutline } from "react-icons/io";
+import { IoMdStar } from "react-icons/io";
+import { IoMdStarOutline } from "react-icons/io";
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
+import { useTranslation } from "react-i18next";
 import { useTranslation } from "react-i18next";
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
@@ -80,6 +83,8 @@ export const Detail = () => {
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
+        title: t("NECESITAS_REGISTRARTE_CARRITO"),
+        footer: `<a href="/register">${t("REGISTRARSE")}</a>`,
         title: t("NECESITAS_REGISTRARTE_CARRITO"),
         footer: `<a href="/register">${t("REGISTRARSE")}</a>`,
       });
