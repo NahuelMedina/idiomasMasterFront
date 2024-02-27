@@ -67,25 +67,26 @@ const ShopCart = () => {
     setIsInCart(false);
   };
 ///// temporal function 
-const handleClose = async () => {
-  try {
-    const res = await axios.put(`${URL}/closeCart/${currentCart._id}`); // Envía el ID del carrito como parámetro
-    console.log(res);
-    if (res.status === 200) {
-      // Si se cerró el carrito correctamente
-      // Itera sobre los cursos en el carrito y agrega cada curso al usuario
-      currentCart.courses.forEach(async (course) => {
-        await axios.put(`${URL}/addUserCourse`, {
-          userId: userData._id,
-          courseId: course._id,
-        });
-      });
-      handleEliminate(); // Realiza alguna acción después de cerrar el carrito (por ejemplo, eliminar el carrito del estado local)
-    }
-  } catch (error) {
-    alert("No se pudo cerrar el carrito");
-  }
-};
+
+// const handleClose = async () => {
+//   try {
+//     const res = await axios.put(`${URL}/closeCart/${currentCart._id}`); // Envía el ID del carrito como parámetro
+//     console.log(res);
+//     if (res.status === 200) {
+//       // Si se cerró el carrito correctamente
+//       // Itera sobre los cursos en el carrito y agrega cada curso al usuario
+//       currentCart.courses.forEach(async (course) => {
+//         await axios.put(`${URL}/addUserCourse`, {
+//           userId: userData._id,
+//           courseId: course._id,
+//         });
+//       });
+//       handleEliminate(); // Realiza alguna acción después de cerrar el carrito (por ejemplo, eliminar el carrito del estado local)
+//     }
+//   } catch (error) {
+//     alert("No se pudo cerrar el carrito");
+//   }
+// };
 
 
   // Mercado pago
@@ -100,7 +101,7 @@ const handleClose = async () => {
       });
       // Manejar la respuesta del servidor
       if (res.status === 200) {
-        handleClose()
+        // handleClose()
         // Mostrar alerta de éxito
         Swal.fire({
           icon: "success",
