@@ -14,7 +14,6 @@ export default function DangerZone() {
   const [userData, setUserDataLocally] = useLocalStorage("userData");
   const navigate = useNavigate();
 
-
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -30,32 +29,27 @@ export default function DangerZone() {
     Swal.fire({
       title: t("ESTAS_SEGURO"),
       text: t("QUIERES_CERRAR_SESION"),
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
       confirmButtonText: t("CERRAR_SESION"),
       cancelButtonText: t("CERRAR"),
     }).then(async (result) => {
       if (result.isConfirmed) {
-
         const response = await deleteUser({
           id: userData._id,
           email: data.email,
           password: data.password,
         });
 
-        console.log(response);
-
         if (response.status) {
-          setTimeout(() => {
-            setUserDataLocally({});
-            logout({ logoutParams: { returnTo: window.location.origin } }).then(
-              () => {
-                navigate("/");
-              }
-            );
-          }, 3500);
+          setUserDataLocally({});
+          logout({ logoutParams: { returnTo: window.location.origin } }).then(
+            () => {
+              navigate("/");
+            }
+          );
         } else {
           Swal.fire({
             icon: "error",
@@ -64,18 +58,14 @@ export default function DangerZone() {
           });
         }
       }
-    })
+    });
   };
 
-
   const buttonDisable = () => {
-    if (
-      data.email.length > 5 &&
-      data.password.length > 5
-    ) {
-      return false
+    if (data.email.length > 5 && data.password.length > 5) {
+      return false;
     } else {
-      return true
+      return true;
     }
   };
 

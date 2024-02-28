@@ -39,6 +39,7 @@ export default function Error404() {
   useEffect(() => {
     if (!userData.isAuthenticated && !userData.email) {
       if (
+        location.pathname !== "/" &&
         location.pathname !== "/home" &&
         location.pathname !== "/detail/:id" &&
         location.pathname !== "/search" &&
