@@ -164,8 +164,8 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
             </h2>
           </div>
         </div>
-        <div className="h-full w-[20%]  grid grid-rows-4 border-l-[1px]">
-          <div className="w-full h-full flex items-center justify-end">
+        <div className="h-full w-[20%]  grid grid-rows-3 border-l-[1px]">
+          <div className="w-full h-full bg-sky-700 flex items-center justify-end">
             {location.pathname !== "/favorite" && (
               <div className="">
                 {isFav ? (
@@ -197,7 +197,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
             )}
           </div>
           <div className="w-full h-full flex items-center justify-center">
-            <h2 className="text-black  text-[30px]">$ {course.price}</h2>
+            <h2 className="text-black  text-[40px]">$ {course.price}</h2>
           </div>
           <Link
             to={`/detail/${course._id}`}
@@ -208,7 +208,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
             </h1>
             <TbListDetails className=" text-[35px] cursor:pointer " />
           </Link>
-          <div className="w-full h-full px-[15px] flex items-center text-white justify-center bg-sky-700 hover:bg-red-500 cursor:pointer">
+          {/* <div className="w-full h-full px-[15px] flex items-center text-white justify-center bg-sky-700 hover:bg-red-500 cursor:pointer">
             {isCart ? (
               <div className="flex items-center justify-center w-full h-full cursor-pointer" onClick={handleCart}>
                 <button
@@ -228,7 +228,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
                 <FaCartShopping className="text-[25px] cursor:pointer" />
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     );

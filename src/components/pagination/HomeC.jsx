@@ -154,8 +154,8 @@ function HomeC() {
             onChange={handleChangeNum}
           >
             <option value="all">{t("PRECIO_CURSO")}</option>
-            <option value="A">{t("MIN_A_MAX")}</option>
-            <option value="B">{t("MAX_A_MIN")}</option>
+            <option value="B">{t("MIN_A_MAX")}</option>
+            <option value="A">{t("MAX_A_MIN")}</option>
           </select>
           <div className="bg-[#1e417a] w-full h-[50px]  flex flex-row items-center justify-evenly">
             <FaRankingStar className="text-[30px] text-white " />
