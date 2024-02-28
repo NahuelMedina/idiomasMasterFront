@@ -111,7 +111,7 @@ export const Detail = () => {
   }, [detail, fav]);
 
   const handleFavorite = () => {
-  
+
     if (
       (!userData.isAuthenticated) ||
       userData.isAuthenticated === null
@@ -123,7 +123,7 @@ export const Detail = () => {
       });
       return;
     }
- 
+
     setIsFav(!isFav);
     const currentfav = JSON.parse(window.localStorage.getItem("fav")) || [];
 
@@ -159,12 +159,23 @@ export const Detail = () => {
     dispatch(createPreference(p));
   };
 
-  const createPayment = () => {
+  const createPayment = async () => {
     try {
       const paymentId = location.search.split("&")[2].split("=")[1];
-      axios.post(`${URL}/createPayment`, {
+      const res = await axios.post(`${URL}/createPayment`, {
         data: paymentId,
       });
+      if (res.status === 200) {
+        // handleClose()
+        // Mostrar alerta de éxito
+        Swal.fire({
+          icon: "success",
+          title: t("PAGO CONFIRMADO"),
+          text: t("EL PAGO SE HA CONFIRMADO CORRECTAMENTE."),
+        });
+
+
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -202,15 +213,15 @@ export const Detail = () => {
     for (let i = 1; i <= 5; i++) {
       i <= detail?.rank
         ? star.push(
-            <span>
-              <IoMdStar className=" text-yellow-500 " />
-            </span>
-          )
+          <span>
+            <IoMdStar className=" text-yellow-500 " />
+          </span>
+        )
         : star.push(
-            <span>
-              <IoMdStar className=" text-black " />
-            </span>
-          );
+          <span>
+            <IoMdStar className=" text-black " />
+          </span>
+        );
     }
     return star;
   };

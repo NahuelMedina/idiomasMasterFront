@@ -74,8 +74,8 @@ export default function AdminManageReview() {
 
   const resetForm = () => {
     setReview(initialUserState);
-    setErrors({});
-    setSuccessMessage("");
+    //setErrors({});
+    //setSuccessMessage("");
   };
 
   const handleFetch = async (event) => {
