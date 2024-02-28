@@ -49,11 +49,19 @@
 }
 
 .text-right {
-    background-color: rgb(0, 255, 255, 0.6); /* Cambia el color de fondo para el lado derecho */
+    background-color: rgb(255, 255, 255); /* Cambia el color de fondo para el lado derecho */
+    width: 500px; /* Tamaño inicial */
+    word-wrap: break-word;
+    margin-left: 20px; /* Permite que las palabras se rompan si son más largas que el contenedor */
 }
 
 .text-left {
-    background-color: rgb(173, 216, 230,0.6); /* Cambia el color de fondo para el lado izquierdo */
+    background-color: rgb(165, 165, 165); /* Cambia el color de fondo para el lado izquierdo */
+    width: 500px; /* Tamaño inicial */
+    word-wrap: break-word;
+    margin-right: 20px;
+    margin-left: auto;
+    color: black;
 }
 
 /* .chat-sala { 

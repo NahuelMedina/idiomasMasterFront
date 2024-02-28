@@ -6,9 +6,10 @@ import React, { useRef } from "react";
 import { IoMdChatbubbles } from "react-icons/io";
 import { CgUserlane } from "react-icons/cg";
 import { TbWorldStar } from "react-icons/tb";
+const URL = import.meta.env.VITE_URL_HOST;
 
 //conexion para escuchar y enviar los eventos
-const socket = io("http://localhost:3000");
+const socket = io(URL);
 const url = "http://localhost:3000";
 
 export const Room = () => {

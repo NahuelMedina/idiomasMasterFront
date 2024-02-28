@@ -43,8 +43,8 @@ export default function Error404() {
         location.pathname !== "/home" &&
         location.pathname !== "/detail/:id" &&
         location.pathname !== "/search" &&
-        location.pathname !== "/redirect" &&
-        location.pathname !== "/Chat"
+        location.pathname !== "/redirect"
+       
       ) {
         setComponente(ErrorComponent);
       }
@@ -68,7 +68,8 @@ export default function Error404() {
         location.pathname !== "/configuracion" &&
         location.pathname !== "/user/home" &&
         location.pathname !== "/favorite" &&
-        location.pathname !== "/cart"
+        location.pathname !== "/cart" &&
+        location.pathname !== "/Chat"
       ) {
         setComponente(ErrorComponent);
       }

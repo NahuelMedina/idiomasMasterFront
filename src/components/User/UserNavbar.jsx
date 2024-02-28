@@ -12,6 +12,7 @@ import { TiShoppingCart } from "react-icons/ti";
 import { BiWorld } from "react-icons/bi";
 import { IoSettingsSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
+import { BsChatSquareQuoteFill } from "react-icons/bs";
 
 export default function UserNavbar() {
   const { user, isAuthenticated, logout } = useAuth0();
@@ -86,6 +87,11 @@ export default function UserNavbar() {
         >
           <FaHeart className="text-[40px] ml-[15px] cursor-pointer text-red-700 " />
         </Link>
+    
+        <Link to="/chat" className="h-full w-[100px] jutsify-center flex items-center cursor-pointer">
+        <BsChatSquareQuoteFill className="text-[40px] ml-[15px] cursor-pointer " />
+          </Link>
+    
       </div>
 
       <div className="flex items-center justify-around h-full w-[40%]">

@@ -2,6 +2,9 @@ import './Chat.css';
 import React, { useEffect, useState, useRef } from 'react';
 import classnames from 'classnames';
 import ScrollToBottom from 'react-scroll-to-bottom';
+import { FaRocketchat } from "react-icons/fa";
+import { RiMessage2Fill } from "react-icons/ri";
+
 
 export const Chat = ({ socket, username, room }) => {
     const [currentMessage, setCurrentMessage] = useState("");
@@ -51,15 +54,56 @@ export const Chat = ({ socket, username, room }) => {
     }, [messagesList]);
 
     return (
-        <div className="contChat">
-            <div>
-                <section className='infoSala'>
-                    <p>{`Chat en vivo | ${username} | Sala: ${room}`}</p>
-                </section>
+        <div className="w-full h-[90vh] flex items-center justify-center flex-col ">
+
+            <div className="w-[97%] h-[95%] mt-[5px] bg-[#1e1f23] flex flex-row rounded-[5px] overflow-hidden">
+            <div className='h-full w-[15%] bg-[#1e1f23] flex justify-center'>
+                <div className='h-[40%] w-[90%] bg-[#2c2d31] mt-[26px] ml-[15px] rounded-[10px] '>
+                <h1 className='mt-[20px] mx-[10px] text-[30px] flex flex-row items-center text-white border-b-[1px] border-gray-500'> Chat en vivo</h1>
+                <h1 className='mt-[20px] mx-[10px] text-[17px] font-light flex flex-row items-center text-gray-300'> CANALES TEXTO</h1>
+                <h1 className='mt-[0px] mx-[10px] text-[30px] flex flex-row items-center text-white '>  {room} <FaRocketchat className="mx-[20px] text-[40px] text-gray-400"/></h1>
+                <h1 className='mt-[20px] mx-[10px] text-[17px] font-light flex flex-row items-center text-gray-300'>USUARIO</h1>
+                <h1 className='mt-[0px] mx-[10px] text-[25px] font-light flex flex-row items-center text-white'> {username}</h1>
+                </div>
             </div>
-            <br />
-            {/* col-span-2 overflow-y-scroll */}
-            <div className='mensajes'>
+            <div className="w-[85%] h-full mt-[5px] bg-[#1e1f23] flex flex-col rounded-[5px] items-center justify-center overflow-hidden">
+                <div className="w-[97%] h-[80%] mt-[5px] bg-[#3a3c41] flex flex-row rounded-[5px] overflow-hidden">
+              
+                    <ScrollToBottom className=" w-full h-full" messagesContainerRef={messagesContainerRef}>
+                        <div className='bg-transparent'>
+                            {messagesList.map((item, i) => (
+                                <h3 key={i}>
+                                    <div className={classnames({
+                                        'message-container': true,
+                                        'text-right': username === item.autor,
+                                        'text-left': username !== item.autor
+                                    }) }>
+                                        <strong>{item.message}</strong>
+                                        <p className='Autor'>{item.autor} <i>{item.time}</i></p>
+                                    </div>
+                                </h3>
+                            ))}
+                        </div>
+                    </ScrollToBottom>
+                
+                </div>
+                <div className="w-[97%] h-[15%] mt-[5px] bg-[#2c2d31] flex flex-row items-center justify-center rounded-[5px] overflow-hidden p-[20px]">
+                <RiMessage2Fill className="text-white text-[55px] mr-[30px] mb-[10px]"/>
+                <section className=" h-full w-[90%] ">
+                    <input className="bg-white h-[50px] w-[80%] rounded-[10px] pl-[20px] text-[18px] font-ligth" value={currentMessage} type="text" placeholder='Escribe tu Mensaje'
+                        onChange={e => setCurrentMessage(e.target.value)}
+                        onKeyPress={(e) => {
+                            e.key === 'Enter' && sendMessage();
+                        }} />
+                        <button className="ml-[15px] h-[50px] w-[120px] bg-sky-800 rounded-[10px] text-white" onClick={sendMessage}>Enviar &#9658; </button>
+                </section>
+
+                </div>
+
+            </div>
+
+
+            {/* <div className='mensajes'>
                 <section>
                     <ScrollToBottom className="scroll-container" messagesContainerRef={messagesContainerRef}>
                         <div className='mensajesss'>
@@ -89,7 +133,12 @@ export const Chat = ({ socket, username, room }) => {
                         }} />
                         <button className='botonEnviar' onClick={sendMessage}>Enviar &#9658; </button>
                 </section>
+            </div> */}
+
             </div>
+          
+            
+           
         </div>
     );
 };
