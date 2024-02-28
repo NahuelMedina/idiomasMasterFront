@@ -53,7 +53,7 @@ export const Navbar = () => {
         </div>
         <div>
         <Link to="/chat" className="h-full flex items-center justify-center">
-            <h1>CHAT</h1>
+            <h1>{t("CHAT")}</h1>
           </Link>
         </div>
         <div className="flex ml-2 items-center gap-10 justify-around ">

@@ -193,5 +193,47 @@
     "HOLA": "Ciao",
     "TU PROGRESO": "Il Tuo Progresso",
     "EXPLORA NUESTROS CURSOS": "Esplora i Nostri Corsi",
-    "AUN NO TIENES CURSOS": "Non hai ancora corsi"
+    "AUN NO TIENES CURSOS": "Non hai ancora corsi",
+
+    "INGRESE PRIMER LETRA EN MAYUSCULA Y SIN ESPACIOS.": "Inserisci la prima lettera in maiuscolo e senza spazi.",
+    "NOMBRE MAYOR A 20 CARACATERES.": "Nome più lungo di 20 caratteri.",
+    "NO PUEDE CONTENER NUMEROS": "Non può contenere numeri",
+    "EL NOMBRE ES OBLIGATORIO.": "Il nome è obbligatorio.",
+    "APELLIDO MAYOR A 20 CARACTERES.": "Cognome più lungo di 20 caratteri.",
+    "EL APELLIDO ES OBLIGATORIO.": "Il cognome è obbligatorio.",
+    "EMAIL ES MAYOR A 30 CARACTERES.": "L'email è più lunga di 30 caratteri.",
+    "LA EDAD ES OBLIGATORIA.": "L'età è obbligatoria.",
+    "LA EDAD DEBE SER MENOR A 90 AÑOS.": "L'età deve essere inferiore a 90 anni.",
+    "LA EDAD DEBE SER MAYOR A 18 AÑOS.": "L'età deve essere maggiore di 18 anni.",
+    "LA CONTRASEÑA DEBE TENER AL MENOS 8 CARACTERES.": "La password deve contenere almeno 8 caratteri.",
+    "DEBE CONTENER CONTRASEÑA.": "Deve contenere una password.",
+    "EL PASSWORD DEBE CONTENER AA2*": "La password deve contenere AA2*",
+
+    "TODO_EL_DIA": "Tutto il giorno",
+    "ANTERIOR": "Precedente",
+    "SIGUIENTE": "Successivo",
+    "HOY": "Oggi",
+    "MES": "Mese",
+    "SEMANA": "Settimana",
+    "DIA": "Giorno",
+    "AGENDA": "Agenda",
+    "FECHA": "Data",
+    "HORA": "Ora",
+    "EVENTO": "Evento",
+    "SIN_EVENTOS_EN_RANGO": "Nessun evento",
+
+    "COMUNIDAD DE IDIOMAS": "Comunità linguistica",
+    "SELECCIONE AULA DE IDIOMA": "Seleziona la stanza linguistica",
+    "UNIRME": "Unisciti!",
+    "UNETE A LA SALA": "Unisciti alla stanza",
+    "NOMBRE DE USUARIO": "Nome utente",
+    "ID SALA: ": "ID della stanza: ",
+
+    "ENVIAR": "Invia",
+    "CHAT EN VIVO": "Chat dal vivo",
+    "SALA": "Sala",
+    "MENSAJE": "Messaggio...",
+    "CHAT": "CHAT",
+    "CALENDARIO": "Calendario"
+    
 }

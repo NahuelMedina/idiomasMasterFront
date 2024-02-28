@@ -6,6 +6,7 @@ import CourseSection from "./CourseSection";
 import DangerZone from "./dangerZone";
 
 import { t } from "i18next";
+import { CalendarSection } from "./CalendarSection";
 
 export const Configuration = () => {
   const [selectedSection, setSelectedSection] = useState("perfil");
@@ -16,6 +17,7 @@ export const Configuration = () => {
     review: false,
     danger: false,
     cursos: false,
+    calendar: false,
   });
 
   const handleClick = (element) => {
@@ -25,6 +27,7 @@ export const Configuration = () => {
       review: false,
       danger: false,
       cursos: false,
+      calendar: false,
       [element]: true,
     };
     setOptions(updatedOptions);
@@ -88,6 +91,18 @@ export const Configuration = () => {
             </p>
           </div>
           <div
+            className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[1px] border-b-[1px]  cursor-pointer ${
+              options.calendar
+                ? "bg-blue-500 text-white cursor-not-allowed border-blue-500 "
+                : "bg-white"
+            }`}
+            onClick={() => handleClick("calendar")}
+          >
+            <p className="text-[18px] ml-[20px] focus:text-white ">
+              {t("CALENDARIO")}
+            </p>
+          </div>
+          <div
             className={`flex items-center h-[10%] font-bold border-x-[1px] border-l-[2px]  border-t-[1px] border-b-[2px]   cursor-pointer ${
               options.danger
                 ? "bg-red-500 text-white cursor-not-allowed border-red-500 "
@@ -107,6 +122,7 @@ export const Configuration = () => {
           {options.pago ? <PaymentSection /> : null}
           {options.review ? <ReviewSection /> : null}
           {options.cursos ? <CourseSection /> : null}
+          {options.calendar ? <CalendarSection /> : null}
           {options.danger ? <DangerZone /> : null}
         </div>
       </div>
