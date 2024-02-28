@@ -233,13 +233,13 @@ const ReviewComponent = () => {
                   <div className="flex items-center mb-4 ">
                     <img
                       className="w-10 h-10 mr-2 rounded-full"
-                      src={review.student_img}
+                      src={review.student_img || "/img/avatar_land.png"}
                       alt="Profile"
                       style={{
                         objectFit: "cover",
                         justifySelf: "center",
                         width: "44px",
-                      }}
+                      }} 
                     />
                     <div>
                       <p className="text-black">

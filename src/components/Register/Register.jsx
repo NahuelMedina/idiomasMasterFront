@@ -77,10 +77,11 @@ const Register = () => {
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(postUser(state));
-    if (postError === null) {
+    const response = await dispatch(postUser(state));
+    console.log(response)
+    if (response.status === 200) {
       Swal.fire({
         icon: 'success',
         title: t("USUARIO_CREADO"),
@@ -93,7 +94,7 @@ const Register = () => {
       Swal.fire({
         icon: 'error',
         title: t("ERROR_AL_CREAR_USUARIO"),
-        text: `${postError}` // Puedes mostrar el mensaje de error específico si lo proporciona la función de registro
+        text: `${response.response.data}` // Puedes mostrar el mensaje de error específico si lo proporciona la función de registro
       });
     }
   };
