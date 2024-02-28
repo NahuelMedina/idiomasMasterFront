@@ -7,18 +7,16 @@ import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {  addCart,  closeCart,  createPreference,  deleteCart,  getCartDB,
+import {
+  addCart, closeCart, createPreference, deleteCart, getCartDB,
 } from "../../redux/action/actions";
 import { FaCartShopping } from "react-icons/fa6";
 import { CiReceipt } from "react-icons/ci";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 const URL = import.meta.env.VITE_URL_HOST;
-
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 const ShopCart = () => {
-  const [cartCourse, setCartCourse] = useState(
-    JSON.parse(localStorage.getItem("cart"))
-  );
   const [total, setTotal] = useState(0);
   const [items, setItems] = useState(1);
   const currentCart = useSelector((state) => state.currentCart);
@@ -27,8 +25,9 @@ const ShopCart = () => {
   const [userData, setUserData] = useState(
     JSON.parse(localStorage.getItem("userData"))
   );
+  const [cartCourse, setCartCourse] = useLocalStorage("cart", [])
   const [isInCart, setIsInCart] = useState(false);
-  const { t , i18n} = useTranslation()
+  const { t, i18n } = useTranslation()
 
 
   useEffect(() => {
@@ -66,27 +65,27 @@ const ShopCart = () => {
     setCartCourse(updatedCart);
     setIsInCart(false);
   };
-///// temporal function 
+  ///// temporal function 
 
-// const handleClose = async () => {
-//   try {
-//     const res = await axios.put(`${URL}/closeCart/${currentCart._id}`); // Envía el ID del carrito como parámetro
-//     console.log(res);
-//     if (res.status === 200) {
-//       // Si se cerró el carrito correctamente
-//       // Itera sobre los cursos en el carrito y agrega cada curso al usuario
-//       currentCart.courses.forEach(async (course) => {
-//         await axios.put(`${URL}/addUserCourse`, {
-//           userId: userData._id,
-//           courseId: course._id,
-//         });
-//       });
-//       handleEliminate(); // Realiza alguna acción después de cerrar el carrito (por ejemplo, eliminar el carrito del estado local)
-//     }
-//   } catch (error) {
-//     alert("No se pudo cerrar el carrito");
-//   }
-// };
+  // const handleClose = async () => {
+  //   try {
+  //     const res = await axios.put(`${URL}/closeCart/${currentCart._id}`); // Envía el ID del carrito como parámetro
+  //     console.log(res);
+  //     if (res.status === 200) {
+  //       // Si se cerró el carrito correctamente
+  //       // Itera sobre los cursos en el carrito y agrega cada curso al usuario
+  //       currentCart.courses.forEach(async (course) => {
+  //         await axios.put(`${URL}/addUserCourse`, {
+  //           userId: userData._id,
+  //           courseId: course._id,
+  //         });
+  //       });
+  //       handleEliminate(); // Realiza alguna acción después de cerrar el carrito (por ejemplo, eliminar el carrito del estado local)
+  //     }
+  //   } catch (error) {
+  //     alert("No se pudo cerrar el carrito");
+  //   }
+  // };
 
 
   // Mercado pago
@@ -155,19 +154,20 @@ const ShopCart = () => {
   // Mas y Menos uno
 
   const handleMinusOne = (id) => {
-    if(items >= 2){
+    const course = cartCourse.find((c) => c._id === id);
+    if (!course) return;
+
+    if (course.items > 1) {
+      // Si el curso tiene más de un ítem, decrementa el número de ítems
       setCartCourse((prevCart) =>
-      prevCart.map((course) =>
-        course._id === id
-          ? { ...course, items: Math.max(1, (course.items || 1) - 1) }
-          : course
-      )
-    );
-    } 
-    if(items === 1){
-      removeFromCart(id)
+        prevCart.map((c) =>
+          c._id === id ? { ...c, items: (c.items || 1) - 1 } : c
+        )
+      );
+    } else {
+      // Si el curso tiene solo un ítem, elimínalo del carrito
+      removeFromCart(id);
     }
-    
   };
   const handlePlusOne = (id) => {
     setCartCourse((prevCart) =>
@@ -230,39 +230,39 @@ const ShopCart = () => {
 
               <div className="border-b border-gray-400"></div>
               <div className="overflow-y-auto h-auto">
-              {cartCourse.map((c, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between px-4 py-2 border-b border-gray-400 "
-                >
-                  <div className="flex items-center justify-start   w-[80%]">
-                    <div className=" w-[30%] flex flex-row items-center justify-evenly">
-                      <button
-                        onClick={() => handleMinusOne(c._id)}
-                        className="p-2 focus:outline-none text-1xl text-black rounded-full"
-                      >
-                        <FaMinus />
-                      </button>
-                      <p className="text-lg text-gray-600 font-semibold mr-2">
-                        {c.items || 1}
-                      </p>
-                      <button
-                        onClick={() => handlePlusOne(c._id)}
-                        className="p-2 focus:outline-none text-1xl text-black rounded-full"
-                      >
-                        <FaPlus />
-                      </button>
-                    </div>
+                {cartCourse.map((c, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between px-4 py-2 border-b border-gray-400 "
+                  >
+                    <div className="flex items-center justify-start   w-[80%]">
+                      <div className=" w-[30%] flex flex-row items-center justify-evenly">
+                        <button
+                          onClick={() => handleMinusOne(c._id)}
+                          className="p-2 focus:outline-none text-1xl text-black rounded-full"
+                        >
+                          <FaMinus />
+                        </button>
+                        <p className="text-lg text-gray-600 font-semibold mr-2">
+                          {c.items || 1}
+                        </p>
+                        <button
+                          onClick={() => handlePlusOne(c._id)}
+                          className="p-2 focus:outline-none text-1xl text-black rounded-full"
+                        >
+                          <FaPlus />
+                        </button>
+                      </div>
 
-                    <p className="text-lg text-gray-800 font-semibold mx-2">
-                    {t(`LANGUAGE_${c?.language?.toUpperCase()}`)}, {t(`NIVEL_${c?.level?.toUpperCase()}`)}
+                      <p className="text-lg text-gray-800 font-semibold mx-2">
+                        {t(`LANGUAGE_${c?.language?.toUpperCase()}`)}, {t(`NIVEL_${c?.level?.toUpperCase()}`)}
+                      </p>
+                    </div>
+                    <p className="text-lg text-gray-800 font-semibold">
+                      ${c.price * (c.items || 1)}
                     </p>
                   </div>
-                  <p className="text-lg text-gray-800 font-semibold">
-                    ${c.price * (c.items || 1)}
-                  </p>
-                </div>
-              ))} </div>
+                ))} </div>
               <div className="flex items-center justify-end px-4 py-2 border-b border-gray-400">
                 <p className="text-xl text-gray-800 font-semibold">
                   {t("TOTAL")}{": "}${total}
@@ -298,8 +298,8 @@ const ShopCart = () => {
                     {t("VACIAR CARRITO")}
                   </button>
 
-                 
-                
+
+
                 </div>
               </div>
             </div>
