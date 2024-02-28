@@ -8,7 +8,11 @@ import { FaMinus } from "react-icons/fa";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addCart, closeCart, createPreference, deleteCart, getCartDB,
+  addCart,
+  closeCart,
+  createPreference,
+  deleteCart,
+  getCartDB,
 } from "../../redux/action/actions";
 import { FaCartShopping } from "react-icons/fa6";
 import { CiReceipt } from "react-icons/ci";
@@ -25,10 +29,9 @@ const ShopCart = () => {
   const [userData, setUserData] = useState(
     JSON.parse(localStorage.getItem("userData"))
   );
-  const [cartCourse, setCartCourse] = useLocalStorage("cart", [])
+  const [cartCourse, setCartCourse] = useLocalStorage("cart", []);
   const [isInCart, setIsInCart] = useState(false);
-  const { t, i18n } = useTranslation()
-
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (isInCart === false) {
@@ -65,7 +68,7 @@ const ShopCart = () => {
     setCartCourse(updatedCart);
     setIsInCart(false);
   };
-  ///// temporal function 
+  ///// temporal function
 
   // const handleClose = async () => {
   //   try {
@@ -87,7 +90,6 @@ const ShopCart = () => {
   //   }
   // };
 
-
   // Mercado pago
   const initCreatePreferenceCart = (p) => {
     dispatch(createPreference(p));
@@ -108,9 +110,7 @@ const ShopCart = () => {
           text: t("EL PAGO SE HA CONFIRMADO CORRECTAMENTE."),
         });
 
-        dispatch(getCartDB(userData._id))
         handleEliminate();
-
       } else {
         // Mostrar alerta de error
         Swal.fire({
@@ -148,8 +148,6 @@ const ShopCart = () => {
   //   createPayment();
   //   location.key = "";
   // }
-
-
 
   // Mas y Menos uno
 
@@ -224,7 +222,9 @@ const ShopCart = () => {
               <div className="w-full h-[50px] bg-gray-100 flex flex-row items-center">
                 <CiReceipt className="text-[40px]" />
                 <p className="text-lg text-black font-semibold bg-gray-100 py-2 px-4">
-                  {t("CURSOS ELEGIDOS")}{":"}{cartCourse.length}
+                  {t("CURSOS ELEGIDOS")}
+                  {":"}
+                  {cartCourse.length}
                 </p>
               </div>
 
@@ -255,17 +255,20 @@ const ShopCart = () => {
                       </div>
 
                       <p className="text-lg text-gray-800 font-semibold mx-2">
-                        {t(`LANGUAGE_${c?.language?.toUpperCase()}`)}, {t(`NIVEL_${c?.level?.toUpperCase()}`)}
+                        {t(`LANGUAGE_${c?.language?.toUpperCase()}`)},{" "}
+                        {t(`NIVEL_${c?.level?.toUpperCase()}`)}
                       </p>
                     </div>
                     <p className="text-lg text-gray-800 font-semibold">
                       ${c.price * (c.items || 1)}
                     </p>
                   </div>
-                ))} </div>
+                ))}{" "}
+              </div>
               <div className="flex items-center justify-end px-4 py-2 border-b border-gray-400">
                 <p className="text-xl text-gray-800 font-semibold">
-                  {t("TOTAL")}{": "}${total}
+                  {t("TOTAL")}
+                  {": "}${total}
                 </p>
               </div>
 
@@ -297,9 +300,6 @@ const ShopCart = () => {
                   >
                     {t("VACIAR CARRITO")}
                   </button>
-
-
-
                 </div>
               </div>
             </div>

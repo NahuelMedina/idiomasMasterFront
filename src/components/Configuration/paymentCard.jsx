@@ -81,6 +81,7 @@ export default function PaymentCard({ id, amount, date, course, status }) {
               price={element.price}
               duration={element.duration}
               img={element.image}
+              schedule = {element.schedule}
             />
           ))}
           {data &&
