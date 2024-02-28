@@ -43,7 +43,8 @@ export default function Error404() {
         location.pathname !== "/home" &&
         location.pathname !== "/detail/:id" &&
         location.pathname !== "/search" &&
-        location.pathname !== "/redirect"
+        location.pathname !== "/redirect" &&
+        location.pathname !== "/Chat"
       ) {
         setComponente(ErrorComponent);
       }
