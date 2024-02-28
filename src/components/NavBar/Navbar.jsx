@@ -53,6 +53,12 @@ console.log((localStorage.getItem("lang")));
           <h1>{t('CURSOS')}</h1>
             <FaDiscourse className="text-[30px] ml-1" />
           </Link>
+
+        </div>
+        <div>
+        <Link to="/chat" className="h-full flex items-center justify-center">
+            <h1>CHAT</h1>
+          </Link>
         </div>
         <div className="flex ml-2 items-center gap-10 justify-around ">
         <select

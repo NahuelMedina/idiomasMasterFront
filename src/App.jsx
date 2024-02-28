@@ -12,6 +12,7 @@ import {
   AuthProvider,
   Favorite,
   ShopCart,
+  Room,
 } from "./components";
 import AdminHome from "./components/Admin/adminHome";
 import AdminNavbar from "./components/Admin/adminNavbar";
@@ -37,17 +38,16 @@ function App() {
 
 
   const { t, i18n } = useTranslation()
-  useEffect(()=>{
+  useEffect(() => {
     const lng = navigator.language
     i18n.changeLanguage(lng)
-  },[])
+  }, [])
   const lng = navigator.language
 
   useEffect(() => {
     setData(userData);
   }, []);
 
-  console.log(data);
 
   useEffect(() => {
     if (loginData.isAuthenticated && Object.keys(data).length === 0) {
@@ -69,7 +69,11 @@ function App() {
         navigate(data.profile === "admin" ? "/admindashboard" : "/user/home");
       }
     }
+    if(userData.email && userData.email.length > 0 && userData.password && userData.password.length > 0 && !userData.isAuthenticated){
+      setUserData({});
+    }
   }, [data]);
+
 
   useEffect(() => {
     const currentLocation = location.pathname;
@@ -79,73 +83,74 @@ function App() {
 
   return (
     <>
-    <Suspense  fallback="loading">
-      <AuthProvider>
-        {Object.keys(data).length === 0 &&
-        data.isAuthenticated === undefined ? (
-          <Navbar />
-        ) : null}
-
-        {Object.keys(data).length &&
-        data.isAuthenticated &&
-        data.profile === "user" ? (
-          <UserNavbar />
-        ) : null}
-
-        {Object.keys(data).length &&
-        data.isAuthenticated &&
-        data.profile === "admin" ? (
-          <AdminNavbar />
-        ) : null}
-        <Routes>
-          <Route path="/home" element={<HomeC />} />
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/search" element={<SearchHome />} />
-          <Route path="/redirect" element={<Redirect/>}/>
-
+      <Suspense fallback="loading">
+        <AuthProvider>
           {Object.keys(data).length === 0 &&
-          data.isAuthenticated === undefined ? (
-            <>
-              <Route path="/" element={<Landing />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/login" element={<Login />} />
-            </>
+            data.isAuthenticated === undefined ? (
+            <Navbar />
           ) : null}
 
           {Object.keys(data).length &&
-          data.isAuthenticated &&
-          data.profile === "user" ? (
-            <>
-              <Route path="/configuracion" element={<Configuration />} />
-              <Route path="/user/home" element={<UserLanding />} />
-              <Route path="/favorite" element={<Favorite />} />
-              <Route path="/cart" element={<ShopCart />} />
-            </>
+            data.isAuthenticated &&
+            data.profile === "user" ? (
+            <UserNavbar />
           ) : null}
 
           {Object.keys(data).length &&
-          data.isAuthenticated &&
-          data.profile === "admin" ? (
-            <>
-              <Route path="/admindashboard" element={<AdminHome />} />
-              <Route
-                path="/admindashboard/products"
-                element={<AdminProducts />}
-              />
-              <Route path="/admindashboard/users" element={<AdminUsers />} />
-              <Route
-                path="/admindashboard/notifications"
-                element={<AdminNotifications />}
-              />
-              <Route
-                path="/admindashboard/settings"
-                element={<AdminSettings />}
-              />
-            </>
+            data.isAuthenticated &&
+            data.profile === "admin" ? (
+            <AdminNavbar />
           ) : null}
-        </Routes>
-      </AuthProvider>
+          <Routes>
+            <Route path="/home" element={<HomeC />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/search" element={<SearchHome />} />
+            <Route path="/redirect" element={<Redirect />} />
+
+            {Object.keys(data).length === 0 &&
+              data.isAuthenticated === undefined ? (
+                <>
+                <Route path="/" element={<Landing />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/chat" element={<Room />} />
+              </>
+            ) : null}
+
+            {Object.keys(data).length &&
+              data.isAuthenticated &&
+              data.profile === "user" ? (
+              <>
+                <Route path="/configuracion" element={<Configuration />} />
+                <Route path="/user/home" element={<UserLanding />} />
+                <Route path="/favorite" element={<Favorite />} />
+                <Route path="/cart" element={<ShopCart />} />
+              </>
+            ) : null}
+
+            {Object.keys(data).length &&
+              data.isAuthenticated &&
+              data.profile === "admin" ? (
+              <>
+                <Route path="/admindashboard" element={<AdminHome />} />
+                <Route
+                  path="/admindashboard/products"
+                  element={<AdminProducts />}
+                />
+                <Route path="/admindashboard/users" element={<AdminUsers />} />
+                <Route
+                  path="/admindashboard/notifications"
+                  element={<AdminNotifications />}
+                />
+                <Route
+                  path="/admindashboard/settings"
+                  element={<AdminSettings />}
+                />
+              </>
+            ) : null}
+          </Routes>
+        </AuthProvider>
       </Suspense>
     </>
   );

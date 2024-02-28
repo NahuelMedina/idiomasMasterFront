@@ -12,5 +12,7 @@ import { Configuration } from "./Configuration/Configuration";
 import Favorite from "./Favorite/Favorite";
 import ShopCart from "./ShopCart/ShopCart";
 import { AuthProvider } from "./AuthProvider/AuthProvider"
+import { Room } from "./Chat/Room.jsx";
 
-export { Navbar, Card, Register, Landing, Login, HomeC, Detail, CourseForm, About, SearchHome, Favorite, ShopCart, Configuration, AuthProvider };
+
+export { Navbar, Card, Register, Landing, Login, HomeC, Detail, CourseForm, About, SearchHome, Favorite, ShopCart, Configuration, AuthProvider, Room };
