@@ -75,7 +75,7 @@ export default function UserNavbar() {
         >
           <TiShoppingCart className="text-[50px] ml-[15px] cursor-pointer " />
           {number && number > 0 ?
-        (<div className="w-[30px] h-[30px] bg-red-700 rounded-[20px] absolute top-2 right-3 flex items-center justify-center">
+        (<div className="w-[30px] h-[30px] bg-red-700 rounded-[20px] absolute top-2 left-[50px] flex items-center justify-center">
         <h1 className="font-bold text-[17px]">{number}</h1>
       </div>)  : (null)
         }
