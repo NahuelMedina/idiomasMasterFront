@@ -28,7 +28,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const [cart, setCart] = useLocalStorage("cart", "");
   const { isAuthenticated } = useAuth0();
   const [userData] = useLocalStorage("userData", {})
-  const { t , i18n} = useTranslation()
+  const { t, i18n } = useTranslation()
 
   // Sector Carrito
   useEffect(() => {
@@ -150,7 +150,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
             <h2 className="text-black text-[17px]">
-            {t("DURACION_DE")}{":"}{t(`DURACION_${course.duration.toUpperCase()}`)}
+              {t("DURACION_DE")}{":"}{t(`DURACION_${course.duration.toUpperCase()}`)}
             </h2>
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
@@ -210,7 +210,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
           </Link>
           <div className="w-full h-full px-[15px] flex items-center text-white justify-center bg-sky-700 hover:bg-red-500 cursor:pointer">
             {isCart ? (
-              <div className="flex items-center justify-center w-full h-full cursor-pointer"  onClick={handleCart}>
+              <div className="flex items-center justify-center w-full h-full cursor-pointer" onClick={handleCart}>
                 <button
                   className="text-[15px] mr-2"
                 >
@@ -311,21 +311,21 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
         </div>
         <div className="bg-white w-[90%] h-[70%] rounded-[10px] flex flex-row items-center justify-center hover:bg-yellow-500 ">
           {isCart ? (
-              <button
-                className="text-black w-full h-full flex items-center justify-center cursor:pointer "
-                onClick={handleCart}
-              >
-                <RxCross2 className=" mr-1" />
-                {t("ELIMINAR DEL CARRITO CARD")}
-              </button>
+            <button
+              className="text-black w-full h-full flex items-center justify-center cursor:pointer "
+              onClick={handleCart}
+            >
+              <RxCross2 className=" mr-1" />
+              {t("ELIMINAR DEL CARRITO CARD")}
+            </button>
           ) : (
-              <button
-                className="text-black w-full flex items-center justify-center h-full cursor:pointer"
-                onClick={handleCart}
-              >
-                <FaCartShopping className=" mr-1" />
-                {t("AGREGAR AL CARRITO CARD")}
-              </button>
+            <button
+              className="text-black w-full flex items-center justify-center h-full cursor:pointer"
+              onClick={handleCart}
+            >
+              <FaCartShopping className=" mr-1" />
+              {t("AGREGAR AL CARRITO CARD")}
+            </button>
           )}
         </div>
       </div>
