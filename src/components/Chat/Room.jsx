@@ -1,54 +1,109 @@
-import { useState } from 'react'
-import './Room.css'
-import io from 'socket.io-client'
-import { Chat } from './Chat'
-import React, { useRef } from 'react';
-
+import { useState } from "react";
+import "./Room.css";
+import io from "socket.io-client";
+import { Chat } from "./Chat";
+import React, { useRef } from "react";
+import { IoMdChatbubbles } from "react-icons/io";
+import { CgUserlane } from "react-icons/cg";
+import { TbWorldStar } from "react-icons/tb";
+import { useTranslation } from 'react-i18next'
 
 
 //conexion para escuchar y enviar los eventos
-const socket = io('http://localhost:3000')
-const url = 'http://localhost:3000'
+const socket = io("http://localhost:3000");
+const url = "http://localhost:3000";
 
 export const Room = () => {
+  const [username, setUsername] = useState("");
+  const [room, setRoom] = useState("");
+  const [showChat, setShowChat] = useState(false);
+  const{ t } = useTranslation()
 
-    const [username, setUsername] = useState('')
-    const [room, setRoom] = useState('')
-    const [showChat, setShowChat] = useState(false)
 
-    const joinRoom = () => {
-        if (username !== "" && room !== "") {
-            socket.emit("join_room", room)
-            setShowChat(true)
-        }
+  const joinRoom = () => {
+    if (username !== "" && room !== "") {
+      socket.emit("join_room", room);
+      setShowChat(true);
     }
+  };
 
-    return (
-        <div className='contenedorRoom'>
-            <div className='contRoom'>
-                <div>
-                    {!showChat ? (
-                        <div className='Cont'>
-                            <h3 className='tituloUnirme'>Unirme al chat</h3>
-                            <div>
-                                <input className='input' type='text' placeholder='Nombre...' onChange={e => setUsername(e.target.value)} />
-                                <select className='SelectRoom' type="text" placeholder='ID Sala: ' onChange={e => setRoom(e.target.value)} >
-                                    <option>Sala de idioma ...</option>
-                                    <option value="Ingles">Inglés</option>
-                                    <option value="Frances">Francés</option>
-                                    <option value="Aleman">Alemán</option>
-                                    <option value="Italiano">Italiano</option>
-                                    <option value="Holanes">Holandés</option>
-                                    <option value="Portuges">Portugés</option>
-                                </select>
-                                <button className='button' onClick={joinRoom}>Unirme</button>
-                            </div>
-                        </div>
-                    ) : (
-                        <Chat socket={socket} username={username} room={room} />
-                    )}
-                </div>
+  return (
+    <div className="w-full h-[90vh] mt-[80px] flex flex-col bg-white">
+      {!showChat ? (
+        <div className="w-full h-full">
+          <div className="w-full h-[20%] flex items-center justify-center bg-gray-100">
+            <h3 className="text-[60px] font-bold text-gray-700">{t("COMUNIDAD DE IDIOMAS")}</h3>
+          </div>
+          <div className="w-full h-[80%] grid grid-cols-2">
+            <div className="w-full h-[95%] flex items-center justify-center  bg-white">
+              <img
+                src="/img/chat_img.png"
+                alt="chat_img"
+                className="w-[90%] h-[90%] m-0 rounded-[10px] shadow-lg shadow-black/50"
+              ></img>
             </div>
+
+            <div className="w-full h-[90%] bg-white flex items-center justify-center">
+              <div className="bg-gradient-to-r from-pink-700 to-purple-600 w-[80%] h-[80%] rounded-[20px] flex flex-col items-center shadow-lg shadow-black/50 animate-fade-left animate-ease-in-out">
+                <div className="w-full h-[30%] flex items-center justify-center">
+                  <IoMdChatbubbles className="text-white text-[50px] font-bold mr-[20px]" />
+                  <h1 className="text-white text-[40px] font-bold">
+                    {t("UNETE A LA SALA")}
+                  </h1>
+                </div>
+                <div className="w-full h-[40%] grid grid-rows-2">
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="h-[60px] w-[80%] rounded-[10px] bg-purple-500 flex flex-row overflow-hidden">
+                      <div className="w-[20%] h-full bg-white flex items-center justify-center">
+                        <CgUserlane className="text-[40px] text-purple-700" />
+                      </div>
+
+                      <input
+                       className="text-black w-[80%] h-full pl-[20px] text-[20px]"
+                        type="text"
+                        placeholder= {t("NOMBRE DE USUARIO")}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full h-full flex items-center justify-center">
+                  <div className="h-[60px] w-[80%] rounded-[10px] bg-purple-500 flex flex-row overflow-hidden">
+                      <div className="w-[20%] h-full bg-white flex items-center justify-center">
+                        <TbWorldStar className="text-[40px] text-purple-700" />
+                      </div>
+
+                      <select
+                  className="text-black w-[80%] h-full pl-[20px] text-[20px]"
+                  type="text"
+                  placeholder= {t("ID SALA: ")}
+                  onChange={(e) => setRoom(e.target.value)}
+                >
+                  <option>{t("SELECCIONE AULA DE IDIOMA")}</option>
+                  <option value="Ingles">{t("INGLES")}</option>
+                  <option value="Frances">{t("FRANCES")}</option>
+                  <option value="Aleman">{t("ALEMAN")}</option>
+                  <option value="Italiano">{t("ITALIANO")}</option>
+                  <option value="Holanes">{t("HOLANDES")}</option>
+                  <option value="Portuges">{t("PORTUGUES")}</option>
+                </select>
+                    </div>
+                
+                    </div>
+                </div>
+                <div className="w-full h-[30%] flex items-center justify-center">
+                <button className=" bg-white w-[150px] h-[50px] rounded-[5px] text-[20px] hover:bg-yellow-300" onClick={joinRoom}>
+                  {t("UNIRME")}
+                </button>
+                </div>
+              
+               
+              </div>
+            </div>
+          </div>
         </div>
-    )
-}
+      ) : (
+        <Chat socket={socket} username={username} room={room} />
+      )}
+    </div>
+  );
+};

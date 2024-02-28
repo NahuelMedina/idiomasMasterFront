@@ -220,5 +220,19 @@
     "FECHA": "Data",
     "HORA": "Ora",
     "EVENTO": "Evento",
-    "SIN_EVENTOS_EN_RANGO": "Nessun evento"
+    "SIN_EVENTOS_EN_RANGO": "Nessun evento",
+
+    "COMUNIDAD DE IDIOMAS": "Comunità linguistica",
+    "SELECCIONE AULA DE IDIOMA": "Seleziona la stanza linguistica",
+    "UNIRME": "Unisciti!",
+    "UNETE A LA SALA": "Unisciti alla stanza",
+    "NOMBRE DE USUARIO": "Nome utente",
+    "ID SALA: ": "ID della stanza: ",
+
+    "ENVIAR": "Invia",
+    "CHAT EN VIVO": "Chat dal vivo",
+    "SALA": "Sala",
+    "MENSAJE": "Messaggio...",
+    "CHAT": "CHAT"
+    
 }

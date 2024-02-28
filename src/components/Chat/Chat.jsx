@@ -2,6 +2,7 @@ import './Chat.css';
 import React, { useEffect, useState, useRef } from 'react';
 import classnames from 'classnames';
 import ScrollToBottom from 'react-scroll-to-bottom';
+import { t } from 'i18next';
 
 export const Chat = ({ socket, username, room }) => {
     const [currentMessage, setCurrentMessage] = useState("");
@@ -54,7 +55,7 @@ export const Chat = ({ socket, username, room }) => {
         <div className="contChat">
             <div>
                 <section className='infoSala'>
-                    <p>{`Chat en vivo | ${username} | Sala: ${room}`}</p>
+                    <p>{`${t("CHAT EN VIVO")} | ${username} | ${t("SALA")}: ${room}`}</p>
                 </section>
             </div>
             <br />
@@ -82,12 +83,12 @@ export const Chat = ({ socket, username, room }) => {
 
             <div>
                 <section className='newMessge'>
-                    <input className='inputNewMessage' value={currentMessage} type="text" placeholder='Mensaje...'
+                    <input className='inputNewMessage' value={currentMessage} type="text" placeholder={t("MENSAJE")}
                         onChange={e => setCurrentMessage(e.target.value)}
                         onKeyPress={(e) => {
                             e.key === 'Enter' && sendMessage();
                         }} />
-                        <button className='botonEnviar' onClick={sendMessage}>Enviar &#9658; </button>
+                        <button className='botonEnviar' onClick={sendMessage}>{t("ENVIAR")} &#9658; </button>
                 </section>
             </div>
         </div>

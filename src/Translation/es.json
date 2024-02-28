@@ -221,6 +221,20 @@
     "FECHA": "Fecha",
     "HORA": "Hora",
     "EVENTO": "Evento",
-    "SIN_EVENTOS_EN_RANGO": "Sin eventos"
+    "SIN_EVENTOS_EN_RANGO": "Sin eventos",
+
+    "COMUNIDAD DE IDIOMAS":"Comunidad de Idiomas",
+    "SELECCIONE AULA DE IDIOMA":"Seleccione Aula de Idioma",
+    "UNIRME":"Unirme!",
+    "UNETE A LA SALA":"Unete a la Sala",
+    "NOMBRE DE USUARIO":"Nombre de Usuario",
+    "ID SALA: ":"ID Sala: ",
+
+    "ENVIAR":"Enviar",
+    "CHAT EN VIVO":"Chat en vivo",
+    "SALA":"Sala",
+    "MENSAJE":"Mensaje...",
+    "CHAT":"CHAT"
+
 
 }

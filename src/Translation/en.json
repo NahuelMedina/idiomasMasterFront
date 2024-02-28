@@ -223,6 +223,19 @@
     "FECHA": "Date",
     "HORA": "Time",
     "EVENTO": "Event",
-    "SIN_EVENTOS_EN_RANGO": "No events"
+    "SIN_EVENTOS_EN_RANGO": "No events",
+
+    "COMUNIDAD DE IDIOMAS": "Language Community",
+    "SELECCIONE AULA DE IDIOMA": "Select Language Room",
+    "UNIRME": "Join!",
+    "UNETE A LA SALA": "Join the Room",
+    "NOMBRE DE USUARIO": "Username",
+    "ID SALA: ": "Room ID: ",
+
+    "ENVIAR": "Send",
+    "CHAT EN VIVO": "Live Chat",
+    "SALA": "Room",
+    "MENSAJE": "Message...",
+    "CHAT": "CHAT"
 
 }

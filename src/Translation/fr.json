@@ -220,6 +220,19 @@
     "FECHA": "Date",
     "HORA": "Heure",
     "EVENTO": "Événement",
-    "SIN_EVENTOS_EN_RANGO": "Aucun événement"
+    "SIN_EVENTOS_EN_RANGO": "Aucun événement",
+
+    "COMUNIDAD DE IDIOMAS": "Communauté de langues",
+    "SELECCIONE AULA DE IDIOMA": "Sélectionnez une salle de langue",
+    "UNIRME": "Rejoindre !",
+    "UNETE A LA SALA": "Rejoignez la salle",
+    "NOMBRE DE USUARIO": "Nom d'utilisateur",
+    "ID SALA: ": "ID de la salle: ",
+
+    "ENVIAR": "Envoyer",
+    "CHAT EN VIVO": "Chat en direct",
+    "SALA": "Salle",
+    "MENSAJE": "Message...",
+    "CHAT": "Discussion"
 
 }
