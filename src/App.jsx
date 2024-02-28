@@ -12,6 +12,7 @@ import {
   AuthProvider,
   Favorite,
   ShopCart,
+  Room,
 } from "./components";
 import AdminHome from "./components/Admin/adminHome";
 import AdminNavbar from "./components/Admin/adminNavbar";
@@ -86,6 +87,7 @@ function App() {
     // }
   }, [data]);
 
+
   useEffect(() => {
     const currentLocation = location.pathname;
     localStorage.setItem("lastLocation", currentLocation);
@@ -126,6 +128,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/Chat" element={<Room />} />
               </>
             ) : null}
 
