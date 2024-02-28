@@ -28,6 +28,8 @@ import {
   DELETE_REVIEW_SUCCESS,
   DELETE_REVIEW_FAILURE,
   ADMINREVIEW,
+  GET_COURSE_REVIEW,
+  CLOSE_CART,
 } from "./actiontypes";
 import axios from "axios";
 
@@ -119,10 +121,9 @@ export const postCourseData = (courseData) => async (dispatch) => {
 export const postUser = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/createUser`, userData);
-    // alert("Usuario creado con Exito", response.data);
+    return response
   } catch (error) {
-    const message = error.response.data;
-    alert(`${message}`);
+    return error
   }
 };
 
@@ -148,13 +149,16 @@ export const postReview = (formData) => {
     try {
       console.log("ESTO RECIBE ACTION FORMDATA:", formData);
       const response = await axios.post(`${URL}/createReview`, formData);
-      console.log("Reseña guardada exitosamente:", response.data);
+      console.log("Reseña guardada exitosamente:", response);
 
-      dispatch(reviewPostSuccess(response.data));
+      dispatch(reviewPostSuccess(response));
+
+      return response;
     } catch (error) {
       console.error("Error al guardar la reseña:", error);
 
       dispatch(reviewPostError(error));
+      throw error;
     }
   };
 };
@@ -351,3 +355,24 @@ export const deleteReview = (reviewId) => {
     }
   };
 };
+export function getCourseReview(data) {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: GET_COURSE_REVIEW,
+        payload: data,
+      });
+    } catch (error) {}
+  };
+}
+export function closeCart(id) {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`${URL}/closeCart/${id}`);
+      dispatch({
+        type: CLOSE_CART,
+        payload: data,
+      });
+    } catch (error) {}
+  };
+}

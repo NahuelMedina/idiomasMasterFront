@@ -145,11 +145,11 @@ export const Landing = () => {
         <div className=" flex w-full h-full absolute  bg-gradient-to-r from-black via-white/10 to-white/0 ">
           <div className="h-full w-full items-start pl-[30px] justify-center flex flex-col">
             <p className="text-[40px] text-white font-semibold border-b-4 border-white">{`${landing_string[num].title}`}</p>
-            <p className={`${landing_string[num].color} `}>
-              <div className="h-[200px]">
-                <span className={landing_string[num].color}>{typeEffect}</span>
-              </div>
-            </p>
+            <div className={`${landing_string[num].color} `}>
+  <div className="h-[200px]">
+    <span className={landing_string[num].color}>{typeEffect}</span>
+  </div>
+</div>
           </div>
         </div>
 

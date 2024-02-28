@@ -76,6 +76,10 @@ function App() {
         navigate(data.profile === "admin" ? "/admindashboard" : "/user/home");
       }
     }
+
+    if(userData.email && userData.email.length > 0 && userData.password && userData.password.length > 0 && !userData.isAuthenticated){
+      setUserData({});
+    }
     // if (data.email && !data.profile) {
     //   setUserData({});
     //   navigate("/");

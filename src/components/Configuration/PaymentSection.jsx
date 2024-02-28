@@ -23,13 +23,13 @@ const PaymentSection = () => {
   }, [userData._id]);
 
   return (
-    <div className=" flex-rows w-full h-full  grid grid-cols-1 gap-[10px] grid-rows-auto overflow-hidden items-center justify-center p-[10px] overflow-y-scroll">
+    <div className=" flex-rows w-full h-full  grid grid-cols-1 gap-[10px] grid-rows-auto overflow-hidden  justify-center p-[10px] overflow-y-scroll">
       {userPayment && userPayment.length === 0 ? (
         <>
           <div className="flex flex-col items-center justify-center">
           <MdPayments className="text-[80px] text-gray-600 ml-[50px] font-semibold flex" />
             <p className="text-[60px] text-gray-600 ml-[50px] font-semibold flex">
-              Aun no tienes Pagos Realizados
+              {t("AUN NO TIENES PAGOS REALIZADOS")}
             </p>
             
           </div>
@@ -38,7 +38,7 @@ const PaymentSection = () => {
         <>
           {userPayment &&
             userPayment.map((c, index) => (
-              <div key={index} className="flex item-center justify-center">
+              <div key={index} className="  bg-white-200 shadow-lg border-[1px] border-gray-200 flex flex-col  h-full">
                 <PaymentCard
                   id={c._id}
                   amount={c.Amount}
