@@ -6,7 +6,12 @@ import React, { useRef } from "react";
 import { IoMdChatbubbles } from "react-icons/io";
 import { CgUserlane } from "react-icons/cg";
 import { TbWorldStar } from "react-icons/tb";
+
 const URL = import.meta.env.VITE_URL_HOST;
+
+import { useTranslation } from 'react-i18next'
+
+
 
 //conexion para escuchar y enviar los eventos
 const socket = io(URL);
@@ -16,6 +21,8 @@ export const Room = () => {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
+  const{ t } = useTranslation()
+
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
@@ -29,7 +36,7 @@ export const Room = () => {
       {!showChat ? (
         <div className="w-full h-full">
        <div className="w-full h-20vmin flex items-center justify-center bg-repeat" style={{backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('/img/bg-title.png')"}}>
-            <h3 className="text-[60px] font-bold text-gray-700">Comunidad de Idiomas</h3>
+            <h3 className="text-[60px] font-bold text-gray-700">{t("COMUNIDAD DE IDIOMAS")}</h3>
           </div>
           <div className="w-full h-[80%] grid grid-cols-2">
             <div className="w-full h-[95%] flex items-center justify-center  bg-white">
@@ -45,7 +52,7 @@ export const Room = () => {
                 <div className="w-full h-[30%] flex items-center justify-center">
                   <IoMdChatbubbles className="text-white text-[50px] font-bold mr-[20px]" />
                   <h1 className="text-white text-[40px] font-bold">
-                    Unete a la Sala
+                    {t("UNETE A LA SALA")}
                   </h1>
                 </div>
                 <div className="w-full h-[40%] grid grid-rows-2">
@@ -58,7 +65,7 @@ export const Room = () => {
                       <input
                        className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                         type="text"
-                        placeholder="Nombre de Usuario"
+                        placeholder= {t("NOMBRE DE USUARIO")}
                         onChange={(e) => setUsername(e.target.value)}
                       />
                     </div>
@@ -72,16 +79,16 @@ export const Room = () => {
                       <select
                   className="text-black w-[80%] h-full pl-[20px] text-[20px]"
                   type="text"
-                  placeholder="ID Sala: "
+                  placeholder= {t("ID SALA: ")}
                   onChange={(e) => setRoom(e.target.value)}
                 >
-                  <option>Seleccione Aula de Idioma</option>
-                  <option value="Ingles">Inglés</option>
-                  <option value="Frances">Francés</option>
-                  <option value="Aleman">Alemán</option>
-                  <option value="Italiano">Italiano</option>
-                  <option value="Holanes">Holandés</option>
-                  <option value="Portuges">Portugés</option>
+                  <option>{t("SELECCIONE AULA DE IDIOMA")}</option>
+                  <option value="Ingles">{t("INGLES")}</option>
+                  <option value="Frances">{t("FRANCES")}</option>
+                  <option value="Aleman">{t("ALEMAN")}</option>
+                  <option value="Italiano">{t("ITALIANO")}</option>
+                  <option value="Holanes">{t("HOLANDES")}</option>
+                  <option value="Portuges">{t("PORTUGUES")}</option>
                 </select>
                     </div>
                 
@@ -89,7 +96,7 @@ export const Room = () => {
                 </div>
                 <div className="w-full h-[30%] flex items-center justify-center">
                 <button className=" bg-white w-[150px] h-[50px] rounded-[5px] text-[20px] hover:bg-yellow-300" onClick={joinRoom}>
-                  Unirme!
+                  {t("UNIRME")}
                 </button>
                 </div>
               

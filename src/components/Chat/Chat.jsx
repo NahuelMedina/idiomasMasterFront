@@ -2,8 +2,12 @@ import './Chat.css';
 import React, { useEffect, useState, useRef } from 'react';
 import classnames from 'classnames';
 import ScrollToBottom from 'react-scroll-to-bottom';
+
 import { FaRocketchat } from "react-icons/fa";
 import { RiMessage2Fill } from "react-icons/ri";
+
+
+import { t } from 'i18next';
 
 
 export const Chat = ({ socket, username, room }) => {
@@ -54,6 +58,7 @@ export const Chat = ({ socket, username, room }) => {
     }, [messagesList]);
 
     return (
+
         <div className="w-full h-[90vh] flex items-center justify-center flex-col ">
 
             <div className="w-[97%] h-[95%] mt-[5px] bg-[#1e1f23] flex flex-row rounded-[5px] overflow-hidden">
@@ -96,6 +101,7 @@ export const Chat = ({ socket, username, room }) => {
                             e.key === 'Enter' && sendMessage();
                         }} />
                         <button className="ml-[15px] h-[50px] w-[120px] bg-sky-800 rounded-[10px] text-white" onClick={sendMessage}>Enviar &#9658; </button>
+
                 </section>
 
                 </div>
@@ -126,12 +132,12 @@ export const Chat = ({ socket, username, room }) => {
 
             <div>
                 <section className='newMessge'>
-                    <input className='inputNewMessage' value={currentMessage} type="text" placeholder='Mensaje...'
+                    <input className='inputNewMessage' value={currentMessage} type="text" placeholder={t("MENSAJE")}
                         onChange={e => setCurrentMessage(e.target.value)}
                         onKeyPress={(e) => {
                             e.key === 'Enter' && sendMessage();
                         }} />
-                        <button className='botonEnviar' onClick={sendMessage}>Enviar &#9658; </button>
+                        <button className='botonEnviar' onClick={sendMessage}>{t("ENVIAR")} &#9658; </button>
                 </section>
             </div> */}
 

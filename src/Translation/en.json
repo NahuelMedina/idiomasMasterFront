@@ -196,6 +196,47 @@
     "HOLA": "Hi",
     "TU PROGRESO": "Your Progress",
     "EXPLORA NUESTROS CURSOS": "Explore Our Courses",
-    "AUN NO TIENES CURSOS": "You don't have any courses yet"
+    "AUN NO TIENES CURSOS": "You don't have any courses yet",
+
+    "INGRESE PRIMER LETRA EN MAYUSCULA Y SIN ESPACIOS.": "Enter first letter in uppercase and without spaces.",
+    "NOMBRE MAYOR A 20 CARACATERES.": "Name longer than 20 characters.",
+    "NO PUEDE CONTENER NUMEROS": "Cannot contain numbers",
+    "EL NOMBRE ES OBLIGATORIO.": "Name is mandatory.",
+    "APELLIDO MAYOR A 20 CARACTERES.": "Last name longer than 20 characters.",
+    "EL APELLIDO ES OBLIGATORIO.": "Last name is mandatory.",
+    "EMAIL ES MAYOR A 30 CARACTERES.": "Email is longer than 30 characters.",
+    "LA EDAD ES OBLIGATORIA.": "Age is mandatory.",
+    "LA EDAD DEBE SER MENOR A 90 AÑOS.": "Age must be less than 90 years.",
+    "LA EDAD DEBE SER MAYOR A 18 AÑOS.": "Age must be greater than 18 years.",
+    "LA CONTRASEÑA DEBE TENER AL MENOS 8 CARACTERES.": "Password must be at least 8 characters long.",
+    "DEBE CONTENER CONTRASEÑA.": "Must contain password.",
+    "EL PASSWORD DEBE CONTENER AA2*": "The password must contain AA2*",
+
+    "TODO_EL_DIA": "All day",
+    "ANTERIOR": "Previous",
+    "SIGUIENTE": "Next",
+    "HOY": "Today",
+    "MES": "Month",
+    "SEMANA": "Week",
+    "DIA": "Day",
+    "AGENDA": "Agenda",
+    "FECHA": "Date",
+    "HORA": "Time",
+    "EVENTO": "Event",
+    "SIN_EVENTOS_EN_RANGO": "No events",
+
+    "COMUNIDAD DE IDIOMAS": "Language Community",
+    "SELECCIONE AULA DE IDIOMA": "Select Language Room",
+    "UNIRME": "Join!",
+    "UNETE A LA SALA": "Join the Room",
+    "NOMBRE DE USUARIO": "Username",
+    "ID SALA: ": "Room ID: ",
+
+    "ENVIAR": "Send",
+    "CHAT EN VIVO": "Live Chat",
+    "SALA": "Room",
+    "MENSAJE": "Message...",
+    "CHAT": "CHAT",
+    "CALENDARIO": "Calendar"
 
 }

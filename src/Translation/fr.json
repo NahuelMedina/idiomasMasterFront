@@ -70,7 +70,7 @@
     "YA_TIENES_CUENTA": "Vous avez déjà un compte?",
     "USUARIO_CREADO": "Utilisateur créé avec succès !",
     "ERROR_AL_CREAR_USUARIO": "Erreur lors de la création de l'utilisateur",
-    "REGISTRO_DE_USUARIO": "Enregistrement de l'utilisateur",
+    "REGISTRO_DE_USUARIO": "Enregistrement ",
 
     "CERRAR_SESION": "Déconnexion",
     "CERRAR": "Annuler",
@@ -193,6 +193,47 @@
     "HOLA": "Bonjour",
     "TU PROGRESO": "Votre Progrès",
     "EXPLORA NUESTROS CURSOS": "Explorez nos Cours",
-    "AUN NO TIENES CURSOS": "Vous n'avez toujours pas de cours"
+    "AUN NO TIENES CURSOS": "Vous n'avez toujours pas de cours",
+
+    "INGRESE PRIMER LETRA EN MAYUSCULA Y SIN ESPACIOS.": "Entrez la première lettre en majuscule et sans espaces.",
+    "NOMBRE MAYOR A 20 CARACATERES.": "Nom plus long que 20 caractères.",
+    "NO PUEDE CONTENER NUMEROS": "Ne peut pas contenir de chiffres",
+    "EL NOMBRE ES OBLIGATORIO.": "Le nom est obligatoire.",
+    "APELLIDO MAYOR A 20 CARACTERES.": "Le nom de famille est plus long que 20 caractères.",
+    "EL APELLIDO ES OBLIGATORIO.": "Le nom de famille est obligatoire.",
+    "EMAIL ES MAYOR A 30 CARACTERES.": "L'email est plus long que 30 caractères.",
+    "LA EDAD ES OBLIGATORIA.": "L'âge est obligatoire.",
+    "LA EDAD DEBE SER MENOR A 90 AÑOS.": "L'âge doit être inférieur à 90 ans.",
+    "LA EDAD DEBE SER MAYOR A 18 AÑOS.": "L'âge doit être supérieur à 18 ans.",
+    "LA CONTRASEÑA DEBE TENER AL MENOS 8 CARACTERES.": "Le mot de passe doit contenir au moins 8 caractères.",
+    "DEBE CONTENER CONTRASEÑA.": "Doit contenir un mot de passe.",
+    "EL PASSWORD DEBE CONTENER AA2*": "Le mot de passe doit contenir AA2*",
+
+    "TODO_EL_DIA": "Toute la journée",
+    "ANTERIOR": "Précédent",
+    "SIGUIENTE": "Suivant",
+    "HOY": "Aujourd'hui",
+    "MES": "Mois",
+    "SEMANA": "Semaine",
+    "DIA": "Jour",
+    "AGENDA": "Agenda",
+    "FECHA": "Date",
+    "HORA": "Heure",
+    "EVENTO": "Événement",
+    "SIN_EVENTOS_EN_RANGO": "Aucun événement",
+
+    "COMUNIDAD DE IDIOMAS": "Communauté de langues",
+    "SELECCIONE AULA DE IDIOMA": "Sélectionnez une salle de langue",
+    "UNIRME": "Rejoindre !",
+    "UNETE A LA SALA": "Rejoignez la salle",
+    "NOMBRE DE USUARIO": "Nom d'utilisateur",
+    "ID SALA: ": "ID de la salle: ",
+
+    "ENVIAR": "Envoyer",
+    "CHAT EN VIVO": "Chat en direct",
+    "SALA": "Salle",
+    "MENSAJE": "Message...",
+    "CHAT": "Discussion",
+    "CALENDARIO": "Calendrier"
 
 }
