@@ -27,7 +27,7 @@ export const Room = () => {
     <div className="w-full h-[90vh] mt-[80px] flex flex-col bg-white">
       {!showChat ? (
         <div className="w-full h-full">
-          <div className="w-full h-[20%] flex items-center justify-center bg-gray-100">
+       <div className="w-full h-20vmin flex items-center justify-center bg-repeat" style={{backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('/img/bg-title.png')"}}>
             <h3 className="text-[60px] font-bold text-gray-700">Comunidad de Idiomas</h3>
           </div>
           <div className="w-full h-[80%] grid grid-cols-2">
