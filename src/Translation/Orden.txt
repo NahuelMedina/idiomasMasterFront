@@ -20,3 +20,5 @@
 20. Danger zone 
 21 Review section
 22 userDashboard y userDashboard card
+23. Errores en Register
+24. CalendarSection

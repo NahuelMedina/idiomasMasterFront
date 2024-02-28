@@ -207,5 +207,18 @@
     "LA EDAD DEBE SER MAYOR A 18 AÑOS.": "L'età deve essere maggiore di 18 anni.",
     "LA CONTRASEÑA DEBE TENER AL MENOS 8 CARACTERES.": "La password deve contenere almeno 8 caratteri.",
     "DEBE CONTENER CONTRASEÑA.": "Deve contenere una password.",
-    "EL PASSWORD DEBE CONTENER AA2*": "La password deve contenere AA2*"
+    "EL PASSWORD DEBE CONTENER AA2*": "La password deve contenere AA2*",
+
+    "TODO_EL_DIA": "Tutto il giorno",
+    "ANTERIOR": "Precedente",
+    "SIGUIENTE": "Successivo",
+    "HOY": "Oggi",
+    "MES": "Mese",
+    "SEMANA": "Settimana",
+    "DIA": "Giorno",
+    "AGENDA": "Agenda",
+    "FECHA": "Data",
+    "HORA": "Ora",
+    "EVENTO": "Evento",
+    "SIN_EVENTOS_EN_RANGO": "Nessun evento"
 }

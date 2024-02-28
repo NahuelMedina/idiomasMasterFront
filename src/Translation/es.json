@@ -86,12 +86,12 @@
     "NECESITAS_REGISTRARTE_CARRITO":"Necesitas registrarte para agregar al Carrito!",
     "NECESITAS_REGISTRARTE_FAVORITO":"Necesitas registrarte para agregar a Favoritos!",
     "COMIENZA_CON":"Comienza con tan solo",
-    "LANGUAGE_INGLES": "Inglés",
-    "LANGUAGE_FRANCES": "Francés",
+    "LANGUAGE_INGLES": "Ingles",
+    "LANGUAGE_FRANCES": "Frances",
     "LANGUAGE_ITALIANO": "Italiano",
-    "LANGUAGE_HOLANDES": "Holandés",
-    "LANGUAGE_ALEMAN": "Alemán",
-    "LANGUAGE_PORTUGUES": "Portugués",
+    "LANGUAGE_HOLANDES": "Holandes",
+    "LANGUAGE_ALEMAN": "Alemen",
+    "LANGUAGE_PORTUGUES": "Portugues",
     "NIVEL": "Nivel",
     "NIVEL_PRINCIPIANTE": "Principiante",
     "NIVEL_INTERMEDIO": "Intermedio",
@@ -208,6 +208,19 @@
     "LA EDAD DEBE SER MAYOR A 18 AÑOS.": "la edad debe ser mayor a 18 años.",
     "LA CONTRASEÑA DEBE TENER AL MENOS 8 CARACTERES.": "la contraseña debe tener al menos 8 caracteres.",
     "DEBE CONTENER CONTRASEÑA.": "debe contener contraseña.",
-    "EL PASSWORD DEBE CONTENER AA2*": "el password debe contener aa2*"
+    "EL PASSWORD DEBE CONTENER AA2*": "el password debe contener aa2*",
+
+    "TODO_EL_DIA": "Todo el día",
+    "ANTERIOR": "Anterior",
+    "SIGUIENTE": "Siguiente",
+    "HOY": "Hoy",
+    "MES": "Mes",
+    "SEMANA": "Semana",
+    "DIA": "Día",
+    "AGENDA": "Agenda",
+    "FECHA": "Fecha",
+    "HORA": "Hora",
+    "EVENTO": "Evento",
+    "SIN_EVENTOS_EN_RANGO": "Sin eventos"
 
 }

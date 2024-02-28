@@ -67,23 +67,28 @@ const ShopCart = () => {
     setIsInCart(false);
   };
 ///// temporal function 
-  const handleClose =async ()=>{
-    //dispatch(closeCart())
-    try {
-    const res = await axios.put(`${URL}/closeCart/${currentCart._id}`);
-    console.log(res);
-    if (res.status === 200) {
-      currentCart.courses.map( async(course) => {
-        await axios.put(`${URL}/addUserCourse`, {userId: userData._id , courseId: course._id})
-      })
-      handleEliminate()
-    }
-    } catch (error) {
-      alert("no se pudo cerrar el carrito")
-    }
-    
-  }
-console.log(currentCart);
+
+// const handleClose = async () => {
+//   try {
+//     const res = await axios.put(`${URL}/closeCart/${currentCart._id}`); // Envía el ID del carrito como parámetro
+//     console.log(res);
+//     if (res.status === 200) {
+//       // Si se cerró el carrito correctamente
+//       // Itera sobre los cursos en el carrito y agrega cada curso al usuario
+//       currentCart.courses.forEach(async (course) => {
+//         await axios.put(`${URL}/addUserCourse`, {
+//           userId: userData._id,
+//           courseId: course._id,
+//         });
+//       });
+//       handleEliminate(); // Realiza alguna acción después de cerrar el carrito (por ejemplo, eliminar el carrito del estado local)
+//     }
+//   } catch (error) {
+//     alert("No se pudo cerrar el carrito");
+//   }
+// };
+
+
   // Mercado pago
   const initCreatePreferenceCart = (p) => {
     dispatch(createPreference(p));
@@ -96,7 +101,7 @@ console.log(currentCart);
       });
       // Manejar la respuesta del servidor
       if (res.status === 200) {
-        handleClose()
+        // handleClose()
         // Mostrar alerta de éxito
         Swal.fire({
           icon: "success",
@@ -172,7 +177,7 @@ console.log(currentCart);
 
   if (cartCourse === null || !cartCourse.length > 0) {
     return (
-      <div className="w-full h-[90vh] mt-[80px] flex flex-col">
+      <div className="w-full h-[90vh] mt-[80px] flex flex-col ">
         <div className="flex justify-center items-center text-3xl font-bold text-black w-full h-[80%]">
           <h1 className="text-[60px] text-gray-600 ml-[50px]">
             {t("NO HAY CURSOS EN EL CARRITO")}
@@ -193,9 +198,9 @@ console.log(currentCart);
 
   return (
     <div className="w-full h-[90vh] mt-[80px] flex flex-row bg-white">
-      <div className="h-full w-[70%]">
-        <div className=" w-full h-full bg-white flex flex-col overflow-y-auto ">
-          <div className="w-full h-[90%] pt-[20px]">
+      <div className="w-[70%]">
+        <div className=" w-full h-fullflex flex-col overflow-scrool ">
+          <div className="w-full h-auto  pb-[20px]">
             {cartCourse &&
               cartCourse.length > 0 &&
               cartCourse.map((element, index) => (
@@ -220,7 +225,7 @@ console.log(currentCart);
               </div>
 
               <div className="border-b border-gray-400"></div>
-              <div className="overflow-y-auto h-[470px]">
+              <div className="overflow-y-auto h-auto">
               {cartCourse.map((c, index) => (
                 <div
                   key={index}
@@ -263,7 +268,7 @@ console.log(currentCart);
               <div className="w-full h-[200px] bg-gray-100  flex items-center justify-center">
                 <div className="bottom-[180px] right-[70px]">
                   <button
-                    className="bg-sky-700 h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium  hover:text-black  cursor:pointer"
+                    className="bg-sky-700 h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-yellow-500 font-medium  hover:text-black  cursor:pointer"
                     onClick={() =>
                       initCreatePreferenceCart({
                         price: total,
@@ -275,19 +280,20 @@ console.log(currentCart);
                     {t("REALIZAR COMPRA")}
                   </button>
 
+                  <Link
+                    to="/home"
+                    className="bg-sky-700 h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-yellow-500 font-medium  hover:text-black  cursor:pointer"
+                  >
+                    <button>{t("VER MAS CURSOS")}</button>
+                  </Link>
+
                   <button
                     className="bg-sky-700 h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium  hover:text-black  cursor:pointer"
                     onClick={handleEliminate}
                   >
                     {t("VACIAR CARRITO")}
                   </button>
-
-                  <Link
-                    to="/home"
-                    className="bg-sky-700 h-[40px] w-[230px] m-6  flex flex-row items-center justify-center  text-white text-[20px] rounded-lg hover:bg-red-500 font-medium  hover:text-black  cursor:pointer"
-                  >
-                    <button>{t("VER MAS CURSOS")}</button>
-                  </Link>
+                 
                 </div>
               </div>
             </div>
