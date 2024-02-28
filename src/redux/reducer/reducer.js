@@ -20,6 +20,7 @@ import {
   GET_CART,
   ADD_CART,
   DELETE_CART,
+  GET_COURSE_REVIEW,
 
 } from "../action/actiontypes";
 
@@ -45,6 +46,7 @@ let initialState = {
   postError: null,
   currentCart: [],
   language: '',
+  courseReview: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -189,6 +191,11 @@ const reducer = (state = initialState, { type, payload }) => {
         return{
           ...state,
           currentCart: payload
+        }
+      case GET_COURSE_REVIEW:
+        return{
+          ...state,
+          courseReview: payload
         }
      
      

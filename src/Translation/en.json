@@ -116,6 +116,7 @@
     "ELIMINAR DEL CARRITO": "Remove from Cart",
     "OCULTAR RESEÑAS": "Hide Review",
     "MOSTRAR RESEÑAS": "Show Review",
+    "OPINIONES":"Opinions",
 
     "COMENTARIOS DEL CURSO": "COURSE REVIEWS",
     "EDITAR":"Edit",
@@ -183,6 +184,7 @@
     "STATUS_REJECTED":"Rejected",
     "NUMERO DE PAGO": "Payment Number",
     "TOTAL PAGO": "Total Payment",
+    "AUN NO TIENES PAGOS REALIZADOS":"You have not made any payments yet",
 
     "EN ESTA SECCIÓN, PODRÁS DESACTIVAR TU CUENTA": "In this section, you can desactivate your account. We will continue to keep your data in case you decide to come back to us. We are committed to the responsible and ethical handling of information.",
     "INGRESA TUS DATOS PARA DESATIVAR TU CUENTA": "Enter your details to desactivate your account",

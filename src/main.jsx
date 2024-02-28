@@ -11,11 +11,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <Auth0Provider
-        domain="idiomas-master.us.auth0.com"
-        clientId="QKuJSniRtysK5OlPJy3muRNgxlcujinH"
-        authorizationParams={{
-          redirect_uri: window.location.origin
-        }}
+       domain="idiomas-master.us.auth0.com"
+       clientId="QKuJSniRtysK5OlPJy3muRNgxlcujinH"
+       authorizationParams={{
+         redirect_uri: window.location.origin
+       }}
       >
         <Provider store={store}>
           <App />

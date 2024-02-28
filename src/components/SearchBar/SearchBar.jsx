@@ -57,8 +57,33 @@ export const SearchBar = () => {
   };
   
   const handleSearch = (event) => {
-    const value = event.target.value;
-    setSearchTerm(value);
+    const value = event.target.value
+    const aux = value.toLowerCase()
+    if(aux === "inglese" || aux === 'anglais' || aux === 'english' || aux === 'ingles'){
+      setSearchTerm('ingles');
+      return
+    }
+    if(aux === "spagnolo" || aux === 'espagnol' || aux === 'spanish' || aux === 'español'){
+      setSearchTerm('español');
+      return
+    }
+    if(aux === "italiano" || aux === 'italien' || aux === 'italian' ){
+      setSearchTerm('italiano');
+      return
+    }
+    if(aux === "francese" || aux === 'français' || aux === 'french' || aux === 'frances'){
+      setSearchTerm('frances');
+      return
+    }
+    if(aux === "olandese" || aux === 'néerlandais' || aux === 'dutch' || aux === 'holandes'){
+      setSearchTerm('holandes');
+      return
+    }
+    if(aux === "portoghese" || aux === 'portugais' || aux === 'portuguese' || aux === 'portugues'){
+      setSearchTerm('portugues');
+      return
+    }
+    setSearchTerm(value)
   }
 
   // Determine if the button should be disabled based on the length of searchTerm
@@ -70,7 +95,6 @@ export const SearchBar = () => {
         placeholder={t("BUSCA_Y_APRENDE_UN_IDIOMA_NUEVO")}
         type="search"
         className="w-[400px] h-[40px] bg-[#ffffff] border-2 border-[#ffffff] rounded-lg text-black px-6 py-3 text-base hover:border-[#7aacfd] cursor-pointer transition"
-        value={searchTerm}
         onChange={handleSearch}
       />
       <IoSearchCircle

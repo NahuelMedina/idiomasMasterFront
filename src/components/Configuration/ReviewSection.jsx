@@ -49,8 +49,8 @@ const ReviewSection = () => {
   }, [URL, userReviews]);
 
   return (
-    <div className="h-full flex flex-col items-center justify-center">
-      <h2 className="text-3xl text-center font-bold bg-blue-500 text-white py-2  absolute top-[152px] w-[1313px]">
+    <div className="h-full flex flex-col items-center w-full relative">
+      <h2 className="w-full text-3xl text-center font-bold bg-blue-500 text-white py-2  ">
       {t("MIS RESEÑAS")}
       </h2>
       <div
@@ -69,7 +69,7 @@ const ReviewSection = () => {
                 <div>
                   <div className="flex items-center mb-2">
                     <img
-                      src={review.student_img}
+                        src={review.student_img || "/img/avatar_land.png"}
                       alt=""
                       className="w-12 h-12 rounded-full mr-4"
                     />
@@ -156,7 +156,7 @@ const ReviewSection = () => {
             ))}
           </ul>
         ) : (
-          <p className="text-[60px] text-gray-600 ml-[50px] font-semibold flex">{t("NO SE ENCONTRARON RESEÑAS")}  <MdOutlineRateReview className="ml-4 mt-4" /></p>
+          <p className="text-[60px] text-gray-600 ml-[50px] font-semibold  absolute top-[50%] w-full right-0 flex items-center justify-center">{t("NO SE ENCONTRARON RESEÑAS")}  <MdOutlineRateReview className="ml-4 mt-4" /></p>
         )}
       </div>
     </div>

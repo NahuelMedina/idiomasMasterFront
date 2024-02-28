@@ -14,6 +14,7 @@ import { addCart, deleteCart, getCartDB } from "../../redux/action/actions";
 import { FaBookAtlas } from "react-icons/fa6";
 
 import { useTranslation } from "react-i18next";
+import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 
 const URL = import.meta.env.VITE_URL_HOST;
 
@@ -30,9 +31,7 @@ function HomeC() {
   const [num, setNum] = useState("all");
   const [courses, setCourses] = useState([]);
 
-  const [cartCourse, setCartCourse] = useState(
-    JSON.parse(window.localStorage.getItem("cart"))
-  );
+  const [cartCourse, setCartCourse] = useLocalStorage("cart", [])
   const [isInCart, setIsInCart] = useState(false);
 
   const removeFromCart = (id) => {
@@ -211,7 +210,7 @@ function HomeC() {
                 <Card
                   key={element._id}
                   course={element}
-                  removeFromCart={removeFromCart}
+                  removeFromCart={removeFromCart} 
                 />
               ))}
             </div>

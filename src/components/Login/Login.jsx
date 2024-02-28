@@ -28,14 +28,12 @@ export const Login = () => {
   };
 
   const buttonDisabled = () => {
-    let buttonAux = false;
-
     for (const user in userData) {
-      if (userData[user].length <= 0) {
-        buttonAux = true;
-        return buttonAux;
+      if (userData[user].length === 0) {
+        return true;
       }
     }
+    return false;
   };
 
   
@@ -47,14 +45,13 @@ export const Login = () => {
         email: userData.email,
         password: userData.password,
       });
-      console.log("Response from server:", response);
-
       if (response.status === 200) {
         const updatedUserData = {
           ...userData,
           ...response.data,
           isAuthenticated: true,
         };
+        navigate("/redirect")
         setUserDataLocally(updatedUserData);
         dispatch(setUserdata(updatedUserData));
         Swal.fire({
@@ -65,7 +62,6 @@ export const Login = () => {
         });
       }else{
 
-        console.log(response.response.status)
 
         if(response.response.status === 405){
 
@@ -127,6 +123,7 @@ export const Login = () => {
                     placeholder= {t("INGRESA EMAIL")}
                     id="email"
                     type="email"
+                    required
                   />
                 </div>
               </div>
@@ -156,6 +153,7 @@ export const Login = () => {
                     name="password"
                     id="password"
                     type="password"
+                    required
                   />
                 </div>
               </div>

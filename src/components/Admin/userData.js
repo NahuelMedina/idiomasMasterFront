@@ -176,10 +176,9 @@ export const idReview = async (id) => {
 
 export const putReview = async ({ reply, view, reviewId }) => {
   try {
-    const response = await axios.put(`${URL}/putReview`, {
+    const response = await axios.put(`${URL}/putReview/${reviewId}`, {
       reply,
-      view,
-      reviewId,
+      view
     });
 
     if (response) {
@@ -238,4 +237,19 @@ export const deleteUser = async ({ email, id, password }) => {
     return(error)
   }
 };
+
+
+export const deleteUserReview = async ({id}) => {
+
+  try {
+    const response = await axios.delete(`${URL}/deleteReview/${id}`);
+
+    if (response.data) {
+        return response.data; 
+      }
+  } catch (error) {
+    return(error)
+  }
+};
+
 
