@@ -48,7 +48,7 @@ export default function AdminSettingUser() {
   const resetForm = () => {
     setUser(initialUserState);
     setErrors({});
-    setSuccessMessage("");
+    //setSuccessMessage("");
   };
 
   const handleFetch = async (event) => {

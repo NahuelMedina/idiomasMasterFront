@@ -154,19 +154,20 @@ const ShopCart = () => {
   // Mas y Menos uno
 
   const handleMinusOne = (id) => {
-    if (items >= 2) {
+    const course = cartCourse.find((c) => c._id === id);
+    if (!course) return;
+
+    if (course.items > 1) {
+      // Si el curso tiene más de un ítem, decrementa el número de ítems
       setCartCourse((prevCart) =>
-        prevCart.map((course) =>
-          course._id === id
-            ? { ...course, items: Math.max(1, (course.items || 1) - 1) }
-            : course
+        prevCart.map((c) =>
+          c._id === id ? { ...c, items: (c.items || 1) - 1 } : c
         )
       );
+    } else {
+      // Si el curso tiene solo un ítem, elimínalo del carrito
+      removeFromCart(id);
     }
-    if (items === 1) {
-      removeFromCart(id)
-    }
-
   };
   const handlePlusOne = (id) => {
     setCartCourse((prevCart) =>
