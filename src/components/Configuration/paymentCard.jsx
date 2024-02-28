@@ -56,12 +56,13 @@ export default function PaymentCard({ id, amount, date, course, status }) {
           "NUMERO DE PAGO"
         )} : ${id}`}</h1>
         <div className="h-full w-[50%] text-yellow-300 flex flex-col items-end pr-[50px] justify-center">
+        <h1>
+             {date.split("T")[0]} 
+          </h1>
           <h1>
             Pago {status}
           </h1>
-          <h1>
-             {date.split("T")[0]} 
-          </h1>
+          
         <h1>
         Monto:{" "}
             {`$ ${Math.floor(amount * .00118963)}`}

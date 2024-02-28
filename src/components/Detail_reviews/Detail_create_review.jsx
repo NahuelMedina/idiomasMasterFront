@@ -87,7 +87,7 @@ const Create_review = ({ onReviewPosted }) => {
         <div className="flex items-center">
           <img
             className="w-10 h-10 mr-2 rounded-full object-cover justify-self-center"
-            src={user?.picture || userData?.img}
+            src={user?.picture || userData?.img || "/img/avatar_land.png"}
             alt=""
           />
           <span className="text-white font-bold">

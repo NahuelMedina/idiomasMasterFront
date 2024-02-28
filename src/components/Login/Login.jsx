@@ -28,14 +28,12 @@ export const Login = () => {
   };
 
   const buttonDisabled = () => {
-    let buttonAux = false;
-
     for (const user in userData) {
-      if (userData[user].length <= 0) {
-        buttonAux = true;
-        return buttonAux;
+      if (userData[user].length === 0) {
+        return true;
       }
     }
+    return false;
   };
 
   
@@ -125,6 +123,7 @@ export const Login = () => {
                     placeholder= {t("INGRESA EMAIL")}
                     id="email"
                     type="email"
+                    required
                   />
                 </div>
               </div>
@@ -154,6 +153,7 @@ export const Login = () => {
                     name="password"
                     id="password"
                     type="password"
+                    required
                   />
                 </div>
               </div>

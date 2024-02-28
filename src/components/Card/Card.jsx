@@ -42,7 +42,10 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   }, [course, cart]);
 
   const handleCart = () => {
-    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
+    if (
+      (!userData.isAuthenticated) ||
+      userData.isAuthenticated === null
+    ) {
       Swal.fire({
         icon: "info",
         title: t("NECESITAS_REGISTRARTE_CARRITO"),
@@ -83,7 +86,10 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   }, [course, fav]);
 
   const handleFavorite = () => {
-    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
+    if (
+      (!userData.isAuthenticated) ||
+      userData.isAuthenticated === null
+    ) {
       Swal.fire({
         icon: "info",
         title: t("NECESITAS_REGISTRARTE_FAVORITO"),
