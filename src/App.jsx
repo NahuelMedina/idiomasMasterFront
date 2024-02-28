@@ -128,7 +128,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/Chat" element={<Room />} />
+               
               </>
             ) : null}
 
@@ -140,6 +140,7 @@ function App() {
                 <Route path="/user/home" element={<UserLanding />} />
                 <Route path="/favorite" element={<Favorite />} />
                 <Route path="/cart" element={<ShopCart />} />
+                <Route path="/Chat" element={<Room />} />
               </>
             ) : null}
 
