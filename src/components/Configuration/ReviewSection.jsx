@@ -69,7 +69,7 @@ const ReviewSection = () => {
                 <div>
                   <div className="flex items-center mb-2">
                     <img
-                      src={review.student_img}
+                        src={review.student_img || "/img/avatar_land.png"}
                       alt=""
                       className="w-12 h-12 rounded-full mr-4"
                     />
