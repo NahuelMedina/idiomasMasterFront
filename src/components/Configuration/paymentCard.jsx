@@ -94,6 +94,7 @@ export default function PaymentCard({ id, amount, date, course, status }) {
               price={data.price}
               duration={data.duration}
               img={data.image}
+              schedule = {data.schedule}
             />
           )}
       </div>
