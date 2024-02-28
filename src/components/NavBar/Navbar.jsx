@@ -45,13 +45,18 @@ export const Navbar = () => {
           <BsFillInfoSquareFill className="text-[40px] ml-[15px] cursor-pointer " />
         </Link>
 
-        <Link to="/home" className="h-full w-[220px] jutsify-center flex items-center cursor-pointer ">
-          <h1 className="text-[20px] ml-[10px] cursor-pointer ">{t("CURSOS")}</h1>
-          <FaDiscourse className="text-[40px] ml-[15px] cursor-pointer " />
-        </Link>
-      </div>
-      <div className="h-full w-[180px] justify-center flex items-center">
-      <BiWorld className="text-[40px]" />
+          <Link to="/home" className="h-full flex items-center justify-center">
+          <h1>{t('CURSOS')}</h1>
+            <FaDiscourse className="text-[30px] ml-1" />
+          </Link>
+
+        </div>
+        <div>
+        <Link to="/chat" className="h-full flex items-center justify-center">
+            <h1>CHAT</h1>
+          </Link>
+        </div>
+        <div className="flex ml-2 items-center gap-10 justify-around ">
         <select
           className="ml-[15px] appearance-none text-white bg-[#2D2D2D] font-semibold backdrop-blur-sm  border-2 border-gray-300 rounded-lg py-2 px-4  leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
           onChange={handleLanguageChange}

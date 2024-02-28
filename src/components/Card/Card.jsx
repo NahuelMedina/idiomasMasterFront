@@ -28,7 +28,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   const [cart, setCart] = useLocalStorage("cart", "");
   const { isAuthenticated } = useAuth0();
   const [userData] = useLocalStorage("userData", {})
-  const { t , i18n} = useTranslation()
+  const { t, i18n } = useTranslation()
 
   // Sector Carrito
   useEffect(() => {
@@ -42,9 +42,10 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   }, [course, cart]);
 
   const handleCart = () => {
-
-
-    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
+    if (
+      (!userData.isAuthenticated) ||
+      userData.isAuthenticated === null
+    ) {
       Swal.fire({
         icon: "info",
         title: t("NECESITAS_REGISTRARTE_CARRITO"),
@@ -52,26 +53,29 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
       });
       return;
     }
+  
     dispatch(getCartDB(userData._id));
-
     setIsCart(!isCart);
-    if (!isCart) {
-      const itemCart = JSON.parse(window.localStorage.getItem("cart"));
-      if (itemCart !== null) {
-        itemCart.push(course);
-        setCart(itemCart);
-      } else {
-        setCart([course]);
-      }
-    } else {
+    
+    const itemCart = JSON.parse(window.localStorage.getItem("cart")) || [];
+    
+    if (!isCart && !itemCart.some(item => item._id === course._id)) {
+      // Agregar al carrito
+      const updatedCart = [...itemCart, course];
+      setCart(updatedCart);
+      window.localStorage.setItem("cart", JSON.stringify(updatedCart));
+    } else if (isCart) {
+      // Eliminar del carrito
+      console.log("Holaaaa")
       removeFromCart(course._id);
-      const eliminateItemCart = JSON.parse(window.localStorage.getItem("cart"));
-      const filteredCart = eliminateItemCart.filter(
-        (c) => c._id !== course._id
-      );
+      const filteredCart = itemCart.filter((c) => c._id !== course._id);
       setCart(filteredCart);
+      window.localStorage.setItem("cart", JSON.stringify(filteredCart));
     }
   };
+
+
+  
   // Sector Favoritos
   useEffect(() => {
     if (!fav && fav.length === 0) {
@@ -82,7 +86,10 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
   }, [course, fav]);
 
   const handleFavorite = () => {
-    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
+    if (
+      (!userData.isAuthenticated) ||
+      userData.isAuthenticated === null
+    ) {
       Swal.fire({
         icon: "info",
         title: t("NECESITAS_REGISTRARTE_FAVORITO"),
@@ -143,7 +150,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
             <h2 className="text-black text-[17px]">
-            {t("DURACION_DE")}{":"}{t(`DURACION_${course.duration.toUpperCase()}`)}
+              {t("DURACION_DE")}{":"}{t(`DURACION_${course.duration.toUpperCase()}`)}
             </h2>
           </div>
           <div className="ml-[40px] w-full h-[30px]  flex flex-row items-center justify-start">
@@ -203,7 +210,7 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
           </Link>
           <div className="w-full h-full px-[15px] flex items-center text-white justify-center bg-sky-700 hover:bg-red-500 cursor:pointer">
             {isCart ? (
-              <div className="flex items-center justify-center w-full h-full cursor-pointer"  onClick={handleCart}>
+              <div className="flex items-center justify-center w-full h-full cursor-pointer" onClick={handleCart}>
                 <button
                   className="text-[15px] mr-2"
                 >
@@ -304,21 +311,21 @@ export const Card = ({ course, removeFromFavorites, removeFromCart }) => {
         </div>
         <div className="bg-white w-[90%] h-[70%] rounded-[10px] flex flex-row items-center justify-center hover:bg-yellow-500 ">
           {isCart ? (
-              <button
-                className="text-black w-full h-full flex items-center justify-center cursor:pointer "
-                onClick={handleCart}
-              >
-                <RxCross2 className=" mr-1" />
-                {t("ELIMINAR DEL CARRITO CARD")}
-              </button>
+            <button
+              className="text-black w-full h-full flex items-center justify-center cursor:pointer "
+              onClick={handleCart}
+            >
+              <RxCross2 className=" mr-1" />
+              {t("ELIMINAR DEL CARRITO CARD")}
+            </button>
           ) : (
-              <button
-                className="text-black w-full flex items-center justify-center h-full cursor:pointer"
-                onClick={handleCart}
-              >
-                <FaCartShopping className=" mr-1" />
-                {t("AGREGAR AL CARRITO CARD")}
-              </button>
+            <button
+              className="text-black w-full flex items-center justify-center h-full cursor:pointer"
+              onClick={handleCart}
+            >
+              <FaCartShopping className=" mr-1" />
+              {t("AGREGAR AL CARRITO CARD")}
+            </button>
           )}
         </div>
       </div>

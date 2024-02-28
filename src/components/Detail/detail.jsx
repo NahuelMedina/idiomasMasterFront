@@ -16,13 +16,11 @@ import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
-import DetailReviews from "./detailReviews";
 import { IoMdStar, IoMdStarOutline } from "react-icons/io"; // Combine IoMdStar and IoMdStarOutline into one import
 import { useLocalStorage } from "../../CustomHook/UseLocalStorage";
 import { useTranslation } from "react-i18next"; // Remove duplicate import of useTranslation
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
-
 
 export const Detail = () => {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -77,7 +75,10 @@ export const Detail = () => {
   }, [detail, cart]);
 
   const handleCart = () => {
-    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
+    if (
+      (!userData.isAuthenticated) ||
+      userData.isAuthenticated === null
+    ) {
       Swal.fire({
         icon: "info",
         title: t("NECESITAS_REGISTRARTE_CARRITO"),
@@ -110,7 +111,11 @@ export const Detail = () => {
   }, [detail, fav]);
 
   const handleFavorite = () => {
-    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
+  
+    if (
+      (!userData.isAuthenticated) ||
+      userData.isAuthenticated === null
+    ) {
       Swal.fire({
         icon: "info",
         title: t("NECESITAS_REGISTRARTE_FAVORITO"),
@@ -118,6 +123,7 @@ export const Detail = () => {
       });
       return;
     }
+ 
     setIsFav(!isFav);
     const currentfav = JSON.parse(window.localStorage.getItem("fav")) || [];
 
@@ -139,7 +145,10 @@ export const Detail = () => {
   }, []);
 
   const initCreatePreference = (p) => {
-    if (!isAuthenticated && !userData.hasOwnProperty("email")) {
+    if (
+      (!userData.isAuthenticated) ||
+      userData.isAuthenticated === null
+    ) {
       Swal.fire({
         icon: "info",
         title: "Necesitas registrarte para realizar la Compra!",
@@ -327,14 +336,12 @@ export const Detail = () => {
         </div>
       </div>
       <div className="w-full min-h-[15%] flex items-center justify-center ">
-        {reviewsLength && reviewsLength.length ? (
-          <button
-            onClick={handleReviews}
-            className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-[10px]"
-          >
-            {reviews ? t("MOSTRAR RESEÑAS") : t("OCULTAR RESEÑAS")}
-          </button>
-        ) : null}
+        <button
+          onClick={handleReviews}
+          className="w-[270px] h-[70px] ml-[40px] bg-white border-[3px] border-yellow-400 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-[10px]"
+        >
+          {reviews ? t("OCULTAR RESEÑAS") : t("MOSTRAR RESEÑAS")}
+        </button>
       </div>
       <div className="w-[80%] h-auto flex items-center justify-center ">
         {reviews ? <ReviewComponent /> : null}
