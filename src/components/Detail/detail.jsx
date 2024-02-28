@@ -23,7 +23,6 @@ import { useTranslation } from "react-i18next"; // Remove duplicate import of us
 const URL = import.meta.env.VITE_URL_HOST;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 
-
 export const Detail = () => {
   const [preferenceId, setPreferenceId] = useState(null);
   const params = useParams();
@@ -76,7 +75,7 @@ export const Detail = () => {
     setIsCart(isCourseCart);
   }, [detail, cart]);
 
-const handleCart = () => {
+  const handleCart = () => {
     if (!isAuthenticated && !userData.hasOwnProperty("email")) {
       Swal.fire({
         icon: "info",
@@ -98,7 +97,7 @@ const handleCart = () => {
 
     setCart(updatedCart);
     window.localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };  
+  };
 
   //Favoritos
   useEffect(() => {
