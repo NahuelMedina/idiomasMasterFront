@@ -99,7 +99,7 @@ export const Configuration = () => {
             onClick={() => handleClick("calendar")}
           >
             <p className="text-[18px] ml-[20px] focus:text-white ">
-              Calendario
+              {t("CALENDARIO")}
             </p>
           </div>
           <div
