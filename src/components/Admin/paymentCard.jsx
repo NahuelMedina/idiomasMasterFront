@@ -18,7 +18,7 @@ export default function PaymentCard({
 }) {
   const dispatch = useDispatch();
 
-  const total = Math.floor(amount * 0.00026)
+  const total = Math.floor(amount * .00118963)
 
   return (
     <div className="w-full h-[35px] border-[1px] border-[#151139] flex flex-row hover:bg-[#4f4986]">
