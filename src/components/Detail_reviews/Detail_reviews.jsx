@@ -201,7 +201,7 @@ const ReviewComponent = ({ submitCompleted }) => {
               >
                 {userData._id === review.student_review && (
                   <div className="absolute top-0 right-0">
-                    <div className="relative inline-block text-left">
+                    <div >
                       <button
                         className="bg-transparent border-none"
                         onClick={() => {
@@ -218,9 +218,9 @@ const ReviewComponent = ({ submitCompleted }) => {
                         />
                       </button>
                       {showOptions[review._id] && (
-                        <div className="absolute right-0 mt-2 w-[120px] bg-white border rounded-lg shadow-lg">
+                        <div className="absolute right-0 mt-2 w-[120px] bg-white border rounded-lg shadow-lg overflow-hidden">
                           <button
-                            className="flex block px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold items-center"
+                           className="flex px-[11px] py-2 text-sm text-gray-700 hover:bg-gray-100 w-full "
                             onClick={() => handleEdit(review._id)}
                           >
                             <img
@@ -231,7 +231,7 @@ const ReviewComponent = ({ submitCompleted }) => {
                             Editar
                           </button>
                           <button
-                            className="flex block px-[11px] py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold"
+                            className="flex px-[11px] py-2 text-sm text-gray-700 hover:bg-gray-100 w-full  "
                             onClick={() => handleDelete(review._id)}
                           >
                             <img
@@ -304,10 +304,10 @@ const ReviewComponent = ({ submitCompleted }) => {
                 )}
                 <div className="flex flex-row md:flex-row items-start md:items-center justify-between">
                   <div className="flex flex-row md:flex-row items-start md:items-center justify-between">
-                    {editMode[review._id] ? (
+                    {/* {editMode[review._id] ? (
                       <>
                         <button
-                          className="flex px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold items-center"
+                          className="flex px-2 py-2 text-sm text-gray-700 hover:bg-gray-100 "
                           onClick={() => handleEdit(review._id)}
                         >
                           <img
@@ -318,7 +318,7 @@ const ReviewComponent = ({ submitCompleted }) => {
                           {t("EDITAR")}
                         </button>
                         <button
-                          className="flex  px-[11px] py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left font-bold"
+                          className="flex  px-[11px] py-2 text-sm text-gray-700 hover:bg-gray-100 "
                           onClick={() => handleDelete(review._id)}
                         >
                           <img
@@ -331,7 +331,7 @@ const ReviewComponent = ({ submitCompleted }) => {
                       </>
                     ) : (
                       <div className="flex items-center justify-between mt-4 text-sm text-white-600 fill-current"></div>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </div>

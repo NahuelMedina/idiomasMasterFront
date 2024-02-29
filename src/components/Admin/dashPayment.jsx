@@ -20,7 +20,7 @@ export default function DashPayment({data}){
             }
         }, 0);
 
-        const total = Math.floor(inactive * 0.00026)
+        const total = Math.floor(inactive * .00118963)
 
         setInactiveProducts(total)
 
